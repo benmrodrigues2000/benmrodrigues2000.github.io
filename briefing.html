@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Briefing de Missão - Ruben Rodrigues</title>
+<meta name="description" content="Briefing interativo para novos sites: oito módulos de perguntas. Responde, envia, e recebes um plano de voo para o teu projeto."/>
+<meta name="robots" content="noindex"/>
+<meta name="theme-color" content="#05060F"/>
+<meta name="view-transition" content="same-origin"/>
+<meta name="color-scheme" content="dark"/>
+<link rel="stylesheet" href="fonts.css"/>
+<style>
+:root{
+  --bg:#05060F; --surface:#0B0F1F; --surface2:#121731; --ink:#E9EDF8; --muted:#9AA3BF;
+  --rule:#232A4D; --violet:#A78BFA; --orange:#FF9E64; --ice:#7DD3FC;
+  --font-d:"Bebas Neue","Arial Narrow",sans-serif; --font-b:"Inter",-apple-system,Segoe UI,sans-serif; --font-m:"IBM Plex Mono",Consolas,monospace;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scrollbar-color:#2B3358 #05060F}
+::-webkit-scrollbar{width:11px}
+::-webkit-scrollbar-track{background:#05060F}
+::-webkit-scrollbar-thumb{background:#2B3358;border-radius:8px;border:2px solid #05060F}
+::selection{background:var(--violet);color:var(--bg)}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-b);font-size:15px;line-height:1.6;padding-top:74px}
+#field{position:fixed;inset:0;z-index:0;pointer-events:none}
+.wrap{max-width:880px;margin:0 auto;padding:0 clamp(16px,4vw,32px);position:relative;z-index:1}
+.mono{font-family:var(--font-m);letter-spacing:1.6px;font-size:11px;color:var(--violet)}
+.bar{position:fixed;top:0;left:0;right:0;z-index:10;background:rgba(5,6,15,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+.bar-in{max-width:880px;margin:0 auto;padding:14px clamp(16px,4vw,32px);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{font-family:var(--font-d);font-size:21px;letter-spacing:1.5px;line-height:1}
+.logo span{display:block;font-family:var(--font-m);font-size:8.5px;letter-spacing:2.6px;color:var(--violet);margin-top:3px}
+.prog{width:min(300px,42vw);text-align:right}
+.prog-label{font-family:var(--font-m);font-size:10px;letter-spacing:2px;color:var(--muted)}
+.prog-track{height:3px;background:var(--surface2);border-radius:99px;margin-top:6px;overflow:hidden}
+#prog-fill{height:100%;width:0;background:var(--violet);border-radius:99px;transition:width 300ms var(--ease)}
+.head{padding:clamp(48px,8vw,84px) 0 10px}
+.head h1{font-family:var(--font-d);font-size:clamp(58px,11vw,104px);line-height:.92;letter-spacing:1px;margin:14px 0 18px}
+.head h1 em{font-style:normal;color:var(--violet)}
+.lede{color:var(--muted);font-size:16.5px;max-width:56ch}
+.hint{margin-top:14px;color:var(--muted)}
+.req{color:var(--orange)}
+.mod{background:rgba(11,15,31,.9);border:1px solid var(--rule);border-radius:18px;padding:clamp(22px,4vw,40px);margin:26px 0}
+.mod-head{display:flex;align-items:baseline;gap:14px;border-bottom:1px solid var(--rule);padding-bottom:14px;margin-bottom:8px}
+.mod-head h2{font-family:var(--font-d);font-size:clamp(28px,4.5vw,38px);letter-spacing:1px}
+.q{margin-top:24px}
+.ql{display:block;font-family:var(--font-m);font-size:11px;letter-spacing:1.6px;color:var(--ink);margin-bottom:10px;text-transform:uppercase}
+.ql small{display:block;letter-spacing:.4px;color:var(--muted);text-transform:none;margin-top:3px;font-size:11.5px}
+input[type=text],input[type=email],input[type=tel],input[type=date],textarea{
+  width:100%;background:var(--bg);border:1px solid var(--rule);border-radius:10px;
+  padding:12px 14px;color:var(--ink);font-family:var(--font-b);font-size:15px;transition:border-color 150ms var(--ease)}
+input:focus,textarea:focus{border-color:var(--violet);outline:none}
+input.invalid{border-color:#FF6B6B}
+textarea{min-height:96px;resize:vertical}
+input[type=date]{color-scheme:dark;max-width:280px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{
+  font-family:var(--font-m);font-size:11px;letter-spacing:1px;padding:9px 15px;border-radius:999px;
+  background:var(--bg);border:1px solid var(--rule);color:var(--muted);cursor:pointer;
+  transition:border-color 150ms var(--ease),color 150ms var(--ease),background 150ms var(--ease)}
+.chips button:hover{border-color:var(--violet);color:var(--ink)}
+.chips button.on{background:var(--violet);border-color:var(--violet);color:var(--bg)}
+.paletas{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+.pal{display:flex;flex-direction:column;gap:9px;padding:13px;background:var(--bg);border:1px solid var(--rule);border-radius:12px;cursor:pointer;transition:border-color 150ms var(--ease)}
+.pal:hover{border-color:var(--violet)}
+.pal.on{border-color:var(--violet);box-shadow:0 0 0 1px var(--violet)}
+.dots{display:flex;gap:6px}
+.dot{width:22px;height:22px;border-radius:50%;border:1px solid rgba(255,255,255,.14)}
+.pal b{font-family:var(--font-m);font-weight:500;font-size:10px;letter-spacing:1.6px;color:var(--muted)}
+.pal.on b{color:var(--ink)}
+.colores{display:flex;gap:18px;flex-wrap:wrap;align-items:end}
+.cor label{display:block;font-family:var(--font-m);font-size:10px;letter-spacing:1.6px;color:var(--muted);margin-bottom:7px}
+.cor input[type=color]{width:54px;height:38px;border:1px solid var(--rule);border-radius:9px;background:var(--bg);padding:3px;cursor:pointer}
+.cor .hex{font-family:var(--font-m);font-size:10px;color:var(--muted);margin-left:8px}
+.ranger{display:flex;align-items:center;gap:16px}
+input[type=range]{flex:1;-webkit-appearance:none;appearance:none;height:4px;border-radius:99px;background:var(--surface2);outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--violet);border:3px solid var(--bg);box-shadow:0 0 0 1px var(--violet);cursor:pointer}
+input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--violet);border:3px solid var(--bg);box-shadow:0 0 0 1px var(--violet);cursor:pointer}
+#orc-val{font-family:var(--font-m);font-size:14px;color:var(--ice);min-width:86px;text-align:right}
+.send-grid{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+.btn{display:inline-block;font-family:var(--font-m);font-size:12px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;cursor:pointer;border-radius:999px;padding:15px 24px;transition:transform 150ms var(--ease),border-color 150ms var(--ease)}
+.btn:active{transform:scale(.97)}
+.btn-pri{background:var(--violet);color:var(--bg);border:1px solid var(--violet)}
+.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--rule)}
+.btn-ghost:hover{border-color:var(--violet)}
+.send-note{font-family:var(--font-m);font-size:10.5px;letter-spacing:.6px;color:var(--muted);margin-top:14px;line-height:1.8}
+details.repo{margin-top:22px;border:1px solid var(--rule);border-radius:12px;background:var(--bg)}
+details.repo summary{font-family:var(--font-m);font-size:11px;letter-spacing:2px;color:var(--violet);cursor:pointer;padding:14px 16px;list-style:none}
+details.repo summary::before{content:"+ ";color:var(--muted)}
+details.repo[open] summary::before{content:"- "}
+#repo{font-family:var(--font-m);font-size:11.5px;line-height:1.9;color:var(--muted);white-space:pre-wrap;padding:0 16px 16px;max-height:340px;overflow:auto}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,12px);z-index:50;background:var(--surface2);border:1px solid var(--violet);color:var(--ink);font-family:var(--font-m);font-size:12px;letter-spacing:1px;padding:11px 20px;border-radius:999px;opacity:0;pointer-events:none;transition:opacity 220ms var(--ease),transform 220ms var(--ease)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.foot{font-family:var(--font-m);font-size:10.5px;letter-spacing:1.6px;color:var(--muted);text-align:center;padding:34px 0 46px;line-height:2}
+.foot a{color:var(--muted)}
+.linkish{background:none;border:none;color:var(--muted);font-family:var(--font-m);font-size:10.5px;letter-spacing:1.6px;cursor:pointer;text-decoration:underline;margin-top:20px}
+.linkish:hover{color:var(--orange)}
+:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
+@media (max-width:720px){
+  .paletas{grid-template-columns:repeat(2,1fr)}
+  .prog{width:34vw}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none !important;animation:none !important}
+}
+@media print{
+  *{color:#111 !important;background:#fff !important;box-shadow:none !important}
+  #field,.bar,.send-grid,.linkish,.toast{display:none !important}
+  .mod{border-color:#ccc;break-inside:avoid}
+  .head h1,.mod-head h2{color:#000 !important}
+}
+</style>
+</head>
+<body>
+<canvas id="field" aria-hidden="true"></canvas>
+
+<header class="bar">
+  <div class="bar-in">
+    <div class="logo">RUBEN RODRIGUES<span>BRIEFING DE MISSÃO v.07</span></div>
+    <div class="prog">
+      <span class="prog-label">PROGRESSO <b id="prog-pct">0%</b></span>
+      <div class="prog-track"><div id="prog-fill"></div></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+<section class="head">
+  <p class="mono">TRANSMISSÃO / NOVO SITE</p>
+  <h1>Briefing de<br/><em>Missão</em></h1>
+  <p class="lede">Oito módulos de perguntas, cerca de 15 minutos, zero tecnicismos. As tuas respostas viram o plano de voo do teu site: estética, estrutura, funcionalidades e prazos. Podes guardar e voltar mais tarde - o rascunho fica no teu navegador.</p>
+  <p class="mono hint">CAMPOS COM <span class="req">*</span> SÃO OBRIGATÓRIOS · O RESTO AJUDA-ME A ACERTAR À PRIMEIRA</p>
+</section>
+
+<form id="form" novalidate>
+
+<section class="mod">
+  <div class="mod-head"><span class="mono">MÓDULO 01</span><h2>Identidade</h2></div>
+
+  <div class="q">
+    <label class="ql" for="f-nome">O teu nome <span class="req">*</span><small>quem está a preencher este briefing</small></label>
+    <input type="text" id="f-nome" data-key="nome" data-label="Nome" data-sec="01 · IDENTIDADE" autocomplete="name" placeholder="Ex.: Maria Silva"/>
+  </div>
+  <div class="q">
+    <label class="ql" for="f-email">Email <span class="req">*</span><small>para onde envio perguntas durante o projeto</small></label>
+    <input type="email" id="f-email" data-key="email" data-label="Email" data-sec="01 · IDENTIDADE" autocomplete="email" placeholder="nome@empresa.pt"/>
+  </div>
+  <div class="q">
+    <label class="ql" for="f-tel">Telefone <small>opcional, só se preferires chamadas rápidas</small></label>
+    <input type="tel" id="f-tel" data-key="telefone" data-label="Telefone" data-sec="01 · IDENTIDADE" autocomplete="tel" placeholder="+351 ..."/>
+  </div>
+  <div class="q">
+    <label class="ql" for="f-marca">Nome da marca ou projeto <span class="req">*</span><small>exatamente como deve aparecer escrito no site</small></label>
+    <input type="text" id="f-marca" data-key="marca" data-label="Marca" data-sec="01 · IDENTIDADE" placeholder="Ex.: Padaria Central"/>
+  </div>
+  <div class="q">
+    <label class="ql" for="f-area">Área de atividade <small>o que a marca faz, numa linha</small></label>
+    <input type="text" id="f-area" data-key="area" data-label="Área de atividade" data-sec="01 · IDENTIDADE" placeholder="Ex.: pastelaria artesanal, consultoria, carpintaria..."/>
+  </div>
+  <div class="q">
+    <label class="ql" for="f-atual">Website atual <small>opcional, se já tiveres um</small></label>
+    <input type="text" id="f-atual" data-key="site_atual" data-label="Website atual" data-sec="01 · IDENTIDADE" placeholder="www..."/>
+  </div>
+</section>
+
+<section class="mod">
+  <div class="mod-head"><span class="mono">MÓDULO 02</span><h2>A missão</h2></div>
+
+  <div class="q">
+    <label class="ql" for="f-oque">O que fazes e para quem?<small>3 a 5 frases, como se explicasses a um amigo</small></label>
+    <textarea id="f-oque" data-key="o_que_fazes" data-label="O que fazes" data-sec="02 · A MISSÃO" placeholder="Ex.: fazemos bolos de aniversário por encomenda em Esmoriz, com ingredientes locais..."></textarea>
+  </div>
+  <div class="q">
+    <fieldset style="border:none"><legend class="ql">Para que serve o site?<small>escolhe tudo o que se aplicar</small></legend>
+    <div class="chips" data-key="objetivos" data-label="Objetivos do site" data-sec="02 · A MISSÃO">
+      <button type="button" data-val="Vender produtos (loja online)">Vender produtos</button>
+      <button type="button" data-val="Gerar contactos e orçamentos">Gerar contactos e orçamentos</button>
+      <button type="button" data-val="Mostrar trabalhos (portefólio)">Mostrar trabalhos</button>
+      <button type="button" data-val="Marcar consultas ou reservas">Marcar consultas ou reservas</button>
+      <button type="button" data-val="Informar e dar credibilidade">Informar e dar credibilidade</button>
+      <button type="button" data-val="Crescer uma audiência">Crescer uma audiência</button>
+      <button type="button" data-val="Ainda não sei - ajudar a decidir">Ainda não sei</button>
+    </div></fieldset>
+  </div>
+  <div class="q">
+    <label class="ql" for="f-acao">A ação nº 1<small>quando um visitante chega ao site, o que deve fazer?</small></label>
+    <input type="text" id="f-acao" data-key="acao_principal" data-label="Ação principal" data-sec="02 · A MISSÃO" placeholder="Ex.: pedir orçamento, marcar visita, comprar..."/>
+  </div>
+  <div class="q">
+    <fieldset style="border:none"><legend class="ql">Como sabes que o site está a funcionar?</legend>
+    <div class="chips" data-key="sucesso" data-label="Medidas de sucesso" data-sec="02 · A MISSÃO">
+      <button type="button" data-val="Mais chamadas">Mais chamadas</button>
+      <button type="button" data-val="Mais mensagens e emails">Mais mensagens e emails</button>
+      <button type="button" data-val="Vendas online">Vendas online</button>
+      <button type="button" data-val="Marcações agendadas">Marcações agendadas</button>
+      <button type="button" data-val="Parecer mais profissional">Parecer mais profissional</button>
+    </div></fieldset>
+  </div>
+  <div class="q">
+    <label class="ql" for="f-concorrentes">Concorrentes<small>opcional: 2 ou 3 nomes ou sites - o que fazem bem, o que fazem mal</small></label>
+    <textarea id="f-concorrentes" data-key="concorrentes" data-label="Concorrentes" data-sec="02 · A MISSÃO" placeholder="Ex.: a Padaria X tem fotos boas mas o site é lento..."></textarea>
+  </div>
+</section>
+
+<section class="mod">
+  <div class="mod-head"><span class="mono">MÓDULO 03</span><h2>Tripulação</h2></div>
+
+  <div class="q">
+    <label class="ql" for="f-publico">Quem é o teu cliente ideal?<small>idade, zona, profissão, interesses... quanto mais concreto, melhor</small></label>
+    <textarea id="f-publico" data-key="cliente_ideal" data-label="Cliente ideal" data-sec="03 · TRIPULAÇÃO" placeholder="Ex.: famílias dos 30 aos 50, Esmoriz e arredores, que encomendam com 1 semana de antecedência..."></textarea>
+  </div>
+  <div class="q">
+    <label class="ql" for="f-procuram">O que procuram em ti?<small>preço, confiança, rapidez, qualidade, exclusividade...</small></label>
+    <textarea id="f-procuram" data-key="o_que_procuram" data-label="O que procuram" data-sec="03 · TRIPULAÇÃO" placeholder="Ex.: confiança e prazo certo..."></textarea>
+  </div>
+  <div class="q">
+    <label class="ql" for="f-zona">Onde vivem esses clientes?</label>
+    <input type="text" id="f-zona" data-key="zona" data-label="Zona geográfica" data-sec="03 · TRIPULAÇÃO" placeholder="Ex.: Esmoriz e arredores, todo o país, estrangeiro..."/>
+  </div>
+</section>
+
+<section class="mod">
+  <div class="mod-head"><span class="mono">MÓDULO 04</span><h2>Estética da nave</h2></div>
+
+  <div class="q">
+    <span class="ql">Paleta de cores<small>escolhe uma base pronta ou personaliza as três cores abaixo</small></span>
+    <div class="paletas" data-key="paleta" data-label="Paleta" data-sec="04 · ESTÉTICA">
+      <button type="button" class="pal" data-pal="Órbita" data-c1="#05060F" data-c2="#A78BFA" data-c3="#E9EDF8">
+        <span class="dots"><span class="dot" style="background:#05060F"></span><span class="dot" style="background:#A78BFA"></span><span class="dot" style="background:#E9EDF8"></span></span><b>ÓRBITA</b></button>
+      <button type="button" class="pal" data-pal="Sinal" data-c1="#0B0F1F" data-c2="#7DD3FC" data-c3="#E9EDF8">
+        <span class="dots"><span class="dot" style="background:#0B0F1F"></span><span class="dot" style="background:#7DD3FC"></span><span class="dot" style="background:#E9EDF8"></span></span><b>SINAL</b></button>
+      <button type="button" class="pal" data-pal="Solar" data-c1="#12100C" data-c2="#FF9E64" data-c3="#F4EDE4">
+        <span class="dots"><span class="dot" style="background:#12100C"></span><span class="dot" style="background:#FF9E64"></span><span class="dot" style="background:#F4EDE4"></span></span><b>SOLAR</b></button>
+      <button type="button" class="pal" data-pal="Papel" data-c1="#FAF7F2" data-c2="#B45309" data-c3="#201A14">
+        <span class="dots"><span class="dot" style="background:#FAF7F2"></span><span class="dot" style="background:#B45309"></span><span class="dot" style="background:#201A14"></span></span><b>PAPEL</b></button>
+      <button type="button" class="pal" data-pal="Mata" data-c1="#0C1410" data-c2="#7DD3A0" data-c3="#E8F2EC">
+        <span class="dots"><span class="dot" style="background:#0C1410"></span><span class="dot" style="background:#7DD3A0"></span><span class="dot" style="background:#E8F2EC"></span></span><b>MATA</b></button>
+      <button type="button" class="pal" data-pal="Areia" data-c1="#14121B" data-c2="#E9C46A" data-c3="#EDEAF4">
+        <span class="dots"><span class="dot" style="background:#14121B"></span><span class="dot" style="background:#E9C46A"></span><span class="dot" style="background:#EDEAF4"></span></span><b>AREIA</b></button>
+    </div>
+    <div class="colores">
+      <div class="cor"><label for="c1">Fundo</label><span><input type="color" id="c1" data-key="cor_fundo" data-label="Cor de fundo" data-sec="04 · ESTÉTICA" value="#05060F"/><span class="hex" id="h1">#05060F</span></span></div>
+      <div class="cor"><label for="c2">Destaque</label><span><input type="color" id="c2" data-key="cor_destaque" data-label="Cor de destaque" data-sec="04 · ESTÉTICA" value="#A78BFA"/><span class="hex" id="h2">#A78BFA</span></span></div>
+      <div class="cor"><label for="c3">Texto</label><span><input type="color" id="c3" data-key="cor_texto" data-label="Cor de texto" data-sec="04 · ESTÉTICA" value="#E9EDF8"/><span class="hex" id="h3">#E9EDF8</span></span></div>
+    </div>
+  </div>
+  <div class="q">
+    <fieldset style="border:none"><legend class="ql">Personalidade da marca<small>quantas quiseres</small></legend>
+    <div class="chips" data-key="personalidade" data-label="Personalidade" data-sec="04 · ESTÉTICA">
+      <button type="button" data-val="Escura e dramática">Escura e dramática</button>
+      <button type="button" data-val="Clara e minimalista">Clara e minimalista</button>
+      <button type="button" data-val="Elegante">Elegante</button>
+      <button type="button" data-val="Divertida">Divertida</button>
+      <button type="button" data-val="Técnica e precisa">Técnica e precisa</button>
+      <button type="button" data-val="Acolhedora">Acolhedora</button>
+      <button type="button" data-val="Ousada e moderna">Ousada e moderna</button>
+      <button type="button" data-val="Clássica e atemporal">Clássica e atemporal</button>
+    </div></fieldset>
+  </div>
+  <div class="q">
+    <fieldset style="border:none"><legend class="ql">Tipografia</legend>
+    <div class="chips" data-key="tipografia" data-label="Tipografia" data-sec="04 · ESTÉTICA">
+      <button type="button" data-val="Moderna e limpa">Moderna e limpa</button>
+      <button type="button" data-val="Clássica com serifa">Clássica com serifa</button>
+      <button type="button" data-val="Mono e técnica">Mono e técnica</button>
+      <button type="button" data-val="De impacto (grandes títulos)">De impacto</button>
+      <button type="button" data-val="Confio em ti - escolhe tu">Confio em ti</button>
+    </div></fieldset>
+  </div>
+  <div class="q">
+    <label class="ql" for="f-refs">Sites de referência<small>opcional: 2 ou 3 sites que gostes, de qualquer área, e o que gostas neles</small></label>
+    <textarea id="f-refs" data-key="referencias" data-label="Referências" data-sec="04 · ESTÉTICA" placeholder="Ex.: o site da loja X é simples e rápido, gosto das fotos grandes..."></textarea>
+  </div>
+  <div class="q">
+    <fieldset style="border:none"><legend class="ql">Logótipo</legend>
+    <div class="chips" data-key="logo" data-label="Logótipo" data-sec="04 · ESTÉTICA">
+      <button type="button" data-val="Tenho e quero manter">Tenho e quero manter</button>
+      <button type="button" data-val="Tenho mas quero renovar">Tenho mas quero renovar</button>
+      <button type="button" data-val="Não tenho - preciso de um">Não tenho, preciso de um</button>
+      <button type="button" data-val="Tenho ideias mas nada feito">Tenho ideias mas nada feito</button>
+    </div></fieldset>
+  </div>
+  <div class="q">
+    <label class="ql" for="f-marcacor">Cores oficiais da marca<small>opcional, se já existirem: códigos ou nomes</small></label>
+    <input type="text" id="f-marcacor" data-key="cores_marca" data-label="Cores da marca" data-sec="04 · ESTÉTICA" placeholder="Ex.: #A78BFA, laranja, azul marinho..."/>
+  </div>
+</section>
+
+<section class="mod">
+  <div class="mod-head"><span class="mono">MÓDULO 05</span><h2>Estrutura & conteúdos</h2></div>
+
+  <div class="q">
+    <fieldset style="border:none"><legend class="ql">Que páginas deve ter o site?</legend>
+    <div class="chips" data-key="paginas" data-label="Páginas" data-sec="05 · ESTRUTURA & CONTEÚDOS">
+      <button type="button" data-val="Início">Início</button>
+      <button type="button" data-val="Sobre">Sobre</button>
+      <button type="button" data-val="Serviços">Serviços</button>
+      <button type="button" data-val="Portefólio / trabalhos">Portefólio / trabalhos</button>
+      <button type="button" data-val="Loja">Loja</button>
+      <button type="button" data-val="Blog / notícias">Blog / notícias</button>
+      <button type="button" data-val="Contacto">Contacto</button>
+      <button type="button" data-val="Perguntas frequentes">Perguntas frequentes</button>
+      <button type="button" data-val="Ainda não sei">Ainda não sei</button>
+    </div></fieldset>
+  </div>
+  <div class="q">
+    <fieldset style="border:none"><legend class="ql">Os textos estão prontos?</legend>
+    <div class="chips" data-key="textos" data-label="Textos" data-sec="05 · ESTRUTURA & CONTEÚDOS">
+      <button type="button" data-val="Tenho tudo escrito">Tenho tudo escrito</button>
+      <button type="button" data-val="Tenho partes">Tenho partes</button>
+      <button type="button" data-val="Não tenho nada - preciso de ajuda">Não tenho nada, preciso de ajuda</button>
+    </div></fieldset>
+  </div>
+  <div class="q">
+    <fieldset style="border:none"><legend class="ql">Fotografias e imagens</legend>
+    <div class="chips" data-key="imagens" data-label="Imagens" data-sec="05 · ESTRUTURA & CONTEÚDOS">
+      <button type="button" data-val="Tenho fotos próprias boas">Tenho fotos próprias boas</button>
+      <button type="button" data-val="Tenho algumas">Tenho algumas</button>
+      <button type="button" data-val="Usar imagens de banco (stock)">Usar imagens de banco</button>
+      <button type="button" data-val="Preciso de sessão fotográfica">Preciso de sessão fotográfica</button>
+    </div></fieldset>
+  </div>
+  <div class="q">
+    <fieldset style="border:none"><legend class="ql">Redes sociais a ligar ao site</legend>
+    <div class="chips" data-key="redes" data-label="Redes sociais" data-sec="05 · ESTRUTURA & CONTEÚDOS">
+      <button type="button" data-val="Instagram">Instagram</button>
+      <button type="button" data-val="Facebook">Facebook</button>
+      <button type="button" data-val="LinkedIn">LinkedIn</button>
+      <button type="button" data-val="TikTok">TikTok</button>
+      <button type="button" data-val="YouTube">YouTube</button>
+      <button type="button" data-val="WhatsApp">WhatsApp</button>
+      <button type="button" data-val="Não tenho redes">Não tenho redes</button>
+    </div></fieldset>
+  </div>
+  <div class="q">
+    <label class="ql" for="f-handles">Links ou @ das redes<small>opcional</small></label>
+    <input type="text" id="f-handles" data-key="links_redes" data-label="Links das redes" data-sec="05 · ESTRUTURA & CONTEÚDOS" placeholder="@marca, links..."/>
+  </div>
+</section>
+
+<section class="mod">
+  <div class="mod-head"><span class="mono">MÓDULO 06</span><h2>Módulos da nave</h2></div>
+
+  <div class="q">
+    <fieldset style="border:none"><legend class="ql">Funcionalidades<small>o que o site deve saber fazer</small></legend>
+    <div class="chips" data-key="funcionalidades" data-label="Funcionalidades" data-sec="06 · MÓDULOS">
+      <button type="button" data-val="Formulário de contacto">Formulário de contacto</button>
+      <button type="button" data-val="Botão de WhatsApp">Botão de WhatsApp</button>
+      <button type="button" data-val="Marcação ou reservas online">Marcação ou reservas online</button>
+      <button type="button" data-val="Loja com pagamentos">Loja com pagamentos</button>
+      <button type="button" data-val="Blog">Blog</button>
+      <button type="button" data-val="Newsletter">Newsletter</button>
+      <button type="button" data-val="Versão em inglês">Versão em inglês</button>
+      <button type="button" data-val="Mapa com localização">Mapa com localização</button>
+      <button type="button" data-val="Galeria de fotos">Galeria de fotos</button>
+      <button type="button" data-val="Área de clientes">Área de clientes</button>
+      <button type="button" data-val="Ainda não sei">Ainda não sei</button>
+    </div></fieldset>
+  </div>
+  <div class="q">
+    <fieldset style="border:none"><legend class="ql">Domínio<small>o endereço do site, tipo marca.pt</small></legend>
+    <div class="chips" data-key="dominio" data-label="Domínio" data-sec="06 · MÓDULOS">
+      <button type="button" data-val="Já tenho">Já tenho</button>
+      <button type="button" data-val="Preciso de registar">Preciso de registar</button>
+      <button type="button" data-val="Não sei o que é">Não sei o que é</button>
+    </div></fieldset>
+  </div>
+  <div class="q">
+    <fieldset style="border:none"><legend class="ql">Alojamento<small>onde o site vive</small></legend>
+    <div class="chips" data-key="alojamento" data-label="Alojamento" data-sec="06 · MÓDULOS">
+      <button type="button" data-val="Já tenho">Já tenho</button>
+      <button type="button" data-val="Preciso de contratar">Preciso de contratar</button>
+      <button type="button" data-val="Não sei o que é">Não sei o que é</button>
+    </div></fieldset>
+  </div>
+</section>
+
+<section class="mod">
+  <div class="mod-head"><span class="mono">MÓDULO 07</span><h2>Logística</h2></div>
+
+  <div class="q">
+    <label class="ql" for="f-orc">Orçamento confortável para este projeto<small>um intervalo honesto ajuda-me a propor a solução certa</small></label>
+    <div class="ranger">
+      <input type="range" id="f-orc" data-key="orcamento" data-label="Orçamento" data-sec="07 · LOGÍSTICA" min="500" max="5000" step="250" value="1500"/>
+      <output id="orc-val" for="f-orc">1500 €</output>
+    </div>
+  </div>
+  <div class="q">
+    <label class="ql" for="f-data">Quando precisas do site a voar?</label>
+    <input type="date" id="f-data" data-key="prazo" data-label="Prazo desejado" data-sec="07 · LOGÍSTICA"/>
+  </div>
+  <div class="q">
+    <fieldset style="border:none"><legend class="ql">Depois do lançamento, quem atualiza o site?</legend>
+    <div class="chips" data-key="manutencao" data-label="Manutenção" data-sec="07 · LOGÍSTICA">
+      <button type="button" data-val="Eu próprio faço as mudanças">Eu próprio</button>
+      <button type="button" data-val="Quero ajuda contínua">Quero ajuda contínua</button>
+      <button type="button" data-val="Decidimos mais tarde">Decidimos mais tarde</button>
+    </div></fieldset>
+  </div>
+</section>
+
+<section class="mod">
+  <div class="mod-head"><span class="mono">MÓDULO 08</span><h2>Transmissão</h2></div>
+
+  <div class="q">
+    <label class="ql" for="f-notas">Mais alguma coisa que eu deva saber?<small>medos, sonhos, prazos apertados, o que NÃO queres num site...</small></label>
+    <textarea id="f-notas" data-key="notas" data-label="Notas finais" data-sec="08 · TRANSMISSÃO" placeholder="Escreve sem filtros - é isto que torna um site teu..."></textarea>
+  </div>
+
+  <details class="repo">
+    <summary>VER RELATÓRIO COMPLETO</summary>
+    <pre id="repo"></pre>
+  </details>
+
+  <div class="send-grid">
+    <a class="btn btn-pri" id="m-mail" href="mailto:benmrodrigues2000@gmail.com">Enviar por email →</a>
+    <button type="button" class="btn btn-ghost" id="m-copy">Copiar respostas</button>
+    <button type="button" class="btn btn-ghost" id="m-dl">Descarregar .txt</button>
+  </div>
+  <p class="send-note">O BOTÃO DE EMAIL ABRE O TEU PROGRAMA DE CORREIO COM TUDO JÁ ESCRITO, DESTINATÁRIO INCLUÍDO. SEM EMAIL À MÃO? USA COPIAR OU DESCARREGAR E ENVIA POR ONDE PREFERIRES.</p>
+  <button type="button" class="linkish" id="m-reset">reiniciar todas as respostas</button>
+</section>
+
+</form>
+
+<footer class="foot">
+  FEITO EM ESMORIZ, PORTUGAL<br/>
+  RUBEN RODRIGUES · PROGRAMADOR & ESPECIALISTA EM IA · <a href="https://github.com/benmrodrigues2000" rel="noopener">GITHUB.COM/BENMRODRIGUES2000</a>
+</footer>
+</main>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s)};
+var $$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
+var MAIL="benmrodrigues2000@gmail.com";
+var form=$("#form"), toast=$("#toast"), toastT=null;
+
+var LS=null;
+try{ LS=window.localStorage; LS.setItem("__t","1"); LS.removeItem("__t"); }catch(e){ LS=null; }
+var LSK="briefing-v07";
+
+function say(msg){
+  toast.textContent=msg; toast.classList.add("show");
+  clearTimeout(toastT); toastT=setTimeout(function(){toast.classList.remove("show")},2600);
+}
+
+function fields(){ return $$("#form [data-key]"); }
+
+function fieldAns(f){
+  var k=f.getAttribute("data-key");
+  if(f.classList.contains("chips")) return f.querySelectorAll(".on").length>0;
+  if(f.type==="range") return f.dataset.touched==="1";
+  if(f.type==="color") return f.dataset.touched==="1";
+  return String(f.value||"").trim().length>0;
+}
+
+function chipVals(g){
+  return $$(".on",0).length===0?[]:[];
+}
+
+function chipsValue(g){
+  var out=[];
+  var bs=g.querySelectorAll("button.on");
+  for(var i=0;i<bs.length;i++) out.push(bs[i].getAttribute("data-val"));
+  return out.join(", ");
+}
+
+function fmtDate(v){
+  if(!v) return "";
+  var p=v.split("-");
+  return p.length===3? p[2]+"/"+p[1]+"/"+p[0] : v;
+}
+
+function fmtBudget(){
+  var r=$("#f-orc"), v=parseInt(r.value,10);
+  return v>=parseInt(r.max,10)? v+" €+" : v+" €";
+}
+
+function report(){
+  var lines=[];
+  var marca=($("#f-marca").value||"").trim();
+  lines.push("RELATÓRIO DE BRIEFING DE MISSÃO");
+  lines.push("Marca: "+(marca||"(sem nome)"));
+  lines.push("Data: "+new Date().toLocaleDateString("pt-PT"));
+  var lastSec=null;
+  var corBuf=[];
+  fields().forEach(function(f){
+    var k=f.getAttribute("data-key");
+    if(k==="cor_fundo"||k==="cor_destaque"||k==="cor_texto"){
+      if(f.dataset.touched==="1") corBuf.push(f.getAttribute("data-label")+" "+f.value.toUpperCase());
+      if(k==="cor_texto"&&corBuf.length){
+        var palName=$(".paletas").dataset.val||"Personalizada";
+        var sec=f.getAttribute("data-sec");
+        lines.push(""); lines.push("- "+sec+" -");
+        lines.push("Paleta: "+palName+" · "+corBuf.join(" · "));
+        corBuf=[];
+      }
+      return;
+    }
+    var v;
+    if(f.classList.contains("chips")) v=chipsValue(f);
+    else if(f.type==="range") v=fmtBudget();
+    else if(f.type==="date") v=fmtDate(f.value);
+    else v=String(f.value||"").trim();
+    if(!v) return;
+    var sec=f.getAttribute("data-sec");
+    if(sec!==lastSec){ lines.push(""); lines.push("- "+sec+" -"); lastSec=sec; }
+    lines.push(f.getAttribute("data-label")+": "+v);
+  });
+  lines.push("");
+  lines.push("Enviado através do briefing de missão de Ruben Rodrigues.");
+  return lines.join("\n");
+}
+
+function progress(){
+  var fs=fields(), done=0;
+  fs.forEach(function(f){ if(fieldAns(f)) done++; });
+  var pct=Math.round(done/fs.length*100);
+  $("#prog-pct").textContent=pct+"%";
+  $("#prog-fill").style.width=pct+"%";
+}
+
+function update(){
+  progress();
+  var r=report();
+  $("#repo").textContent=r;
+  var marca=($("#f-marca").value||"").trim();
+  $("#m-mail").href="mailto:"+MAIL+"?subject="+encodeURIComponent("Briefing de missão - "+(marca||"Novo projeto"))+"&body="+encodeURIComponent(r);
+  save();
+}
+
+function save(){
+  if(!LS) return;
+  var d={};
+  fields().forEach(function(f){
+    var k=f.getAttribute("data-key");
+    if(f.classList.contains("chips")){
+      var on=f.querySelectorAll("button.on"), vals=[];
+      for(var i=0;i<on.length;i++) vals.push(on[i].getAttribute("data-val"));
+      d[k]=vals;
+    } else {
+      d[k]=f.value;
+      if(f.dataset.touched==="1") d[k+"__t"]=1;
+    }
+  });
+  try{ LS.setItem(LSK,JSON.stringify(d)); }catch(e){}
+}
+
+function restore(){
+  if(!LS) return;
+  var d;
+  try{ d=JSON.parse(LS.getItem(LSK)||"{}"); }catch(e){ return; }
+  fields().forEach(function(f){
+    var k=f.getAttribute("data-key"), v=d[k];
+    if(v===undefined) return;
+    if(f.classList.contains("chips")){
+      $$("#"+f.getAttribute("data-key")+"-x").length;
+      var bs=f.querySelectorAll("button");
+      for(var i=0;i<bs.length;i++){
+        if(v.indexOf(bs[i].getAttribute("data-val"))>-1) bs[i].classList.add("on");
+      }
+    } else {
+      f.value=v;
+      if(d[k+"__t"]===1){
+        f.dataset.touched="1";
+        if(f.type==="color") syncHex(f);
+      }
+    }
+  });
+}
+
+function syncHex(c){
+  var map={cor_fundo:"h1",cor_destaque:"h2",cor_texto:"h3"};
+  var el=document.getElementById(map[c.getAttribute("data-key")]);
+  if(el) el.textContent=c.value.toUpperCase();
+}
+
+function markTouched(f){ f.dataset.touched="1"; }
+
+form.addEventListener("input",function(e){
+  var t=e.target;
+  if(t.type==="range"||t.type==="color"){
+    markTouched(t);
+    if(t.type==="color") syncHex(t);
+    if(t.type==="range") $("#orc-val").textContent=fmtBudget();
+  }
+  update();
+});
+
+$$(".chips").forEach(function(g){
+  var single=g.hasAttribute("data-single");
+  g.addEventListener("click",function(e){
+    var b=e.target.closest("button");
+    if(!b) return;
+    e.preventDefault();
+    if(single){
+      var was=b.classList.contains("on");
+      var bs=g.querySelectorAll("button.on");
+      for(var i=0;i<bs.length;i++) bs[i].classList.remove("on");
+      if(!was) b.classList.add("on");
+    } else {
+      b.classList.toggle("on");
+    }
+    update();
+  });
+});
+
+$$(".pal").forEach(function(p){
+  p.addEventListener("click",function(){
+    $$(".pal").forEach(function(x){x.classList.remove("on")});
+    p.classList.add("on");
+    var pair={cor_fundo:p.getAttribute("data-c1"),cor_destaque:p.getAttribute("data-c2"),cor_texto:p.getAttribute("data-c3")};
+    var g=$(".paletas");
+    g.dataset.val=p.getAttribute("data-pal");
+    ["cor_fundo","cor_destaque","cor_texto"].forEach(function(k){
+      var c=document.querySelector('[data-key="'+k+'"]');
+      c.value=pair[k]; markTouched(c); syncHex(c);
+    });
+    update();
+    say("Paleta "+p.getAttribute("data-pal")+" aplicada");
+  });
+});
+
+function requiredMissing(){
+  var miss=[];
+  ["nome","email","marca"].forEach(function(k){
+    var f=document.querySelector('[data-key="'+k+'"]');
+    if(!String(f.value||"").trim()){ miss.push(f); f.classList.add("invalid"); }
+    else f.classList.remove("invalid");
+  });
+  return miss;
+}
+
+$("#m-mail").addEventListener("click",function(e){
+  var miss=requiredMissing();
+  if(miss.length){
+    e.preventDefault();
+    miss[0].scrollIntoView({behavior:"smooth",block:"center"});
+    miss[0].focus({preventScroll:true});
+    say("Faltam coordenadas obrigatórias no módulo 01");
+    return;
+  }
+  say("A abrir o teu email...");
+});
+
+$("#m-copy").addEventListener("click",function(){
+  var miss=requiredMissing();
+  if(miss.length){
+    miss[0].scrollIntoView({behavior:"smooth",block:"center"});
+    say("Faltam coordenadas obrigatórias no módulo 01");
+    return;
+  }
+  var r=report();
+  var done=function(){ say("Relatório copiado - cola onde quiseres"); };
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(r).then(done,function(){ legacy(); });
+  } else legacy();
+  function legacy(){
+    var ta=document.createElement("textarea");
+    ta.value=r; document.body.appendChild(ta); ta.select();
+    try{ document.execCommand("copy"); done(); }catch(err){ say("Não foi possível copiar - usa Descarregar"); }
+    document.body.removeChild(ta);
+  }
+});
+
+$("#m-dl").addEventListener("click",function(){
+  var miss=requiredMissing();
+  if(miss.length){
+    miss[0].scrollIntoView({behavior:"smooth",block:"center"});
+    say("Faltam coordenadas obrigatórias no módulo 01");
+    return;
+  }
+  var marca=($("#f-marca").value||"briefing").trim().toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+  var blob=new Blob([report()],{type:"text/plain;charset=utf-8"});
+  var a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="briefing-"+(marca||"missao")+".txt";
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(a.href)},2000);
+  say("Relatório descarregado");
+});
+
+$("#m-reset").addEventListener("click",function(){
+  if(!confirm("Reiniciar todas as respostas?")) return;
+  if(LS) LS.removeItem(LSK);
+  form.reset();
+  $$(".chips button.on").forEach(function(b){b.classList.remove("on")});
+  var defs={cor_fundo:"#05060F",cor_destaque:"#A78BFA",cor_texto:"#E9EDF8"};
+  ["cor_fundo","cor_destaque","cor_texto"].forEach(function(k){
+    var c=document.querySelector('[data-key="'+k+'"]');
+    c.value=defs[k]; c.dataset.touched=""; syncHex(c);
+  });
+  $("#f-orc").dataset.touched="";
+  $("#orc-val").textContent=fmtBudget();
+  update();
+  say("Missão reiniciada");
+  window.scrollTo({top:0,behavior:"smooth"});
+});
+
+var c=document.getElementById("field"), ctx=c.getContext("2d");
+var stars=[], meteors=[], W=0, H=0;
+var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function seed(){
+  W=c.width=window.innerWidth; H=c.height=window.innerHeight;
+  stars=[];
+  var n=Math.min(240,Math.round(W*H/9000));
+  for(var i=0;i<n;i++) stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.3+.3,p:Math.random()*Math.PI*2,s:.4+Math.random()*1.2});
+}
+function drawField(t){
+  ctx.clearRect(0,0,W,H);
+  for(var i=0;i<stars.length;i++){
+    var st=stars[i], a=reduce?.5:(.28+.3*Math.abs(Math.sin(t*.0006*st.s+st.p)));
+    ctx.beginPath();
+    ctx.fillStyle="rgba(233,237,248,"+a.toFixed(3)+")";
+    ctx.arc(st.x,st.y,st.r,0,6.2832);
+    ctx.fill();
+  }
+  if(reduce) return;
+  for(var m=meteors.length-1;m>=0;m--){
+    var mt=meteors[m];
+    mt.x+=mt.vx; mt.y+=mt.vy; mt.life-=.012;
+    if(mt.life<=0){ meteors.splice(m,1); continue; }
+    var tx=mt.x-mt.vx*11, ty=mt.y-mt.vy*11;
+    var g=ctx.createLinearGradient(mt.x,mt.y,tx,ty);
+    g.addColorStop(0,"rgba(237,239,250,"+(0.95*mt.life).toFixed(3)+")");
+    g.addColorStop(.5,"rgba(167,139,250,"+(0.5*mt.life).toFixed(3)+")");
+    g.addColorStop(1,"rgba(167,139,250,0)");
+    ctx.strokeStyle=g; ctx.lineWidth=1.6;
+    ctx.beginPath(); ctx.moveTo(mt.x,mt.y); ctx.lineTo(tx,ty); ctx.stroke();
+  }
+  if(Math.random()<0.005&&meteors.length<2)
+    meteors.push({x:W*(0.15+Math.random()*0.7),y:Math.random()*H*0.35,vx:-(2.4+Math.random()*1.8),vy:1.2+Math.random()*0.9,life:1});
+}
+function loop(t){ drawField(t||0); requestAnimationFrame(loop); }
+seed();
+if(reduce){ drawField(0); }
+else requestAnimationFrame(loop);
+window.addEventListener("resize",function(){ seed(); if(reduce) drawField(0); });
+
+var d=$("#f-data");
+if(d){ var today=new Date(); d.min=today.toISOString().slice(0,10); }
+
+restore();
+update();
+
+try{
+  if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)){
+    navigator.serviceWorker.register("sw.js").catch(function(){});
+  }
+}catch(e){}
+})();
+</script>
+</body>
+</html>
