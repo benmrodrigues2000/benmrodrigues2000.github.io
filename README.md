@@ -2,6 +2,12 @@
 
 Programador & Especialista em IA - Esmoriz, Portugal.
 
+## Publicar no GitHub Pages
+
+1. Carrega o conteudo deste zip para o ramo `main` de `benmrodrigues2000/benmrodrigues2000.github.io`
+2. Mantem a estrutura de pastas (assets/, css/, js/) e todos os ficheiros da raiz
+3. O site fica vivo em https://benmrodrigues2000.github.io/
+
 ## Estrutura
 
 - `index.html` - inicio

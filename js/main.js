@@ -116,6 +116,31 @@
     }, 2400);
   }
 
+
+  var toTop = document.createElement("a");
+  toTop.className = "to-top";
+  toTop.href = "#main";
+  toTop.setAttribute("aria-label", "Voltar ao topo");
+  toTop.textContent = "\u2191";
+  document.body.appendChild(toTop);
+  var ticking = false;
+  function onScroll(){
+    if (!ticking){
+      window.requestAnimationFrame(function(){
+        toTop.classList.toggle("show", window.scrollY > 600);
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+  toTop.addEventListener("click", function(e){
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+  });
+
+  try{
   var canvas = document.getElementById("field");
   if (canvas && !reduce && canvas.getContext){
     var ctx = canvas.getContext("2d");
@@ -125,6 +150,7 @@
     var trail = [];
     var nodes = [];
     var stars = [];
+    var meteors = [];
     var idleT = 0;
     var running = true;
 
@@ -178,6 +204,15 @@
 
     function grid(){
       ctx.clearRect(0, 0, W, H);
+      if (Math.random() < 0.005 && meteors.length < 2){
+        meteors.push({
+          x: W * 0.15 + Math.random() * W * 0.7,
+          y: Math.random() * H * 0.35,
+          vx: -(2.4 + Math.random() * 1.8),
+          vy: 1.2 + Math.random() * 0.9,
+          life: 1
+        });
+      }
       for (var i = 0; i < stars.length; i++){
         var st = stars[i];
         var tw = 0.35 + 0.45 * (0.5 + 0.5 * Math.sin(idleT * st.sp + st.p));
@@ -185,6 +220,22 @@
         ctx.arc(st.x, st.y, st.r, 0, Math.PI * 2);
         ctx.fillStyle = "rgba(" + st.c + "," + tw.toFixed(3) + ")";
         ctx.fill();
+      }
+      for (var m = meteors.length - 1; m >= 0; m--){
+        var mt = meteors[m];
+        mt.x += mt.vx; mt.y += mt.vy; mt.life -= 0.012;
+        if (mt.life <= 0 || mt.x < -80 || mt.y > H + 40){ meteors.splice(m, 1); continue; }
+        var tail = 11;
+        var grad = ctx.createLinearGradient(mt.x, mt.y, mt.x - mt.vx * tail, mt.y - mt.vy * tail);
+        grad.addColorStop(0, "rgba(237,239,250," + (mt.life * 0.95).toFixed(3) + ")");
+        grad.addColorStop(0.4, "rgba(167,139,250," + (mt.life * 0.5).toFixed(3) + ")");
+        grad.addColorStop(1, "rgba(167,139,250,0)");
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.6;
+        ctx.beginPath();
+        ctx.moveTo(mt.x, mt.y);
+        ctx.lineTo(mt.x - mt.vx * tail, mt.y - mt.vy * tail);
+        ctx.stroke();
       }
     }
 
@@ -259,4 +310,11 @@
       heroIo.observe(hero);
     }
   }
+  }catch(canvasErr){ /* o site funciona sem canvas */ }
+
+  try{
+    if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)){
+      navigator.serviceWorker.register("sw.js").catch(function(){});
+    }
+  }catch(swErr){}
 })();
