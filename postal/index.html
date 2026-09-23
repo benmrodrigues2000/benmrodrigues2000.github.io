@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="pt-PT" data-lang="pt" data-fmt="a6">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#05060F">
+<meta name="author" content="Ruben Monteiro Correia Rodrigues">
+<title>Postal da Terra - Ruben Rodrigues</title>
+<meta name="description" content="Postal imprimível de Ruben Rodrigues, programador e especialista em IA em Esmoriz, Portugal.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Postal da Terra - Ruben Rodrigues">
+<meta property="og:description" content="Programador &amp; Especialista em IA · Esmoriz, Portugal. Quem sou, o que faço e como falar comigo — num postal A6.">
+<meta property="og:image" content="https://benmrodrigues2000.github.io/postal/retrato.jpg">
+<meta property="og:locale" content="pt_PT">
+<meta property="og:locale:alternate" content="en_GB">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='14'%20fill='%2305060F'/%3E%3Ccircle%20cx='46'%20cy='18'%20r='6'%20fill='%237DD3FC'/%3E%3Ccircle%20cx='46'%20cy='18'%20r='9'%20fill='none'%20stroke='%237DD3FC'%20stroke-width='1.4'%20opacity='.5'/%3E%3Ctext%20x='30'%20y='46'%20font-family='Arial%20Black,Arial,sans-serif'%20font-size='34'%20font-weight='900'%20fill='%23A78BFA'%20text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Ruben Monteiro Correia Rodrigues","alternateName":"AYYLIENADO","jobTitle":"Programador & Especialista em IA","url":"https://benmrodrigues2000.github.io","email":"mailto:benmrodrigues2000@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Esmoriz","postalCode":"3885","addressCountry":"PT"},"sameAs":["https://github.com/benmrodrigues2000","https://malt.es/profile/rubenrodrigues"]}
+</script>
+<style id="page-size">@page{size:154mm 111mm;margin:0}</style>
+<style>
+/* Local static Inter (optional, print shop file set): real embedded fonts in PDFs.
+   Falls back silently to Google Fonts / system when the files are absent. */
+@font-face{font-family:"Inter Static";font-style:normal;font-weight:400;font-display:swap;src:local("Inter"),url(fonts/inter-400-latin.woff2) format("woff2")}
+@font-face{font-family:"Inter Static";font-style:normal;font-weight:600;font-display:swap;src:local("Inter SemiBold"),url(fonts/inter-600-latin.woff2) format("woff2")}
+@font-face{font-family:"Inter Static";font-style:normal;font-weight:700;font-display:swap;src:local("Inter Bold"),url(fonts/inter-700-latin.woff2) format("woff2")}
+:root{
+  --canvas:#05060F;
+  --surface:#0B0F1F;
+  --surface-2:#121731;
+  --light:#E9EDF8;
+  --paper:#EEF1F9;
+  --ink:#EDEFFA;
+  --ink-dark:#070A18;
+  --muted:#9AA3BF;
+  --muted-print:#B3BAD2;
+  --rule:#232A4D;
+  --rule-light:rgba(7,10,24,.16);
+  --violet:#A78BFA;
+  --violet-deep:#7C5CF0;
+  --coral:#FF9E64;
+  --cyan:#7DD3FC;
+  --ok:#6EE7B7;
+  --font-display:"Bebas Neue","Arial Narrow",Impact,sans-serif;
+  --font-read:"Inter Static","Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--canvas);color:var(--ink);
+  font-family:var(--font-read);font-size:16px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;font-synthesis:none;
+}
+::selection{background:rgba(167,139,250,.38);color:#fff}
+[data-lang="pt"] .en,[data-lang="en"] .pt{display:none !important}
+svg{display:block}
+.ico{display:inline-block;width:1em;height:1em;vertical-align:-.12em;flex:none}
+.skip{
+  position:absolute;left:16px;top:-60px;z-index:99;
+  background:var(--violet);color:var(--ink-dark);font-weight:700;font-size:13px;
+  padding:10px 18px;border-radius:9999px;text-decoration:none;
+  transition:top 180ms var(--ease);
+}
+.skip:focus-visible{top:12px}
+
+/* =========================================================
+   CARD FACES - all measurements in real print units (mm/pt)
+   Do not change trim math: 148 x 105 mm + bleed.
+   ========================================================= */
+.face{
+  --bleed:0mm;
+  position:relative;overflow:hidden;
+  width:calc(148mm + 2 * var(--bleed));
+  height:calc(105mm + 2 * var(--bleed));
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  line-height:1.3;
+}
+.face *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.trim{position:absolute;left:var(--bleed);top:var(--bleed);width:148mm;height:105mm}
+:where(.face) :where(p,h1,h2,h3,ol,ul){margin:0;padding:0}
+
+/* ---------- FRONT : the view from space ---------- */
+.face-front{
+  color:var(--ink);
+  background:
+    radial-gradient(70mm 52mm at 100% 0%,rgba(167,139,250,.22),transparent 70%),
+    radial-gradient(80mm 46mm at 0% 100%,rgba(125,211,252,.09),transparent 72%),
+    radial-gradient(60mm 30mm at 50% 118%,rgba(255,158,100,.08),transparent 70%),
+    linear-gradient(rgba(0,0,0,.28),transparent 26%),
+    var(--canvas);
+}
+.stars{position:absolute;left:-3mm;top:-3mm;width:154mm;height:111mm}
+.stars .w{fill:#EDEFFA}
+.stars .c{fill:#7DD3FC}
+.constel{position:absolute;left:0;top:0;width:148mm;height:105mm;overflow:visible}
+.meteor{
+  position:absolute;left:84mm;top:17.5mm;width:19mm;height:.32mm;border-radius:1mm;
+  background:linear-gradient(90deg,rgba(237,239,250,.95),rgba(167,139,250,.45) 40%,rgba(167,139,250,0));
+  transform:rotate(-19deg);transform-origin:0 50%;
+}
+/* outlined wordmark as vector paths (Bebas Neue, shaped with HarfBuzz):
+   prints as clean line art instead of a Type 3 font */
+.hero-word{position:absolute;left:0;top:0;width:148mm;height:105mm;overflow:visible;pointer-events:none}
+.planet{position:absolute;left:0;top:0;width:148mm;height:105mm;overflow:visible}
+
+.f-top{
+  position:absolute;left:8mm;top:7.6mm;
+  display:flex;align-items:center;gap:2.2mm;
+  font-family:var(--font-mono);font-size:5.5pt;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--muted-print);white-space:nowrap;
+}
+.tick{display:inline-block;width:4.6mm;height:.26mm;background:var(--violet)}
+
+.f-left{position:absolute;left:8mm;top:18.6mm;width:69mm}
+.hello{
+  display:flex;align-items:center;gap:1.8mm;
+  font-family:var(--font-display);font-size:15pt;line-height:1;letter-spacing:.06em;color:var(--muted-print);
+}
+.hello .alien{width:4.4mm;height:4.4mm;color:var(--violet)}
+.name{
+  font-family:var(--font-display);font-weight:400;
+  font-size:53pt;line-height:.84;letter-spacing:.01em;margin-top:1.6mm;color:var(--ink);
+  text-shadow:0 0 12mm rgba(167,139,250,.28);
+}
+.bar{display:block;width:17mm;height:.9mm;background:linear-gradient(90deg,var(--violet),var(--cyan));margin:3.9mm 0 3.2mm}
+.role{font-weight:600;font-size:9.6pt;line-height:1.2;color:var(--violet)}
+.lead{
+  font-family:var(--font-mono);font-size:6.3pt;line-height:1.55;color:var(--muted-print);
+  margin-top:2.3mm;max-width:64mm;
+}
+
+.map{
+  position:absolute;right:8mm;top:26mm;width:63mm;
+  border:.26mm solid var(--rule);border-radius:2.6mm;
+  background:rgba(11,15,31,.82);
+  box-shadow:0 4mm 10mm -4mm rgba(0,0,0,.6),0 0 0 .26mm rgba(167,139,250,.06);
+  padding:4mm 4.2mm 3.4mm;
+}
+.map-head,.map-foot{
+  display:flex;justify-content:space-between;align-items:center;gap:2mm;
+  font-family:var(--font-mono);font-size:5.2pt;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--muted-print);white-space:nowrap;
+}
+.map-head{margin-bottom:4.1mm}
+.routes{list-style:none;padding-left:7.6mm;position:relative}
+.routes::before{
+  content:"";position:absolute;left:2.18mm;top:2.4mm;bottom:5.6mm;width:.34mm;
+  background:linear-gradient(var(--cyan),rgba(125,211,252,.25));
+}
+.routes li{position:relative;display:flex;gap:2.1mm;align-items:flex-start;padding-bottom:4mm}
+.routes li:last-child{padding-bottom:.4mm}
+.routes .dot{
+  position:absolute;left:-7.6mm;top:0;width:4.7mm;height:4.7mm;border-radius:50%;
+  border:.26mm solid var(--violet);background:var(--canvas);
+  display:flex;align-items:center;justify-content:center;
+}
+.routes .dot svg{width:2.4mm;height:2.4mm;color:var(--violet)}
+.routes .idx{font-family:var(--font-mono);font-size:5.3pt;letter-spacing:.08em;color:var(--muted-print);padding-top:.75mm;min-width:3.4mm}
+.routes b{display:block;font-weight:600;font-size:8.5pt;line-height:1.15;color:var(--ink);margin-bottom:.75mm}
+.routes small{
+  display:block;font-family:var(--font-mono);font-size:5.1pt;line-height:1.35;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--muted-print);
+}
+.map-foot{border-top:.26mm solid var(--rule);margin-top:3.3mm;padding-top:2.5mm}
+.map-foot .turn{display:inline-flex;align-items:center;gap:1.1mm;color:var(--violet)}
+.map-foot .turn .ico{width:2.6mm;height:2.6mm}
+
+.f-bottom{
+  position:absolute;left:8mm;right:8mm;bottom:6.6mm;
+  display:flex;justify-content:space-between;align-items:center;gap:4mm;
+  font-family:var(--font-mono);font-size:5.6pt;letter-spacing:.11em;text-transform:uppercase;color:var(--ink);
+  white-space:nowrap;
+}
+.status{
+  display:inline-flex;align-items:center;
+  border:.26mm solid var(--rule);border-radius:99mm;background:rgba(11,15,31,.72);
+  padding:1.3mm 3.2mm 1.2mm;
+}
+.dot-live{
+  display:inline-block;width:1.8mm;height:1.8mm;border-radius:50%;background:var(--violet);
+  box-shadow:0 0 0 .85mm rgba(167,139,250,.18);margin-right:2.4mm;
+}
+.f-bottom .url{color:var(--cyan);letter-spacing:.06em;text-transform:none;font-size:6pt}
+
+/* ---------- BACK : the paper side ---------- */
+.face-back{color:var(--ink-dark);background:var(--paper)}
+.face-back .grain{
+  position:absolute;inset:-3mm;
+  background:
+    radial-gradient(.14mm .14mm at .7mm .7mm,rgba(7,10,24,.055) 99%,transparent),
+    radial-gradient(60mm 40mm at 0% 0%,rgba(167,139,250,.10),transparent 70%),
+    radial-gradient(70mm 50mm at 100% 100%,rgba(125,211,252,.10),transparent 70%);
+  background-size:1.35mm 1.35mm,auto,auto;
+}
+.label{
+  font-family:var(--font-mono);font-size:5.1pt;letter-spacing:.13em;text-transform:uppercase;
+  color:rgba(7,10,24,.62);white-space:nowrap;
+}
+.b-msg{position:absolute;left:8mm;top:7.6mm;bottom:7mm;width:69mm;display:flex;flex-direction:column}
+.proj{display:flex;align-items:center;gap:2.6mm;margin-top:2.4mm}
+.proj-name{font-family:var(--font-display);font-weight:400;font-size:31pt;line-height:.86;letter-spacing:.01em}
+.live-pill{
+  display:inline-flex;align-items:center;gap:1.2mm;white-space:nowrap;
+  font-family:var(--font-mono);font-size:5pt;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--cyan);background:var(--canvas);border-radius:99mm;padding:1mm 2.1mm .9mm;
+  transform:translateY(-.4mm);
+}
+.live-pill i{width:1.2mm;height:1.2mm;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 .55mm rgba(125,211,252,.25)}
+.proj-meta{
+  font-family:var(--font-mono);font-size:5.1pt;letter-spacing:.07em;text-transform:uppercase;
+  color:rgba(7,10,24,.64);margin-top:1.9mm;
+}
+.stats{display:grid;grid-template-columns:1fr 1fr 1.25fr;gap:1.9mm;margin-top:3.3mm}
+.stats div{
+  border:.26mm solid var(--rule-light);border-radius:1.8mm;
+  background:rgba(255,255,255,.66);padding:1.9mm 2.2mm 1.7mm;
+}
+.stats b{display:block;font-family:var(--font-display);font-weight:400;font-size:20pt;line-height:.86;color:var(--ink-dark)}
+.stats b small{font-size:.55em;letter-spacing:.04em;margin-left:.3mm;color:var(--violet-deep)}
+.stats div:first-child b{color:var(--violet-deep)}
+.stats span{
+  display:block;margin-top:.9mm;font-family:var(--font-mono);font-size:5pt;line-height:1.3;
+  letter-spacing:.08em;text-transform:uppercase;color:rgba(7,10,24,.64);
+}
+.proj-desc{font-size:6.9pt;line-height:1.46;color:rgba(7,10,24,.82);margin-top:3.1mm}
+.proj-desc strong{font-weight:600;color:var(--ink-dark)}
+.facts{display:flex;gap:1.4mm;margin-top:auto;margin-bottom:2.3mm;flex-wrap:nowrap}
+.fact{
+  font-family:var(--font-mono);font-size:5pt;line-height:1;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;
+  color:var(--ink-dark);border:.26mm solid var(--rule-light);border-radius:99mm;padding:1.15mm 1.8mm 1.05mm;
+  background:rgba(255,255,255,.55);
+}
+.chip{
+  font-family:var(--font-mono);font-size:5.9pt;line-height:1.5;color:var(--ink-dark);
+  border:.26mm solid var(--rule-light);border-left:1mm solid var(--coral);
+  border-radius:1.8mm;background:#fff;padding:2.1mm 2.6mm;
+}
+.chip::before{content:"› ";color:var(--coral);font-weight:500}
+.answer{display:flex;align-items:flex-end;justify-content:space-between;gap:3mm;margin-top:2.4mm}
+.answer p{font-family:var(--font-display);font-size:24pt;line-height:.9;letter-spacing:.02em;white-space:nowrap}
+.answer mark{background:linear-gradient(transparent 60%,rgba(167,139,250,.9) 60%,rgba(167,139,250,.9) 88%,transparent 88%);color:inherit;padding:0 .7mm;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.answer .sign{
+  font-family:var(--font-mono);font-size:5pt;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(7,10,24,.6);text-align:right;line-height:1.45;padding-bottom:.6mm;
+}
+.answer .sign b{display:block;font-weight:500;color:var(--ink-dark);letter-spacing:.12em}
+
+.b-divider{position:absolute;left:83mm;top:8mm;bottom:8mm;border-left:.26mm solid rgba(7,10,24,.22)}
+.b-divider > span{
+  position:absolute;left:0;top:50%;transform:translate(-50%,-50%) rotate(-90deg);
+  background:var(--paper);padding:0 2mm;white-space:nowrap;
+  font-family:var(--font-mono);font-size:4.6pt;letter-spacing:.16em;text-transform:uppercase;color:rgba(7,10,24,.5);
+}
+
+.b-addr{position:absolute;left:88mm;right:7.6mm;top:7mm;bottom:7mm}
+.stamp{position:absolute;z-index:1;right:.4mm;top:.4mm;width:23mm;height:27mm;transform:rotate(2.4deg)}
+.stamp-edge{position:absolute;inset:0;width:100%;height:100%;fill:#fff;stroke:rgba(7,10,24,.16);stroke-width:.14}
+.stamp-inner{position:absolute;inset:1.75mm;overflow:hidden;background:var(--canvas)}
+.stamp-inner img{display:block;width:100%;height:calc(100% - 4.4mm);object-fit:cover;object-position:50% 38%}
+.stamp-fallback{
+  width:100%;height:calc(100% - 4.4mm);
+  display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(120% 100% at 50% 0%,#1B2144 0%,var(--canvas) 72%);
+  color:var(--violet);font-family:var(--font-display);font-size:22pt;letter-spacing:.05em;
+}
+.stamp-band{
+  position:absolute;left:0;right:0;bottom:0;height:4.4mm;background:var(--canvas);
+  display:flex;justify-content:space-between;align-items:center;padding:0 1.3mm;
+}
+.stamp-band em{font-style:normal;font-family:var(--font-display);font-size:7.6pt;letter-spacing:.07em;color:#fff}
+.stamp-band b{font-family:var(--font-display);font-weight:400;font-size:7.6pt;letter-spacing:.05em;color:var(--violet)}
+.postmark{position:absolute;z-index:2;left:.8mm;top:6.2mm;width:32mm;height:22mm;color:#6D5DF6;transform:rotate(-8deg);opacity:.92;mix-blend-mode:multiply}
+
+.addr-label{position:absolute;left:0;top:35.6mm}
+.lines{position:absolute;left:0;right:0;top:38.6mm;list-style:none}
+.lines li{
+  display:flex;align-items:flex-end;height:6.3mm;padding-bottom:1.05mm;
+  border-bottom:.26mm solid rgba(7,10,24,.22);white-space:nowrap;
+  font-size:6.8pt;line-height:1;color:var(--ink-dark);
+}
+.lines li .k{
+  flex:none;width:9.6mm;font-family:var(--font-mono);font-size:4.7pt;letter-spacing:.11em;
+  text-transform:uppercase;color:rgba(7,10,24,.52);padding-bottom:.25mm;
+}
+.lines li .v{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.lines li.em{font-weight:700;font-size:7.4pt}
+.copy-btn{
+  flex:none;align-self:center;margin-left:1.5mm;width:5mm;height:5mm;
+  display:inline-flex;align-items:center;justify-content:center;
+  border:.26mm solid var(--rule-light);border-radius:1.2mm;background:#fff;color:rgba(7,10,24,.6);
+  cursor:pointer;padding:0;
+}
+.copy-btn:hover{color:var(--violet-deep);border-color:var(--violet-deep)}
+.copy-btn svg{width:2.5mm;height:2.5mm}
+.qr-row{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:flex-end;gap:3mm}
+.qr{flex:none;width:17.5mm;height:17.5mm;border-radius:1.2mm;overflow:hidden;background:#fff}
+.qr-copy{
+  font-family:var(--font-mono);font-size:5pt;line-height:1.45;letter-spacing:.09em;text-transform:uppercase;
+  color:rgba(7,10,24,.62);padding-bottom:.2mm;
+}
+.qr-copy b{
+  display:block;margin:.9mm 0 1.3mm;font-family:var(--font-read);font-size:6.5pt;line-height:1.3;
+  font-weight:600;letter-spacing:0;text-transform:none;color:var(--ink-dark);
+}
+.qr-copy .pin{display:inline-flex;align-items:center;gap:1mm}
+.qr-copy .pin i{width:1.5mm;height:1.5mm;border-radius:50%;background:var(--violet)}
+
+/* =========================================================
+   SCREEN - presentation page around the card
+   ========================================================= */
+@media screen{
+  body{
+    min-height:100vh;
+    background-image:
+      radial-gradient(1px 1px at 18% 22%,rgba(237,239,250,.28),transparent 55%),
+      radial-gradient(1.4px 1.4px at 73% 64%,rgba(125,211,252,.22),transparent 55%),
+      radial-gradient(1px 1px at 42% 86%,rgba(237,239,250,.18),transparent 55%),
+      radial-gradient(1.2px 1.2px at 88% 14%,rgba(237,239,250,.22),transparent 55%),
+      radial-gradient(1px 1px at 6% 70%,rgba(167,139,250,.25),transparent 55%),
+      linear-gradient(rgba(35,42,77,.22) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(35,42,77,.22) 1px,transparent 1px);
+    background-size:auto,auto,auto,auto,auto,64px 64px,64px 64px;
+  }
+  #print-root{display:none}
+  .map{backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+  .routes li{border-radius:1.5mm;transition:background 200ms var(--ease)}
+  .routes li:hover{background:rgba(167,139,250,.08)}
+  .stamp{filter:drop-shadow(0 1.4mm 2.2mm rgba(7,10,24,.28))}
+  .qr{box-shadow:0 0 0 .3mm rgba(7,10,24,.18),0 2mm 6mm -2mm rgba(7,10,24,.28)}
+  .meteor{animation:meteor 5.5s var(--ease) infinite}
+  @keyframes meteor{
+    0%{opacity:0;transform:rotate(-19deg) translateX(-7mm)}
+    18%{opacity:1}
+    38%{opacity:1;transform:rotate(-19deg) translateX(7mm)}
+    55%,100%{opacity:0;transform:rotate(-19deg) translateX(7mm)}
+  }
+  .stars circle:nth-child(3n){animation:tw 3.4s ease-in-out infinite alternate}
+  .stars circle:nth-child(3n+1){animation:tw 4.3s ease-in-out infinite alternate-reverse}
+  @keyframes tw{from{opacity:.22}to{opacity:1}}
+  .dot-live{animation:pulse 2.2s ease-in-out infinite}
+  @keyframes pulse{
+    0%,100%{box-shadow:0 0 0 .85mm rgba(167,139,250,.18)}
+    50%{box-shadow:0 0 0 1.7mm rgba(167,139,250,.05)}
+  }
+  .live-pill i{animation:pulseCyan 2.2s ease-in-out infinite}
+  @keyframes pulseCyan{
+    0%,100%{box-shadow:0 0 0 .55mm rgba(125,211,252,.25)}
+    50%{box-shadow:0 0 0 1.1mm rgba(125,211,252,.08)}
+  }
+  .chip::after{content:"▍";color:var(--coral);animation:blink 1.1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+}
+.chrome{
+  position:sticky;top:0;z-index:10;
+  background:rgba(7,10,24,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--rule);
+}
+.chrome .wrap{
+  max-width:1440px;margin:0 auto;padding:14px 32px;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+}
+.wordmark{display:flex;align-items:baseline;gap:12px;color:var(--ink);text-decoration:none}
+.wordmark .name-s{font-family:var(--font-display);font-size:26px;line-height:1;letter-spacing:.02em}
+.wordmark .role-s{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.seg{display:inline-flex;border:1px solid var(--rule);border-radius:9999px;padding:3px;gap:2px}
+.seg button{
+  font:inherit;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);background:none;border:0;border-radius:9999px;padding:8px 14px;cursor:pointer;
+  transition:color 150ms var(--ease),background 150ms var(--ease);
+}
+.seg button:hover{color:var(--ink)}
+.seg button[aria-pressed="true"]{background:var(--surface-2);color:var(--violet)}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;min-height:42px;padding:11px 20px;border-radius:9999px;
+  font:inherit;font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;
+  border:0;cursor:pointer;transition:transform 150ms var(--ease),background 150ms var(--ease),color 150ms var(--ease),border-color 150ms var(--ease);
+}
+.btn-primary{background:var(--violet);color:var(--ink-dark)}
+.btn-primary:hover{transform:translateY(-2px)}
+.btn-ghost{border:1px solid var(--rule);color:var(--ink);background:none}
+.btn-ghost:hover{border-color:var(--violet);color:var(--violet)}
+.btn-sm{min-height:36px;padding:8px 16px;font-size:12px}
+.btn .ico{width:14px;height:14px}
+.btn[aria-pressed="true"]{border-color:var(--violet);color:var(--violet)}
+:focus-visible{outline:2px solid var(--violet);outline-offset:3px}
+
+.stage-wrap{max-width:1440px;margin:0 auto;padding:44px 32px 24px}
+.intro{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:28px}
+.intro .mono{font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.intro h1{font-family:var(--font-display);font-weight:400;font-size:clamp(56px,8vw,112px);line-height:.84;margin:8px 0 0;letter-spacing:.01em}
+.intro h1 em{font-style:normal;background:linear-gradient(100deg,var(--violet),var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.intro p.lede{font-family:var(--font-mono);font-size:15px;line-height:1.55;color:var(--muted);max-width:46ch;margin:0}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.toolbar{
+  display:flex;align-items:center;justify-content:space-between;gap:14px 22px;flex-wrap:wrap;
+  border:1px solid var(--rule);border-radius:16px;background:rgba(11,15,31,.6);
+  padding:12px 18px;margin-bottom:30px;
+}
+.tb-group{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.tb-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.tb-label output{color:var(--violet);margin-left:4px}
+input[type="range"]{accent-color:var(--violet);width:150px;cursor:pointer}
+.stage{--z:1;display:flex;flex-wrap:wrap;gap:40px;justify-content:center}
+.stage[data-mode="flip"]{justify-content:center}
+.stage[data-mode="flip"] .card-col{display:none}
+.stage[data-mode="flip"][data-side="front"] .front-col{display:flex}
+.stage[data-mode="flip"][data-side="back"] .back-col{display:flex}
+.stage[data-mode="flip"] .card-box{cursor:pointer}
+.card-col{display:flex;flex-direction:column;gap:12px}
+.card-cap{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.card-cap b{color:var(--ink);font-weight:500}
+.flip-hint{display:none;color:var(--violet)}
+.stage[data-mode="flip"] .flip-hint{display:inline}
+.stage[data-mode="flip"] .pg{display:none}
+.card-box{
+  width:calc(148mm * var(--z));height:calc(105mm * var(--z));
+  border-radius:calc(2.2mm * var(--z));overflow:hidden;
+  box-shadow:0 1px 0 rgba(255,255,255,.06) inset,0 40px 80px -30px rgba(0,0,0,.85),0 0 0 1px rgba(35,42,77,.9);
+  transition:transform 400ms var(--ease);
+}
+.card-box:hover{transform:translateY(-4px) rotate(-.4deg)}
+.card-box .face{transform:scale(var(--z));transform-origin:0 0}
+.card-box.flip-in{animation:flipIn .45s var(--ease)}
+@keyframes flipIn{from{transform:rotateY(88deg);opacity:.35}to{transform:rotateY(0);opacity:1}}
+.stage.show-safe .trim::after{
+  content:"";position:absolute;inset:3mm;pointer-events:none;
+  border:.35mm dashed rgba(167,139,250,.85);border-radius:1.2mm;
+}
+.stage.show-safe .face-back .trim::after{border-color:rgba(124,92,240,.8)}
+
+.notes{max-width:1440px;margin:0 auto;padding:28px 32px 72px}
+.notes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;border-top:1px solid var(--rule);padding-top:28px}
+.notes h2{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500;margin:0 0 10px}
+.notes p,.notes li{font-size:14.5px;line-height:1.55;color:#C9CFE3;margin:0}
+.notes ul{margin:0;padding-left:18px}
+.notes li+li{margin-top:4px}
+.notes .dl{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.notes code{font-family:var(--font-mono);font-size:12.5px;color:var(--cyan)}
+.kbd{
+  display:inline-block;font-family:var(--font-mono);font-size:11px;line-height:1;
+  border:1px solid var(--rule);border-bottom-width:2px;border-radius:6px;
+  background:var(--surface-2);color:var(--ink);padding:3px 7px;margin:0 1px;
+}
+.shortcuts{margin-top:12px !important}
+.footer-base{
+  max-width:1440px;margin:0 auto;padding:0 32px 40px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+}
+.footer-base a{color:var(--muted);text-decoration:none}
+.footer-base a:hover{color:var(--violet)}
+.toasts{
+  position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:50;
+  display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none;
+}
+.toast{
+  background:rgba(11,15,31,.94);border:1px solid var(--violet);color:var(--ink);
+  font-family:var(--font-mono);font-size:12.5px;letter-spacing:.03em;
+  padding:10px 20px;border-radius:9999px;box-shadow:0 12px 32px rgba(0,0,0,.5);
+  animation:toastIn 250ms var(--ease);
+}
+.toast.out{opacity:0;transform:translateY(6px);transition:opacity 250ms,transform 250ms}
+@keyframes toastIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (max-width:900px){
+  .chrome .wrap{padding:12px 18px}
+  .wordmark .role-s{display:none}
+  .stage-wrap{padding:28px 18px 16px}
+  .notes{padding:20px 18px 56px}
+  .notes-grid{grid-template-columns:1fr}
+  .footer-base{padding:0 18px 32px;flex-direction:column}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none !important;transition:none !important}
+}
+
+/* =========================================================
+   PRINT
+   ========================================================= */
+@media print{
+  /* every sheet is exactly one page: sizes derive from the real page box,
+     so browser rounding of the @page size can never leave a white edge */
+  html,body{background:#fff !important;width:100%;height:100%}
+  .chrome,.stage-wrap,.notes,.footer-base,.toolbar,.actions,.toasts,.skip,.copy-btn,.flip-hint{display:none !important}
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  #print-root{display:block;width:100%;height:100%}
+  .sheet{position:relative;overflow:hidden;width:100%;height:100%;break-inside:avoid;page-break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .sheet + .sheet{break-before:page;page-break-before:always}
+  [data-fmt="a6"] .sheet-front{background:var(--canvas)}
+  [data-fmt="a6"] .sheet-back{background:var(--paper)}
+  [data-fmt="a6"] .slot{width:100%;height:100%}
+  [data-fmt="a6"] .face{--bleed:3mm;width:100%;height:100%}
+  [data-fmt="a4"] .sheet{display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff}
+  [data-fmt="a4"] .face{--bleed:2mm}
+  .slot{position:relative}
+  [data-fmt="a4"] .slot{padding:8mm}
+  .marks{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+  .marks line{stroke:#000;stroke-width:.2}
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main"><span class="pt">Saltar para o conteúdo</span><span class="en">Skip to content</span></a>
+
+<header class="chrome">
+  <div class="wrap">
+    <a class="wordmark" href="../index.html">
+      <span class="name-s">RUBEN RODRIGUES</span>
+      <span class="role-s"><span class="pt">Postal imprimível</span><span class="en">Printable postcard</span></span>
+    </a>
+    <div class="controls">
+      <div class="seg" role="group" data-aria-pt="Idioma" data-aria-en="Language" aria-label="Idioma">
+        <button type="button" data-set-lang="pt" aria-pressed="true">PT</button>
+        <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <div class="seg" role="group" data-aria-pt="Formato de impressão" data-aria-en="Print format" aria-label="Formato de impressão">
+        <button type="button" data-set-fmt="a6" aria-pressed="true"><span class="pt">A6 · Gráfica</span><span class="en">A6 · Print shop</span></button>
+        <button type="button" data-set-fmt="a4" aria-pressed="false"><span class="pt">A4 · Em casa</span><span class="en">A4 · At home</span></button>
+      </div>
+      <button type="button" class="btn btn-primary" id="printBtn" data-aria-pt="Imprimir ou guardar PDF (atalho: P)" data-aria-en="Print or save PDF (shortcut: P)">
+        <span class="pt">Imprimir / guardar PDF</span><span class="en">Print / save PDF</span>
+        <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="stage-wrap" id="main">
+  <div class="intro">
+    <div>
+      <span class="mono"><span class="pt">Cartão / A6 · 148 × 105 mm · frente e verso</span><span class="en">Card / A6 · 148 × 105 mm · two-sided</span></span>
+      <h1><span class="pt">Postal da <em>Terra</em></span><span class="en">Postcard from <em>Earth</em></span></h1>
+    </div>
+    <div>
+      <p class="lede"><span class="pt">Curto e direto: quem sou, o que faço, a última missão e como falar comigo. Escolhe o idioma e o formato, e imprime.</span><span class="en">Short and direct: who I am, what I do, my latest mission and how to reach me. Pick a language and format, then print.</span></p>
+      <div class="actions">
+        <button type="button" class="btn btn-ghost btn-sm" data-copy="benmrodrigues2000@gmail.com">
+          <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><rect x="5" y="5" width="8.5" height="8.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M11 5V4a1.5 1.5 0 0 0-1.5-1.5H4A1.5 1.5 0 0 0 2.5 4v5.5A1.5 1.5 0 0 0 4 11h1" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+          <span class="pt">Copiar email</span><span class="en">Copy email</span>
+        </button>
+        <button type="button" class="btn btn-ghost btn-sm" id="vcardBtn">
+          <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2.5v9M4.5 8 8 11.5 11.5 8M3 13.5h10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="pt">Guardar contacto</span><span class="en">Save contact</span>
+        </button>
+        <a class="btn btn-ghost btn-sm" href="https://benmrodrigues2000.github.io" target="_blank" rel="noopener">
+          <span class="pt">Abrir portefólio</span><span class="en">Open portfolio</span>
+          <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.5 3.5H3.5v9h9V9.5M9 2.5h4.5V7M13.2 2.8 7.5 8.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="tb-group">
+      <span class="tb-label" id="viewLabel"><span class="pt">Ver</span><span class="en">View</span></span>
+      <div class="seg" role="group" aria-labelledby="viewLabel">
+        <button type="button" data-set-mode="side" aria-pressed="true"><span class="pt">Lado a lado</span><span class="en">Side by side</span></button>
+        <button type="button" data-set-mode="flip" aria-pressed="false"><span class="pt">Virar</span><span class="en">Flip</span></button>
+      </div>
+      <button type="button" class="btn btn-ghost btn-sm" id="flipBtn" hidden>
+        <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8a5 5 0 0 1 8.7-3.4M13 8a5 5 0 0 1-8.7 3.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M11.7 2.3v3h-3M4.3 13.7v-3h3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="pt">Virar postal</span><span class="en">Flip card</span>
+      </button>
+    </div>
+    <div class="tb-group">
+      <label class="tb-label" for="zoom">Zoom <output id="zoomOut" for="zoom">100%</output></label>
+      <input type="range" id="zoom" min="60" max="140" step="5" value="100" data-aria-pt="Nível de zoom da pré-visualização" data-aria-en="Preview zoom level">
+    </div>
+    <div class="tb-group">
+      <button type="button" class="btn btn-ghost btn-sm" id="safeBtn" aria-pressed="false" data-aria-pt="Mostrar área segura de impressão" data-aria-en="Show print safe area">
+        <span class="pt">Área segura</span><span class="en">Safe area</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="stage" id="stage" data-mode="side" data-side="front">
+    <div class="card-col front-col">
+      <div class="card-cap"><b><span class="pt">Frente</span><span class="en">Front</span></b><span><span class="pg">01 / 02</span><span class="flip-hint"><span class="pt">clica para virar</span><span class="en">click to flip</span></span></span></div>
+      <div class="card-box">
+
+<!-- ===================== FRONT ===================== -->
+<section class="face face-front" id="front" aria-label="Frente do postal">
+  <div class="trim">
+    <svg class="stars" viewBox="0 0 154 111" aria-hidden="true"><circle class="w" cx="49.9" cy="16.7" r="0.12" opacity="0.53"/><circle class="c" cx="8.9" cy="56.3" r="0.37" opacity="0.40"/><circle class="w" cx="65.4" cy="91.8" r="0.14" opacity="0.82"/><circle class="w" cx="122.3" cy="77.6" r="0.18" opacity="0.79"/><circle class="c" cx="129.4" cy="104.9" r="0.20" opacity="0.70"/><circle class="w" cx="99.7" cy="110.2" r="0.15" opacity="0.68"/><circle class="c" cx="3.5" cy="51.2" r="0.13" opacity="0.73"/><circle class="w" cx="84.6" cy="98.1" r="0.22" opacity="0.56"/><circle class="w" cx="104.1" cy="6.0" r="0.21" opacity="0.75"/><circle class="c" cx="32.1" cy="18.0" r="0.12" opacity="0.43"/><circle class="w" cx="127.6" cy="17.9" r="0.45" opacity="0.42"/><circle class="w" cx="83.6" cy="3.0" r="0.24" opacity="0.70"/><circle class="w" cx="126.0" cy="82.1" r="0.18" opacity="0.36"/><circle class="w" cx="4.3" cy="31.0" r="0.20" opacity="0.57"/><circle class="w" cx="144.3" cy="109.7" r="0.16" opacity="0.46"/><circle class="w" cx="100.6" cy="88.8" r="0.41" opacity="0.74"/><circle class="w" cx="149.6" cy="43.9" r="0.23" opacity="0.44"/><circle class="c" cx="19.6" cy="16.8" r="0.21" opacity="0.76"/><circle class="c" cx="151.0" cy="73.0" r="0.18" opacity="0.36"/><circle class="w" cx="149.5" cy="72.1" r="0.23" opacity="0.79"/><circle class="w" cx="127.2" cy="23.4" r="0.15" opacity="0.64"/><circle class="w" cx="89.8" cy="100.4" r="0.23" opacity="0.62"/><circle class="c" cx="80.6" cy="2.1" r="0.13" opacity="0.75"/><circle class="w" cx="85.5" cy="87.1" r="0.39" opacity="0.49"/><circle class="w" cx="73.6" cy="104.5" r="0.22" opacity="0.48"/><circle class="c" cx="86.2" cy="104.7" r="0.13" opacity="0.57"/><circle class="w" cx="23.8" cy="79.5" r="0.13" opacity="0.83"/><circle class="w" cx="33.8" cy="105.7" r="0.17" opacity="0.77"/><circle class="c" cx="111.2" cy="2.2" r="0.17" opacity="0.52"/><circle class="w" cx="87.9" cy="77.7" r="0.31" opacity="0.56"/><circle class="c" cx="41.3" cy="14.3" r="0.14" opacity="0.43"/><circle class="w" cx="7.8" cy="22.4" r="0.15" opacity="0.49"/><circle class="w" cx="105.9" cy="109.1" r="0.22" opacity="0.67"/><circle class="w" cx="39.4" cy="18.1" r="0.43" opacity="0.69"/><circle class="w" cx="40.5" cy="106.8" r="0.18" opacity="0.83"/><circle class="w" cx="6.4" cy="2.5" r="0.14" opacity="0.61"/><circle class="c" cx="151.6" cy="16.6" r="0.19" opacity="0.77"/><circle class="w" cx="77.7" cy="92.7" r="0.22" opacity="0.80"/><circle class="w" cx="16.2" cy="92.8" r="0.19" opacity="0.69"/><circle class="w" cx="75.4" cy="0.4" r="0.21" opacity="0.62"/><circle class="c" cx="101.5" cy="7.3" r="0.14" opacity="0.48"/><circle class="w" cx="112.3" cy="22.8" r="0.24" opacity="0.54"/><circle class="w" cx="73.8" cy="75.9" r="0.19" opacity="0.39"/><circle class="w" cx="150.6" cy="103.9" r="0.37" opacity="0.83"/><circle class="w" cx="136.6" cy="78.1" r="0.23" opacity="0.36"/><circle class="c" cx="0.6" cy="54.6" r="0.15" opacity="0.52"/><circle class="w" cx="48.7" cy="93.3" r="0.42" opacity="0.41"/><circle class="w" cx="142.7" cy="79.1" r="0.15" opacity="0.55"/><circle class="w" cx="153.8" cy="65.4" r="0.17" opacity="0.37"/><circle class="w" cx="15.7" cy="92.6" r="0.23" opacity="0.48"/><circle class="w" cx="97.2" cy="101.4" r="0.18" opacity="0.37"/><circle class="w" cx="142.7" cy="14.1" r="0.15" opacity="0.72"/><circle class="w" cx="150.3" cy="28.9" r="0.15" opacity="0.55"/><circle class="w" cx="25.8" cy="17.9" r="0.23" opacity="0.46"/><circle class="c" cx="139.6" cy="110.6" r="0.13" opacity="0.40"/><circle class="w" cx="132.9" cy="24.0" r="0.14" opacity="0.57"/><circle class="c" cx="146.9" cy="94.2" r="0.11" opacity="0.70"/><circle class="w" cx="92.6" cy="1.2" r="0.17" opacity="0.67"/><circle class="w" cx="47.3" cy="2.4" r="0.20" opacity="0.48"/><circle class="w" cx="102.8" cy="102.7" r="0.11" opacity="0.56"/><circle class="w" cx="105.1" cy="22.0" r="0.21" opacity="0.45"/><circle class="w" cx="149.4" cy="34.6" r="0.14" opacity="0.73"/><circle class="w" cx="45.4" cy="105.7" r="0.13" opacity="0.56"/><circle class="c" cx="102.5" cy="105.3" r="0.16" opacity="0.84"/></svg>
+    <svg class="constel" viewBox="0 0 148 105" aria-hidden="true">
+      <path d="M52 13 59 16 66 12 73 15 80 12" fill="none" stroke="#EDEFFA" stroke-width=".18" opacity=".35"/>
+      <circle cx="52" cy="13" r=".55" fill="#EDEFFA" opacity=".8"/>
+      <circle cx="59" cy="16" r=".4" fill="#EDEFFA" opacity=".6"/>
+      <circle cx="66" cy="12" r=".6" fill="#EDEFFA" opacity=".85"/>
+      <circle cx="73" cy="15" r=".4" fill="#EDEFFA" opacity=".6"/>
+      <circle cx="80" cy="12" r=".55" fill="#EDEFFA" opacity=".8"/>
+      <g stroke-linecap="round" stroke-width=".3" fill="none">
+        <path d="M45 15h2M46 14v2" stroke="#A78BFA" opacity=".75"/>
+        <path d="M95 23h2.4M96.2 21.8v2.4" stroke="#7DD3FC" opacity=".75"/>
+      </g>
+    </svg>
+    <svg class="planet" viewBox="0 0 148 105" aria-hidden="true">
+      <circle cx="136.5" cy="4.5" r="16.5" fill="none" stroke="#A78BFA" stroke-width=".25" opacity=".3"/>
+      <line x1="112.6" y1="12.4" x2="160" y2="-3.4" stroke="#7DD3FC" stroke-width=".42" stroke-linecap="round" opacity=".85"/>
+      <circle cx="136.5" cy="4.5" r="13.2" fill="#121731" stroke="#A78BFA" stroke-width=".62"/>
+      <ellipse cx="136.5" cy="4.5" rx="21" ry="5.2" transform="rotate(-18 136.5 4.5)" fill="none" stroke="#7DD3FC" stroke-width=".3" opacity=".45"/>
+      <path d="M126.2 7.4a10.6 10.6 0 0 1 4.6-8.6" fill="none" stroke="#A78BFA" stroke-width=".32" stroke-linecap="round" opacity=".5"/>
+      <line x1="112.6" y1="12.4" x2="124.2" y2="8.53" stroke="#7DD3FC" stroke-width=".42" stroke-linecap="round" opacity=".85"/>
+      <circle cx="116.2" cy="11.2" r="1.15" fill="#7DD3FC"/>
+    </svg>
+    <i class="meteor" aria-hidden="true"></i>
+    <svg class="hero-word" viewBox="0 0 148 105" aria-hidden="true"><path transform="translate(2.769 108.119) scale(0.035884)" fill="#EDEFFA" fill-opacity=".05" stroke="#EDEFFA" stroke-opacity=".19" stroke-width="5.57" stroke-linejoin="round" d="M126 -700H275L389 0H279L259 -139V-137H134L114 0H12ZM246 -232 197 -578H195L147 -232ZM532 -298 399 -700H516L591 -443H593L668 -700H775L642 -298V0H532ZM961 -298 828 -700H945L1020 -443H1022L1097 -700H1204L1071 -298V0H961ZM1289 -700H1399V-100H1580V0H1289ZM1668 -700H1778V0H1668ZM1895 -700H2195V-600H2005V-415H2156V-315H2005V-100H2195V0H1895ZM2293 -700H2431L2538 -281H2540V-700H2638V0H2525L2393 -511H2391V0H2293ZM2840 -700H2989L3103 0H2993L2973 -139V-137H2848L2828 0H2726ZM2960 -232 2911 -578H2909L2861 -232ZM3191 -700H3359Q3441 -700 3482 -656Q3523 -612 3523 -527V-173Q3523 -88 3482 -44Q3441 0 3359 0H3191ZM3357 -100Q3384 -100 3398.5 -116Q3413 -132 3413 -168V-532Q3413 -568 3398.5 -584Q3384 -600 3357 -600H3301V-100ZM3624 -166V-534Q3624 -618 3667 -664Q3710 -710 3791 -710Q3872 -710 3915 -664Q3958 -618 3958 -534V-166Q3958 -82 3915 -36Q3872 10 3791 10Q3710 10 3667 -36Q3624 -82 3624 -166ZM3848 -159V-541Q3848 -610 3791 -610Q3734 -610 3734 -541V-159Q3734 -90 3791 -90Q3848 -90 3848 -159Z"/></svg>
+
+    <div class="f-top">
+      <span class="pt">Postal da Terra</span><span class="en">Postcard from Earth</span>
+      <i class="tick"></i><span>Nº 01</span>
+      <i class="tick"></i><span>Esmoriz, PT</span>
+    </div>
+
+    <div class="f-left">
+      <p class="hello">
+        <svg class="alien" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c-5 0-8.8 3.7-8.8 8.4 0 4.8 4.4 9.6 8.8 11.2 4.4-1.6 8.8-6.4 8.8-11.2 0-4.7-3.8-8.4-8.8-8.4z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M6.3 10.9c2.1-.3 3.9.9 4.4 2.8-2.1.3-3.9-.9-4.4-2.8zm11.4 0c-2.1-.3-3.9.9-4.4 2.8 2.1.3 3.9-.9 4.4-2.8z" fill="currentColor"/></svg>
+        <span class="pt">Olá, sou o</span><span class="en">Hi, I’m</span>
+      </p>
+      <h2 class="name">Ruben<br>Rodrigues</h2>
+      <i class="bar" aria-hidden="true"></i>
+      <p class="role"><span class="pt">Programador &amp; Especialista em IA</span><span class="en">Developer &amp; AI Specialist</span></p>
+      <p class="lead">
+        <span class="pt">Trabalho com IA todos os dias. Transformo perguntas em código, em fluxos de trabalho e em coisas úteis.</span>
+        <span class="en">I work with AI every single day. I turn questions into code, into workflows and into useful things.</span>
+      </p>
+    </div>
+
+    <div class="map">
+      <div class="map-head">
+        <span><span class="pt">Plano de voo</span><span class="en">Flight plan</span></span>
+        <span><span class="pt">v.2026 / 3 rotas</span><span class="en">v.2026 / 3 routes</span></span>
+      </div>
+      <ol class="routes">
+        <li>
+          <span class="dot"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.4" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.6 8h10.8M8 2.6c-3.4 3.2-3.4 7.6 0 10.8 3.4-3.2 3.4-7.6 0-10.8z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></span><span class="idx">01</span>
+          <span><b>Websites &amp; landing pages</b><small><span class="pt">Para pequenas empresas</span><span class="en">For small businesses</span></small></span>
+        </li>
+        <li>
+          <span class="dot"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.8 9.7 6l4.5 1-4.5 1L8 12.2 6.3 8l-4.5-1 4.5-1zM13.2 10.4l.9 2 2 .9-2 .9-.9 2-.9-2-2-.9 2-.9z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></span><span class="idx">02</span>
+          <span><b><span class="pt">Integrações de IA</span><span class="en">AI integrations</span></b><small><span class="pt">Formulários, quizzes e chatbots</span><span class="en">Smart forms, quizzes &amp; chatbots</span></small></span>
+        </li>
+        <li>
+          <span class="dot"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10.4 2.6a3.4 3.4 0 0 0-4.5 4.2L2.4 10.3a1.7 1.7 0 0 0 2.4 2.4l3.5-3.5a3.4 3.4 0 0 0 4.2-4.5l-2.1 2.1-1.5-.4-.4-1.5z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></span><span class="idx">03</span>
+          <span><b><span class="pt">Revisão &amp; reparação</span><span class="en">Code review &amp; repair</span></b><small><span class="pt">Código partido, inteiro outra vez</span><span class="en">Broken code, made whole again</span></small></span>
+        </li>
+      </ol>
+      <div class="map-foot">
+        <span><span class="pt">Contactos no verso</span><span class="en">Contacts on the back</span></span>
+        <span class="turn"><span class="pt">Vira o postal</span><span class="en">Turn over</span>
+          <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </div>
+
+    <div class="f-bottom">
+      <span class="status"><i class="dot-live"></i><span class="pt">Disponível para missões freelance</span><span class="en">Available for freelance missions</span></span>
+      <span class="url">benmrodrigues2000.github.io</span>
+    </div>
+  </div>
+</section>
+
+      </div>
+    </div>
+    <div class="card-col back-col">
+      <div class="card-cap"><b><span class="pt">Verso</span><span class="en">Back</span></b><span><span class="pg">02 / 02</span><span class="flip-hint"><span class="pt">clica para virar</span><span class="en">click to flip</span></span></span></div>
+      <div class="card-box">
+
+<!-- ===================== BACK ===================== -->
+<section class="face face-back" id="back" aria-label="Verso do postal">
+  <div class="trim">
+    <div class="grain" aria-hidden="true"></div>
+
+    <div class="b-msg">
+      <p class="label"><span class="pt">Nota de campo / última missão</span><span class="en">Field note / latest mission</span></p>
+      <div class="proj">
+        <h3 class="proj-name">O Provador</h3>
+        <span class="live-pill"><i></i><span class="pt">Ao vivo</span><span class="en">Live</span></span>
+      </div>
+      <p class="proj-meta"><span class="pt">Freedom Outdoor · estágio 2026 · responsável pelo website</span><span class="en">Freedom Outdoor · 2026 internship · website lead</span></p>
+      <div class="stats">
+        <div><b>5</b><span class="pt">perguntas</span><span class="en">questions</span></div>
+        <div><b>60<small>s</small></b><span class="pt">até ao parecer</span><span class="en">to a verdict</span></div>
+        <div><b>6</b><span class="pt">eixos de pontuação</span><span class="en">scoring axes</span></div>
+      </div>
+      <p class="proj-desc">
+        <span class="pt">O aconselhamento do balcão, agora online: cruza o perfil do corredor com o stock real da loja e devolve um parecer honesto, com PDF. Feito de ponta a ponta, ao vivo em <strong>freedomoutdoor.pt/provador</strong>.</span>
+        <span class="en">The store’s counter advice, now online: it matches a runner’s profile against real store stock and returns an honest verdict, with a PDF. Built end to end, live at <strong>freedomoutdoor.pt/provador</strong>.</span>
+      </p>
+      <div class="facts">
+        <span class="fact">Português · English</span>
+        <span class="fact"><span class="pt">Remoto ou presencial até 50 km</span><span class="en">Remote or on-site up to 50 km</span></span>
+      </div>
+      <p class="chip">
+        <span class="pt">tens uma pergunta confusa, um site partido ou um fluxo de trabalho repetitivo?</span>
+        <span class="en">got a messy question, a broken website or a repetitive workflow?</span>
+      </p>
+      <div class="answer">
+        <p><mark><span class="pt">Fala comigo!</span><span class="en">Let’s talk!</span></mark></p>
+        <p class="sign"><b>Ruben</b><span class="pt">Sem certificados.<br>Provas em vez disso.</span><span class="en">No certificates.<br>Proof instead.</span></p>
+      </div>
+    </div>
+
+    <div class="b-divider" aria-hidden="true"><span><span class="pt">Correio intergaláctico · Feito em Esmoriz, Portugal</span><span class="en">Intergalactic mail · Made in Esmoriz, Portugal</span></span></div>
+
+    <div class="b-addr">
+
+      <div class="stamp">
+        <svg class="stamp-edge" viewBox="0 0 23 27" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0L0.425 0A0.62 0.62 0 0 0 1.665 0L2.516 0A0.62 0.62 0 0 0 3.756 0L4.607 0A0.62 0.62 0 0 0 5.847 0L6.698 0A0.62 0.62 0 0 0 7.938 0L8.789 0A0.62 0.62 0 0 0 10.029 0L10.880 0A0.62 0.62 0 0 0 12.120 0L12.971 0A0.62 0.62 0 0 0 14.211 0L15.062 0A0.62 0.62 0 0 0 16.302 0L17.153 0A0.62 0.62 0 0 0 18.393 0L19.244 0A0.62 0.62 0 0 0 20.484 0L21.335 0A0.62 0.62 0 0 0 22.575 0L23 0L23 0.418A0.62 0.62 0 0 0 23 1.658L23 2.495A0.62 0.62 0 0 0 23 3.735L23 4.572A0.62 0.62 0 0 0 23 5.812L23 6.649A0.62 0.62 0 0 0 23 7.889L23 8.726A0.62 0.62 0 0 0 23 9.966L23 10.803A0.62 0.62 0 0 0 23 12.043L23 12.880A0.62 0.62 0 0 0 23 14.120L23 14.957A0.62 0.62 0 0 0 23 16.197L23 17.034A0.62 0.62 0 0 0 23 18.274L23 19.111A0.62 0.62 0 0 0 23 20.351L23 21.188A0.62 0.62 0 0 0 23 22.428L23 23.265A0.62 0.62 0 0 0 23 24.505L23 25.342A0.62 0.62 0 0 0 23 26.582L23 27L22.575 27A0.62 0.62 0 0 0 21.335 27L20.484 27A0.62 0.62 0 0 0 19.244 27L18.393 27A0.62 0.62 0 0 0 17.153 27L16.302 27A0.62 0.62 0 0 0 15.062 27L14.211 27A0.62 0.62 0 0 0 12.971 27L12.120 27A0.62 0.62 0 0 0 10.880 27L10.029 27A0.62 0.62 0 0 0 8.789 27L7.938 27A0.62 0.62 0 0 0 6.698 27L5.847 27A0.62 0.62 0 0 0 4.607 27L3.756 27A0.62 0.62 0 0 0 2.516 27L1.665 27A0.62 0.62 0 0 0 0.425 27L0 27L0 26.582A0.62 0.62 0 0 0 0 25.342L0 24.505A0.62 0.62 0 0 0 0 23.265L0 22.428A0.62 0.62 0 0 0 0 21.188L0 20.351A0.62 0.62 0 0 0 0 19.111L0 18.274A0.62 0.62 0 0 0 0 17.034L0 16.197A0.62 0.62 0 0 0 0 14.957L0 14.120A0.62 0.62 0 0 0 0 12.880L0 12.043A0.62 0.62 0 0 0 0 10.803L0 9.966A0.62 0.62 0 0 0 0 8.726L0 7.889A0.62 0.62 0 0 0 0 6.649L0 5.812A0.62 0.62 0 0 0 0 4.572L0 3.735A0.62 0.62 0 0 0 0 2.495L0 1.658A0.62 0.62 0 0 0 0 0.418Z"/></svg>
+        <div class="stamp-inner">
+          <img src="retrato.jpg" alt="Retrato de Ruben Rodrigues" width="584" height="584" decoding="async" fetchpriority="low">
+          <span class="stamp-band"><em>AYYLIENADO</em><b>PT</b></span>
+        </div>
+      </div>
+
+      <svg class="postmark" viewBox="0 0 32 22" aria-hidden="true">
+        <defs><path id="pm-arc" d="M13.85 11a7.65 7.65 0 1 1 15.3 0a7.65 7.65 0 1 1-15.3 0"/></defs>
+        <g fill="none" stroke="currentColor" stroke-width=".36" stroke-linecap="round">
+          <circle cx="21.5" cy="11" r="9.7"/>
+          <circle cx="21.5" cy="11" r="5.6"/>
+          <path d="M0 5.4q1.85-1.4 3.7 0t3.7 0 3.7 0"/>
+          <path d="M0 8.9q1.85-1.4 3.7 0t3.7 0 3.7 0"/>
+          <path d="M0 12.4q1.85-1.4 3.7 0t3.7 0 3.7 0"/>
+          <path d="M0 15.9q1.85-1.4 3.7 0t3.7 0 3.7 0"/>
+        </g>
+        <text font-family="IBM Plex Mono, monospace" font-size="1.8" font-weight="500" fill="currentColor"><textPath href="#pm-arc" textLength="46.4" lengthAdjust="spacing">ESMORIZ · PORTUGAL · PLANETA TERRA ·</textPath></text>
+        <text x="21.5" y="12.4" text-anchor="middle" font-family="Bebas Neue, sans-serif" font-size="4.6" fill="currentColor" letter-spacing=".15">2026</text>
+        <text x="21.5" y="14.6" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="1.3" fill="currentColor" letter-spacing=".25">3885</text>
+      </svg>
+
+      <p class="label addr-label"><span class="pt">Responde para</span><span class="en">Reply to</span></p>
+      <ul class="lines">
+        <li class="em"><span class="k">Email</span><span class="v" title="benmrodrigues2000@gmail.com">benmrodrigues2000@gmail.com</span><button type="button" class="copy-btn" data-copy="benmrodrigues2000@gmail.com" data-aria-pt="Copiar email" data-aria-en="Copy email"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="5" y="5" width="8.5" height="8.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M11 5V4a1.5 1.5 0 0 0-1.5-1.5H4A1.5 1.5 0 0 0 2.5 4v5.5A1.5 1.5 0 0 0 4 11h1" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button></li>
+        <li><span class="k">Site</span><span class="v" title="benmrodrigues2000.github.io">benmrodrigues2000.github.io</span><button type="button" class="copy-btn" data-copy="https://benmrodrigues2000.github.io" data-aria-pt="Copiar endereço do site" data-aria-en="Copy website address"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="5" y="5" width="8.5" height="8.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M11 5V4a1.5 1.5 0 0 0-1.5-1.5H4A1.5 1.5 0 0 0 2.5 4v5.5A1.5 1.5 0 0 0 4 11h1" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button></li>
+        <li><span class="k">GitHub</span><span class="v" title="github.com/benmrodrigues2000">github.com/benmrodrigues2000</span><button type="button" class="copy-btn" data-copy="https://github.com/benmrodrigues2000" data-aria-pt="Copiar endereço do GitHub" data-aria-en="Copy GitHub address"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="5" y="5" width="8.5" height="8.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M11 5V4a1.5 1.5 0 0 0-1.5-1.5H4A1.5 1.5 0 0 0 2.5 4v5.5A1.5 1.5 0 0 0 4 11h1" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button></li>
+        <li><span class="k">Malt</span><span class="v" title="malt.es/profile/rubenrodrigues">malt.es/profile/rubenrodrigues</span><button type="button" class="copy-btn" data-copy="https://malt.es/profile/rubenrodrigues" data-aria-pt="Copiar endereço da Malt" data-aria-en="Copy Malt address"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="5" y="5" width="8.5" height="8.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M11 5V4a1.5 1.5 0 0 0-1.5-1.5H4A1.5 1.5 0 0 0 2.5 4v5.5A1.5 1.5 0 0 0 4 11h1" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button></li>
+      </ul>
+
+      <div class="qr-row">
+        <svg class="qr" viewBox="-3 -3 35 35" shape-rendering="crispEdges" role="img" aria-label="QR code: benmrodrigues2000.github.io"><rect x="-3" y="-3" width="35" height="35" fill="#fff"/><path d="M0 0h7v1h-7zM9 0h1v1h-1zM12 0h1v1h-1zM14 0h4v1h-4zM20 0h1v1h-1zM22 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM8 1h1v1h-1zM11 1h1v1h-1zM13 1h2v1h-2zM18 1h1v1h-1zM22 1h1v1h-1zM28 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM8 2h1v1h-1zM13 2h1v1h-1zM15 2h1v1h-1zM18 2h2v1h-2zM22 2h1v1h-1zM24 2h3v1h-3zM28 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM8 3h1v1h-1zM12 3h1v1h-1zM16 3h3v1h-3zM22 3h1v1h-1zM24 3h3v1h-3zM28 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM11 4h2v1h-2zM15 4h1v1h-1zM19 4h1v1h-1zM22 4h1v1h-1zM24 4h3v1h-3zM28 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM11 5h2v1h-2zM16 5h1v1h-1zM18 5h1v1h-1zM20 5h1v1h-1zM22 5h1v1h-1zM28 5h1v1h-1zM0 6h7v1h-7zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h7v1h-7zM8 7h3v1h-3zM12 7h1v1h-1zM14 7h3v1h-3zM18 7h2v1h-2zM0 8h1v1h-1zM6 8h1v1h-1zM8 8h4v1h-4zM17 8h2v1h-2zM20 8h3v1h-3zM25 8h3v1h-3zM4 9h2v1h-2zM13 9h1v1h-1zM15 9h1v1h-1zM19 9h1v1h-1zM21 9h1v1h-1zM23 9h2v1h-2zM26 9h2v1h-2zM2 10h2v1h-2zM5 10h3v1h-3zM10 10h1v1h-1zM12 10h5v1h-5zM18 10h1v1h-1zM20 10h2v1h-2zM23 10h2v1h-2zM2 11h1v1h-1zM5 11h1v1h-1zM7 11h2v1h-2zM10 11h4v1h-4zM18 11h1v1h-1zM20 11h1v1h-1zM22 11h2v1h-2zM25 11h1v1h-1zM0 12h3v1h-3zM4 12h4v1h-4zM12 12h2v1h-2zM16 12h1v1h-1zM18 12h3v1h-3zM22 12h2v1h-2zM28 12h1v1h-1zM0 13h2v1h-2zM3 13h3v1h-3zM7 13h2v1h-2zM10 13h3v1h-3zM15 13h6v1h-6zM22 13h3v1h-3zM27 13h2v1h-2zM1 14h3v1h-3zM5 14h2v1h-2zM9 14h3v1h-3zM15 14h1v1h-1zM17 14h1v1h-1zM20 14h1v1h-1zM22 14h1v1h-1zM25 14h2v1h-2zM1 15h1v1h-1zM8 15h1v1h-1zM10 15h1v1h-1zM15 15h1v1h-1zM18 15h1v1h-1zM21 15h1v1h-1zM23 15h1v1h-1zM26 15h1v1h-1zM28 15h1v1h-1zM4 16h1v1h-1zM6 16h2v1h-2zM17 16h1v1h-1zM20 16h1v1h-1zM25 16h2v1h-2zM0 17h2v1h-2zM4 17h2v1h-2zM8 17h8v1h-8zM18 17h3v1h-3zM22 17h3v1h-3zM26 17h3v1h-3zM0 18h8v1h-8zM11 18h1v1h-1zM15 18h2v1h-2zM19 18h1v1h-1zM22 18h1v1h-1zM24 18h2v1h-2zM28 18h1v1h-1zM0 19h1v1h-1zM4 19h2v1h-2zM7 19h1v1h-1zM9 19h2v1h-2zM12 19h2v1h-2zM15 19h1v1h-1zM19 19h2v1h-2zM23 19h2v1h-2zM0 20h1v1h-1zM2 20h1v1h-1zM4 20h3v1h-3zM8 20h4v1h-4zM14 20h2v1h-2zM17 20h1v1h-1zM20 20h5v1h-5zM26 20h3v1h-3zM8 21h2v1h-2zM11 21h2v1h-2zM14 21h2v1h-2zM17 21h2v1h-2zM20 21h1v1h-1zM24 21h2v1h-2zM0 22h7v1h-7zM10 22h2v1h-2zM15 22h2v1h-2zM18 22h3v1h-3zM22 22h1v1h-1zM24 22h3v1h-3zM0 23h1v1h-1zM6 23h1v1h-1zM9 23h4v1h-4zM14 23h1v1h-1zM16 23h1v1h-1zM19 23h2v1h-2zM24 23h1v1h-1zM27 23h2v1h-2zM0 24h1v1h-1zM2 24h3v1h-3zM6 24h1v1h-1zM9 24h2v1h-2zM13 24h3v1h-3zM19 24h7v1h-7zM27 24h2v1h-2zM0 25h1v1h-1zM2 25h3v1h-3zM6 25h1v1h-1zM9 25h4v1h-4zM14 25h3v1h-3zM19 25h1v1h-1zM21 25h1v1h-1zM25 25h2v1h-2zM28 25h1v1h-1zM0 26h1v1h-1zM2 26h3v1h-3zM6 26h1v1h-1zM10 26h1v1h-1zM14 26h2v1h-2zM20 26h1v1h-1zM22 26h6v1h-6zM0 27h1v1h-1zM6 27h1v1h-1zM11 27h2v1h-2zM14 27h1v1h-1zM16 27h1v1h-1zM18 27h1v1h-1zM22 27h1v1h-1zM25 27h2v1h-2zM28 27h1v1h-1zM0 28h7v1h-7zM8 28h1v1h-1zM12 28h1v1h-1zM14 28h1v1h-1zM17 28h1v1h-1zM19 28h1v1h-1zM21 28h2v1h-2zM24 28h1v1h-1zM26 28h1v1h-1z" fill="#05060F"/></svg>
+        <p class="qr-copy">
+          <span class="pt">Aponta a câmara</span><span class="en">Point your camera</span>
+          <b><span class="pt">Portefólio, CV e briefing de projeto</span><span class="en">Portfolio, CV and project briefing</span></b>
+          <span class="pin"><i></i>Esmoriz, PT · <span class="pt">Terra</span><span class="en">Earth</span></span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<section class="notes" aria-label="Notas de impressão">
+  <div class="notes-grid">
+    <div>
+      <h2><span class="pt">A6 · Gráfica</span><span class="en">A6 · Print shop</span></h2>
+      <p class="pt">148 × 105 mm com 3 mm de sangria (PDF de 154 × 111 mm). Página 1 = frente, página 2 = verso. Pede papel mate de 300–350 g/m². O PDF sai em RGB — a gráfica converte para CMYK.</p>
+      <p class="en">148 × 105 mm with 3 mm bleed (154 × 111 mm PDF). Page 1 = front, page 2 = back. Ask for 300–350 gsm matte stock. The PDF prints in RGB — the shop converts to CMYK.</p>
+    </div>
+    <div>
+      <h2><span class="pt">A4 · Em casa</span><span class="en">A4 · At home</span></h2>
+      <ul class="pt">
+        <li>2 postais por folha, com marcas de corte.</li>
+        <li>Frente e verso, <em>virar pela margem longa</em>.</li>
+        <li>Escala 100% / tamanho real, papel de 250 g/m² ou mais.</li>
+        <li>Ativa <code>Gráficos de fundo</code> nas opções de impressão.</li>
+      </ul>
+      <ul class="en">
+        <li>2 postcards per sheet, with crop marks.</li>
+        <li>Two-sided, <em>flip on long edge</em>.</li>
+        <li>100% scale / actual size, 250 gsm paper or heavier.</li>
+        <li>Enable <code>Background graphics</code> in the print options.</li>
+      </ul>
+    </div>
+    <div>
+      <h2><span class="pt">Ficheiros e atalhos</span><span class="en">Files &amp; shortcuts</span></h2>
+      <div class="dl">
+        <a class="btn btn-ghost" id="dlA6" href="ruben-rodrigues-postal-a6-pt.pdf" download><span class="pt">PDF A6 · gráfica</span><span class="en">PDF A6 · print shop</span>
+          <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2.5v9M4.5 8 8 11.5 11.5 8M3 13.5h10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="btn btn-ghost" id="dlA4" href="ruben-rodrigues-postal-a4-pt.pdf" download><span class="pt">PDF A4 · em casa</span><span class="en">PDF A4 · at home</span>
+          <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2.5v9M4.5 8 8 11.5 11.5 8M3 13.5h10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <ul class="shortcuts">
+        <li><span class="kbd">P</span> <span class="pt">imprimir</span><span class="en">print</span> · <span class="kbd">L</span> <span class="pt">idioma</span><span class="en">language</span> · <span class="kbd">F</span> <span class="pt">virar postal</span><span class="en">flip card</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+<footer class="footer-base">
+  <span><span class="pt">© 2026 Ruben Monteiro Correia Rodrigues · «AYYLIENADO» é a alcunha online</span><span class="en">© 2026 Ruben Monteiro Correia Rodrigues · “AYYLIENADO” is the online alias</span></span>
+  <a href="../index.html"><span class="pt">Voltar ao portefólio</span><span class="en">Back to the portfolio</span></a>
+</footer>
+
+<div id="print-root" aria-hidden="true"></div>
+<div id="toasts" class="toasts" aria-live="polite" aria-atomic="false"></div>
+
+<script>
+(function(){
+  "use strict";
+  var root = document.documentElement;
+  var params = new URLSearchParams(location.search);
+  function loadPrefs(){ try{ return JSON.parse(localStorage.getItem("postal-prefs") || "{}"); }catch(e){ return {}; } }
+  function savePrefs(){ try{ localStorage.setItem("postal-prefs", JSON.stringify({lang:state.lang, fmt:state.fmt, mode:state.mode, zoom:state.zoom})); }catch(e){} }
+  var stored = loadPrefs();
+  var mq = window.matchMedia ? window.matchMedia("(max-width: 900px)") : null;
+  var state = {
+    lang: params.get("lang") === "en" ? "en" : (params.get("lang") === "pt" ? "pt" : ((stored.lang === "en" || stored.lang === "pt") ? stored.lang : "pt")),
+    fmt: params.get("fmt") === "a4" ? "a4" : (params.get("fmt") === "a6" ? "a6" : ((stored.fmt === "a4" || stored.fmt === "a6") ? stored.fmt : "a6")),
+    mode: (stored.mode === "flip" || stored.mode === "side") ? stored.mode : ((mq && mq.matches) ? "flip" : "side"),
+    side: "front",
+    zoom: (typeof stored.zoom === "number" && stored.zoom >= 60 && stored.zoom <= 140) ? stored.zoom : 100
+  };
+  var PAGE = {
+    a6: "@page{size:154mm 111mm;margin:0}",
+    a4: "@page{size:210mm 297mm;margin:0}"
+  };
+  var TITLE = {
+    pt: "Postal da Terra - Ruben Rodrigues",
+    en: "Postcard from Earth - Ruben Rodrigues"
+  };
+  var DESC = {
+    pt: "Postal imprimível de Ruben Rodrigues, programador e especialista em IA em Esmoriz, Portugal.",
+    en: "Printable postcard by Ruben Rodrigues, developer & AI specialist in Esmoriz, Portugal."
+  };
+  var FACE_LABEL = {
+    pt: { front: "Frente do postal", back: "Verso do postal" },
+    en: { front: "Postcard front", back: "Postcard back" }
+  };
+  var T = {
+    pt: { copied: "Copiado!", copyFail: "Não foi possível copiar.", vcard: "Contacto guardado (.vcf).", pdfHint: "PDF indisponível — usa “Guardar como PDF” no diálogo." },
+    en: { copied: "Copied!", copyFail: "Could not copy.", vcard: "Contact saved (.vcf).", pdfHint: "PDF missing — use “Save as PDF” in the dialog." }
+  };
+  var SVGNS = "http://www.w3.org/2000/svg";
+  var stage = document.getElementById("stage");
+  var zoomInput = document.getElementById("zoom");
+  var zoomOut = document.getElementById("zoomOut");
+  var flipBtn = document.getElementById("flipBtn");
+  var safeBtn = document.getElementById("safeBtn");
+  var toasts = document.getElementById("toasts");
+
+  function toast(msg){
+    var d = document.createElement("div");
+    d.className = "toast";
+    d.setAttribute("role", "status");
+    d.textContent = msg;
+    toasts.appendChild(d);
+    while (toasts.children.length > 3) toasts.removeChild(toasts.firstChild);
+    setTimeout(function(){ d.classList.add("out"); setTimeout(function(){ d.remove(); }, 280); }, 2400);
+  }
+
+  function copyText(text){
+    function done(ok){ toast(ok ? T[state.lang].copied : T[state.lang].copyFail); }
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){ done(true); }, function(){ fallback(); });
+    } else { fallback(); }
+    function fallback(){
+      try{
+        var ta = document.createElement("textarea");
+        ta.value = text; ta.setAttribute("readonly", "");
+        ta.style.position = "fixed"; ta.style.opacity = "0";
+        document.body.appendChild(ta); ta.select();
+        var ok = document.execCommand("copy");
+        ta.remove(); done(ok);
+      }catch(e){ done(false); }
+    }
+  }
+
+  function downloadVCard(){
+    var v = ["BEGIN:VCARD","VERSION:3.0","FN:Ruben Monteiro Correia Rodrigues","N:Rodrigues;Ruben;;;",
+      "TITLE:Programador & Especialista em IA / Developer & AI Specialist",
+      "EMAIL;TYPE=INTERNET:benmrodrigues2000@gmail.com","URL:https://benmrodrigues2000.github.io",
+      "ADR;TYPE=HOME:;;;Esmoriz;;3885;Portugal","NOTE:AYYLIENADO - Postal da Terra / Postcard from Earth","END:VCARD"].join("\r\n");
+    try{
+      var blob = new Blob([v], {type: "text/vcard;charset=utf-8"});
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "ruben-rodrigues.vcf";
+      document.body.appendChild(a); a.click();
+      setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 800);
+      toast(T[state.lang].vcard);
+    }catch(e){ toast(T[state.lang].copyFail); }
+  }
+
+  function cropMarks(){
+    // slot = 8mm margin + 2mm bleed + 148 x 105 trim + 2mm bleed + 8mm margin
+    var W = 168, H = 125, t = 10, r = 158, b = 115;
+    var svg = document.createElementNS(SVGNS, "svg");
+    svg.setAttribute("class", "marks");
+    svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+    svg.setAttribute("aria-hidden", "true");
+    var L = [
+      [0.5, t, 7, t], [0.5, b, 7, b], [W - 7, t, W - 0.5, t], [W - 7, b, W - 0.5, b],
+      [t, 0.5, t, 7], [r, 0.5, r, 7], [t, H - 7, t, H - 0.5], [r, H - 7, r, H - 0.5]
+    ];
+    L.forEach(function(c){
+      var l = document.createElementNS(SVGNS, "line");
+      l.setAttribute("x1", c[0]); l.setAttribute("y1", c[1]);
+      l.setAttribute("x2", c[2]); l.setAttribute("y2", c[3]);
+      svg.appendChild(l);
+    });
+    return svg;
+  }
+
+  function cloneFace(face, suffix){
+    var c = face.cloneNode(true);
+    c.removeAttribute("id");
+    c.querySelectorAll("[id]").forEach(function(el){ el.id = el.id + suffix; });
+    c.querySelectorAll("textPath,use").forEach(function(el){
+      ["href", "xlink:href"].forEach(function(a){
+        var h = el.getAttribute(a);
+        if (h && h.charAt(0) === "#") el.setAttribute(a, h + suffix);
+      });
+    });
+    c.querySelectorAll("*").forEach(function(el){
+      ["fill", "stroke", "filter", "clip-path", "mask"].forEach(function(a){
+        var v = el.getAttribute(a);
+        if (v && v.indexOf("url(#") === 0) el.setAttribute(a, v.replace("url(#", "url(#" + "__tmp__").replace("__tmp__", "") + "");
+      });
+    });
+    c.querySelectorAll(".copy-btn").forEach(function(b){ b.setAttribute("tabindex", "-1"); });
+    return c;
+  }
+
+  function buildPrint(){
+    var host = document.getElementById("print-root");
+    host.innerHTML = "";
+    var per = state.fmt === "a4" ? 2 : 1;
+    var n = 0;
+    ["front", "back"].forEach(function(id){
+      var face = document.getElementById(id);
+      if (!face) return;
+      var sheet = document.createElement("div");
+      sheet.className = "sheet sheet-" + id;
+      for (var i = 0; i < per; i++){
+        var slot = document.createElement("div");
+        slot.className = "slot";
+        slot.appendChild(cloneFace(face, "-p" + (n++)));
+        if (state.fmt === "a4") slot.appendChild(cropMarks());
+        sheet.appendChild(slot);
+      }
+      host.appendChild(sheet);
+    });
+  }
+
+  function apply(){
+    root.setAttribute("data-lang", state.lang);
+    root.setAttribute("data-fmt", state.fmt);
+    root.setAttribute("lang", state.lang === "en" ? "en" : "pt-PT");
+    document.title = TITLE[state.lang];
+    var md = document.querySelector('meta[name="description"]');
+    if (md) md.setAttribute("content", DESC[state.lang]);
+    document.getElementById("page-size").textContent = PAGE[state.fmt];
+    var f = document.getElementById("front"), b = document.getElementById("back");
+    if (f) f.setAttribute("aria-label", FACE_LABEL[state.lang].front);
+    if (b) b.setAttribute("aria-label", FACE_LABEL[state.lang].back);
+    document.querySelectorAll("[data-aria-pt]").forEach(function(el){
+      el.setAttribute("aria-label", state.lang === "en" ? el.getAttribute("data-aria-en") : el.getAttribute("data-aria-pt"));
+    });
+    document.querySelectorAll("[data-set-lang]").forEach(function(x){
+      x.setAttribute("aria-pressed", String(x.getAttribute("data-set-lang") === state.lang));
+    });
+    document.querySelectorAll("[data-set-fmt]").forEach(function(x){
+      x.setAttribute("aria-pressed", String(x.getAttribute("data-set-fmt") === state.fmt));
+    });
+    document.querySelectorAll("[data-set-mode]").forEach(function(x){
+      x.setAttribute("aria-pressed", String(x.getAttribute("data-set-mode") === state.mode));
+    });
+    document.getElementById("dlA6").setAttribute("href", "ruben-rodrigues-postal-a6-" + state.lang + ".pdf");
+    document.getElementById("dlA4").setAttribute("href", "ruben-rodrigues-postal-a4-" + state.lang + ".pdf");
+    stage.setAttribute("data-mode", state.mode);
+    stage.setAttribute("data-side", state.side);
+    flipBtn.hidden = state.mode !== "flip";
+    if (zoomInput) zoomInput.value = String(state.zoom);
+    if (zoomOut) zoomOut.textContent = state.zoom + "%";
+    buildPrint();
+    savePrefs();
+    try{
+      history.replaceState(null, "", location.pathname + "?lang=" + state.lang + "&fmt=" + state.fmt);
+    }catch(e){}
+    fit();
+  }
+
+  function fit(){
+    var avail = stage.clientWidth;
+    if (!avail) return;
+    var mm = 96 / 25.4, faceW = 148 * mm, gap = 40;
+    var cols = 1;
+    if (state.mode === "side") cols = avail >= faceW * 2 * 0.9 + gap ? 2 : 1;
+    var w = (avail - gap * (cols - 1)) / cols;
+    var z = Math.max(0.3, Math.min(w / faceW, cols === 1 ? 1.7 : 1.45));
+    z = Math.max(0.25, Math.min(2, z * state.zoom / 100));
+    stage.style.setProperty("--z", z.toFixed(4));
+  }
+
+  function setSide(s, animate){
+    if (state.side === s) return;
+    state.side = s;
+    stage.setAttribute("data-side", s);
+    if (animate !== false){
+      var box = stage.querySelector('[data-side] .card-box, .card-col .card-box');
+      var visible = stage.querySelector(state.side === "front" ? ".front-col .card-box" : ".back-col .card-box");
+      if (visible){
+        visible.classList.remove("flip-in");
+        void visible.offsetWidth;
+        visible.classList.add("flip-in");
+      }
+    }
+  }
+
+  function pdfOrPrint(fmt, href, ev){
+    ev.preventDefault();
+    function goPrint(){
+      state.fmt = fmt; apply();
+      toast(T[state.lang].pdfHint);
+      setTimeout(function(){ window.print(); }, 400);
+    }
+    try{
+      var c = ("AbortController" in window) ? new AbortController() : null;
+      var t = setTimeout(function(){ if (c) c.abort(); }, 2500);
+      fetch(href, {method: "HEAD", signal: c ? c.signal : undefined}).then(function(r){
+        clearTimeout(t);
+        if (r && r.ok) window.location.href = href;
+        else goPrint();
+      }, function(){ clearTimeout(t); goPrint(); });
+    }catch(e){ goPrint(); }
+  }
+
+  function armStampFallback(){
+    var img = document.querySelector("#back .stamp-inner img");
+    if (!img) return;
+    function swap(){
+      if (!img.isConnected) return;
+      var d = document.createElement("div");
+      d.className = "stamp-fallback";
+      d.setAttribute("role", "img");
+      d.setAttribute("aria-label", img.getAttribute("alt") || "Ruben Rodrigues");
+      var s = document.createElement("span");
+      s.setAttribute("aria-hidden", "true");
+      s.textContent = "RR";
+      d.appendChild(s);
+      img.replaceWith(d);
+      buildPrint();
+    }
+    img.addEventListener("error", swap);
+    if (img.complete && img.naturalWidth === 0) swap();
+  }
+
+  document.querySelectorAll("[data-set-lang]").forEach(function(x){
+    x.addEventListener("click", function(){ state.lang = x.getAttribute("data-set-lang"); apply(); });
+  });
+  document.querySelectorAll("[data-set-fmt]").forEach(function(x){
+    x.addEventListener("click", function(){ state.fmt = x.getAttribute("data-set-fmt"); apply(); });
+  });
+  document.querySelectorAll("[data-set-mode]").forEach(function(x){
+    x.addEventListener("click", function(){ state.mode = x.getAttribute("data-set-mode"); apply(); });
+  });
+  flipBtn.addEventListener("click", function(){ setSide(state.side === "front" ? "back" : "front"); });
+  stage.addEventListener("click", function(e){
+    if (state.mode !== "flip") return;
+    if (e.target.closest(".copy-btn")) return;
+    if (e.target.closest(".card-box")) setSide(state.side === "front" ? "back" : "front");
+  });
+  if (zoomInput){
+    zoomInput.addEventListener("input", function(){
+      state.zoom = parseInt(zoomInput.value, 10) || 100;
+      if (zoomOut) zoomOut.textContent = state.zoom + "%";
+      fit(); savePrefs();
+    });
+  }
+  if (safeBtn){
+    safeBtn.addEventListener("click", function(){
+      var on = stage.classList.toggle("show-safe");
+      safeBtn.setAttribute("aria-pressed", String(on));
+    });
+  }
+  document.querySelectorAll("[data-copy]").forEach(function(x){
+    x.addEventListener("click", function(e){ e.stopPropagation(); copyText(x.getAttribute("data-copy")); });
+  });
+  document.getElementById("vcardBtn").addEventListener("click", downloadVCard);
+  document.getElementById("dlA6").addEventListener("click", function(e){ pdfOrPrint("a6", this.getAttribute("href"), e); });
+  document.getElementById("dlA4").addEventListener("click", function(e){ pdfOrPrint("a4", this.getAttribute("href"), e); });
+  document.getElementById("printBtn").addEventListener("click", function(){ buildPrint(); window.print(); });
+  window.addEventListener("beforeprint", buildPrint);
+  var raf = 0;
+  window.addEventListener("resize", function(){
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(fit);
+  });
+  if (mq && mq.addEventListener && !stored.mode){
+    mq.addEventListener("change", function(e){
+      state.mode = e.matches ? "flip" : "side";
+      apply();
+    });
+  }
+  document.addEventListener("keydown", function(e){
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var t = e.target;
+    if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT" || t.isContentEditable)) return;
+    var k = (e.key || "").toLowerCase();
+    if (k === "p"){ e.preventDefault(); buildPrint(); window.print(); }
+    else if (k === "l"){ state.lang = state.lang === "pt" ? "en" : "pt"; apply(); }
+    else if (k === "f"){
+      if (state.mode !== "flip"){ state.mode = "flip"; apply(); }
+      else setSide(state.side === "front" ? "back" : "front");
+    }
+  });
+
+  armStampFallback();
+  apply();
+  fit();
+})();
+</script>
+</body>
+</html>
