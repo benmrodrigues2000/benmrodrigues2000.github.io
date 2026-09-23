@@ -25,4 +25,5 @@ Programador & Especialista em IA - Esmoriz, Portugal.
 - `fonts/` + `fonts.css` - tipografia self-hosted (sem pedidos ao Google)
 - `sitemap.xml`, `robots.txt`, `.nojekyll` - SEO e configuracao
 - `assets/` - imagens reais do Provador (com variantes `-720.jpg` para ecrãs pequenos)
+- `assets/ruben-portrait*.jpg` - retrato na página Sobre
 - `css/style.css`, `js/main.js` - estilos e comportamento
