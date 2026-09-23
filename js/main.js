@@ -310,7 +310,7 @@
       heroIo.observe(hero);
     }
   }
-  }catch(canvasErr){ /* o site funciona sem canvas */ }
+  }catch(canvasErr){}
 
   try{
     if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)){
