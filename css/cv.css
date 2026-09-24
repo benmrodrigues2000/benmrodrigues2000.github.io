@@ -1,0 +1,204 @@
+/* ==========================================================================
+   Ruben Rodrigues — CV page (cv.html)
+   --------------------------------------------------------------------------
+   Page-specific layout only. Every colour, spacing token and component here
+   comes from css/style.css, so the CV inherits the site's Gestalt system
+   instead of restating it:
+
+   COMMON REGION ..... .cv-sheet is one enclosure: the whole document is a
+                       single object, not a stack of loose blocks.
+   PROXIMITY ......... inside a band, label/value pairs hug each other
+                       (--gap-in); bands are separated by hairlines and air.
+   SIMILARITY ........ one colour, one meaning — violet = now, cyan = link,
+                       coral = action; filled node = work, ring = training.
+   CONTINUITY ........ the page keeps the .sec axis and its numbered nodes,
+                       so the CV reads as part of the same document set.
+   CLOSURE ........... .cv-alias is sliced into strips and still reads as one
+                       word; the flow's last node is filled — the loop closes.
+   FIGURE / GROUND ... on print, the starfield ground goes away and the sheet
+                       becomes the page.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   01 · THE SHEET — one common region holding the identity block
+   -------------------------------------------------------------------------- */
+.cv-sheet{overflow:hidden;margin-top:var(--gap-mid)}
+.cv-sheet > * + *{border-top:1px solid var(--rule)}
+
+.cv-head{background:rgba(10,13,29,.35)}
+html[data-theme="light"] .cv-head{background:rgba(233,236,248,.55)}
+.cv-head-r{color:var(--ink)}
+
+.cv-identity{
+  display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);
+  gap:40px;align-items:start;padding:36px 34px 30px;
+}
+.cv-id-left{display:grid;gap:12px;align-content:start}
+.cv-name{
+  font-family:var(--font-display);font-weight:400;
+  font-size:clamp(54px,7.6vw,108px);line-height:.82;letter-spacing:.01em;text-transform:uppercase;
+}
+.cv-role{color:var(--ink)}
+
+/* Closure: the alias, sliced into strips, still reads as one word */
+.cv-alias{
+  margin-top:10px;font-family:var(--font-display);
+  font-size:clamp(34px,4.6vw,58px);line-height:.8;letter-spacing:.06em;
+  color:transparent;-webkit-text-stroke:1px rgba(236,238,250,.16);white-space:nowrap;
+  -webkit-mask:repeating-linear-gradient(90deg,#000 0 14px,transparent 14px 20px);
+          mask:repeating-linear-gradient(90deg,#000 0 14px,transparent 14px 20px);
+}
+html[data-theme="light"] .cv-alias{-webkit-text-stroke-color:rgba(20,24,48,.22)}
+
+.cv-id-right{display:grid;align-content:start}
+.cv-facts{width:100%}
+.cv-facts dd{display:flex;align-items:center;gap:9px}
+
+.cv-profile{display:grid;gap:16px;padding:28px 34px 32px}
+.cv-lbl{display:block}
+.cv-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+
+/* --------------------------------------------------------------------------
+   03 · SKILLS — three enclosures, chips tight inside each one
+   -------------------------------------------------------------------------- */
+.cv-skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap-mid);margin-top:var(--gap-mid)}
+.cv-skill-body{display:grid;gap:16px;padding:22px}
+.cv-skill-body .body{font-size:14.5px;max-width:none}
+/* Similarity: the three group marks are one shape (a circle) and differ only by
+   colour — code = ink, AI = cyan, web/client = coral. Shape never carries
+   meaning here; in the timeline it does (filled = work, ring = training). */
+.cv-skills .region-head .lg.act{background:var(--act);border-radius:50%;width:12px;height:12px}
+
+/* --------------------------------------------------------------------------
+   04 · FEATURED PROJECT — numbers bound to their captions by proximity
+   -------------------------------------------------------------------------- */
+.cv-feature{overflow:hidden;margin-top:var(--gap-mid)}
+.cv-ledger{margin-bottom:0;border-bottom:1px solid var(--rule)}
+.cv-feature-body{
+  display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
+  gap:32px;padding:28px 26px;
+}
+.cv-feature-copy{display:grid;gap:18px;align-content:start}
+.cv-feature-copy .body{max-width:none}
+
+/* --------------------------------------------------------------------------
+   05 · METHOD — one connected chain, then the sign-off inside the same frame
+   -------------------------------------------------------------------------- */
+.cv-method{margin-top:var(--gap-mid);overflow:hidden}
+.cv-method .p-block{border-bottom:1px solid var(--rule)}
+.cv-principles{padding:10px 26px 22px}
+.cv-principles li{grid-template-columns:34px minmax(0,1fr);gap:16px}
+.cv-principles li span strong{color:var(--ink)}
+.cv-signoff{
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;
+  padding:20px 26px;border-top:1px solid var(--rule);background:rgba(10,13,29,.35);
+}
+html[data-theme="light"] .cv-signoff{background:rgba(233,236,248,.55)}
+
+/* ==========================================================================
+   RESPONSIVE — same breakpoints as the rest of the site
+   ========================================================================== */
+@media (max-width:1040px){
+  .cv-identity{grid-template-columns:1fr;gap:32px}
+  .cv-skills{grid-template-columns:1fr}
+  .cv-feature-body{grid-template-columns:1fr;gap:26px}
+}
+@media (max-width:760px){
+  .cv-identity{padding:26px 20px 22px}
+  .cv-profile{padding:22px 20px 26px}
+  .cv-skill-body{padding:18px}
+  .cv-feature-body{padding:22px 18px}
+  .cv-principles{padding:8px 18px 18px}
+  .cv-method .p-block{padding:20px 18px}
+  .cv-signoff{padding:18px}
+  .cv-actions .btn{flex:1 1 auto}
+}
+@media (max-width:480px){
+  .cv-name{font-size:clamp(44px,13vw,64px)}
+  .cv-alias{font-size:32px}
+}
+
+/* ==========================================================================
+   PRINT — the sheet becomes the page (figure/ground flips to paper)
+   Force the light palette so a dark-theme visitor still prints a legible
+   A4 document, and keep the meaning colours by asking for exact colours.
+   ========================================================================== */
+@media print{
+  @page{size:A4;margin:14mm 13mm}
+
+  :root{
+    --canvas:#FFFFFF;
+    --surface:#FFFFFF;
+    --surface-2:#F3F5FC;
+    --ink:#141830;
+    --ink-dark:#0A0D1B;
+    --muted:#4C5480;
+    --rule:#D8DCEE;
+    --rule-strong:#B9C0DD;
+    --state:#6D4AE0;
+    --link:#0B77A8;
+    --act:#C05A18;
+    --gap-out:20px;
+    --gap-mid:14px;
+    --rail:0px;
+    --gutter:0px;
+  }
+
+  html,body{background:#fff !important;color:var(--ink) !important;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  body{font-size:10.4pt;line-height:1.5}
+
+  /* Ground and chrome go away; only the document is left */
+  .site-header,.site-footer,#sky,.sky-fallback,#field,.cv-actions,.actions,.skip,.to-top{display:none !important}
+
+  .sec{padding:0 0 16px}
+  .sec > .wrap{padding-left:0;max-width:none}
+  .sec > .wrap::before{display:none}
+
+  /* Section numbers stay, but as small broken rings in the flow of the text */
+  .sec-head{margin-bottom:10px;gap:6px}
+  .sec-head.wide{grid-template-columns:1fr}
+  .node{
+    position:static;display:grid;place-items:center;
+    width:22px;height:22px;font-size:7pt;
+    background:none;color:var(--muted);margin-bottom:2px;
+  }
+  .node::before{
+    display:block;border-radius:50%;background:none;
+    border:0.9pt dashed var(--rule-strong);
+    -webkit-mask:none;mask:none;
+  }
+  .h1{font-size:34pt;line-height:.9}
+  .h2{font-size:22pt;line-height:.95}
+  .lead{font-size:10.4pt;max-width:none}
+
+  .region{background:#fff !important;border-color:var(--rule) !important;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+  .cv-sheet,.cv-feature,.cv-method{margin-top:8px;break-inside:avoid}
+  .cv-identity{padding:16px 18px 14px;gap:20px}
+  .cv-profile{padding:14px 18px 16px}
+  .cv-name{font-size:40pt}
+  /* Closure still reads on paper: the sliced alias gets a dark stroke */
+  .cv-alias{-webkit-text-stroke-color:rgba(20,24,48,.3);margin-top:2px}
+  .cv-skill-body{padding:12px 14px}
+  .cv-skills{grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
+  .cv-ledger b{font-size:26pt}
+  .cv-ledger div{padding:12px 14px}
+  .cv-feature-body{padding:14px;gap:18px}
+  .cv-method .p-block{padding:12px 14px}
+  .cv-principles{padding:6px 14px 12px}
+  .cv-signoff{padding:10px 14px}
+
+  .chip{background:#fff !important;font-size:8.4pt;min-height:0;padding:2px 8px}
+  .ledger{grid-template-columns:repeat(4,1fr) !important}
+  .timeline{margin-top:8px}
+  .timeline::before{left:120px}
+  .timeline li{grid-template-columns:96px minmax(0,1fr) minmax(0,1.25fr);gap:6px 28px;padding:10px 0;break-inside:avoid}
+  .timeline li::before{left:114px;top:16px}
+  .region-head{padding:9px 14px}
+  .btn,.arrow-link{color:var(--link)}
+  a{text-decoration:none;color:var(--ink)}
+  a[href^="http"]::after{content:" (" attr(href) ")";font-family:var(--font-mono);font-size:8pt;color:var(--muted);letter-spacing:0}
+  .cv-feature a[href^="http"]::after,.cv-profile a[href^="http"]::after{content:""}
+  .facts{padding:0}
+  .facts div{padding:6px 8px}
+  .rv{opacity:1;transform:none}
+}

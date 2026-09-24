@@ -26,8 +26,9 @@ O briefing (índice de 8 estrelas) e o postal (frente com duas figuras e órbita
 - `percurso.html` - percurso e registo de servico
 - `trabalhos.html` - trabalhos (O Provador, ferramentas de entrada, o agente Ajuda, o criterio e o sistema visual Gestalt)
 - `contacto.html` - contacto e servicos
+- `cv.html` - CV em pagina (o mesmo conteudo do PDF, no sistema visual do site: identidade, registo de servico, competencias, projeto em destaque e metodo). Imprimivel em A4 a partir do proprio browser
 - `404.html` - pagina de erro
-- `cv.pdf` - curriculum atualizado (descarregavel no site)
+- `cv.pdf` - curriculum atualizado (descarregavel no site); gerado por `tools/build-cv-pdf.py`, uma pagina A4 no mesmo sistema visual (fundo estelar, violeta = agora, ciano = ligacao, coral = acao, anel tracejado = fecho), com as fontes do site embutidas
 - `favicon.svg`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`, `manifest.webmanifest` - identidade e icones
 - `og.jpg`, `og-trabalhos.jpg` - imagens de partilha (geral e Trabalhos)
 - `briefing.html` - briefing interativo para clientes (autónomo, sem dependências do site)
@@ -36,6 +37,7 @@ O briefing (índice de 8 estrelas) e o postal (frente com duas figuras e órbita
 - `sitemap.xml`, `robots.txt`, `.nojekyll` - SEO e configuracao
 - `assets/` - imagens reais do Provador (com variantes `-720.jpg` para ecrãs pequenos)
 - `assets/ruben-portrait*.jpg` - retrato na página Sobre
-- `css/style.css`, `css/ajuda.css` - estilos do site e do guia de ajuda
+- `css/style.css`, `css/cv.css`, `css/ajuda.css` - estilos do site, do CV (layout da pagina + folha de impressao A4) e do guia de ajuda
 - `js/main.js`, `js/controls.js` - comportamento e controlos (tema/idioma)
+- `tools/build-cv-pdf.py` - constroi o `cv.pdf` no sistema Gestalt do site: usa as fontes de `fonts/` (woff2 -> ttf em memoria) e falha se o conteudo passar de uma pagina (`pip install reportlab fonttools brotli`)
 - `js/ajuda.js` - guia de navegacao "Ajuda" (canto inferior direito): pergunta porque o visitante esta ali e de onde vem, e encaminha-o para a pagina certa. Bilingue, funciona offline e nao faz pedidos a terceiros. Publica `window.RR_AJUDA` e pode ser desligada com `?noajuda=1`. Apresentado como trabalho na pagina Trabalhos (`#ajuda`).
