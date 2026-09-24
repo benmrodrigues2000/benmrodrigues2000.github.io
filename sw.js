@@ -1,4 +1,4 @@
-var VERSION = "portefolio-v12";
+var VERSION = "portefolio-v13";
 var SHELL = [
   "./",
   "index.html",
@@ -18,6 +18,7 @@ var SHELL = [
   "manifest.webmanifest",
   "apple-touch-icon.png",
   "icon-192.png",
+  "icon-512.png",
   "fonts.css",
   "fonts/bebas-neue-400-latin.woff2",
   "fonts/ibm-plex-mono-400-latin.woff2",
