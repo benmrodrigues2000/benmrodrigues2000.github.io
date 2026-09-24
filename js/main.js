@@ -6,9 +6,12 @@
 (function(){
   "use strict";
   var root = document.documentElement;
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var coarse = window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
+  var mq = (typeof window.matchMedia === "function") ? window.matchMedia.bind(window) : null;
+  var reduce = mq ? mq("(prefers-reduced-motion: reduce)").matches : false;
+  var coarse = mq ? mq("(pointer: coarse)").matches : false;
   var canAnimate = !reduce;
+  var raf = window.requestAnimationFrame ? window.requestAnimationFrame.bind(window)
+                                         : function(fn){ return window.setTimeout(function(){ fn(Date.now()); }, 16); };
 
   function lang(){ return root.getAttribute("data-lang") === "en" ? "en" : "pt"; }
   var STR = {
@@ -21,7 +24,7 @@
 
   /* ---------------------------------------------------------------- boot */
   function boot(){ document.body.classList.remove("boot"); document.body.classList.add("booted"); }
-  if (reduce) boot(); else window.requestAnimationFrame(function(){ window.setTimeout(boot, 120); });
+  if (reduce) boot(); else raf(function(){ window.setTimeout(boot, 120); });
 
   /* ---------------------------------------------------------------- menu */
   var burger = document.getElementById("burger");
@@ -41,7 +44,7 @@
     document.addEventListener("click", function(e){
       if (nav.classList.contains("open") && !nav.contains(e.target) && !burger.contains(e.target)) setMenu(false);
     });
-    var desk = window.matchMedia && window.matchMedia("(min-width: 1041px)");
+    var desk = mq ? mq("(min-width: 1041px)") : null;
     if (desk){
       var close = function(e){ if (e.matches) setMenu(false); };
       if (desk.addEventListener) desk.addEventListener("change", close); else if (desk.addListener) desk.addListener(close);
@@ -61,12 +64,12 @@
 
   /* ------------------------------------------------ tools: master/detail */
   var TOOLS = [
-    {note:{pt:"Comparar antes de comprometer. Todo o prompt que importa passa primeiro por uma pequena arena de modelos - o vencedor define a direção, os perdedores revelam o que faltava na instrução.",en:"Compare before committing. Every prompt that matters first runs through a small arena of models - the winner sets the direction, the losers reveal what the instruction was missing."},prompt:{pt:"Mesmo briefing, três modelos. Ordena por clareza, tom e utilidade. Diz-me o que os perdedores erraram.",en:"Same brief, three models. Rank for clarity, tone and usefulness. Tell me what the losers got wrong."},out:{pt:"Uma decisão ordenada com razão anexa - a escolha do modelo é um passo documentado, não um hábito.",en:"A ranked decision with a reason attached - so the choice of model is a documented step, not a habit."}},
-    {note:{pt:"O parceiro de pensamento. Notas confusas de clientes entram; saem estrutura, rascunhos e contra-argumentos. Uso-o para pensar comigo, não por mim.",en:"The thinking partner. Messy client notes go in; structure, drafts and counter-arguments come out. I use it to think with me, not for me."},prompt:{pt:"Aqui está o meu briefing confuso. Dá-me 3 estruturas e depois argumenta contra a que eu escolheria naturalmente.",en:"Here is my messy brief. Give me 3 structures, then argue against the one I'd naturally pick."},out:{pt:"Rascunhos com espinha - e uma lista curta de pontos fracos que ainda tenho de corrigir eu.",en:"Drafts with a backbone - plus a short list of weak points I still have to fix myself."}},
-    {note:{pt:"Quando a pilha é grande demais para um cérebro. Transcrições longas, documentos e referências entram; sai um mapa do território. Segunda opinião quando o enviesamento de um modelo aparece.",en:"For when the pile is too big for one brain. Long transcripts, documents and references go in; a map of the territory comes out. A second opinion when a model's bias shows."},prompt:{pt:"Lê os documentos anexos. Cria uma cronologia, lista contradições e responde apenas com base nas fontes.",en:"Read the attached documents. Build a timeline, list contradictions, and answer only from the sources."},out:{pt:"Um briefing com fontes com que posso discutir - citações incluídas, nada flutua sem evidência.",en:"A brief with sources I can argue from - citations included, nothing floats without evidence."}},
-    {note:{pt:"O motor de clipes. Entra stream longa, saem candidatos verticais curtos. A IA é rápida a encontrar momentos; sou eu que sei que momento significou alguma coisa.",en:"The clip engine. A long stream goes in, short vertical candidates come out. AI is quick to find moments; I'm the one who knows which moment actually meant something."},prompt:{pt:"Encontra os 5 momentos mais carregados emocionalmente. Ordena pela força do gancho nos primeiros 2 segundos.",en:"Find the 5 most emotionally charged moments. Rank by the strength of the hook in the first 2 seconds."},out:{pt:"Três clipes publicáveis com ganchos e legendas - e uma lista de cortes que poupa uma hora.",en:"Three publishable clips with hooks and captions - plus an edit list that saves an hour."}},
-    {note:{pt:"A camada de publicação. Modelos, formulários inteligentes e assistentes ligados a produtos reais com Python e JavaScript - para pequenas empresas que só querem que as coisas funcionem.",en:"The shipping layer. Models, smart forms and assistants wired into real products with Python and JavaScript - for small businesses that just want things to work."},prompt:{pt:"Dada a tarefa mais repetitiva deste cliente, desenha a funcionalidade de IA mais fina que a elimina. Inclui estados de falha.",en:"Given this client's most repetitive task, design the thinnest AI feature that removes it. Include failure states."},out:{pt:"Uma integração com âmbito definido: endpoints, prompts, ligações à base de dados - e um preço que o cliente entende.",en:"A scoped integration: endpoints, prompts, database links - and a price the client understands."}},
-    {note:{pt:"O ofício por trás de cada fluxo de IA. Os prompts dão-te um rascunho; Python e JavaScript dão-te um produto - e a reparação tira-te de apuros quando um build parte.",en:"The craft behind every AI flow. Prompts give you a draft; Python and JavaScript give you a product - and repair gets you out of trouble when a build breaks."},prompt:{pt:"Explica este bug como um sénior: causa raiz, correção mínima, guarda de regressão.",en:"Explain this bug like a senior: root cause, minimal fix, regression guard."},out:{pt:"Código a funcionar com razão anexa - revisto, reparado e legível.",en:"Working code with a reason attached - reviewed, repaired and readable."}}
+    {note:{pt:"Comparo respostas de modelos diferentes ao mesmo pedido, sem ver qual é qual. O vencedor define a direção; os perdedores mostram o que faltava na instrução.",en:"I compare answers from different models to the same request, without seeing which is which. The winner sets the direction; the losers show what the instruction was missing."},prompt:{pt:"Mesmo briefing, três modelos. Ordena por clareza, tom e utilidade. Diz-me o que os perdedores erraram.",en:"Same brief, three models. Rank for clarity, tone and usefulness. Tell me what the losers got wrong."},out:{pt:"Uma escolha ordenada, com a razão escrita ao lado.",en:"A ranked choice, with the reason written next to it."}},
+    {note:{pt:"Notas confusas de clientes entram; saem estrutura, rascunhos e contra-argumentos. Uso-o para pensar comigo, não por mim.",en:"Messy client notes go in; structure, drafts and counter-arguments come out. I use it to think with me, not for me."},prompt:{pt:"Aqui está o meu briefing confuso. Dá-me 3 estruturas e depois argumenta contra a que eu escolheria naturalmente.",en:"Here is my messy brief. Give me 3 structures, then argue against the one I'd naturally pick."},out:{pt:"Rascunhos utilizáveis e uma lista curta de pontos fracos que ainda tenho de corrigir.",en:"Usable drafts plus a short list of weak points I still have to fix."}},
+    {note:{pt:"Transcrições longas, documentos e referências entram; sai um mapa do que interessa. Segunda opinião quando o primeiro modelo se desvia.",en:"Long transcripts, documents and references go in; a map of what matters comes out. A second opinion when the first model drifts."},prompt:{pt:"Lê os documentos anexos. Cria uma cronologia, lista contradições e responde apenas com base nas fontes.",en:"Read the attached documents. Build a timeline, list contradictions, and answer only from the sources."},out:{pt:"Um resumo com fontes e citações, para eu poder confirmar cada linha.",en:"A summary with sources and citations, so I can check every line."}},
+    {note:{pt:"Entra stream longa, saem clipes verticais. A ferramenta é rápida a encontrar momentos; eu escolho o que publicar.",en:"A long stream goes in, vertical clips come out. The tool is quick to find moments; I pick what gets published."},prompt:{pt:"Encontra os 5 momentos mais carregados emocionalmente. Ordena pela força do gancho nos primeiros 2 segundos.",en:"Find the 5 most emotionally charged moments. Rank by the strength of the hook in the first 2 seconds."},out:{pt:"Três clipes com legendas e uma lista de cortes.",en:"Three clips with captions and a cut list."}},
+    {note:{pt:"Modelos, formulários e assistentes ligados a sites com Python e JavaScript, para empresas que só querem que aquilo funcione.",en:"Models, forms and assistants wired into sites with Python and JavaScript, for businesses that just want it to work."},prompt:{pt:"Dada a tarefa mais repetitiva deste cliente, desenha a funcionalidade de IA mais fina que a elimina. Inclui estados de falha.",en:"Given this client's most repetitive task, design the thinnest AI feature that removes it. Include failure states."},out:{pt:"Uma integração com âmbito definido: endpoints, prompts, base de dados e um preço combinado antes de começar.",en:"A scoped integration: endpoints, prompts, database and a price agreed before we start."}},
+    {note:{pt:"Os prompts dão um rascunho; Python e JavaScript dão um produto. E quando um build parte, é aqui que se resolve.",en:"Prompts give you a draft; Python and JavaScript give you a product. And when a build breaks, this is where it gets fixed."},prompt:{pt:"Explica este bug como um sénior: causa raiz, correção mínima, guarda de regressão.",en:"Explain this bug like a senior: root cause, minimal fix, regression guard."},out:{pt:"Código a funcionar, revisto e legível.",en:"Working code, reviewed and readable."}}
   ];
   var rows = Array.prototype.slice.call(document.querySelectorAll(".tool-row"));
   var panel = document.getElementById("toolPanel");
@@ -128,8 +131,18 @@
     copyBtn.addEventListener("click", function(){
       var email = copyBtn.getAttribute("data-email") || "";
       if (navigator.clipboard && navigator.clipboard.writeText){
-        navigator.clipboard.writeText(email).then(function(){ showToast(tr("copied") + email); }, function(){ showToast(email); });
-      } else { showToast(email); }
+        navigator.clipboard.writeText(email).then(function(){ showToast(tr("copied") + email); }, legacy);
+      } else legacy();
+      function legacy(){
+        var ta = document.createElement("textarea");
+        ta.value = email; ta.setAttribute("readonly", "");
+        ta.style.position = "fixed"; ta.style.opacity = "0";
+        document.body.appendChild(ta); ta.select();
+        var ok = false;
+        try{ ok = document.execCommand("copy"); }catch(err){}
+        document.body.removeChild(ta);
+        showToast(ok ? tr("copied") + email : email);
+      }
     });
   }
 
@@ -325,5 +338,6 @@
     var opener = e.target && e.target.closest ? e.target.closest("[data-ajuda-open]") : null;
     if (!opener) return;
     if (window.RR_AJUDA && window.RR_AJUDA.open) window.RR_AJUDA.open(true);
+    else window.location.href = "contacto.html#contact";
   });
 })();

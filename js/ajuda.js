@@ -70,7 +70,7 @@
     cvpage: [{ h:"#cv", name:{pt:"Currículo", en:"Curriculum"},
                note:{pt:"uma página, cinco blocos", en:"one page, five blocks"} }],
     percurso: [{ h:"#curriculum", name:{pt:"Índice de capacidades", en:"Capability index"},
-                 note:{pt:"3 rotas, prova por etapa", en:"3 routes, proof per step"} }],
+                 note:{pt:"3 rotas, um exemplo por etapa", en:"3 routes, one example per step"} }],
     trabalhos: [
       { h:"#provador", name:{pt:"O Provador (caso de estudo)", en:"O Provador (case study)"}, note:{pt:"cliente real, em produção", en:"real client, live"} },
       { h:"#ferramentas-vivas", name:{pt:"Ferramentas públicas", en:"Public tools"}, note:{pt:"briefing e postal", en:"briefing and postcard"} },
@@ -129,7 +129,7 @@
       echo:{ pt:"os trabalhos", en:"the work" },
       route:function(){
         return {
-          head:{ pt:"Rota: prova", en:"Route: proof" },
+          head:{ pt:"Rota: exemplos", en:"Route: examples" },
           text:{
             pt:"A página Trabalhos abre pelo caso de estudo do Provador (quiz de recomendação com stock real, ligado à base de dados da Freedom Outdoor), mostra as ferramentas públicas, desmonta o próprio guia Ajuda por dentro e fecha com o critério de decisão por trás de tudo.",
             en:"The Work page opens with the O Provador case study (a recommendation quiz on real stock, wired to Freedom Outdoor's database), shows the public tools, takes the Ajuda guide itself apart inside, and closes with the decision criterion behind it all."
@@ -175,8 +175,8 @@
         return {
           head:{ pt:"Rota: currículo", en:"Route: résumé" },
           text:{
-            pt:"O CV em PDF tem o essencial para triagem; o Percurso dá a versão longa - três rotas de capacidade com provas, sem certificados. Se precisares de contexto humano (idade, de onde venho, o que fiz antes), está na página Sobre.",
-            en:"The PDF CV has what screening needs; Journey gives the long version - three capability routes with proof, no certificates. If you need human context (age, where I'm from, what I did before), it's on the About page."
+            pt:"O CV em PDF tem o essencial para triagem; o Percurso dá a versão longa, com exemplos concretos em cada rota. Se precisares de contexto humano (idade, de onde venho, o que fiz antes), está na página Sobre.",
+            en:"The PDF CV has what screening needs; Journey gives the long version, with concrete examples on each route. If you need human context (age, where I'm from, what I did before), it's on the About page."
           },
           acts:[
             { page:"cv", label:{pt:"Descarregar o CV (PDF)", en:"Download the CV (PDF)"},
@@ -219,12 +219,12 @@
         return {
           head:{ pt:"Rota: mapa completo", en:"Route: full map" },
           text:{
-            pt:"Sem problema. O site tem seis páginas: Início (o plano de voo), Sobre (quem está por trás), Ferramentas (o stack), Percurso (as três rotas), Trabalhos (o Provador e as provas) e Contacto (serviços). Salta para onde quiseres - ou continua a perguntar-me.",
-            en:"No problem. The site has six pages: Home (the flight plan), About (who's behind it), Tools (the stack), Journey (the three routes), Work (O Provador and the proof) and Contact (services). Jump wherever you like - or keep asking me."
+            pt:"O site tem seis páginas no menu: Início (o plano de voo), Sobre (quem está por trás), Ferramentas (o stack), Percurso (as três rotas), Trabalhos (o Provador e as ferramentas) e Contacto (serviços). Salta para onde quiseres, ou continua a perguntar-me.",
+            en:"The site has six pages in the menu: Home (the flight plan), About (who's behind it), Tools (the stack), Journey (the three routes), Work (O Provador and the tools) and Contact (services). Jump wherever you like, or keep asking me."
           },
           acts:[
             { page:"trabalhos", hash:"#provador", label:{pt:"Ver o caso do Provador", en:"See the Provador case"},
-              note:{pt:"a prova mais concreta", en:"the most concrete proof"}, primary:true },
+              note:{pt:"o que está em produção", en:"what's in production"}, primary:true },
             { page:"percurso", hash:"#curriculum", label:{pt:"Perceber o que faço", en:"Understand what I do"},
               note:{pt:"3 rotas de capacidade", en:"3 capability routes"} },
             { page:"contacto", hash:"#contact", label:{pt:"Falar comigo", en:"Talk to me"},
@@ -249,9 +249,9 @@
     { id:"direto", label:{pt:"Email / mensagem direta", en:"Email / direct message"}, boost:"contacto",
       line:{ pt:"Já tens o meu contacto, isso é meio caminho andado.", en:"You already have my contact - half the work is done." } },
     { id:"outro", label:{pt:"Outra coisa", en:"Somewhere else"}, boost:"",
-      line:{ pt:"Seja como for, chegaste ao sítio certo.", en:"Either way, you're in the right place." } },
+      line:{ pt:"Certo. Continuo por aqui.", en:"Fine. I'll carry on from here." } },
     { id:"skip", label:{pt:"Prefiro não dizer", en:"Rather not say"}, boost:"",
-      line:{ pt:"Sem problema - a rota funciona na mesma.", en:"No problem - the route still works." } }
+      line:{ pt:"Fica como está: a rota funciona na mesma.", en:"Fine: the route still works." } }
   ];
 
   function goalById(id){ for (var i=0;i<GOALS.length;i++) if (GOALS[i].id===id) return GOALS[i]; return null; }
@@ -300,13 +300,6 @@
   function A(page, hash, pt, en, npt, nen, primary){
     return { page:page, hash:hash||"", label:{pt:pt, en:en}, note:{pt:npt, en:nen}, primary:!!primary };
   }
-  var MAP_ACTS = [
-    A("index","", "Início","Home","o plano de voo","the flight plan"),
-    A("sobre","#sobre","Sobre","About","quem está por trás","who's behind it"),
-    A("percurso","#curriculum","Percurso","Journey","3 rotas de capacidade","3 capability routes"),
-    A("trabalhos","#provador","Trabalhos","Work","o Provador e as provas","O Provador and the proof"),
-    A("contacto","#contact","Contacto","Contact","serviços e email","services and email")
-  ];
 
   var KB = [
     { id:"servicos", goal:"negocio",
@@ -371,8 +364,8 @@
     { id:"trabalhos", goal:"trabalhos",
       kw:["trabalhos","projetos","portfolio","portefolio","casos","caso de estudo","exemplos","provas","amostra","work","projects","case studies","case study","examples","your work"],
       head:{pt:"Trabalhos", en:"Work"},
-      text:{ pt:"Quatro blocos: um caso de estudo (O Provador), duas ferramentas públicas (briefing e postal), o próprio guia Ajuda desmontado por dentro e um método de decisão. Nada de maquetas soltas - tudo recebe pessoas a sério.",
-              en:"Four blocks: a case study (O Provador), two public tools (briefing and postcard), the Ajuda guide itself taken apart inside, and a decision method. No loose mockups - everything meets real people." },
+      text:{ pt:"Quatro blocos: um caso de estudo (O Provador), duas ferramentas públicas (briefing e postal), o próprio guia Ajuda desmontado por dentro e o critério de decisão. Tudo o que está lá pode ser aberto e usado.",
+              en:"Four blocks: a case study (O Provador), two public tools (briefing and postcard), the Ajuda guide itself taken apart, and the decision criterion. Everything there can be opened and used." },
       acts:[A("trabalhos","#provador","Abrir o caso do Provador","Open the Provador case","5 perguntas · 60 segundos","5 questions · 60 seconds",true),
             A("trabalhos","#ajuda","Ver o guia por dentro","See the guide from inside","nota de campo · sem nuvem","field note · no cloud"),
             A("trabalhos","#ferramentas-vivas","Ferramentas públicas","Public tools","briefing e postal","briefing and postcard")] },
@@ -395,8 +388,8 @@
     { id:"metodo", goal:"metodo",
       kw:["metodo","processo","como trabalhas","como e que trabalhas","fluxo de trabalho","como funciona","method","process","how do you work","your workflow","how it works"],
       head:{pt:"O método", en:"The method"},
-      text:{ pt:"Prompt → rascunho → crítica → revisão → publicação. Defino o resultado, o cliente e a restrição antes de escrever o primeiro prompt; depois comparo respostas de dois ou três modelos numa arena e assino o veredicto com razão anexa.",
-              en:"Prompt → draft → critique → revision → publish. I define the outcome, the client and the constraint before writing the first prompt; then I compare answers from two or three models in an arena and sign the verdict with a reason attached." },
+      text:{ pt:"Prompt → rascunho → crítica → revisão → publicação. Antes do primeiro prompt sei o que tem de funcionar, para quem e o que não pode ser feito; depois comparo respostas de dois ou três modelos e escrevo o veredicto com a razão ao lado.",
+              en:"Prompt → draft → critique → revision → publish. Before the first prompt I know what has to work, for whom and what can't be done; then I compare answers from two or three models and write the verdict with the reason next to it." },
       acts:[A("sobre","#method","Ver o método completo","See the full method","com o diagrama do briefing","with the brief diagram",true),
             A("trabalhos","#metodo","O critério aplicado","The criterion applied","veredicto da arena","arena verdict")] },
 
@@ -411,16 +404,16 @@
     { id:"percurso", goal:"metodo",
       kw:["percurso","experiencia","carreira","curriculo profissional","robot","ferreira de sa","servico militar","registo de servico","journey","experience","career","background","track record"],
       head:{pt:"Percurso", en:"Journey"},
-      text:{ pt:"Três rotas: prompt & conversação; integrações de IA & código; web design & reparação. Sem certificados - cada rota tem provas e uma lista do que ainda está a ser treinado. Antes disto: estágio na Freedom Outdoor (onde construí o Provador), operador de robô na Ferreira de Sá e atendimento ao cliente no Pingo Doce.",
-              en:"Three routes: prompt & conversation; AI & code integrations; web design & repair. No certificates - each route carries proof and a list of what's still being trained. Before this: an internship at Freedom Outdoor (where I built O Provador), robot operator at Ferreira de Sá and customer service at Pingo Doce." },
-      acts:[A("percurso","#curriculum","Abrir o percurso","Open the journey","3 rotas, prova por etapa","3 routes, proof per step",true),
+      text:{ pt:"Três rotas: prompt & conversação; integrações de IA & código; web design & reparação. Cada rota tem exemplos concretos por baixo. Antes disto: estágio na Freedom Outdoor (onde construí o Provador), operador de robô na Ferreira de Sá e atendimento ao público no Pingo Doce.",
+              en:"Three routes: prompt & conversation; AI & code integrations; web design & repair. Each route has concrete examples underneath. Before this: an internship at Freedom Outdoor (where I built O Provador), robot operator at Ferreira de Sá and customer service at Pingo Doce." },
+      acts:[A("percurso","#curriculum","Abrir o percurso","Open the journey","3 rotas, um exemplo por etapa","3 routes, one example per step",true),
             A("sobre","#sobre","Quem está por trás","Who's behind it","26 anos · Esmoriz, PT","26 years old · Esmoriz, PT")] },
 
     { id:"cv", goal:"recrutador",
       kw:["cv!","curriculum","curriculo","curriculo vitae","recrutador","recrutamento","vaga","emprego","contratar","estagio","hire","hiring","resume","recruiter","recruiting","job","open role","internship"],
       head:{pt:"CV", en:"CV"},
-      text:{ pt:"O PDF tem o essencial para triagem e é atualizado a cada entrega. Se a vaga for de IA aplicada ou front-end, o Percurso mostra a profundidade real - cada capacidade com a sua prova.",
-              en:"The PDF carries what screening needs and is updated with every delivery. If the role is applied AI or front-end, Journey shows the real depth - every capability with its proof." },
+      text:{ pt:"O PDF tem o essencial para triagem e é atualizado a cada entrega. Se a vaga for de IA aplicada ou front-end, o Percurso mostra a profundidade real - cada capacidade com um exemplo ao lado.",
+              en:"The PDF carries what screening needs and is updated with every delivery. If the role is applied AI or front-end, Journey shows the real depth - every capability with an example next to it." },
       acts:[A("cv","","Descarregar o CV (PDF)","Download the CV (PDF)","pronto para triagem","screening-ready",true),
             A("cvpage","#cv","CV na página","CV as a web page","uma página, cinco blocos","one page, five blocks"),
             A("percurso","#curriculum","Índice de capacidades","Capability index","a versão longa","the long version"),
@@ -429,16 +422,16 @@
     { id:"sobre", goal:"perdido",
       kw:["quem es","quem es tu","sobre ti","idade","anos tens","onde estas","onde vives","onde moras","about you","about yourself","tell me about you","who are you","how old","where are you","where do you live"],
       head:{pt:"Quem está por trás", en:"Who's behind it"},
-      text:{ pt:"Ruben Monteiro Correia Rodrigues, 26 anos, Esmoriz - Portugal. Programador e especialista em IA: uso modelos todos os dias e transformo esse uso em produtos para pequenas empresas. Também assino como AYYLIENADO.",
-              en:"Ruben Monteiro Correia Rodrigues, 26, from Esmoriz - Portugal. Developer and AI specialist: I use models every day and turn that into products for small businesses. I also sign as AYYLIENADO." },
+      text:{ pt:"Ruben Monteiro Correia Rodrigues, 26 anos, Esmoriz - Portugal. Programador e especialista em IA: websites, landing pages, integrações de IA e reparação de código para pequenas empresas. Também assino como AYYLIENADO.",
+              en:"Ruben Monteiro Correia Rodrigues, 26, from Esmoriz - Portugal. Developer and AI specialist: websites, landing pages, AI integrations and code repair for small businesses. I also sign as AYYLIENADO." },
       acts:[A("sobre","#sobre","Abrir a página Sobre","Open the About page","contexto e percurso","context and journey",true),
-            A("percurso","#curriculum","Ver o percurso","See the journey","provas, não certificados","proof, not certificates")] },
+            A("percurso","#curriculum","Ver o percurso","See the journey","exemplos, não certificados","examples, not certificates")] },
 
     { id:"contacto", goal:"negocio",
       kw:["contacto!","contactos","falar contigo","telefone","email!","e-mail","marcar reuniao","conversar","duvidas","contact","get in touch","talk to you","phone","meeting","reach you","your email","reuniao!","telefone!"],
       head:{pt:"Contacto", en:"Contact"},
-      text:{ pt:"Está tudo na página Contacto: email direto, GitHub, CV e o briefing. Traz uma pergunta confusa, um site partido ou um fluxo repetitivo que não devia existir - é por aí que começo.",
-              en:"It's all on the Contact page: direct email, GitHub, CV and the briefing. Bring a messy question, a broken site or a repetitive workflow that shouldn't exist - that's where I start." },
+      text:{ pt:"Está tudo na página Contacto: email direto, GitHub, CV e o briefing. Escreve-me com o que tens: um site que não funciona, uma tarefa repetitiva, um projeto por começar.",
+              en:"It's all on the Contact page: direct email, GitHub, CV and the briefing. Write to me with what you have: a site that doesn't work, a repetitive task, a project that hasn't started." },
       acts:[A("contacto","#contact","Abrir o contacto","Open contact","email, GitHub, CV","email, GitHub, CV",true),
             A("email","","Escrever agora","Write now","benmrodrigues2000@gmail.com","benmrodrigues2000@gmail.com")] },
 
@@ -484,8 +477,8 @@
     { id:"agradecimento",
       kw:["obrigado!","obrigada!","thanks!","thank you","valeu","agradecido"],
       head:{pt:"Ora essa", en:"Any time"},
-      text:{ pt:"Sempre às ordens. Se ainda houver alguma coisa para descobrir, o mapa fica aqui em baixo.",
-              en:"Always around. If there's still something to dig into, the map is right below." } },
+      text:{ pt:"Fico por aqui. Se houver mais alguma coisa para descobrir, o mapa está em baixo.",
+              en:"I'm around. If there's more to dig into, the map is below." } },
 
     { id:"saudacao",
       kw:["ola!","bom dia","boa tarde","boa noite","boas!","viva","hey!","hi!","hello!","good morning","good afternoon"],
@@ -563,7 +556,7 @@
   var ICON_ORB = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h4l2-5 3 10 2-5h5"/></svg>';
   var ICON_SEND= '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>';
 
-  var rootEl, bubble, panel, log, chipsBar, form, input, sendBtn, resetBtn, footNote;
+  var rootEl, bubble, panel, log, chipsBar, form, input, sendBtn, resetBtn, footNote, closeBtn;
   var lblEl, subEl;
   var nodes = [];          /* transcript, kept as data so it can re-render */
   var chips = [];          /* current quick choices */
@@ -612,13 +605,13 @@
     titles.appendChild(subEl);
     id.appendChild(orb);
     id.appendChild(titles);
-    var x = el("button", "aj-x");
-    x.type = "button";
-    x.innerHTML = ICON_X;
-    x.setAttribute("aria-label", "Fechar");
-    x.addEventListener("click", close);
+    closeBtn = el("button", "aj-x");
+    closeBtn.type = "button";
+    closeBtn.innerHTML = ICON_X;
+    closeBtn.setAttribute("aria-label", t({pt:"Fechar", en:"Close"}));
+    closeBtn.addEventListener("click", close);
     head.appendChild(id);
-    head.appendChild(x);
+    head.appendChild(closeBtn);
 
     log = el("div", "aj-log");
     log.setAttribute("role", "log");
@@ -631,11 +624,11 @@
     input = el("input", "aj-input");
     input.type = "text";
     input.autocomplete = "off";
-    input.setAttribute("aria-label", "Escrever mensagem");
+    input.setAttribute("aria-label", t({pt:"Escrever mensagem", en:"Type a message"}));
     sendBtn = el("button", "aj-send");
     sendBtn.type = "submit";
     sendBtn.innerHTML = ICON_SEND;
-    sendBtn.setAttribute("aria-label", "Enviar");
+    sendBtn.setAttribute("aria-label", t({pt:"Enviar", en:"Send"}));
     form.appendChild(input);
     form.appendChild(sendBtn);
 
@@ -669,10 +662,13 @@
 
   /* Copy that depends on language or live state, refreshed on every render. */
   function syncChrome(){
+    closeBtn.setAttribute("aria-label", t({pt:"Fechar", en:"Close"}));
+    input.setAttribute("aria-label", t({pt:"Escrever mensagem", en:"Type a message"}));
+    sendBtn.setAttribute("aria-label", t({pt:"Enviar", en:"Send"}));
     lblEl.textContent = isOpen() ? t({pt:"Fechar", en:"Close"}) : t({pt:"Ajuda", en:"Help"});
     bubble.setAttribute("aria-label", isOpen()
       ? t({pt:"Fechar a ajuda", en:"Close help"})
-      : t({pt:"Abrir a ajuda - levo-te ao sítio certo", en:"Open help - I'll take you where you need to go"}));
+      : t({pt:"Abrir a ajuda: duas perguntas e aponto a página", en:"Open help: two questions and I'll point to the page"}));
     subEl.textContent = t({pt:"Guia do site · 2 perguntas", en:"Site guide · 2 questions"});
     input.placeholder = state.step === "goal"
       ? t({pt:"Escreve a tua pergunta…", en:"Type your question…"})
@@ -907,7 +903,7 @@
     out.push({ label:{pt:"Voltar", en:"Back"}, act:"back", fn:function(){
       state.step = "goal"; state.goal = "";
       push({ k:"me", text:{pt:"Voltar atrás", en:"Go back"} });
-      say({ k:"ag", text:{pt:"Sem problema - porque estás aqui?", en:"No problem - why are you here?"} });
+      say({ k:"ag", text:{pt:"Ainda bem. Então porque estás aqui?", en:"Good. So why are you here?"} });
       chips = goalChips(); renderChips();
     }});
     return out;
@@ -940,7 +936,7 @@
         ],
         acts:[
           A("index","","Voltar ao início","Back to home","o plano de voo","the flight plan", true),
-          A("trabalhos","#provador","Ver os trabalhos","See the work","o Provador e as provas","O Provador and the proof"),
+          A("trabalhos","#provador","Ver os trabalhos","See the work","o Provador e as ferramentas","O Provador and the tools"),
           A("contacto","#contact","Falar comigo","Talk to me","email direto","direct email")
         ]
       });
@@ -952,7 +948,7 @@
       k:"ag",
       head:{pt:"Ajuda", en:"Help"},
       text:[
-        {pt:"Olá. Sou o guia do site - duas perguntas e ficamos com isto resolvido.", en:"Hello. I'm the site guide - two questions and we're done here."},
+        {pt:"Olá. Sou o guia do site: duas perguntas e digo-te onde ir.", en:"Hello. I'm the site guide: two questions and I'll tell you where to go."},
         {pt:"Porque estás aqui hoje?", en:"Why are you here today?"}
       ]
     });
@@ -1024,7 +1020,7 @@
     }
     var hit = match(raw);
     if (!hit){
-      showMap({ prefix:{pt:"Não tenho a certeza de ter percebido - mas não te deixo a andar às voltas. Aqui está o mapa completo:", en:"I'm not sure I caught that - but I won't leave you wandering. Here's the full map:"} });
+      showMap({ prefix:{pt:"Não percebi bem a pergunta. Aqui está o mapa do site:", en:"I didn't get that. Here's the site map:"} });
       return;
     }
     var e = hit.entry;
@@ -1083,7 +1079,7 @@
     var o = opts || {};
     var text = [];
     if (o.prefix) text.push(o.prefix);
-    text.push({pt:"Sete páginas, sete intenções:", en:"Seven pages, seven intentions:"});
+    text.push({pt:"Páginas principais:", en:"Main pages:"});
     say({
       k:"ag",
       head:{pt:"Mapa do site", en:"Site map"},
@@ -1092,7 +1088,7 @@
         A("sobre","#sobre","Sobre","About","quem está por trás","who's behind it"),
         A("percurso","#curriculum","Percurso","Journey","3 rotas de capacidade","3 capability routes"),
         A("cvpage","#cv","CV","CV","currículo numa página","the CV as a web page"),
-        A("trabalhos","#provador","Trabalhos","Work","o Provador e as provas","O Provador and the proof"),
+        A("trabalhos","#provador","Trabalhos","Work","o Provador e as ferramentas","O Provador and the tools"),
         A("contacto","#contact","Contacto","Contact","serviços e email","services and email")
       ]
     });

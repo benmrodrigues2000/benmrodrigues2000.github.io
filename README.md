@@ -16,7 +16,17 @@ O site inteiro (e cada trabalho) segue as leis de perceção da Gestalt, dentro 
 - **Figura / fundo** - céu estrelado como fundo; uma ação coral por ecrã como figura.
 - **Destino comum** - camadas de estrelas em paralaxe no `canvas#sky`.
 
-O briefing (índice de 8 estrelas) e o postal (frente com duas figuras e órbita aberta) seguem as mesmas regras; os PDFs do postal foram regenerados.
+O briefing (índice de 8 estrelas) e o postal (frente com duas figuras e órbita aberta) seguem as mesmas regras.
+
+### Manutenção dos PDFs
+
+- `cv.pdf` é construído por `tools/build-cv-pdf.py` a partir do conteúdo de `cv.html`; sempre que o texto do CV mudar, correr
+  `python3 tools/build-cv-pdf.py` (precisa de `reportlab fonttools brotli`) e confirmar que continua com uma página.
+- Os quatro PDFs do postal (`postal/*.pdf`) saem de `postal/index.html`: correr `node tools/build-postal-pdfs.mjs`
+  (precisa de `npm i -D puppeteer-core @sparticuz/chromium`) - escreve A6 para gráfica e A4 para casa, em PT e EN,
+  duas páginas por ficheiro, pelo mesmo caminho de impressão do Chrome. Alternativa manual: abrir a página, escolher
+  idioma e formato, "Imprimir / guardar PDF". Depois de alterar qualquer texto do postal, reconstruir os quatro -
+  a página e os PDFs têm de dizer o mesmo.
 
 ## Estrutura
 

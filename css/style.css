@@ -37,7 +37,8 @@
   /* Similarity: meaning-bound colours */
   --state:#A78BFA;          /* violet — here / selected / live */
   --link:#7DD3FC;           /* cyan   — connection */
-  --act:#FF9E64;            /* coral  — action */
+  --act:#FF9E64;            /* coral  — action (fills) */
+  --act-text:#FF9E64;       /* coral as text — meets contrast on dark */
   --act-ink:#1B0D03;
 
   /* Legacy aliases (ajuda.css + older components read these) */
@@ -730,7 +731,7 @@ mark{background:none;color:var(--ink);box-shadow:inset 0 -.38em 0 rgba(167,139,2
 .contact-title{font-family:var(--font-display);font-weight:400;font-size:clamp(80px,12vw,190px);line-height:.8;text-transform:uppercase;letter-spacing:.005em}
 .contact-title span.l{display:block}
 .contact-title span.l:nth-child(2){color:transparent;-webkit-text-stroke:1.5px var(--ink)}
-.contact-title span.l:nth-child(3){color:var(--act)}
+.contact-title span.l:nth-child(3){color:var(--act-text)}
 /* Channels: one region; primary action alone in coral = focal point */
 .channels{padding:22px;display:grid;gap:10px}
 .channels .btn{width:100%;justify-content:space-between}
@@ -821,6 +822,9 @@ html[data-theme="light"]{
   --link:#0B77A8;
   --act:#E8742F;
   --act-ink:#1B0D03;
+  /* #E8742F is only 2.77:1 as text on the light canvas; this keeps the coral
+     hue while reaching 4.76:1 (AA for text of any size). */
+  --act-text:#B94A0C;
   --accent-fill:#A78BFA;
   scrollbar-color:#C4CADD #F3F5FC;
 }
