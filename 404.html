@@ -14,9 +14,12 @@
 <meta name="description" content="Página não encontrada - volta ao início ou vê os trabalhos." data-en="Page not found - go back home or see the work.">
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preload" href="fonts/inter-400_700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/bebas-neue-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="fonts.css"/>
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/ajuda.css">
+<link rel="stylesheet" href="css/ajuda.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="css/ajuda.css"></noscript>
 <style>
 .nf{min-height:calc(100vh - 200px);display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
 .nf-code{font-family:var(--font-display);font-size:clamp(120px,26vw,300px);line-height:.9;color:transparent;-webkit-text-stroke:1.5px rgba(237,239,250,.22);margin:0}
@@ -116,8 +119,7 @@
 </div>
 </footer>
 
-<script src="js/controls.js"></script>
-<script src="js/main.js"></script>
-<script src="js/ajuda.js"></script>
+<script src="js/controls.js" defer></script>
+<script src="js/main.js" defer></script>
 </body>
 </html>

@@ -10,6 +10,8 @@
 <title data-en="Mission Briefing - Ruben Rodrigues">Briefing de Missão - Ruben Rodrigues</title>
 <meta name="description" content="Briefing interativo para novos sites: oito módulos de perguntas. Responde, envia, e recebes um plano de voo para o teu projeto." data-en="Interactive briefing for new sites: eight modules of questions. Answer, send, and get a flight plan for your project."/>
 <meta name="robots" content="noindex"/>
+<link rel="preload" href="fonts/inter-400_700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/bebas-neue-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="fonts.css"/>
 <style>
 :root{
@@ -560,7 +562,7 @@ body{padding-top:128px}
 
 <div class="toast" id="toast" role="status"></div>
 
-<script src="js/controls.js"></script>
+<script src="js/controls.js" defer></script>
 <script>
 (function(){
 "use strict";

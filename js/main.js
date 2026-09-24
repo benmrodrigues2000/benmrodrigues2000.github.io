@@ -1,7 +1,8 @@
 /* --------------------------------------------------------------------------
    Site behaviour — Gestalt in orbit.
    Menu, reveals, tools master/detail, copy email, flight-plan cycling,
-   back-to-top, starfield (common fate parallax) and the hero pointer trail.
+   back-to-top, starfield (common fate parallax), the hero pointer trail
+   and the idle loader for the Ajuda guide (js/ajuda.js).
    -------------------------------------------------------------------------- */
 (function(){
   "use strict";
@@ -187,7 +188,8 @@
     var sky = document.getElementById("sky");
     if (sky && sky.getContext){
       var sctx = sky.getContext("2d");
-      var SW = 0, SH = 0, SD = Math.min(window.devicePixelRatio || 1, 2);
+      /* DPR 1.5 keeps 1px stars crisp while cutting full-screen fill cost. */
+      var SW = 0, SH = 0, SD = Math.min(window.devicePixelRatio || 1, 1.5);
       var layers = [];
       var skyRunning = true, t0 = 0;
       var palette = function(){
@@ -227,21 +229,27 @@
             var s = L.stars[i];
             var y = s.y - off; if (y < 0) y += SH;
             var tw = reduce ? 0.8 : (0.55 + 0.45 * Math.sin(t * 0.0012 * s.sp + s.p));
-            sctx.beginPath();
-            sctx.arc(s.x, y, s.r, 0, 6.2832);
-            sctx.fillStyle = "rgba(" + pal[s.c] + "," + (L.a * tw * k).toFixed(3) + ")";
-            sctx.fill();
+            sctx.fillStyle = "rgba(" + pal[s.c] + "," + (L.a * tw * k).toFixed(2) + ")";
+            /* Sub-pixel stars are rects, not arcs: identical at this size,
+               far cheaper than a path per star. */
+            if (s.r < 0.9) sctx.fillRect(s.x - s.r, y - s.r, s.r * 2, s.r * 2);
+            else { sctx.beginPath(); sctx.arc(s.x, y, s.r, 0, 6.2832); sctx.fill(); }
           }
         }
       };
       var skyLoop = function(t){
         if (!skyRunning) return;
-        if (t - t0 > 40){ drawSky(t); t0 = t; }   /* ~25 fps is plenty for twinkle */
+        if (t - t0 > 66){ drawSky(t); t0 = t; }   /* ~15 fps is plenty for twinkle */
         window.requestAnimationFrame(skyLoop);
       };
       seedSky();
       drawSky(0);
-      window.addEventListener("resize", function(){ seedSky(); drawSky(performance.now()); });
+      /* Debounced: mobile scroll/orientation fires resize bursts mid-gesture. */
+      var skyRz = null;
+      window.addEventListener("resize", function(){
+        window.clearTimeout(skyRz);
+        skyRz = window.setTimeout(function(){ seedSky(); drawSky(performance.now()); }, 150);
+      });
       if (!reduce){
         window.requestAnimationFrame(skyLoop);
         document.addEventListener("visibilitychange", function(){
@@ -265,7 +273,7 @@
       var ctx = canvas.getContext("2d");
       var hero = canvas.parentElement;
       var W = 0, H = 0, DPR = Math.min(window.devicePixelRatio || 1, 2);
-      var trail = [], running = true, meteors = [];
+      var trail = [], running = true, heroVisible = true, active = false, meteors = [];
       var resize = function(){
         W = hero.clientWidth; H = hero.clientHeight;
         canvas.width = Math.floor(W * DPR); canvas.height = Math.floor(H * DPR);
@@ -273,18 +281,39 @@
         ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
       };
       resize();
-      window.addEventListener("resize", resize);
+      var heroRz = null;
+      window.addEventListener("resize", function(){
+        window.clearTimeout(heroRz);
+        heroRz = window.setTimeout(resize, 150);
+      });
+      /* The loop sleeps when there is nothing to draw and wakes on demand,
+         instead of clearing a full-screen canvas 60 times a second forever. */
+      var kick = function(){
+        if (!running || !heroVisible || active) return;
+        active = true;
+        window.requestAnimationFrame(draw);
+      };
       hero.addEventListener("pointermove", function(e){
         var r = canvas.getBoundingClientRect();
         trail.push({ x: e.clientX - r.left, y: e.clientY - r.top, life: 1 });
         if (trail.length > 60) trail.shift();
+        kick();
       }, { passive: true });
-      var draw = function(){
-        if (!running) return;
-        ctx.clearRect(0, 0, W, H);
-        if (Math.random() < 0.004 && meteors.length < 1){
+      hero.addEventListener("pointerdown", kick, { passive: true });
+      /* Meteors arrive on a slow timer, not a per-frame dice roll. */
+      window.setInterval(function(){
+        if (!running || !heroVisible || document.hidden || meteors.length >= 1) return;
+        if (Math.random() < 0.5){
           meteors.push({ x: W * (0.3 + Math.random() * 0.6), y: Math.random() * H * 0.3, vx: -(3 + Math.random() * 2), vy: 1.4 + Math.random(), life: 1 });
+          kick();
         }
+      }, 3000);
+      var draw = function(){
+        active = false;
+        if (!running || !heroVisible) return;
+        if (!trail.length && !meteors.length) return;   /* sleep until kicked */
+        active = true;
+        ctx.clearRect(0, 0, W, H);
         for (var m = meteors.length - 1; m >= 0; m--){
           var mt = meteors[m];
           mt.x += mt.vx; mt.y += mt.vy; mt.life -= 0.012;
@@ -310,18 +339,18 @@
         }
         window.requestAnimationFrame(draw);
       };
-      window.requestAnimationFrame(draw);
+      kick();
       if ("IntersectionObserver" in window){
         new IntersectionObserver(function(entries){
           entries.forEach(function(en){
-            if (en.isIntersecting && !running){ running = true; window.requestAnimationFrame(draw); }
-            else if (!en.isIntersecting) running = false;
+            heroVisible = en.isIntersecting;
+            if (heroVisible) kick();
           });
         }).observe(hero);
       }
       document.addEventListener("visibilitychange", function(){
         if (document.hidden) running = false;
-        else if (!running){ running = true; window.requestAnimationFrame(draw); }
+        else { running = true; kick(); }
       });
     }
   }catch(heroErr){}
@@ -333,7 +362,57 @@
     }
   }catch(swErr){}
 
-  /* Work page: "Talk to Ajuda" opens the corner guide (when it is enabled). */
+  /* ----------------------------------------------------------------------
+     AJUDA - the corner guide (~70 KB) loads after the page is interactive:
+     on idle first, on first interaction at the latest. An early click on a
+     [data-ajuda-open] button pulls it in on demand and opens it on arrival.
+     ---------------------------------------------------------------------- */
+  var ajudaState = 0; /* 0 = not asked, 1 = loading, 2 = ready */
+  var ajudaQueue = [];
+  function loadAjuda(cb){
+    if (window.RR_AJUDA){ if (cb) cb(window.RR_AJUDA); return; }
+    if (cb) ajudaQueue.push(cb);
+    if (ajudaState !== 0) return;
+    ajudaState = 1;
+    var s = document.createElement("script");
+    s.src = "js/ajuda.js";
+    s.async = true;
+    s.onload = function(){
+      ajudaState = window.RR_AJUDA ? 2 : 0;
+      var q = ajudaQueue; ajudaQueue = [];
+      for (var i = 0; i < q.length; i++){ try{ q[i](window.RR_AJUDA); }catch(err){} }
+    };
+    s.onerror = function(){ ajudaState = 0; ajudaQueue = []; };
+    document.head.appendChild(s);
+  }
+  if (!/[?&]noajuda=1/.test(location.search)){
+    var ajudaScheduled = false;
+    var scheduleAjuda = function(){ if (!ajudaScheduled){ ajudaScheduled = true; loadAjuda(); } };
+    if ("requestIdleCallback" in window) window.requestIdleCallback(scheduleAjuda, { timeout: 2800 });
+    else window.addEventListener("load", function(){ window.setTimeout(scheduleAjuda, 1200); });
+    /* First real interaction pulls the guide in - the visitor may head there. */
+    var earlyOpts = { capture: true, passive: true };
+    var earlyAjuda = function(){
+      scheduleAjuda();
+      window.removeEventListener("pointerdown", earlyAjuda, earlyOpts);
+      window.removeEventListener("keydown", earlyAjuda, earlyOpts);
+    };
+    window.addEventListener("pointerdown", earlyAjuda, earlyOpts);
+    window.addEventListener("keydown", earlyAjuda, earlyOpts);
+  }
+  /* Capture: an early [data-ajuda-open] click waits for the guide instead of
+     falling through to the contact page. */
+  document.addEventListener("click", function(e){
+    var opener = e.target && e.target.closest ? e.target.closest("[data-ajuda-open]") : null;
+    if (!opener || window.RR_AJUDA) return;
+    e.preventDefault();
+    e.stopPropagation();
+    loadAjuda(function(api){
+      if (api && api.open) api.open(true);
+      else window.location.href = "contacto.html#contact";
+    });
+  }, true);
+  /* Bubble fallback: guide ready -> open; failed to load -> contact page. */
   document.addEventListener("click", function(e){
     var opener = e.target && e.target.closest ? e.target.closest("[data-ajuda-open]") : null;
     if (!opener) return;
