@@ -31,7 +31,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font-b);font-size:1
 .bar{position:fixed;top:0;left:0;right:0;z-index:10;background:rgba(5,6,15,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
 .bar-in{max-width:880px;margin:0 auto;padding:14px clamp(16px,4vw,32px);display:flex;align-items:center;justify-content:space-between;gap:16px}
 .logo{font-family:var(--font-d);font-size:21px;letter-spacing:1.5px;line-height:1}
-.logo span{display:block;font-family:var(--font-m);font-size:8.5px;letter-spacing:2.6px;color:var(--violet);margin-top:3px}
+.logo > span{display:block;font-family:var(--font-m);font-size:8.5px;letter-spacing:2.6px;color:var(--violet);margin-top:3px}
 .prog{width:min(300px,42vw);text-align:right}
 .prog-label{font-family:var(--font-m);font-size:10px;letter-spacing:2px;color:var(--muted)}
 .prog-track{height:3px;background:var(--surface2);border-radius:99px;margin-top:6px;overflow:hidden}
@@ -109,7 +109,7 @@ details.repo[open] summary::before{content:"- "}
   body{padding-top:68px}
   .bar-in{padding:10px 16px;gap:10px}
   .logo{font-size:19px}
-  .logo span{font-size:7.5px;letter-spacing:1.8px}
+  .logo > span{font-size:7.5px;letter-spacing:1.8px}
   .head{padding-top:40px}
   .mod{border-radius:14px;padding:20px 16px}
   .mod-head{align-items:flex-start;flex-direction:column;gap:5px}
@@ -123,7 +123,11 @@ details.repo[open] summary::before{content:"- "}
 
 /* ---- language + theme controls (injected) ---- */
 [data-lang="pt"] .en,[data-lang="en"] .pt{display:none !important}
-html[data-theme="light"]{--bg:#F3F5FC;--surface:#FFFFFF;--surface2:#E9ECF8;--ink:#171B30;--muted:#59608A;--rule:#D6DBEC}
+/* Light accents: the dark-mode pastels fall to 1.7-2.7:1 on white. These pass
+   AA as text, and --bg text on --violet (primary button, selected chips) is 5.2:1. */
+html[data-theme="light"]{--bg:#F3F5FC;--surface:#FFFFFF;--surface2:#E9ECF8;--ink:#171B30;--muted:#59608A;--rule:#D6DBEC;--violet:#6D4AE0;--orange:#B4540F;--ice:#0B77A8}
+/* Swatch outlines: the white hairline vanished against light cards. */
+html[data-theme="light"] .dot{border-color:rgba(10,13,27,.22)}
 html[data-theme="light"] .bar{background:rgba(255,255,255,.85)}
 html[data-theme="light"] .mod{background:rgba(255,255,255,.92)}
 html[data-theme="light"] #field{display:none}
