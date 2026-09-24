@@ -2,7 +2,7 @@
 <html lang="pt-PT" data-lang="pt" data-theme="dark" data-fmt="a6">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#05060F">
 <meta name="robots" content="noindex">
@@ -18,6 +18,8 @@
 <meta property="og:locale:alternate" content="en_GB">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='14'%20fill='%2305060F'/%3E%3Ccircle%20cx='46'%20cy='18'%20r='6'%20fill='%237DD3FC'/%3E%3Ccircle%20cx='46'%20cy='18'%20r='9'%20fill='none'%20stroke='%237DD3FC'%20stroke-width='1.4'%20opacity='.5'/%3E%3Ctext%20x='30'%20y='46'%20font-family='Arial%20Black,Arial,sans-serif'%20font-size='34'%20font-weight='900'%20fill='%23A78BFA'%20text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E">
+<link rel="preload" href="../fonts/inter-400_700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/bebas-neue-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../fonts.css">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"Ruben Monteiro Correia Rodrigues","alternateName":"AYYLIENADO","jobTitle":"Programador & Especialista em IA","url":"https://benmrodrigues2000.github.io","email":"mailto:benmrodrigues2000@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Esmoriz","postalCode":"3885","addressCountry":"PT"},"sameAs":["https://github.com/benmrodrigues2000"]}
@@ -525,6 +527,10 @@ input[type="range"]{accent-color:var(--violet);width:150px;cursor:pointer}
   .toasts{bottom:max(16px,env(safe-area-inset-bottom));width:calc(100% - 32px)}
   .toast{text-align:center}
 }
+@media (max-width:760px), (pointer:coarse){
+  .chrome{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(7,10,24,.96)}
+  .stars circle{animation:none}
+}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none !important;transition:none !important}
@@ -606,7 +612,7 @@ html[data-theme="light"]::-webkit-scrollbar-thumb{ background:#C4CADD; }
 @keyframes rr-rays{from{transform:rotate(0)}to{transform:rotate(180deg)}}
 @media (prefers-reduced-motion:reduce){.theme-toggle.ready.pop,.theme-toggle.ready.pop .t-sun .rays{animation:none}}
 </style>
-<script src="../js/controls.js"></script>
+<script src="../js/controls.js" defer></script>
 </head>
 <body>
 

@@ -150,12 +150,20 @@
   var routes = Array.prototype.slice.call(document.querySelectorAll(".route"));
   var railSpans = Array.prototype.slice.call(document.querySelectorAll(".rail span"));
   if (canAnimate && routes.length){
-    var mi = 0;
-    window.setInterval(function(){
+    var mi = 0, routeTimer = 0;
+    var cycleRoutes = function(){
       mi = (mi + 1) % Math.max(routes.length, railSpans.length);
       routes.forEach(function(n, i){ n.classList.toggle("is-live", i === mi % routes.length); });
       railSpans.forEach(function(s, i){ s.classList.toggle("is-live", i === mi % railSpans.length); });
-    }, 2600);
+    };
+    var armRoutes = function(){
+      window.clearInterval(routeTimer);
+      routeTimer = 0;
+      if (document.hidden) return;
+      routeTimer = window.setInterval(cycleRoutes, 2600);
+    };
+    armRoutes();
+    document.addEventListener("visibilitychange", armRoutes);
   }
 
   /* --------------------------------------------------------- back to top */
@@ -176,153 +184,239 @@
     ticking = true;
     window.requestAnimationFrame(function(){ toTop.classList.toggle("show", window.scrollY > 700); ticking = false; });
   }, { passive: true });
-  toTop.addEventListener("click", function(e){ e.preventDefault(); window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" }); });
+  toTop.addEventListener("click", function(e){ e.preventDefault(); window.scrollTo({ top: 0, behavior: (reduce || coarse) ? "auto" : "smooth" }); });
+
+  /* Pause the marquee while it is off screen. The track is a wide stroked
+     headline; there is no point compositing it on pages that never show it. */
+  var marq = document.querySelector(".marquee-track");
+  if (marq && "IntersectionObserver" in window){
+    marq.style.animationPlayState = "paused";
+    new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        marq.style.animationPlayState = (en.isIntersecting && !reduce) ? "running" : "paused";
+      });
+    }, { rootMargin: "120px" }).observe(marq.parentElement || marq);
+  }
 
   /* ----------------------------------------------------------------------
-     SKY — fixed starfield in three depth layers. Each layer drifts at its
-     own speed as you scroll: stars that move together are read as one
-     plane (common fate), which is what gives the page its depth.
+     SKY — three depth layers that drift with scroll (common fate).
+     Painted only when the page actually changes: first frame, scroll,
+     resize, theme. A continuous twinkle loop sat under the header's
+     backdrop-filter and forced a re-blur on every frame, which is what
+     made scrolling feel heavy. Stars are batched by colour (a handful of
+     fills, not one path per star) and the bitmap stays at 1x — dots do
+     not need a retina buffer.
      ---------------------------------------------------------------------- */
   try{
     var sky = document.getElementById("sky");
     if (sky && sky.getContext){
       var sctx = sky.getContext("2d");
-      var SW = 0, SH = 0, SD = Math.min(window.devicePixelRatio || 1, 2);
-      var layers = [];
-      var skyRunning = true, t0 = 0;
+      var SW = 0, SH = 0, viewW = 0, viewH = 0, layers = [];
+      var saveData = false;
+      try{ saveData = !!(navigator.connection && navigator.connection.saveData); }catch(e){}
+      var tightSky = reduce || coarse || saveData;
       var palette = function(){
         var light = root.getAttribute("data-theme") === "light";
         return light ? ["20,24,48", "11,119,168", "109,74,224"] : ["236,238,250", "125,211,252", "167,139,250"];
       };
+      var buffers = [];
+      var bakeSky = function(){
+        var pal = palette();
+        var light = root.getAttribute("data-theme") === "light";
+        var k = light ? 0.35 : 1;
+        buffers = layers.map(function(L){
+          var c = document.createElement("canvas");
+          c.width = SW; c.height = SH;
+          var g = c.getContext("2d");
+          if (!g) return c;
+          for (var ci = 0; ci < 3; ci++){
+            g.beginPath();
+            var any = false;
+            for (var i = 0; i < L.stars.length; i++){
+              var s = L.stars[i];
+              if (s.c !== ci) continue;
+              any = true;
+              g.moveTo(s.x + s.r, s.y);
+              g.arc(s.x, s.y, s.r, 0, 6.2832);
+            }
+            if (!any) continue;
+            g.fillStyle = "rgba(" + pal[ci] + "," + (L.a * k).toFixed(3) + ")";
+            g.fill();
+          }
+          return c;
+        });
+      };
       var seedSky = function(){
-        SW = window.innerWidth; SH = window.innerHeight;
-        sky.width = Math.floor(SW * SD); sky.height = Math.floor(SH * SD);
-        sky.style.width = SW + "px"; sky.style.height = SH + "px";
-        sctx.setTransform(SD, 0, 0, SD, 0, 0);
+        viewW = window.innerWidth;
+        viewH = window.innerHeight;
+        /* CSS sizes the element. Cap the bitmap so a 4K window cannot
+           allocate four full-screen buffers, and stay at 1x so retina
+           phones don't pay for a buffer that is uploaded on every scroll. */
+        var cap = tightSky ? 700000 : 1600000;
+        var scale = (viewW * viewH > cap) ? Math.sqrt(cap / (viewW * viewH)) : 1;
+        SW = Math.max(1, Math.round(viewW * scale));
+        SH = Math.max(1, Math.round(viewH * scale));
+        sky.width = SW; sky.height = SH;
+        sctx.setTransform(1, 0, 0, 1, 0, 0);
         var area = SW * SH;
+        var div = tightSky ? 1.35 : 1;
         var spec = [
-          { n: Math.round(area / 5200), r: [0.35, 0.8], speed: 0.04, a: 0.45 },
-          { n: Math.round(area / 16000), r: [0.8, 1.3], speed: 0.10, a: 0.7 },
-          { n: Math.round(area / 60000), r: [1.3, 2.0], speed: 0.20, a: 0.95 }
+          { n: Math.min(tightSky ? 90 : 320, Math.round(area / (5200 * div))), r: [0.35, 0.8], speed: 0.04, a: 0.45 },
+          { n: Math.min(tightSky ? 40 : 140, Math.round(area / (16000 * div))), r: [0.8, 1.3], speed: 0.10, a: 0.7 },
+          { n: Math.min(tightSky ? 16 : 48, Math.round(area / (60000 * div))), r: [1.3, 2.0], speed: 0.20, a: 0.95 }
         ];
         layers = spec.map(function(s){
           var stars = [];
           for (var i = 0; i < s.n; i++){
             var roll = Math.random();
-            stars.push({ x: Math.random() * SW, y: Math.random() * SH, r: s.r[0] + Math.random() * (s.r[1] - s.r[0]),
-              p: Math.random() * 6.283, sp: 0.4 + Math.random() * 1.1, c: roll < 0.8 ? 0 : (roll < 0.92 ? 1 : 2) });
+            stars.push({
+              x: Math.random() * SW,
+              y: Math.random() * SH,
+              r: s.r[0] + Math.random() * (s.r[1] - s.r[0]),
+              c: roll < 0.8 ? 0 : (roll < 0.92 ? 1 : 2)
+            });
           }
           return { stars: stars, speed: s.speed, a: s.a };
         });
+        bakeSky();
       };
-      var drawSky = function(t){
-        var pal = palette();
-        var light = root.getAttribute("data-theme") === "light";
-        var k = light ? 0.35 : 1;
+      /* Scroll only blits the three pre-rendered layers. Rebuilding arcs
+         here is what made the page hitch while the finger was still down. */
+      var drawSky = function(){
+        if (!SW || !SH || !buffers.length) return;
+        sctx.setTransform(1, 0, 0, 1, 0, 0);
         sctx.clearRect(0, 0, SW, SH);
         var sy = window.scrollY || 0;
-        for (var l = 0; l < layers.length; l++){
-          var L = layers[l], off = (sy * L.speed) % SH;
-          for (var i = 0; i < L.stars.length; i++){
-            var s = L.stars[i];
-            var y = s.y - off; if (y < 0) y += SH;
-            var tw = reduce ? 0.8 : (0.55 + 0.45 * Math.sin(t * 0.0012 * s.sp + s.p));
-            sctx.beginPath();
-            sctx.arc(s.x, y, s.r, 0, 6.2832);
-            sctx.fillStyle = "rgba(" + pal[s.c] + "," + (L.a * tw * k).toFixed(3) + ")";
-            sctx.fill();
-          }
+        for (var l = 0; l < buffers.length; l++){
+          var off = (sy * layers[l].speed) % SH;
+          sctx.drawImage(buffers[l], 0, -off);
+          sctx.drawImage(buffers[l], 0, SH - off);
         }
       };
-      var skyLoop = function(t){
-        if (!skyRunning) return;
-        if (t - t0 > 40){ drawSky(t); t0 = t; }   /* ~25 fps is plenty for twinkle */
-        window.requestAnimationFrame(skyLoop);
-      };
+      var skyScroll = false;
+      var paintSky = function(){ skyScroll = false; drawSky(); };
       seedSky();
-      drawSky(0);
-      window.addEventListener("resize", function(){ seedSky(); drawSky(performance.now()); });
-      if (!reduce){
-        window.requestAnimationFrame(skyLoop);
-        document.addEventListener("visibilitychange", function(){
-          if (document.hidden) skyRunning = false;
-          else if (!skyRunning){ skyRunning = true; window.requestAnimationFrame(skyLoop); }
-        });
-      } else {
-        window.addEventListener("scroll", function(){ drawSky(0); }, { passive: true });
-      }
-      var mo = new MutationObserver(function(){ drawSky(performance.now()); });
+      drawSky();
+      window.addEventListener("scroll", function(){
+        if (skyScroll || document.hidden) return;
+        skyScroll = true;
+        raf(paintSky);
+      }, { passive: true });
+      window.addEventListener("load", paintSky);
+      var skyResizeT = 0;
+      window.addEventListener("resize", function(){
+        window.clearTimeout(skyResizeT);
+        skyResizeT = window.setTimeout(function(){
+          var w = window.innerWidth, h = window.innerHeight;
+          /* Ignore the mobile URL-bar resize so stars don't flash. */
+          if (w === viewW && Math.abs(h - viewH) < 140) return;
+          seedSky();
+          drawSky();
+        }, 150);
+      });
+      var mo = new MutationObserver(function(){ bakeSky(); drawSky(); });
       mo.observe(root, { attributes: true, attributeFilter: ["data-theme"] });
     }
   }catch(skyErr){}
 
   /* ----------------------------------------------------------------------
      HERO — pointer leaves a short comet trail (desktop only).
+     The loop runs only while a trail or meteor is on screen, then stops.
      ---------------------------------------------------------------------- */
   try{
     var canvas = document.getElementById("field");
     if (canvas && canAnimate && !coarse && canvas.getContext){
       var ctx = canvas.getContext("2d");
       var hero = canvas.parentElement;
-      var W = 0, H = 0, DPR = Math.min(window.devicePixelRatio || 1, 2);
-      var trail = [], running = true, meteors = [];
-      var resize = function(){
+      var W = 0, H = 0, DPR = Math.min(window.devicePixelRatio || 1, 1.5);
+      var trail = [], meteors = [], looping = false, heroOn = true;
+      var resizeHero = function(){
         W = hero.clientWidth; H = hero.clientHeight;
+        if (!W || !H) return;
         canvas.width = Math.floor(W * DPR); canvas.height = Math.floor(H * DPR);
         canvas.style.width = W + "px"; canvas.style.height = H + "px";
         ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
       };
-      resize();
-      window.addEventListener("resize", resize);
+      var heroResizeT = 0;
+      resizeHero();
+      window.addEventListener("resize", function(){
+        window.clearTimeout(heroResizeT);
+        heroResizeT = window.setTimeout(resizeHero, 120);
+      });
+      var kickHero = function(){
+        if (!heroOn || looping) return;
+        looping = true;
+        raf(drawHero);
+      };
       hero.addEventListener("pointermove", function(e){
+        if (!heroOn) return;
         var r = canvas.getBoundingClientRect();
         trail.push({ x: e.clientX - r.left, y: e.clientY - r.top, life: 1 });
-        if (trail.length > 60) trail.shift();
+        if (trail.length > 28) trail.shift();
+        kickHero();
       }, { passive: true });
-      var draw = function(){
-        if (!running) return;
+      var drawHero = function(){
+        if (!looping) return;
         ctx.clearRect(0, 0, W, H);
-        if (Math.random() < 0.004 && meteors.length < 1){
-          meteors.push({ x: W * (0.3 + Math.random() * 0.6), y: Math.random() * H * 0.3, vx: -(3 + Math.random() * 2), vy: 1.4 + Math.random(), life: 1 });
-        }
+        var busy = false;
         for (var m = meteors.length - 1; m >= 0; m--){
           var mt = meteors[m];
-          mt.x += mt.vx; mt.y += mt.vy; mt.life -= 0.012;
+          mt.x += mt.vx; mt.y += mt.vy; mt.life -= 0.02;
           if (mt.life <= 0){ meteors.splice(m, 1); continue; }
-          var g = ctx.createLinearGradient(mt.x, mt.y, mt.x - mt.vx * 12, mt.y - mt.vy * 12);
-          g.addColorStop(0, "rgba(236,238,250," + (mt.life * 0.9).toFixed(3) + ")");
-          g.addColorStop(1, "rgba(125,211,252,0)");
-          ctx.strokeStyle = g; ctx.lineWidth = 1.5;
-          ctx.beginPath(); ctx.moveTo(mt.x, mt.y); ctx.lineTo(mt.x - mt.vx * 12, mt.y - mt.vy * 12); ctx.stroke();
+          busy = true;
+          ctx.strokeStyle = "rgba(236,238,250," + (mt.life * 0.85).toFixed(3) + ")";
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.moveTo(mt.x, mt.y);
+          ctx.lineTo(mt.x - mt.vx * 12, mt.y - mt.vy * 12);
+          ctx.stroke();
         }
-        for (var i = 0; i < trail.length; i++) trail[i].life -= 0.02;
-        trail = trail.filter(function(p){ return p.life > 0; });
+        var next = [];
+        for (var i = 0; i < trail.length; i++){
+          trail[i].life -= 0.04;
+          if (trail[i].life > 0) next.push(trail[i]);
+        }
+        trail = next;
         if (trail.length > 1){
+          busy = true;
+          ctx.lineCap = "round";
           for (var j = 1; j < trail.length; j++){
             var a = trail[j - 1], b = trail[j];
             ctx.strokeStyle = "rgba(125,211,252," + (b.life * 0.55).toFixed(3) + ")";
-            ctx.lineWidth = 1 + b.life * 1.5;
+            ctx.lineWidth = 1 + b.life * 1.4;
             ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
           }
           var head = trail[trail.length - 1];
-          ctx.beginPath(); ctx.arc(head.x, head.y, 3, 0, 6.2832);
+          ctx.beginPath(); ctx.arc(head.x, head.y, 2.5, 0, 6.2832);
           ctx.fillStyle = "rgba(167,139,250," + head.life.toFixed(3) + ")"; ctx.fill();
         }
-        window.requestAnimationFrame(draw);
+        if (busy && heroOn) raf(drawHero);
+        else { looping = false; ctx.clearRect(0, 0, W, H); }
       };
-      window.requestAnimationFrame(draw);
+      var meteorT = 0;
+      var armMeteor = function(){
+        window.clearTimeout(meteorT);
+        meteorT = window.setTimeout(function(){
+          if (heroOn && !document.hidden && meteors.length < 1 && Math.random() < 0.7){
+            meteors.push({ x: W * (0.3 + Math.random() * 0.6), y: Math.random() * H * 0.3, vx: -(3 + Math.random() * 2), vy: 1.4 + Math.random(), life: 1 });
+            kickHero();
+          }
+          armMeteor();
+        }, 3200);
+      };
       if ("IntersectionObserver" in window){
         new IntersectionObserver(function(entries){
           entries.forEach(function(en){
-            if (en.isIntersecting && !running){ running = true; window.requestAnimationFrame(draw); }
-            else if (!en.isIntersecting) running = false;
+            heroOn = en.isIntersecting && !document.hidden;
+            if (!heroOn){ looping = false; trail = []; meteors = []; ctx.clearRect(0, 0, W, H); }
           });
         }).observe(hero);
       }
       document.addEventListener("visibilitychange", function(){
-        if (document.hidden) running = false;
-        else if (!running){ running = true; window.requestAnimationFrame(draw); }
+        if (document.hidden){ heroOn = false; looping = false; }
+        else heroOn = true;
       });
+      armMeteor();
     }
   }catch(heroErr){}
 

@@ -2,7 +2,7 @@
 <html lang="pt-PT" data-lang="pt" data-theme="dark">
 <head>
 <meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
 <meta name="color-scheme" content="dark"/>
 <meta name="theme-color" content="#05060F"/>
 <meta name="view-transition" content="same-origin"/>
@@ -10,6 +10,8 @@
 <title data-en="Mission Briefing - Ruben Rodrigues">Briefing de Missão - Ruben Rodrigues</title>
 <meta name="description" content="Briefing interativo para novos sites: oito módulos de perguntas. Responde, envia, e recebes um plano de voo para o teu projeto." data-en="Interactive briefing for new sites: eight modules of questions. Answer, send, and get a flight plan for your project."/>
 <meta name="robots" content="noindex"/>
+<link rel="preload" href="fonts/inter-400_700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/bebas-neue-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="fonts.css"/>
 <style>
 :root{
@@ -31,7 +33,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font-b);font-size:1
 .skip:focus{left:12px;top:12px}
 .wrap{max-width:880px;margin:0 auto;padding:0 clamp(16px,4vw,32px);position:relative;z-index:1}
 .mono{font-family:var(--font-m);letter-spacing:1.6px;font-size:11px;color:var(--violet)}
-.bar{position:fixed;top:0;left:0;right:0;z-index:10;background:rgba(5,6,15,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+.bar{position:fixed;top:0;left:0;right:0;z-index:10;background:rgba(5,6,15,.94);border-bottom:1px solid var(--rule)}
 .bar-in{max-width:880px;margin:0 auto;padding:14px clamp(16px,4vw,32px);display:flex;align-items:center;justify-content:space-between;gap:16px}
 .logo{font-family:var(--font-d);font-size:21px;letter-spacing:1.5px;line-height:1}
 .logo > span{display:block;font-family:var(--font-m);font-size:8.5px;letter-spacing:2.6px;color:var(--violet);margin-top:3px}
@@ -101,6 +103,11 @@ details.repo[open] summary::before{content:"- "}
 .linkish{background:none;border:none;color:var(--muted);font-family:var(--font-m);font-size:10.5px;letter-spacing:1.6px;cursor:pointer;text-decoration:underline;margin-top:20px}
 .linkish:hover{color:var(--orange)}
 :focus-visible{outline:2px solid var(--violet);outline-offset:2px}
+@media (max-width:720px), (pointer:coarse){
+  .bar{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(5,6,15,.96)}
+  html[data-theme="light"] .bar{background:rgba(243,245,252,.97)}
+  html{scroll-behavior:auto}
+}
 @media (max-width:720px){
   body{padding-bottom:env(safe-area-inset-bottom)}
   .paletas{grid-template-columns:repeat(2,1fr)}
@@ -131,7 +138,7 @@ details.repo[open] summary::before{content:"- "}
 html[data-theme="light"]{--bg:#F3F5FC;--surface:#FFFFFF;--surface2:#E9ECF8;--ink:#171B30;--muted:#59608A;--rule:#D6DBEC;--violet:#6D4AE0;--orange:#B4540F;--ice:#0B77A8}
 /* Swatch outlines: the white hairline vanished against light cards. */
 html[data-theme="light"] .dot{border-color:rgba(10,13,27,.22)}
-html[data-theme="light"] .bar{background:rgba(255,255,255,.85)}
+html[data-theme="light"] .bar{background:rgba(243,245,252,.96)}
 html[data-theme="light"] .mod{background:rgba(255,255,255,.92)}
 html[data-theme="light"] #field{display:none}
 html[data-theme="light"] input[type=date]{color-scheme:light}
@@ -560,7 +567,7 @@ body{padding-top:128px}
 
 <div class="toast" id="toast" role="status"></div>
 
-<script src="js/controls.js"></script>
+<script src="js/controls.js" defer></script>
 <script>
 (function(){
 "use strict";
@@ -880,65 +887,77 @@ $("#m-reset").addEventListener("click",function(){
 });
 
 var c=document.getElementById("field"), ctx=(c&&c.getContext)?c.getContext("2d"):null;
-/* No canvas support (or no element): keep the animation loop harmless. */
-if(!ctx) ctx={clearRect:function(){},beginPath:function(){},arc:function(){},fill:function(){},
-             moveTo:function(){},lineTo:function(){},stroke:function(){},
-             createLinearGradient:function(){return {addColorStop:function(){}};}};
+var saveData=false;
+try{ saveData=!!(navigator.connection&&navigator.connection.saveData); }catch(e){}
+var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  || window.matchMedia("(pointer: coarse)").matches
+  || saveData
+  || window.matchMedia("(max-width: 760px)").matches;
+var stars=[], meteors=[], W=0, H=0, running=false, frame=0;
 var raf=window.requestAnimationFrame?window.requestAnimationFrame.bind(window):function(f){return setTimeout(function(){f(Date.now())},16)};
 var caf=window.cancelAnimationFrame?window.cancelAnimationFrame.bind(window):function(id){clearTimeout(id)};
-var stars=[], meteors=[], W=0, H=0, frame=0, running=false;
-var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches || (window.matchMedia && window.matchMedia("(pointer: coarse)").matches);
+function paintStars(){
+  if(!ctx) return;
+  ctx.clearRect(0,0,W,H);
+  ctx.beginPath();
+  for(var i=0;i<stars.length;i++){
+    var st=stars[i];
+    ctx.moveTo(st.x+st.r, st.y);
+    ctx.arc(st.x, st.y, st.r, 0, 6.2832);
+  }
+  ctx.fillStyle="rgba(233,237,248,.42)";
+  ctx.fill();
+}
 function seed(){
-  if(!c) return;
+  if(!c||!ctx) return;
   W=c.width=window.innerWidth; H=c.height=window.innerHeight;
   stars=[];
-  var n=Math.min(240,Math.round(W*H/9000));
-  for(var i=0;i<n;i++) stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.3+.3,p:Math.random()*Math.PI*2,s:.4+Math.random()*1.2});
+  var n=Math.min(reduce?60:120, Math.round(W*H/(reduce?16000:10000)));
+  for(var i=0;i<n;i++) stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.2+.35});
+  paintStars();
 }
-function drawField(t){
-  ctx.clearRect(0,0,W,H);
-  for(var i=0;i<stars.length;i++){
-    var st=stars[i], a=reduce?.5:(.28+.3*Math.abs(Math.sin(t*.0006*st.s+st.p)));
-    ctx.beginPath();
-    ctx.fillStyle="rgba(233,237,248,"+a.toFixed(3)+")";
-    ctx.arc(st.x,st.y,st.r,0,6.2832);
-    ctx.fill();
-  }
-  if(reduce) return;
+function drawMeteors(){
+  if(!running||!ctx) return;
+  var busy=false;
   for(var m=meteors.length-1;m>=0;m--){
     var mt=meteors[m];
-    mt.x+=mt.vx; mt.y+=mt.vy; mt.life-=.012;
+    mt.x+=mt.vx; mt.y+=mt.vy; mt.life-=.02;
     if(mt.life<=0){ meteors.splice(m,1); continue; }
-    var tx=mt.x-mt.vx*11, ty=mt.y-mt.vy*11;
-    var g=ctx.createLinearGradient(mt.x,mt.y,tx,ty);
-    g.addColorStop(0,"rgba(237,239,250,"+(0.95*mt.life).toFixed(3)+")");
-    g.addColorStop(.5,"rgba(167,139,250,"+(0.5*mt.life).toFixed(3)+")");
-    g.addColorStop(1,"rgba(167,139,250,0)");
-    ctx.strokeStyle=g; ctx.lineWidth=1.6;
-    ctx.beginPath(); ctx.moveTo(mt.x,mt.y); ctx.lineTo(tx,ty); ctx.stroke();
+    busy=true;
   }
-  if(Math.random()<0.005&&meteors.length<2)
-    meteors.push({x:W*(0.15+Math.random()*0.7),y:Math.random()*H*0.35,vx:-(2.4+Math.random()*1.8),vy:1.2+Math.random()*0.9,life:1});
+  paintStars();
+  for(var j=0;j<meteors.length;j++){
+    var mt2=meteors[j];
+    ctx.strokeStyle="rgba(237,239,250,"+(0.7*mt2.life).toFixed(3)+")";
+    ctx.lineWidth=1.4;
+    ctx.beginPath();
+    ctx.moveTo(mt2.x, mt2.y);
+    ctx.lineTo(mt2.x-mt2.vx*10, mt2.y-mt2.vy*10);
+    ctx.stroke();
+  }
+  if(busy) frame=raf(drawMeteors);
+  else running=false;
 }
-function loop(t){
-  if(!running) return;
-  drawField(t||0);
-  frame=raf(loop);
-}
-function startField(){
-  if(reduce || running || document.hidden) return;
-  running=true;
-  frame=raf(loop);
-}
-function stopField(){
-  running=false;
-  caf(frame);
-}
+function kick(){ if(running||reduce||!ctx) return; running=true; frame=raf(drawMeteors); }
 seed();
-if(reduce) drawField(0);
-else startField();
-window.addEventListener("resize",function(){ seed(); if(reduce) drawField(0); });
-document.addEventListener("visibilitychange",function(){ if(document.hidden) stopField(); else startField(); });
+var fieldResizeT=0;
+window.addEventListener("resize",function(){
+  clearTimeout(fieldResizeT);
+  fieldResizeT=setTimeout(function(){
+    if(Math.abs(window.innerWidth-W)<2 && Math.abs(window.innerHeight-H)<140) return;
+    seed();
+  },150);
+});
+if(!reduce){
+  setInterval(function(){
+    if(document.hidden||meteors.length) return;
+    if(Math.random()<0.7){
+      meteors.push({x:W*(0.15+Math.random()*0.7),y:Math.random()*H*0.35,vx:-(2.4+Math.random()*1.8),vy:1.2+Math.random()*0.9,life:1});
+      kick();
+    }
+  }, 3400);
+  document.addEventListener("visibilitychange",function(){ if(document.hidden){ running=false; caf(frame); } });
+}
 
 var d=$("#f-data");
 if(d){
@@ -984,7 +1003,17 @@ try{
   var form=document.getElementById("form");
   if(form){form.addEventListener("input",paint);form.addEventListener("click",function(){setTimeout(paint,0)});form.addEventListener("change",paint)}
   window.addEventListener("load",paint);paint();
-  function onScroll(){var y=160,best=0;mods.forEach(function(m,i){if(m.getBoundingClientRect().top<=y+40)best=i});setCur(best)}
+  var scrollTick=false;
+  function onScroll(){
+    if(scrollTick) return;
+    scrollTick=true;
+    requestAnimationFrame(function(){
+      scrollTick=false;
+      var y=160,best=0;
+      for(var i=0;i<mods.length;i++){ if(mods[i].getBoundingClientRect().top<=y+40) best=i; }
+      setCur(best);
+    });
+  }
   window.addEventListener("scroll",onScroll,{passive:true});onScroll();
 })();
 </script>

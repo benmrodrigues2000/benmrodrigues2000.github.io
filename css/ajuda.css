@@ -51,7 +51,7 @@
 /* --------------------------------------------------------------- painel --- */
 .aj-panel{
   position:fixed;right:22px;bottom:86px;z-index:132;
-  width:min(384px,calc(100vw - 44px));
+  width:min(384px,calc(100% - 44px));
   max-height:min(620px,calc(100vh - 170px));
   max-height:min(620px,calc(100dvh - 170px));
   display:flex;flex-direction:column;
@@ -222,7 +222,7 @@
 .aj-input{
   flex:1;min-width:0;height:44px;padding:0 13px;border-radius:10px;
   background:var(--canvas);border:1px solid var(--rule);color:var(--ink);
-  font-family:var(--font-read);font-size:14px;
+  font-family:var(--font-read);font-size:16px;
 }
 .aj-input::placeholder{color:var(--muted)}
 .aj-input:focus{outline:none;border-color:var(--lime)}

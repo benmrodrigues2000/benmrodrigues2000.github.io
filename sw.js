@@ -1,4 +1,4 @@
-var VERSION = "portefolio-v15";
+var VERSION = "portefolio-v16";
 var SHELL = [
   "./",
   "index.html",
@@ -43,29 +43,44 @@ self.addEventListener("activate", function(e){
       .then(function(keys){
         return Promise.all(keys.filter(function(k){ return k !== VERSION; }).map(function(k){ return caches.delete(k); }));
       })
+      .then(function(){
+        if (self.registration.navigationPreload) return self.registration.navigationPreload.enable();
+      })
       .then(function(){ return self.clients.claim(); })
   );
 });
 
+function store(req, res){
+  if (!res || !res.ok || res.type === "opaque") return;
+  var copy = res.clone();
+  caches.open(VERSION).then(function(c){ c.put(req, copy).catch(function(){}); });
+}
+
 self.addEventListener("fetch", function(e){
   var req = e.request;
   if (req.method !== "GET") return;
-  var url = new URL(req.url);
-  var sameOrigin = url.origin === location.origin;
-  var isFont = url.hostname.indexOf("fonts.") > -1;
-  if (!sameOrigin && !isFont) return;
+  var url;
+  try{ url = new URL(req.url); }catch(err){ return; }
+  if (url.origin !== location.origin) return;
 
   var wantsHTML = req.mode === "navigate" || (req.headers.get("accept") || "").indexOf("text/html") > -1;
 
+  /* HTML is stale-while-revalidate: a return visit paints from cache
+     immediately, then the network refreshes the copy. Navigation preload
+     (enabled on activate) skips the service-worker wait on that refresh. */
   if (wantsHTML){
+    var preload = e.preloadResponse || Promise.resolve(undefined);
     e.respondWith(
-      fetch(req).then(function(res){
-        var copy = res.clone();
-        caches.open(VERSION).then(function(c){ c.put(req, copy); });
-        return res;
-      }).catch(function(){
-        return caches.match(req, { ignoreSearch: true }).then(function(m){
-          return m || caches.match("404.html");
+      preload.catch(function(){ return undefined; }).then(function(pre){
+        if (pre){ store(req, pre); return pre; }
+        return caches.match(req, { ignoreSearch: true }).then(function(cached){
+          var net = fetch(req).then(function(res){
+            store(req, res);
+            return res;
+          }).catch(function(){
+            return cached || caches.match("404.html");
+          });
+          return cached || net;
         });
       })
     );
@@ -75,10 +90,7 @@ self.addEventListener("fetch", function(e){
   e.respondWith(
     caches.match(req).then(function(cached){
       var net = fetch(req).then(function(res){
-        if (res && (res.ok || res.type === "opaque")){
-          var copy = res.clone();
-          caches.open(VERSION).then(function(c){ c.put(req, copy); });
-        }
+        store(req, res);
         return res;
       }).catch(function(){ return cached || Response.error(); });
       return cached || net;

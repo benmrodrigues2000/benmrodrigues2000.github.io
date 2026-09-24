@@ -28,6 +28,10 @@ O briefing (índice de 8 estrelas) e o postal (frente com duas figuras e órbita
   idioma e formato, "Imprimir / guardar PDF". Depois de alterar qualquer texto do postal, reconstruir os quatro -
   a página e os PDFs têm de dizer o mesmo.
 
+## Desempenho
+
+O céu (`canvas#sky`) pinta no primeiro frame e só volta a pintar no scroll, no resize e na mudança de tema. Um loop contínuo por baixo de `backdrop-filter` obrigava o browser a reborrar o cabeçalho em cada frame. Em ecrã pequeno ou ponteiro grosso o vidro do cabeçalho fica opaco, e o rasto do herói só corre enquanto há traço no ecrã.
+
 ## Estrutura
 
 - `index.html` - inicio
@@ -42,10 +46,10 @@ O briefing (índice de 8 estrelas) e o postal (frente com duas figuras e órbita
 - `favicon.svg`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`, `manifest.webmanifest` - identidade e icones
 - `og.jpg`, `og-trabalhos.jpg` - imagens de partilha (geral e Trabalhos)
 - `briefing.html` - briefing interativo para clientes (autónomo, sem dependências do site)
-- `sw.js` - service worker: o site funciona offline (páginas e estilos em cache)
+- `sw.js` - service worker: páginas em stale-while-revalidate (a visita seguinte pinta da cache e a rede refresca) e shell em cache para offline
 - `fonts/` + `fonts.css` - tipografia self-hosted (sem pedidos ao Google)
 - `sitemap.xml`, `robots.txt`, `.nojekyll` - SEO e configuracao
-- `assets/` - imagens reais do Provador (com variantes `-720.jpg` para ecrãs pequenos)
+- `assets/` - imagens reais do Provador, com variantes 720 / 960 / 1280 para o browser não descarregar o original de 2160px
 - `assets/ruben-portrait*.jpg` - retrato na página Sobre
 - `css/style.css`, `css/cv.css`, `css/ajuda.css` - estilos do site, do CV (layout da pagina + folha de impressao A4) e do guia de ajuda
 - `js/main.js`, `js/controls.js` - comportamento e controlos (tema/idioma)

@@ -66,11 +66,22 @@
 }
 
 *,*::before,*::after{box-sizing:border-box}
-html{scroll-behavior:smooth;scrollbar-color:#2B3358 var(--canvas)}
+html{
+  scroll-behavior:smooth;
+  scroll-padding-top:calc(var(--header-h) + 8px);
+  scrollbar-color:#2B3358 var(--canvas);
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+  touch-action:manipulation;
+}
 body{
   margin:0;background:var(--canvas);color:var(--ink);
   font-family:var(--font-read);font-size:16px;line-height:1.6;
-  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  /* clip (not hidden) stops sideways scroll from 100vw decorations without
+     turning the body into a scroll container, which breaks sticky headers. */
+  overflow-x:hidden;
+  overflow-x:clip;
 }
 img,svg,canvas{display:block;max-width:100%}
 img{height:auto}
@@ -91,7 +102,7 @@ ul,ol{padding:0;list-style:none}
 .skip:focus{left:12px;top:12px}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter)}
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 max(var(--gutter), env(safe-area-inset-right)) 0 max(var(--gutter), env(safe-area-inset-left))}
 .mono{
   font-family:var(--font-mono);font-size:11.5px;line-height:1.45;
   letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
@@ -101,7 +112,7 @@ ul,ol{padding:0;list-style:none}
 /* --------------------------------------------------------------------------
    GROUND — fixed starfield behind every page (figure/ground + common fate)
    -------------------------------------------------------------------------- */
-#sky{position:fixed;inset:0;width:100vw;height:100vh;z-index:-1;pointer-events:none}
+#sky{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;contain:paint}
 .sky-fallback{
   position:fixed;inset:0;z-index:-2;pointer-events:none;
   background:
@@ -315,8 +326,9 @@ mark{background:none;color:var(--ink);box-shadow:inset 0 -.38em 0 rgba(167,139,2
 /* Common region: the one enclosure style */
 .region{
   position:relative;border:1px solid var(--rule);border-radius:var(--radius);
-  background:linear-gradient(180deg,rgba(16,21,44,.72),rgba(10,13,29,.72));
-  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  /* Opaque enough that cards don't need backdrop-filter. A blur on every
+     card recomposites the starfield on each scroll frame. */
+  background:linear-gradient(180deg,rgba(16,21,44,.94),rgba(10,13,29,.97));
 }
 .region-head{
   display:flex;justify-content:space-between;align-items:center;gap:12px;
@@ -346,7 +358,11 @@ mark{background:none;color:var(--ink);box-shadow:inset 0 -.38em 0 rgba(167,139,2
    ========================================================================== */
 .hero{
   position:relative;min-height:calc(100vh - var(--header-h));min-height:calc(100svh - var(--header-h));
-  display:grid;place-items:center;overflow:hidden;overflow:clip visible;padding:72px 0 120px;isolation:isolate;
+  display:grid;place-items:center;padding:72px 0 120px;isolation:isolate;
+  /* `overflow: clip visible` computed the visible axis to auto and made the
+     hero its own scroll container. Clip both axes so orbits can't widen the page. */
+  overflow:hidden;
+  overflow:clip;
 }
 #field{position:absolute;inset:0;z-index:-1;pointer-events:none}
 
@@ -424,8 +440,13 @@ mark{background:none;color:var(--ink);box-shadow:inset 0 -.38em 0 rgba(167,139,2
 .rail span.is-live::before{background:var(--state);transform:scale(1.4)}
 .status-row{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:28px}
 .status-row .mono{display:inline-flex;align-items:center;gap:10px}
-.dot-live{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--state);box-shadow:0 0 0 4px rgba(167,139,250,.2);animation:pulse 2.4s ease-in-out infinite}
-@keyframes pulse{50%{box-shadow:0 0 0 8px rgba(167,139,250,.04)}}
+.dot-live{position:relative;display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--state)}
+.dot-live::after{
+  content:"";position:absolute;inset:-4px;border-radius:50%;z-index:-1;
+  background:rgba(167,139,250,.22);
+  animation:pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse{50%{transform:scale(1.7);opacity:.2}}
 
 /* Site constellation: five destinations, drawn as a star chart */
 .chart{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap-mid);margin-top:var(--gap-mid)}
@@ -859,7 +880,6 @@ html[data-theme="light"] .nf-code .zero{background:radial-gradient(circle at 35%
     position:fixed;left:0;right:0;top:var(--header-h);min-width:0;
     display:grid;grid-auto-flow:row;grid-auto-columns:auto;gap:0;
     padding:18px var(--gutter) 28px;background:rgba(4,5,14,.97);border-bottom:1px solid var(--rule);
-    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
     opacity:0;visibility:hidden;transform:translateY(-8px);
     transition:opacity 220ms var(--ease),transform 220ms var(--ease),visibility 0s 220ms;
   }
@@ -926,16 +946,47 @@ html[data-theme="light"] .nf-code .zero{background:radial-gradient(circle at 35%
   .shot-grid .shot:first-child{grid-row:auto}
   .to-top{right:16px;bottom:16px}
 }
+@media (max-width:860px){
+  .brand-txt .role{display:none}
+}
 @media (max-width:480px){
   :root{--gutter:16px}
   .brand-mark{display:none}
+  .hdr{gap:8px}
+  .hdr-tools{gap:6px}
+  .brand-txt .name{font-size:17px;letter-spacing:.02em}
   .gestalt-grid{grid-template-columns:1fr}
   .ledger{grid-template-columns:1fr}
   .ledger div{border-left:0 !important;border-top:1px solid var(--rule)}
   .ledger div:first-child{border-top:0}
   .agent-msg{max-width:100%}
 }
-
+@media (max-width:380px){
+  .brand-txt .name{font-size:15px;letter-spacing:0}
+  .lt-globe{display:none}
+  .lang-toggle{padding:0 10px}
+}
+/* Phones and touch: drop the glass blur (it recomposites on every scroll
+   frame) and the infinite paint animations that aren't the focal motion. */
+@media (max-width:760px), (pointer:coarse){
+  html{scroll-behavior:auto}
+  .site-header{
+    backdrop-filter:none;-webkit-backdrop-filter:none;
+    background:rgba(4,5,14,.94);
+  }
+  html[data-theme="light"] .site-header{background:rgba(243,245,252,.96)}
+  .hero-word{display:none}
+  .hero-orbits .sats,
+  .lt-globe,
+  .constellation a[aria-current="page"] .star::after,
+  .route.is-live .r-dot::after,
+  .portrait .ring1{animation:none}
+  .dot-live::after{animation:none;opacity:.75}
+}
+@media (pointer:coarse){
+  .icon-btn,.burger{width:44px;height:44px}
+  .lang-toggle{min-height:44px}
+}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}

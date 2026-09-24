@@ -2,7 +2,7 @@
 <html lang="pt-PT" data-lang="pt" data-theme="dark">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#05060F">
 <script>(function(){try{var q=new URLSearchParams(location.search);var l=q.get("lang"),t=q.get("theme"),L=null,T=null;try{L=localStorage.getItem("rr-lang");T=localStorage.getItem("rr-theme")}catch(e){}l=(l==="en"||l==="pt")?l:((L==="en"||L==="pt")?L:"pt");t=(t==="light"||t==="dark")?t:((T==="light"||T==="dark")?T:"dark");var r=document.documentElement;r.setAttribute("data-lang",l);r.setAttribute("lang",l==="en"?"en":"pt-PT");r.setAttribute("data-theme",t);var cs=document.querySelector('meta[name="color-scheme"]');if(cs)cs.content=t==="light"?"light":"dark";var tc=document.querySelector('meta[name="theme-color"]');if(tc)tc.content=t==="light"?"#F3F5FC":"#05060F";}catch(e){}})();</script>
@@ -29,6 +29,8 @@
 <meta name="twitter:title" content="Ruben Rodrigues - Programador &amp; Especialista em IA">
 <meta name="twitter:description" content="Programador e especialista em IA em Esmoriz, Portugal. Websites, landing pages e integrações de IA para pequenas empresas.">
 <meta name="twitter:image" content="https://benmrodrigues2000.github.io/og.jpg">
+<link rel="preload" href="fonts/inter-400_700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/bebas-neue-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="fonts.css"/>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/ajuda.css">
@@ -208,8 +210,8 @@
 </div>
 </footer>
 
-<script src="js/controls.js"></script>
-<script src="js/main.js"></script>
-<script src="js/ajuda.js"></script>
+<script src="js/controls.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/ajuda.js" defer fetchpriority="low"></script>
 </body>
 </html>
