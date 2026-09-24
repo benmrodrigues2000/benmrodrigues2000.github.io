@@ -136,7 +136,7 @@
 .aj-msg.ag + .aj-msg.me, .aj-msg.me + .aj-msg.ag{margin-top:14px}
 .aj-msg.ag{position:relative}
 .aj-msg.ag::before{content:"";position:absolute;left:-17px;top:16px;width:7px;height:7px;border-radius:50%;
-  border:1.5px solid var(--link);background:var(--bg)}
+  border:1.5px solid var(--link);background:var(--canvas, var(--bg, #04050E))}
 .aj-msg.ag + .aj-msg.ag::before{opacity:0}
 .aj-msg p{margin:0}
 .aj-msg p + p{margin-top:8px}
