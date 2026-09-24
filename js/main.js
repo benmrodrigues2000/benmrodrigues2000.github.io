@@ -346,4 +346,11 @@
       navigator.serviceWorker.register("sw.js").catch(function(){});
     }
   }catch(swErr){}
+
+  /* Work page: "Talk to Ajuda" opens the corner guide (when it is enabled). */
+  document.addEventListener("click", function(e){
+    var opener = e.target && e.target.closest ? e.target.closest("[data-ajuda-open]") : null;
+    if (!opener) return;
+    if (window.RR_AJUDA && window.RR_AJUDA.open) window.RR_AJUDA.open(true);
+  });
 })();
