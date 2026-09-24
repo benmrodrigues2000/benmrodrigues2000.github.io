@@ -1,61 +1,65 @@
+/* --------------------------------------------------------------------------
+   Site behaviour — Gestalt in orbit.
+   Menu, reveals, tools master/detail, copy email, flight-plan cycling,
+   back-to-top, starfield (common fate parallax) and the hero pointer trail.
+   -------------------------------------------------------------------------- */
 (function(){
   "use strict";
+  var root = document.documentElement;
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  /* Touch devices get the lightweight static hero rather than a continuous canvas loop. */
-  var coarsePointer = window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
-  var canAnimate = !reduce && !coarsePointer;
+  var coarse = window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
+  var canAnimate = !reduce;
 
-  function boot(){
-    document.body.classList.remove("boot");
-    document.body.classList.add("booted");
-  }
-  if (reduce) { boot(); }
-  else { window.requestAnimationFrame(function(){ window.setTimeout(boot, 120); }); }
+  function lang(){ return root.getAttribute("data-lang") === "en" ? "en" : "pt"; }
+  var STR = {
+    toTop:   { pt: "Voltar ao topo", en: "Back to top" },
+    copied:  { pt: "Email copiado - ", en: "Email copied - " },
+    menuOpen:{ pt: "Abrir menu", en: "Open menu" },
+    menuClose:{ pt: "Fechar menu", en: "Close menu" }
+  };
+  function tr(k){ return (STR[k] && STR[k][lang()]) || ""; }
 
+  /* ---------------------------------------------------------------- boot */
+  function boot(){ document.body.classList.remove("boot"); document.body.classList.add("booted"); }
+  if (reduce) boot(); else window.requestAnimationFrame(function(){ window.setTimeout(boot, 120); });
+
+  /* ---------------------------------------------------------------- menu */
   var burger = document.getElementById("burger");
   var nav = document.getElementById("nav");
   if (burger && nav){
-    function setMenu(open){
+    var setMenu = function(open){
       nav.classList.toggle("open", open);
       document.body.classList.toggle("menu-open", open);
       burger.setAttribute("aria-expanded", open ? "true" : "false");
-      burger.setAttribute("aria-label", open ? "Fechar menu" : "Abrir menu");
-    }
-    burger.addEventListener("click", function(){
-      setMenu(!nav.classList.contains("open"));
-    });
-    nav.addEventListener("click", function(e){
-      if (e.target.closest("a")) setMenu(false);
-    });
+      burger.setAttribute("aria-label", open ? tr("menuClose") : tr("menuOpen"));
+    };
+    burger.addEventListener("click", function(){ setMenu(!nav.classList.contains("open")); });
+    nav.addEventListener("click", function(e){ if (e.target.closest("a")) setMenu(false); });
     document.addEventListener("keydown", function(e){
-      if (e.key === "Escape" && nav.classList.contains("open")){
-        setMenu(false);
-        burger.focus();
-      }
+      if (e.key === "Escape" && nav.classList.contains("open")){ setMenu(false); burger.focus(); }
     });
     document.addEventListener("click", function(e){
       if (nav.classList.contains("open") && !nav.contains(e.target) && !burger.contains(e.target)) setMenu(false);
     });
-    var desktopNav = window.matchMedia && window.matchMedia("(min-width: 721px)");
-    function closeForDesktop(e){ if (e.matches) setMenu(false); }
-    if (desktopNav){
-      if (desktopNav.addEventListener) desktopNav.addEventListener("change", closeForDesktop);
-      else if (desktopNav.addListener) desktopNav.addListener(closeForDesktop);
+    var desk = window.matchMedia && window.matchMedia("(min-width: 1041px)");
+    if (desk){
+      var close = function(e){ if (e.matches) setMenu(false); };
+      if (desk.addEventListener) desk.addEventListener("change", close); else if (desk.addListener) desk.addListener(close);
     }
   }
 
-  var revealables = document.querySelectorAll(".rv, .rv-left, .pathway");
+  /* ------------------------------------------------------------- reveals */
+  var revealables = document.querySelectorAll(".rv");
   if ("IntersectionObserver" in window && !reduce){
     var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(en){
-        if (en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
-      });
-    }, { rootMargin: "0px 0px -10% 0px", threshold: 0.08 });
+      entries.forEach(function(en){ if (en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); } });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.06 });
     revealables.forEach(function(el){ io.observe(el); });
   } else {
     revealables.forEach(function(el){ el.classList.add("in"); });
   }
 
+  /* ------------------------------------------------ tools: master/detail */
   var TOOLS = [
     {note:{pt:"Comparar antes de comprometer. Todo o prompt que importa passa primeiro por uma pequena arena de modelos - o vencedor define a direção, os perdedores revelam o que faltava na instrução.",en:"Compare before committing. Every prompt that matters first runs through a small arena of models - the winner sets the direction, the losers reveal what the instruction was missing."},prompt:{pt:"Mesmo briefing, três modelos. Ordena por clareza, tom e utilidade. Diz-me o que os perdedores erraram.",en:"Same brief, three models. Rank for clarity, tone and usefulness. Tell me what the losers got wrong."},out:{pt:"Uma decisão ordenada com razão anexa - a escolha do modelo é um passo documentado, não um hábito.",en:"A ranked decision with a reason attached - so the choice of model is a documented step, not a habit."}},
     {note:{pt:"O parceiro de pensamento. Notas confusas de clientes entram; saem estrutura, rascunhos e contra-argumentos. Uso-o para pensar comigo, não por mim.",en:"The thinking partner. Messy client notes go in; structure, drafts and counter-arguments come out. I use it to think with me, not for me."},prompt:{pt:"Aqui está o meu briefing confuso. Dá-me 3 estruturas e depois argumenta contra a que eu escolheria naturalmente.",en:"Here is my messy brief. Give me 3 structures, then argue against the one I'd naturally pick."},out:{pt:"Rascunhos com espinha - e uma lista curta de pontos fracos que ainda tenho de corrigir eu.",en:"Drafts with a backbone - plus a short list of weak points I still have to fix myself."}},
@@ -64,40 +68,40 @@
     {note:{pt:"A camada de publicação. Modelos, formulários inteligentes e assistentes ligados a produtos reais com Python e JavaScript - para pequenas empresas que só querem que as coisas funcionem.",en:"The shipping layer. Models, smart forms and assistants wired into real products with Python and JavaScript - for small businesses that just want things to work."},prompt:{pt:"Dada a tarefa mais repetitiva deste cliente, desenha a funcionalidade de IA mais fina que a elimina. Inclui estados de falha.",en:"Given this client's most repetitive task, design the thinnest AI feature that removes it. Include failure states."},out:{pt:"Uma integração com âmbito definido: endpoints, prompts, ligações à base de dados - e um preço que o cliente entende.",en:"A scoped integration: endpoints, prompts, database links - and a price the client understands."}},
     {note:{pt:"O ofício por trás de cada fluxo de IA. Os prompts dão-te um rascunho; Python e JavaScript dão-te um produto - e a reparação tira-te de apuros quando um build parte.",en:"The craft behind every AI flow. Prompts give you a draft; Python and JavaScript give you a product - and repair gets you out of trouble when a build breaks."},prompt:{pt:"Explica este bug como um sénior: causa raiz, correção mínima, guarda de regressão.",en:"Explain this bug like a senior: root cause, minimal fix, regression guard."},out:{pt:"Código a funcionar com razão anexa - revisto, reparado e legível.",en:"Working code with a reason attached - reviewed, repaired and readable."}}
   ];
-
   var rows = Array.prototype.slice.call(document.querySelectorAll(".tool-row"));
   var panel = document.getElementById("toolPanel");
+  var tdName = document.getElementById("td-name");
   var tdNote = document.getElementById("td-note");
   var tdPrompt = document.getElementById("td-prompt");
   var tdOut = document.getElementById("td-out");
-
   var currentTool = 0;
+  function visibleText(el){
+    if (!el) return "";
+    var clone = el.cloneNode(true);
+    var hide = clone.querySelectorAll(lang() === "en" ? ".pt" : ".en");
+    for (var i = 0; i < hide.length; i++) hide[i].remove();
+    return clone.textContent.trim();
+  }
   function selectTool(i){
     currentTool = i;
     rows.forEach(function(r, idx){
-      var selected = idx === i;
-      r.setAttribute("aria-selected", selected ? "true" : "false");
-      r.setAttribute("tabindex", selected ? "0" : "-1");
+      var s = idx === i;
+      r.setAttribute("aria-selected", s ? "true" : "false");
+      r.setAttribute("tabindex", s ? "0" : "-1");
     });
-    var t = TOOLS[i];
-    var L = curLang();
+    var t = TOOLS[i], L = lang();
     if (t && tdNote && tdPrompt && tdOut){
       tdNote.textContent = t.note[L];
       tdPrompt.textContent = t.prompt[L];
       tdOut.textContent = t.out[L];
     }
+    if (tdName && rows[i]) tdName.textContent = visibleText(rows[i].querySelector(".t-name"));
     if (panel && rows[i]) panel.setAttribute("aria-labelledby", rows[i].id);
   }
-
-  /* Re-render the tool panel in the new language when the user switches. */
-  document.addEventListener("rr:lang", function(){
-    if (rows.length) selectTool(currentTool);
-  });
-
   rows.forEach(function(row, i){
     row.addEventListener("click", function(){ selectTool(i); });
-    row.addEventListener("mouseenter", function(){ selectTool(i); });
     row.addEventListener("focus", function(){ selectTool(i); });
+    if (!coarse) row.addEventListener("mouseenter", function(){ selectTool(i); });
     row.addEventListener("keydown", function(e){
       var n = null;
       if (e.key === "ArrowDown" || e.key === "ArrowRight") n = (i + 1) % rows.length;
@@ -107,240 +111,209 @@
       if (n !== null){ e.preventDefault(); rows[n].focus(); selectTool(n); }
     });
   });
+  if (rows.length) selectTool(0);
 
-  if (rows.length){ selectTool(0); }
-
+  /* ---------------------------------------------------------- copy email */
   var copyBtn = document.getElementById("copyEmail");
   var toast = document.getElementById("toast");
+  var toastT = null;
   function showToast(msg){
     if (!toast) return;
     toast.textContent = msg;
     toast.classList.add("show");
-    window.setTimeout(function(){ toast.classList.remove("show"); }, 1800);
+    window.clearTimeout(toastT);
+    toastT = window.setTimeout(function(){ toast.classList.remove("show"); }, 2000);
   }
   if (copyBtn){
     copyBtn.addEventListener("click", function(){
       var email = copyBtn.getAttribute("data-email") || "";
       if (navigator.clipboard && navigator.clipboard.writeText){
-        navigator.clipboard.writeText(email).then(
-          function(){ showToast("Email copiado - " + email); },
-          function(){ showToast(email); }
-        );
-      } else {
-        showToast(email);
-      }
+        navigator.clipboard.writeText(email).then(function(){ showToast(tr("copied") + email); }, function(){ showToast(email); });
+      } else { showToast(email); }
     });
   }
 
-  var mapNodes = Array.prototype.slice.call(document.querySelectorAll(".map-node"));
-  var railSpans = Array.prototype.slice.call(document.querySelectorAll(".map-rail span"));
-  if (canAnimate && mapNodes.length){
+  /* --------------------------------- flight plan: route + rail move together */
+  var routes = Array.prototype.slice.call(document.querySelectorAll(".route"));
+  var railSpans = Array.prototype.slice.call(document.querySelectorAll(".rail span"));
+  if (canAnimate && routes.length){
     var mi = 0;
     window.setInterval(function(){
-      mapNodes.forEach(function(n, i){ n.classList.toggle("is-live", i === mi); });
-      if (railSpans.length){
-        railSpans.forEach(function(s, i){ s.classList.toggle("is-live", i === mi); });
-      }
-      mi = (mi + 1) % mapNodes.length;
-    }, 2400);
+      mi = (mi + 1) % Math.max(routes.length, railSpans.length);
+      routes.forEach(function(n, i){ n.classList.toggle("is-live", i === mi % routes.length); });
+      railSpans.forEach(function(s, i){ s.classList.toggle("is-live", i === mi % railSpans.length); });
+    }, 2600);
   }
 
-
+  /* --------------------------------------------------------- back to top */
   var toTop = document.createElement("a");
   toTop.className = "to-top";
   toTop.href = "#main";
   toTop.setAttribute("aria-label", tr("toTop"));
   toTop.textContent = "\u2191";
   document.body.appendChild(toTop);
-  var ticking = false;
-  function onScroll(){
-    if (!ticking){
-      window.requestAnimationFrame(function(){
-        toTop.classList.toggle("show", window.scrollY > 600);
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
-  toTop.addEventListener("click", function(e){
-    e.preventDefault();
-    window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+  document.addEventListener("rr:lang", function(){
+    toTop.setAttribute("aria-label", tr("toTop"));
+    if (rows.length) selectTool(currentTool);
+    if (burger) burger.setAttribute("aria-label", nav && nav.classList.contains("open") ? tr("menuClose") : tr("menuOpen"));
   });
+  var ticking = false;
+  window.addEventListener("scroll", function(){
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(function(){ toTop.classList.toggle("show", window.scrollY > 700); ticking = false; });
+  }, { passive: true });
+  toTop.addEventListener("click", function(e){ e.preventDefault(); window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" }); });
 
+  /* ----------------------------------------------------------------------
+     SKY — fixed starfield in three depth layers. Each layer drifts at its
+     own speed as you scroll: stars that move together are read as one
+     plane (common fate), which is what gives the page its depth.
+     ---------------------------------------------------------------------- */
   try{
-  var canvas = document.getElementById("field");
-  if (canvas && canAnimate && canvas.getContext){
-    var ctx = canvas.getContext("2d");
-    var hero = canvas.parentElement;
-    var W = 0, H = 0, DPR = Math.min(window.devicePixelRatio || 1, 2);
-    var pointer = { x: -999, y: -999, has: false };
-    var trail = [];
-    var nodes = [];
-    var stars = [];
-    var meteors = [];
-    var idleT = 0;
-    var running = true;
-
-    function resize(){
-      W = hero.clientWidth; H = hero.clientHeight;
-      canvas.width = Math.floor(W * DPR);
-      canvas.height = Math.floor(H * DPR);
-      canvas.style.width = W + "px";
-      canvas.style.height = H + "px";
-      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-    }
-    function makeStars(){
-      stars = [];
-      var count = Math.round((W * H) / 9000);
-      for (var s = 0; s < count; s++){
-        stars.push({
-          x: Math.random() * W,
-          y: Math.random() * H,
-          r: Math.random() < 0.85 ? (0.6 + Math.random() * 0.9) : (1.6 + Math.random() * 1.1),
-          p: Math.random() * Math.PI * 2,
-          sp: 0.4 + Math.random() * 1.2,
-          c: Math.random() < 0.78 ? "237,239,250" : "125,211,252"
+    var sky = document.getElementById("sky");
+    if (sky && sky.getContext){
+      var sctx = sky.getContext("2d");
+      var SW = 0, SH = 0, SD = Math.min(window.devicePixelRatio || 1, 2);
+      var layers = [];
+      var skyRunning = true, t0 = 0;
+      var palette = function(){
+        var light = root.getAttribute("data-theme") === "light";
+        return light ? ["20,24,48", "11,119,168", "109,74,224"] : ["236,238,250", "125,211,252", "167,139,250"];
+      };
+      var seedSky = function(){
+        SW = window.innerWidth; SH = window.innerHeight;
+        sky.width = Math.floor(SW * SD); sky.height = Math.floor(SH * SD);
+        sky.style.width = SW + "px"; sky.style.height = SH + "px";
+        sctx.setTransform(SD, 0, 0, SD, 0, 0);
+        var area = SW * SH;
+        var spec = [
+          { n: Math.round(area / 5200), r: [0.35, 0.8], speed: 0.04, a: 0.45 },
+          { n: Math.round(area / 16000), r: [0.8, 1.3], speed: 0.10, a: 0.7 },
+          { n: Math.round(area / 60000), r: [1.3, 2.0], speed: 0.20, a: 0.95 }
+        ];
+        layers = spec.map(function(s){
+          var stars = [];
+          for (var i = 0; i < s.n; i++){
+            var roll = Math.random();
+            stars.push({ x: Math.random() * SW, y: Math.random() * SH, r: s.r[0] + Math.random() * (s.r[1] - s.r[0]),
+              p: Math.random() * 6.283, sp: 0.4 + Math.random() * 1.1, c: roll < 0.8 ? 0 : (roll < 0.92 ? 1 : 2) });
+          }
+          return { stars: stars, speed: s.speed, a: s.a };
         });
-      }
-    }
-    resize();
-    makeStars();
-    window.addEventListener("resize", function(){ resize(); makeStars(); });
-    hero.classList.add("canvas-live");
-
-    hero.addEventListener("pointermove", function(e){
-      var r = canvas.getBoundingClientRect();
-      pointer.x = e.clientX - r.left;
-      pointer.y = e.clientY - r.top;
-      pointer.has = true;
-      trail.push({ x: pointer.x, y: pointer.y, life: 1 });
-      if (trail.length > 90) trail.shift();
-      if (Math.random() < 0.16 && nodes.length < 26){
-        nodes.push({
-          x: pointer.x + (Math.random() * 40 - 20),
-          y: pointer.y + (Math.random() * 40 - 20),
-          life: 1,
-          r: 2 + Math.random() * 3
-        });
-      }
-    }, { passive: true });
-
-    hero.addEventListener("pointerleave", function(){
-      pointer.has = false;
-    });
-
-    function grid(){
-      ctx.clearRect(0, 0, W, H);
-      if (Math.random() < 0.005 && meteors.length < 2){
-        meteors.push({
-          x: W * 0.15 + Math.random() * W * 0.7,
-          y: Math.random() * H * 0.35,
-          vx: -(2.4 + Math.random() * 1.8),
-          vy: 1.2 + Math.random() * 0.9,
-          life: 1
-        });
-      }
-      for (var i = 0; i < stars.length; i++){
-        var st = stars[i];
-        var tw = 0.35 + 0.45 * (0.5 + 0.5 * Math.sin(idleT * st.sp + st.p));
-        ctx.beginPath();
-        ctx.arc(st.x, st.y, st.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(" + st.c + "," + tw.toFixed(3) + ")";
-        ctx.fill();
-      }
-      for (var m = meteors.length - 1; m >= 0; m--){
-        var mt = meteors[m];
-        mt.x += mt.vx; mt.y += mt.vy; mt.life -= 0.012;
-        if (mt.life <= 0 || mt.x < -80 || mt.y > H + 40){ meteors.splice(m, 1); continue; }
-        var tail = 11;
-        var grad = ctx.createLinearGradient(mt.x, mt.y, mt.x - mt.vx * tail, mt.y - mt.vy * tail);
-        grad.addColorStop(0, "rgba(237,239,250," + (mt.life * 0.95).toFixed(3) + ")");
-        grad.addColorStop(0.4, "rgba(167,139,250," + (mt.life * 0.5).toFixed(3) + ")");
-        grad.addColorStop(1, "rgba(167,139,250,0)");
-        ctx.strokeStyle = grad;
-        ctx.lineWidth = 1.6;
-        ctx.beginPath();
-        ctx.moveTo(mt.x, mt.y);
-        ctx.lineTo(mt.x - mt.vx * tail, mt.y - mt.vy * tail);
-        ctx.stroke();
-      }
-    }
-
-    function draw(){
-      if (!running) return;
-      idleT += 0.01;
-      if (!pointer.has){
-        var ax = W * (0.5 + 0.35 * Math.sin(idleT * 0.7));
-        var ay = H * (0.45 + 0.28 * Math.cos(idleT * 0.5));
-        trail.push({ x: ax, y: ay, life: 1 });
-        if (trail.length > 70) trail.shift();
-        if (Math.random() < 0.05 && nodes.length < 18){
-          nodes.push({ x: ax + (Math.random()*30-15), y: ay + (Math.random()*30-15), life: 1, r: 2 + Math.random()*2.5 });
+      };
+      var drawSky = function(t){
+        var pal = palette();
+        var light = root.getAttribute("data-theme") === "light";
+        var k = light ? 0.35 : 1;
+        sctx.clearRect(0, 0, SW, SH);
+        var sy = window.scrollY || 0;
+        for (var l = 0; l < layers.length; l++){
+          var L = layers[l], off = (sy * L.speed) % SH;
+          for (var i = 0; i < L.stars.length; i++){
+            var s = L.stars[i];
+            var y = s.y - off; if (y < 0) y += SH;
+            var tw = reduce ? 0.8 : (0.55 + 0.45 * Math.sin(t * 0.0012 * s.sp + s.p));
+            sctx.beginPath();
+            sctx.arc(s.x, y, s.r, 0, 6.2832);
+            sctx.fillStyle = "rgba(" + pal[s.c] + "," + (L.a * tw * k).toFixed(3) + ")";
+            sctx.fill();
+          }
         }
-      }
-      grid();
-      for (var i = 0; i < trail.length; i++){
-        var p = trail[i];
-        p.life -= 0.012;
-        if (p.life <= 0) continue;
-        var a = p.life * 0.85;
-        var rad = 6 + (1 - p.life) * 18;
-        var g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, rad);
-        g.addColorStop(0, "rgba(167,139,250," + (a * 0.55).toFixed(3) + ")");
-        g.addColorStop(0.5, "rgba(125,211,252," + (a * 0.22).toFixed(3) + ")");
-        g.addColorStop(1, "rgba(5,6,15,0)");
-        ctx.fillStyle = g;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, rad, 0, Math.PI * 2);
-        ctx.fill();
-      }
-      trail = trail.filter(function(p){ return p.life > 0; });
-      if (trail.length > 2){
-        ctx.strokeStyle = "rgba(125,211,252,0.35)";
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(trail[0].x, trail[0].y);
-        for (var j = 1; j < trail.length; j++) ctx.lineTo(trail[j].x, trail[j].y);
-        ctx.stroke();
-      }
-      for (var k = 0; k < nodes.length; k++){
-        var n = nodes[k];
-        n.life -= 0.016;
-        if (n.life <= 0) continue;
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, n.r + (1 - n.life) * 8, 0, Math.PI * 2);
-        ctx.strokeStyle = "rgba(167,139,250," + (n.life * 0.8).toFixed(3) + ")";
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(167,139,250," + n.life.toFixed(3) + ")";
-        ctx.fill();
-      }
-      nodes = nodes.filter(function(n){ return n.life > 0; });
-      window.requestAnimationFrame(draw);
-    }
-    window.requestAnimationFrame(draw);
-
-    document.addEventListener("visibilitychange", function(){
-      if (document.hidden){ running = false; }
-      else if (!running){ running = true; window.requestAnimationFrame(draw); }
-    });
-
-    if ("IntersectionObserver" in window){
-      var heroIo = new IntersectionObserver(function(entries){
-        entries.forEach(function(en){
-          if (en.isIntersecting && !running){ running = true; window.requestAnimationFrame(draw); }
-          else if (!en.isIntersecting){ running = false; }
+      };
+      var skyLoop = function(t){
+        if (!skyRunning) return;
+        if (t - t0 > 40){ drawSky(t); t0 = t; }   /* ~25 fps is plenty for twinkle */
+        window.requestAnimationFrame(skyLoop);
+      };
+      seedSky();
+      drawSky(0);
+      window.addEventListener("resize", function(){ seedSky(); drawSky(performance.now()); });
+      if (!reduce){
+        window.requestAnimationFrame(skyLoop);
+        document.addEventListener("visibilitychange", function(){
+          if (document.hidden) skyRunning = false;
+          else if (!skyRunning){ skyRunning = true; window.requestAnimationFrame(skyLoop); }
         });
-      }, { threshold: 0 });
-      heroIo.observe(hero);
+      } else {
+        window.addEventListener("scroll", function(){ drawSky(0); }, { passive: true });
+      }
+      var mo = new MutationObserver(function(){ drawSky(performance.now()); });
+      mo.observe(root, { attributes: true, attributeFilter: ["data-theme"] });
     }
-  }
-  }catch(canvasErr){}
+  }catch(skyErr){}
 
+  /* ----------------------------------------------------------------------
+     HERO — pointer leaves a short comet trail (desktop only).
+     ---------------------------------------------------------------------- */
+  try{
+    var canvas = document.getElementById("field");
+    if (canvas && canAnimate && !coarse && canvas.getContext){
+      var ctx = canvas.getContext("2d");
+      var hero = canvas.parentElement;
+      var W = 0, H = 0, DPR = Math.min(window.devicePixelRatio || 1, 2);
+      var trail = [], running = true, meteors = [];
+      var resize = function(){
+        W = hero.clientWidth; H = hero.clientHeight;
+        canvas.width = Math.floor(W * DPR); canvas.height = Math.floor(H * DPR);
+        canvas.style.width = W + "px"; canvas.style.height = H + "px";
+        ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      };
+      resize();
+      window.addEventListener("resize", resize);
+      hero.addEventListener("pointermove", function(e){
+        var r = canvas.getBoundingClientRect();
+        trail.push({ x: e.clientX - r.left, y: e.clientY - r.top, life: 1 });
+        if (trail.length > 60) trail.shift();
+      }, { passive: true });
+      var draw = function(){
+        if (!running) return;
+        ctx.clearRect(0, 0, W, H);
+        if (Math.random() < 0.004 && meteors.length < 1){
+          meteors.push({ x: W * (0.3 + Math.random() * 0.6), y: Math.random() * H * 0.3, vx: -(3 + Math.random() * 2), vy: 1.4 + Math.random(), life: 1 });
+        }
+        for (var m = meteors.length - 1; m >= 0; m--){
+          var mt = meteors[m];
+          mt.x += mt.vx; mt.y += mt.vy; mt.life -= 0.012;
+          if (mt.life <= 0){ meteors.splice(m, 1); continue; }
+          var g = ctx.createLinearGradient(mt.x, mt.y, mt.x - mt.vx * 12, mt.y - mt.vy * 12);
+          g.addColorStop(0, "rgba(236,238,250," + (mt.life * 0.9).toFixed(3) + ")");
+          g.addColorStop(1, "rgba(125,211,252,0)");
+          ctx.strokeStyle = g; ctx.lineWidth = 1.5;
+          ctx.beginPath(); ctx.moveTo(mt.x, mt.y); ctx.lineTo(mt.x - mt.vx * 12, mt.y - mt.vy * 12); ctx.stroke();
+        }
+        for (var i = 0; i < trail.length; i++) trail[i].life -= 0.02;
+        trail = trail.filter(function(p){ return p.life > 0; });
+        if (trail.length > 1){
+          for (var j = 1; j < trail.length; j++){
+            var a = trail[j - 1], b = trail[j];
+            ctx.strokeStyle = "rgba(125,211,252," + (b.life * 0.55).toFixed(3) + ")";
+            ctx.lineWidth = 1 + b.life * 1.5;
+            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+          }
+          var head = trail[trail.length - 1];
+          ctx.beginPath(); ctx.arc(head.x, head.y, 3, 0, 6.2832);
+          ctx.fillStyle = "rgba(167,139,250," + head.life.toFixed(3) + ")"; ctx.fill();
+        }
+        window.requestAnimationFrame(draw);
+      };
+      window.requestAnimationFrame(draw);
+      if ("IntersectionObserver" in window){
+        new IntersectionObserver(function(entries){
+          entries.forEach(function(en){
+            if (en.isIntersecting && !running){ running = true; window.requestAnimationFrame(draw); }
+            else if (!en.isIntersecting) running = false;
+          });
+        }).observe(hero);
+      }
+      document.addEventListener("visibilitychange", function(){
+        if (document.hidden) running = false;
+        else if (!running){ running = true; window.requestAnimationFrame(draw); }
+      });
+    }
+  }catch(heroErr){}
+
+  /* --------------------------------------------------------- offline */
   try{
     if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)){
       navigator.serviceWorker.register("sw.js").catch(function(){});

@@ -32,140 +32,147 @@
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/ajuda.css">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Ruben Monteiro Correia Rodrigues", "alternateName": "AYYLIENADO", "jobTitle": "Programador & Especialista em IA", "email": "mailto:benmrodrigues2000@gmail.com", "url": "https://benmrodrigues2000.github.io/", "sameAs": ["https://github.com/benmrodrigues2000", "https://freedomoutdoor.pt/provador"], "address": {"@type": "PostalAddress", "addressLocality": "Esmoriz", "addressCountry": "PT"}}</script>
-<noscript>
-<style>
-.rv,.rv-left{opacity:1;transform:none}
-.boot .map-node,.boot .hero-left>*{opacity:1;transform:none}
-.booted .map-node,.booted .hero-left>*{opacity:1;transform:none}
-</style>
-</noscript>
+
+
+<noscript><style>.rv{opacity:1;transform:none}.boot .hero-inner>*{opacity:1;transform:none}</style></noscript>
 </head>
 <body class="boot">
 <a class="skip" href="#main"><span class="pt">Saltar para o conteúdo</span><span class="en">Skip to content</span></a>
+<div class="sky-fallback" aria-hidden="true"></div>
+<canvas id="sky" aria-hidden="true"></canvas>
 <header class="site-header">
-<div class="wrap">
-<div class="header-left">
-<button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Ativar modo claro" title="Ativar modo claro" aria-pressed="false">
-<span class="t-icon t-sun" aria-hidden="true">
-<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><g class="rays"><line x1="12" y1="1.6" x2="12" y2="4"></line><line x1="12" y1="20" x2="12" y2="22.4"></line><line x1="1.6" y1="12" x2="4" y2="12"></line><line x1="20" y1="12" x2="22.4" y2="12"></line><line x1="4.4" y1="4.4" x2="6.1" y2="6.1"></line><line x1="17.9" y1="17.9" x2="19.6" y2="19.6"></line><line x1="4.4" y1="19.6" x2="6.1" y2="17.9"></line><line x1="17.9" y1="6.1" x2="19.6" y2="4.4"></line></g></svg>
-</span>
-<span class="t-icon t-moon" aria-hidden="true">
-<svg viewBox="0 0 24 24"><path d="M20.3 14.6A8.6 8.6 0 0 1 9.4 3.7a8.6 8.6 0 1 0 10.9 10.9z"></path></svg>
-</span>
-</button>
-<a class="wordmark" href="index.html">
-<span class="name">RUBEN RODRIGUES</span>
-<span class="role"><span class="pt">Programador &amp; Especialista em IA</span><span class="en">Developer &amp; AI Specialist</span></span>
+<div class="wrap hdr">
+<a class="brand" href="index.html">
+<svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><circle class="orbit" cx="17" cy="17" r="15"></circle><circle class="planet" cx="17" cy="17" r="6.5"></circle><circle cx="29.5" cy="9" r="2.2" fill="var(--link)"></circle></svg>
+<span class="brand-txt"><span class="name">RUBEN RODRIGUES</span><span class="role"><span class="pt">Programador &amp; Especialista em IA</span><span class="en">Developer &amp; AI Specialist</span></span></span>
 </a>
-</div>
-<nav aria-label="Secções do site" class="nav" id="nav">
-<a href="index.html"><span class="pt">Início</span><span class="en">Home</span></a>
-<a href="sobre.html" aria-current="page"><span class="pt">Sobre</span><span class="en">About</span></a>
-<a href="ferramentas.html"><span class="pt">Ferramentas</span><span class="en">Tools</span></a>
-<a href="percurso.html"><span class="pt">Percurso</span><span class="en">Journey</span></a>
-<a href="trabalhos.html"><span class="pt">Trabalhos</span><span class="en">Work</span></a>
-<a href="contacto.html"><span class="pt">Contacto</span><span class="en">Contact</span></a>
+<nav aria-label="Secções do site" class="constellation" id="nav">
+<a href="index.html"><i class="star" aria-hidden="true"></i><span class="lbl"><span class="pt">Início</span><span class="en">Home</span></span></a>
+<a href="sobre.html" aria-current="page"><i class="star" aria-hidden="true"></i><span class="lbl"><span class="pt">Sobre</span><span class="en">About</span></span></a>
+<a href="ferramentas.html"><i class="star" aria-hidden="true"></i><span class="lbl"><span class="pt">Ferramentas</span><span class="en">Tools</span></span></a>
+<a href="percurso.html"><i class="star" aria-hidden="true"></i><span class="lbl"><span class="pt">Percurso</span><span class="en">Journey</span></span></a>
+<a href="trabalhos.html"><i class="star" aria-hidden="true"></i><span class="lbl"><span class="pt">Trabalhos</span><span class="en">Work</span></span></a>
+<a href="contacto.html"><i class="star" aria-hidden="true"></i><span class="lbl"><span class="pt">Contacto</span><span class="en">Contact</span></span></a>
 </nav>
-<div style="display:flex;align-items:center;gap:12px">
+<div class="hdr-tools">
+<div class="ctl-group" role="group" aria-label="Tema e idioma / Theme and language">
+<button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Ativar modo claro" title="Ativar modo claro" aria-pressed="false">
+<span class="t-icon t-sun" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><g class="rays"><line x1="12" y1="1.6" x2="12" y2="4"></line><line x1="12" y1="20" x2="12" y2="22.4"></line><line x1="1.6" y1="12" x2="4" y2="12"></line><line x1="20" y1="12" x2="22.4" y2="12"></line><line x1="4.4" y1="4.4" x2="6.1" y2="6.1"></line><line x1="17.9" y1="17.9" x2="19.6" y2="19.6"></line><line x1="4.4" y1="19.6" x2="6.1" y2="17.9"></line><line x1="17.9" y1="6.1" x2="19.6" y2="4.4"></line></g></svg></span>
+<span class="t-icon t-moon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.3 14.6A8.6 8.6 0 0 1 9.4 3.7a8.6 8.6 0 1 0 10.9 10.9z"></path></svg></span>
+</button>
+<span class="ctl-sep" aria-hidden="true"></span>
 <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch to English" title="Switch to English">
 <span class="lt-globe" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"></circle><path d="M3.6 12h16.8"></path><path d="M12 3.6c2.7 2.5 2.7 14.1 0 16.8-2.7-2.7-2.7-14.3 0-16.8z"></path></svg></span>
 <span class="lt-stack" aria-hidden="true"><span class="lt-code lt-pt">PT</span><span class="lt-code lt-en">EN</span></span>
 </button>
+</div>
 <a class="btn btn-primary header-cta" href="contacto.html"><span class="pt">Vamos falar</span><span class="en">Let's talk</span></a>
-<button aria-controls="nav" aria-expanded="false" aria-label="Abrir menu" class="burger" id="burger">
-<span></span>
-</button>
+<button aria-controls="nav" aria-expanded="false" aria-label="Abrir menu" class="burger" id="burger" type="button"><span></span></button>
 </div>
 </div>
 </header>
 <main id="main">
-
-<section class="section on-dark page-head" id="sobre">
-<div class="wrap about-grid">
-<div class="about-copy">
-<span class="mono"><span class="pt">Sobre / quem está por trás</span><span class="en">About / who&#39;s behind it</span></span>
-<h1 class="big-title">Ruben Rodrigues</h1>
-<p class="page-lead"><span class="pt">Programador e especialista em IA, 26 anos, Esmoriz - Portugal. Uso modelos de IA todos os dias e transformo esse uso em produtos para pequenas empresas: websites, landing pages, integrações e reparações de código.</span><span class="en">Developer and AI specialist, 26, from Esmoriz - Portugal. I use AI models every day and turn that into products for small businesses: websites, landing pages, integrations and code repairs.</span></p>
-<p class="page-lead"><span class="pt">Antes disto: estágio na Freedom Outdoor, onde construí o Provador; operador de robô na Ferreira de Sá; e atendimento ao cliente no Pingo Doce, onde aprendi que servir bem faz parte do produto.</span><span class="en">Before this: an internship at Freedom Outdoor, where I built O Provador; robot operator at Ferreira de Sá; and customer service at Pingo Doce, where I learned that serving well is part of the product.</span></p>
-<div class="fact-row">
-<span><span class="pt">26 anos</span><span class="en">26 years old</span></span>
-<span>Esmoriz, PT</span>
-<span><span class="pt">A construir o portefólio</span><span class="en">Building portfolio</span></span>
-<span>benmrodrigues2000@gmail.com</span>
-<span>github.com/benmrodrigues2000</span>
+<section class="sec first" id="sobre">
+<div class="wrap">
+<div class="profile">
+<div class="profile-copy">
+<header class="sec-head" style="margin:0">
+<span class="node state" aria-hidden="true">01</span>
+<div class="eyebrow"><span><span class="pt">Sobre / quem está por trás</span><span class="en">About / who's behind it</span></span></div>
+<h1 class="h1">Ruben<br>Rodrigues</h1>
+</header>
+<p class="lead"><span class="pt">Programador e especialista em IA, 26 anos, Esmoriz - Portugal. Uso modelos de IA todos os dias e transformo esse uso em produtos para pequenas empresas: websites, landing pages, integrações e reparações de código.</span><span class="en">Developer and AI specialist, 26, from Esmoriz - Portugal. I use AI models every day and turn that into products for small businesses: websites, landing pages, integrations and code repairs.</span></p>
+<p class="lead"><span class="pt">Antes disto: estágio na Freedom Outdoor, onde construí o Provador; operador de robô na Ferreira de Sá; e atendimento ao cliente no Pingo Doce, onde aprendi que servir bem faz parte do produto.</span><span class="en">Before this: an internship at Freedom Outdoor, where I built O Provador; robot operator at Ferreira de Sá; and customer service at Pingo Doce, where I learned that serving well is part of the product.</span></p>
+<dl class="facts region">
+<div><dt><span class="pt">Idade</span><span class="en">Age</span></dt><dd><span class="pt">26 anos</span><span class="en">26 years old</span></dd></div>
+<div><dt><span class="pt">Base</span><span class="en">Base</span></dt><dd>Esmoriz, PT</dd></div>
+<div><dt><span class="pt">Estado</span><span class="en">Status</span></dt><dd><span class="pt">A construir o portefólio</span><span class="en">Building portfolio</span></dd></div>
+<div><dt>GitHub</dt><dd><a href="https://github.com/benmrodrigues2000" rel="noopener" target="_blank">github.com/benmrodrigues2000</a></dd></div>
+<div><dt>Email</dt><dd><a href="mailto:benmrodrigues2000@gmail.com">benmrodrigues2000@gmail.com</a></dd></div>
+<div><dt>CV</dt><dd><a href="cv.pdf" download><span class="pt">PDF atualizado</span><span class="en">Up-to-date PDF</span></a></dd></div>
+</dl>
+<div class="actions">
+<a class="btn btn-primary" href="cv.pdf" download><span class="pt">Descarregar CV (PDF)</span><span class="en">Download CV (PDF)</span> <span class="arrow">↓</span></a>
+<a class="btn btn-ghost" href="contacto.html"><span class="pt">Falar comigo</span><span class="en">Get in touch</span></a>
 </div>
-      <p class="cv-cta"><a class="btn btn-primary" href="cv.pdf" download><span class="pt">Descarregar CV (PDF)</span><span class="en">Download CV (PDF)</span> <span class="arrow">↓</span></a></p>
 </div>
-<figure class="about-photo rv">
-<img alt="Retrato de Ruben Rodrigues" decoding="async" height="1000" loading="eager" sizes="(max-width:720px) 92vw, 420px" src="assets/ruben-portrait.jpg" srcset="assets/ruben-portrait-480.jpg 480w, assets/ruben-portrait.jpg 800w" width="800"/>
+<figure class="portrait rv">
+<svg viewBox="0 0 400 400" aria-hidden="true">
+<circle class="ring2" cx="200" cy="200" r="196"></circle>
+<circle class="ring1" cx="200" cy="200" r="178"></circle>
+<circle class="moon" cx="340" cy="90" r="9"></circle>
+</svg>
+<div class="ph"><img alt="Retrato de Ruben Rodrigues" decoding="async" height="1000" loading="eager" sizes="(max-width:720px) 80vw, 380px" src="assets/ruben-portrait.jpg" srcset="assets/ruben-portrait-480.jpg 480w, assets/ruben-portrait.jpg 800w" width="800"/></div>
+<figcaption><span class="dot-live" aria-hidden="true"></span><span class="pt">Terra · online</span><span class="en">Earth · online</span></figcaption>
 </figure>
+</div>
 </div>
 </section>
 
-
-<section class="section on-light method" id="method">
+<section class="sec last" id="method">
 <div aria-hidden="true" class="marquee">
 <div class="marquee-track">
-<span class="display"><span class="pt">Prompt → Rascunho → Crítica → Revisão → Publicação →</span><span class="en">Prompt → Draft → Critique → Revision → Publish →</span></span>
-<span class="display"><span class="pt">Prompt → Rascunho → Crítica → Revisão → Publicação →</span><span class="en">Prompt → Draft → Critique → Revision → Publish →</span></span>
+<span><span class="pt">Prompt <i class='sep'></i> Rascunho <i class='sep'></i> Crítica <i class='sep'></i> Revisão <i class='sep'></i> Publicação <i class='sep'></i></span><span class="en">Prompt <i class='sep'></i> Draft <i class='sep'></i> Critique <i class='sep'></i> Revision <i class='sep'></i> Publish <i class='sep'></i></span></span>
+<span><span class="pt">Prompt <i class='sep'></i> Rascunho <i class='sep'></i> Crítica <i class='sep'></i> Revisão <i class='sep'></i> Publicação <i class='sep'></i></span><span class="en">Prompt <i class='sep'></i> Draft <i class='sep'></i> Critique <i class='sep'></i> Revision <i class='sep'></i> Publish <i class='sep'></i></span></span>
 </div>
 </div>
 <div class="wrap">
 <div class="method-grid">
 <div class="method-statement">
-<span class="mono"><span class="pt">Método / registo de missão</span><span class="en">Method / mission log</span></span>
-<h2 class="rv"><span class="pt">O trabalho não é o resultado.<br/>É o <mark>sistema por trás dele.</mark></span><span class="en">The work isn&#39;t the result.<br/>It&#39;s the <mark>system behind it.</mark></span></h2>
+<header class="sec-head" style="margin:0">
+<span class="node" aria-hidden="true">02</span>
+<div class="eyebrow"><span><span class="pt">Método / registo de missão</span><span class="en">Method / mission log</span></span><span class="g-tag"><span class="pt">Conexão</span><span class="en">Connectedness</span></span></div>
+<h2 class="h2 rv"><span class="pt">O trabalho não é o resultado. É o <em>sistema por trás dele.</em></span><span class="en">The work isn't the result. It's the <em>system behind it.</em></span></h2>
+</header>
+<p class="lead"><span class="pt">Cada briefing passa por mais do que um modelo. As linhas no diagrama são o caminho real: de uma ideia confusa a três entregáveis concretos.</span><span class="en">Every brief goes through more than one model. The lines in the diagram are the real path: from a messy idea to three concrete deliverables.</span></p>
 </div>
-<figure class="method-art rv notebook" style="margin:0">
-<svg aria-label="Diagrama de um briefing a passar por dois modelos e um veredicto da arena, tornando-se três entregáveis" role="img" viewbox="0 0 460 340">
-<rect fill="#FFFFFF" height="340" width="460" x="0" y="0"></rect>
-<g stroke="rgba(7,10,24,.08)" stroke-width="1">
-<line x1="0" x2="460" y1="60" y2="60"></line>
-<line x1="0" x2="460" y1="140" y2="140"></line>
-<line x1="0" x2="460" y1="240" y2="240"></line>
-</g>
-<text fill="rgba(7,10,24,.55)" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1.2" x="20" y="34"><tspan class="pt">BRIEFING DO CLIENTE / v.07</tspan><tspan class="en">CLIENT BRIEF / v.07</tspan></text>
-<rect fill="#E9EDF8" height="76" rx="8" stroke="rgba(7,10,24,.16)" width="300" x="20" y="44"></rect>
-<text fill="#05060F" font-family="IBM Plex Mono, monospace" font-size="12" x="34" y="70"><tspan class="pt">“um quiz que encontra a sapatilha</tspan><tspan class="en">“a quiz that finds the right shoe</tspan></text>
-<text fill="#05060F" font-family="IBM Plex Mono, monospace" font-size="12" x="34" y="90"><tspan class="pt">certa por corredor. mobile first,</tspan><tspan class="en">for each runner. mobile first,</tspan></text>
-<text fill="#05060F" font-family="IBM Plex Mono, monospace" font-size="12" x="34" y="110"><tspan class="pt">rápido, ligado à nossa base de dados.”</tspan><tspan class="en">fast, connected to our database.”</tspan></text>
-<path d="M330 82 C 370 82 370 100 400 100" fill="none" stroke="#7DD3FC" stroke-width="1.5"></path>
-<path d="M330 82 C 360 82 360 170 400 170" fill="none" stroke="#7DD3FC" stroke-dasharray="4 4" stroke-width="1.5"></path>
-<rect fill="#05060F" height="30" rx="6" width="110" x="330" y="86"></rect>
-<text fill="#A78BFA" font-family="IBM Plex Mono, monospace" font-size="11" x="344" y="105">CHATGPT</text>
-<rect fill="#05060F" height="30" rx="6" width="110" x="330" y="156"></rect>
-<text fill="#7DD3FC" font-family="IBM Plex Mono, monospace" font-size="11" x="346" y="175">GEMINI</text>
-<rect fill="#05060F" height="64" rx="8" width="240" x="20" y="156"></rect>
-<text fill="#9AA3BF" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1" x="34" y="182"><tspan class="pt">VEREDICTO DA ARENA</tspan><tspan class="en">ARENA VERDICT</tspan></text>
-<text fill="#E9EDF8" font-family="IBM Plex Mono, monospace" font-size="12" x="34" y="204"><tspan class="pt">B - menos passos, menos fricção</tspan><tspan class="en">B - fewer steps, less friction</tspan></text>
-<g>
-<rect fill="#E9EDF8" height="64" rx="8" stroke="#A78BFA" width="128" x="20" y="256"></rect>
-<text fill="#05060F" font-family="IBM Plex Mono, monospace" font-size="11" x="34" y="282"><tspan class="pt">QUIZ + BD</tspan><tspan class="en">QUIZ + DB</tspan></text>
-<text fill="rgba(7,10,24,.55)" font-family="IBM Plex Mono, monospace" font-size="10" x="34" y="302"><tspan class="pt">lógica + dados</tspan><tspan class="en">logic + data</tspan></text>
-<rect fill="#E9EDF8" height="64" rx="8" stroke="rgba(7,10,24,.16)" width="128" x="166" y="256"></rect>
-<text fill="#05060F" font-family="IBM Plex Mono, monospace" font-size="11" x="180" y="282">LANDING PAGE</text>
-<text fill="rgba(7,10,24,.55)" font-family="IBM Plex Mono, monospace" font-size="10" x="180" y="302"><tspan class="pt">texto + layout</tspan><tspan class="en">copy + layout</tspan></text>
-<rect fill="#E9EDF8" height="64" rx="8" stroke="rgba(7,10,24,.16)" width="128" x="312" y="256"></rect>
-<text fill="#05060F" font-family="IBM Plex Mono, monospace" font-size="11" x="326" y="282"><tspan class="pt">ASSISTENTE DE IA</tspan><tspan class="en">AI ASSISTANT</tspan></text>
-<text fill="rgba(7,10,24,.55)" font-family="IBM Plex Mono, monospace" font-size="10" x="326" y="302"><tspan class="pt">prompt + api</tspan><tspan class="en">prompt + api</tspan></text>
-</g>
-<path d="M140 188 C 150 220 80 230 84 252" fill="none" stroke="#7DD3FC" stroke-width="1.5"></path>
-<path d="M180 220 V 252" fill="none" stroke="#7DD3FC" stroke-width="1.5"></path>
-<path d="M220 220 C 300 230 360 230 376 252" fill="none" stroke="#7DD3FC" stroke-width="1.5"></path>
+<figure class="notebook region rv">
+<svg aria-label="Diagrama de um briefing a passar por dois modelos e um veredicto da arena, tornando-se três entregáveis" role="img" viewBox="0 0 460 340">
+<text class="nb-t m" x="20" y="30"><tspan class="pt">BRIEFING DO CLIENTE / v.07</tspan><tspan class="en">CLIENT BRIEF / v.07</tspan></text>
+<rect class="nb-box" height="76" rx="10" width="292" x="20" y="42"></rect>
+<text class="nb-t" x="34" y="68"><tspan class="pt">“um quiz que encontra a sapatilha</tspan><tspan class="en">“a quiz that finds the right shoe</tspan></text>
+<text class="nb-t" x="34" y="88"><tspan class="pt">certa por corredor. mobile first,</tspan><tspan class="en">for each runner. mobile first,</tspan></text>
+<text class="nb-t" x="34" y="108"><tspan class="pt">rápido, ligado à nossa base de dados.”</tspan><tspan class="en">fast, connected to our database.”</tspan></text>
+<path class="nb-line" d="M312 80 C 330 80 322 101 338 101"></path>
+<path class="nb-line dash" d="M312 80 C 330 80 322 171 338 171"></path>
+<rect class="nb-dark" height="30" rx="15" width="104" x="338" y="86"></rect>
+<text class="nb-t v" x="358" y="105">CHATGPT</text>
+<rect class="nb-dark" height="30" rx="15" width="104" x="338" y="156"></rect>
+<text class="nb-t c" x="362" y="175">GEMINI</text>
+<path class="nb-line" d="M338 101 C 300 101 300 186 262 186"></path>
+<rect class="nb-box sel" height="64" rx="10" width="242" x="20" y="154"></rect>
+<text class="nb-t m" x="34" y="180"><tspan class="pt">VEREDICTO DA ARENA</tspan><tspan class="en">ARENA VERDICT</tspan></text>
+<text class="nb-t" x="34" y="202"><tspan class="pt">B - menos passos, menos fricção</tspan><tspan class="en">B - fewer steps, less friction</tspan></text>
+<path class="nb-line" d="M84 218 V 256"></path>
+<path class="nb-line" d="M141 218 C 141 240 230 236 230 256"></path>
+<path class="nb-line" d="M200 218 C 200 236 376 236 376 256"></path>
+<circle class="nb-dot" cx="84" cy="256" r="3"></circle><circle class="nb-dot" cx="230" cy="256" r="3"></circle><circle class="nb-dot" cx="376" cy="256" r="3"></circle>
+<rect class="nb-box sel" height="62" rx="10" width="128" x="20" y="262"></rect>
+<text class="nb-t" x="34" y="288"><tspan class="pt">QUIZ + BD</tspan><tspan class="en">QUIZ + DB</tspan></text>
+<text class="nb-t m" x="34" y="308"><tspan class="pt">lógica + dados</tspan><tspan class="en">logic + data</tspan></text>
+<rect class="nb-box" height="62" rx="10" width="128" x="166" y="262"></rect>
+<text class="nb-t" x="180" y="288">LANDING PAGE</text>
+<text class="nb-t m" x="180" y="308"><tspan class="pt">texto + layout</tspan><tspan class="en">copy + layout</tspan></text>
+<rect class="nb-box" height="62" rx="10" width="128" x="312" y="262"></rect>
+<text class="nb-t" x="326" y="288"><tspan class="pt">ASSISTENTE IA</tspan><tspan class="en">AI ASSISTANT</tspan></text>
+<text class="nb-t m" x="326" y="308">prompt + api</text>
 </svg>
 <figcaption><span class="pt">Nota de campo 07 - briefing → dois modelos → veredicto da arena → três entregáveis.</span><span class="en">Field note 07 - brief → two models → arena verdict → three deliverables.</span></figcaption>
 </figure>
-<div class="principles">
-<div class="principle rv">
-<h3 class="sub"><span class="pt">Começar pela pergunta.</span><span class="en">Start with the question.</span></h3>
+<div class="principles rv">
+<div class="principle">
+<span class="num">01</span>
+<h3 class="h3"><span class="pt">Começar pela pergunta.</span><span class="en">Start with the question.</span></h3>
 <p><span class="pt">As ferramentas vêm depois. Defino o resultado, o cliente e a restrição antes de escrever um único prompt.</span><span class="en">The tools come after. I define the outcome, the client and the constraint before writing a single prompt.</span></p>
 </div>
-<div class="principle rv">
-<h3 class="sub"><span class="pt">Tornar o invisível visível.</span><span class="en">Make the invisible visible.</span></h3>
+<div class="principle">
+<span class="num">02</span>
+<h3 class="h3"><span class="pt">Tornar o invisível visível.</span><span class="en">Make the invisible visible.</span></h3>
 <p><span class="pt">Cada prompt que importa é guardado, numerado e anotado. O processo faz parte do portefólio.</span><span class="en">Every prompt that matters is saved, numbered and annotated. The process is part of the portfolio.</span></p>
 </div>
-<div class="principle rv">
-<h3 class="sub"><span class="pt">Servir o cliente primeiro.</span><span class="en">Serve the client first.</span></h3>
+<div class="principle">
+<span class="num">03</span>
+<h3 class="h3"><span class="pt">Servir o cliente primeiro.</span><span class="en">Serve the client first.</span></h3>
 <p><span class="pt">Prazos claros, linguagem simples, sem tecnicismos. Um cliente feliz faz parte da entrega - não é um pormenor.</span><span class="en">Clear deadlines, plain language, no jargon. A happy client is part of the delivery - not a footnote.</span></p>
 </div>
 </div>
@@ -177,23 +184,20 @@
 <div class="wrap">
 <div class="footer-grid">
 <div>
-<p class="f-h"><span class="pt">Índice / 01</span><span class="en">Index / 01</span></p>
-<p><span class="dot-live"></span><span><span class="pt">Esmoriz, PT - Terra</span><span class="en">Esmoriz, PT - Earth</span></span></p>
+<p class="f-h"><span class="pt">Base</span><span class="en">Base</span></p>
+<p><span class="dot-live" aria-hidden="true"></span><span><span class="pt">Esmoriz, PT - Terra</span><span class="en">Esmoriz, PT - Earth</span></span></p>
 <p><span class="pt">26 anos - a construir o portefólio</span><span class="en">26 years old - building portfolio</span></p>
 </div>
 <div>
-<p class="f-h"><span class="pt">Índice / 02</span><span class="en">Index / 02</span></p>
+<p class="f-h"><span class="pt">Serviços</span><span class="en">Services</span></p>
 <p><span class="pt">Websites · landing pages · integrações de IA</span><span class="en">Websites · landing pages · AI integrations</span></p>
 <p><span class="pt">Revisão &amp; reparação de código</span><span class="en">Code review &amp; repair</span></p>
 </div>
 <div>
 <p class="f-h"><span class="pt">Ferramentas selecionadas</span><span class="en">Selected tools</span></p>
 <ul>
-<li>Arena.AI</li>
-<li>ChatGPT</li>
-<li>Gemini</li>
-<li>Eklipse</li>
-<li>APIs de IA</li>
+<li>Arena.AI · ChatGPT · Gemini</li>
+<li>Eklipse · <span class="pt">APIs de IA</span><span class="en">AI APIs</span></li>
 <li>Python / JS</li>
 </ul>
 </div>
@@ -201,9 +205,8 @@
 <p class="f-h"><span class="pt">Contacto</span><span class="en">Contact</span></p>
 <ul>
 <li><a href="mailto:benmrodrigues2000@gmail.com">benmrodrigues2000@gmail.com</a></li>
-
 <li><a href="https://github.com/benmrodrigues2000" rel="noopener" target="_blank">github.com/benmrodrigues2000</a></li>
-          <li><a href="cv.pdf" download>CV (PDF)</a></li>
+<li><a href="cv.pdf" download>CV (PDF)</a></li>
 </ul>
 </div>
 </div>
@@ -213,7 +216,6 @@
 </div>
 </div>
 </footer>
-
 
 <script src="js/controls.js"></script>
 <script src="js/main.js"></script>

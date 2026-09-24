@@ -1,4 +1,4 @@
-var VERSION = "portefolio-v11";
+var VERSION = "portefolio-v12";
 var SHELL = [
   "./",
   "index.html",

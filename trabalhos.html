@@ -32,274 +32,296 @@
 <link rel="stylesheet" href="fonts.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/ajuda.css">
-<noscript><style>.rv,.rv-left{opacity:1;transform:none}</style></noscript>
+
+<noscript><style>.rv{opacity:1;transform:none}.boot .hero-inner>*{opacity:1;transform:none}</style></noscript>
 </head>
 <body class="boot">
 <a class="skip" href="#main"><span class="pt">Saltar para o conteúdo</span><span class="en">Skip to content</span></a>
+<div class="sky-fallback" aria-hidden="true"></div>
+<canvas id="sky" aria-hidden="true"></canvas>
 <header class="site-header">
-<div class="wrap">
-<div class="header-left">
-<button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Ativar modo claro" title="Ativar modo claro" aria-pressed="false">
-<span class="t-icon t-sun" aria-hidden="true">
-<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><g class="rays"><line x1="12" y1="1.6" x2="12" y2="4"></line><line x1="12" y1="20" x2="12" y2="22.4"></line><line x1="1.6" y1="12" x2="4" y2="12"></line><line x1="20" y1="12" x2="22.4" y2="12"></line><line x1="4.4" y1="4.4" x2="6.1" y2="6.1"></line><line x1="17.9" y1="17.9" x2="19.6" y2="19.6"></line><line x1="4.4" y1="19.6" x2="6.1" y2="17.9"></line><line x1="17.9" y1="6.1" x2="19.6" y2="4.4"></line></g></svg>
-</span>
-<span class="t-icon t-moon" aria-hidden="true">
-<svg viewBox="0 0 24 24"><path d="M20.3 14.6A8.6 8.6 0 0 1 9.4 3.7a8.6 8.6 0 1 0 10.9 10.9z"></path></svg>
-</span>
-</button>
-<a class="wordmark" href="index.html">
-<span class="name">RUBEN RODRIGUES</span>
-<span class="role"><span class="pt">Programador &amp; Especialista em IA</span><span class="en">Developer &amp; AI Specialist</span></span>
+<div class="wrap hdr">
+<a class="brand" href="index.html">
+<svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><circle class="orbit" cx="17" cy="17" r="15"></circle><circle class="planet" cx="17" cy="17" r="6.5"></circle><circle cx="29.5" cy="9" r="2.2" fill="var(--link)"></circle></svg>
+<span class="brand-txt"><span class="name">RUBEN RODRIGUES</span><span class="role"><span class="pt">Programador &amp; Especialista em IA</span><span class="en">Developer &amp; AI Specialist</span></span></span>
 </a>
-</div>
-<nav aria-label="Secções do site" class="nav" id="nav">
-<a href="index.html"><span class="pt">Início</span><span class="en">Home</span></a>
-<a href="sobre.html"><span class="pt">Sobre</span><span class="en">About</span></a>
-<a href="ferramentas.html"><span class="pt">Ferramentas</span><span class="en">Tools</span></a>
-<a href="percurso.html"><span class="pt">Percurso</span><span class="en">Journey</span></a>
-<a href="trabalhos.html" aria-current="page"><span class="pt">Trabalhos</span><span class="en">Work</span></a>
-<a href="contacto.html"><span class="pt">Contacto</span><span class="en">Contact</span></a>
+<nav aria-label="Secções do site" class="constellation" id="nav">
+<a href="index.html"><i class="star" aria-hidden="true"></i><span class="lbl"><span class="pt">Início</span><span class="en">Home</span></span></a>
+<a href="sobre.html"><i class="star" aria-hidden="true"></i><span class="lbl"><span class="pt">Sobre</span><span class="en">About</span></span></a>
+<a href="ferramentas.html"><i class="star" aria-hidden="true"></i><span class="lbl"><span class="pt">Ferramentas</span><span class="en">Tools</span></span></a>
+<a href="percurso.html"><i class="star" aria-hidden="true"></i><span class="lbl"><span class="pt">Percurso</span><span class="en">Journey</span></span></a>
+<a href="trabalhos.html" aria-current="page"><i class="star" aria-hidden="true"></i><span class="lbl"><span class="pt">Trabalhos</span><span class="en">Work</span></span></a>
+<a href="contacto.html"><i class="star" aria-hidden="true"></i><span class="lbl"><span class="pt">Contacto</span><span class="en">Contact</span></span></a>
 </nav>
-<div style="display:flex;align-items:center;gap:12px">
+<div class="hdr-tools">
+<div class="ctl-group" role="group" aria-label="Tema e idioma / Theme and language">
+<button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Ativar modo claro" title="Ativar modo claro" aria-pressed="false">
+<span class="t-icon t-sun" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><g class="rays"><line x1="12" y1="1.6" x2="12" y2="4"></line><line x1="12" y1="20" x2="12" y2="22.4"></line><line x1="1.6" y1="12" x2="4" y2="12"></line><line x1="20" y1="12" x2="22.4" y2="12"></line><line x1="4.4" y1="4.4" x2="6.1" y2="6.1"></line><line x1="17.9" y1="17.9" x2="19.6" y2="19.6"></line><line x1="4.4" y1="19.6" x2="6.1" y2="17.9"></line><line x1="17.9" y1="6.1" x2="19.6" y2="4.4"></line></g></svg></span>
+<span class="t-icon t-moon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.3 14.6A8.6 8.6 0 0 1 9.4 3.7a8.6 8.6 0 1 0 10.9 10.9z"></path></svg></span>
+</button>
+<span class="ctl-sep" aria-hidden="true"></span>
 <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch to English" title="Switch to English">
 <span class="lt-globe" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"></circle><path d="M3.6 12h16.8"></path><path d="M12 3.6c2.7 2.5 2.7 14.1 0 16.8-2.7-2.7-2.7-14.3 0-16.8z"></path></svg></span>
 <span class="lt-stack" aria-hidden="true"><span class="lt-code lt-pt">PT</span><span class="lt-code lt-en">EN</span></span>
 </button>
+</div>
 <a class="btn btn-primary header-cta" href="contacto.html"><span class="pt">Vamos falar</span><span class="en">Let's talk</span></a>
-<button aria-controls="nav" aria-expanded="false" aria-label="Abrir menu" class="burger" id="burger">
-<span></span>
-</button>
+<button aria-controls="nav" aria-expanded="false" aria-label="Abrir menu" class="burger" id="burger" type="button"><span></span></button>
 </div>
 </div>
 </header>
-
 <main class="work-page" id="main">
-  <section class="work-hero" aria-labelledby="work-title">
-    <div class="wrap">
-      <div class="work-hero-top">
-        <span class="mono"><span class="pt">Trabalhos / sistemas em órbita</span><span class="en">Work / systems in orbit</span></span>
-        <span class="mono">2026 · Portugal</span>
-      </div>
-      <div class="work-hero-grid">
-        <div class="work-hero-copy">
-          <p class="work-kicker"><span></span><span class="pt">Notas de campo</span><span class="en">Field notes</span></p>
-          <h1 id="work-title"><span class="pt">Trabalho<br>com <em>prova.</em></span><span class="en">Work<br>with <em>proof.</em></span></h1>
-          <p class="work-intro"><span class="pt">Não são maquetas soltas. São ferramentas que recebem pessoas, reduzem dúvidas e chegam à produção.</span><span class="en">These aren&#39;t loose mockups. They&#39;re tools that receive people, cut confusion and reach production.</span></p>
-          <a class="work-text-link" href="#provador"><span class="pt">Começar pelo caso em destaque</span><span class="en">Start with the featured case</span> <span aria-hidden="true">↓</span></a>
-        </div>
-        <ol class="work-route" aria-label="Índice dos trabalhos">
-          <li><a href="#provador"><span>01</span><b>O Provador</b><small><span class="pt">recomendação com stock real</span><span class="en">recommendation on real stock</span></small></a></li>
-          <li><a href="#ferramentas-vivas"><span>02</span><b><span class="pt">Ferramentas de entrada</span><span class="en">Input tools</span></b><small><span class="pt">briefing e postal imprimível</span><span class="en">briefing and printable postcard</span></small></a></li>
-          <li><a href="#ajuda"><span>03</span><b>Ajuda</b><small><span class="pt">o guia que te está a guiar</span><span class="en">the guide that is guiding you</span></small></a></li>
-          <li><a href="#metodo"><span>04</span><b><span class="pt">O critério</span><span class="en">The criterion</span></b><small><span class="pt">respostas comparadas, não aceites</span><span class="en">answers compared, not accepted</span></small></a></li>
-        </ol>
-      </div>
-      <div class="work-hero-foot">
-        <span><span class="pt">01 caso de estudo</span><span class="en">01 case study</span></span><span><span class="pt">02 ferramentas públicas</span><span class="en">02 public tools</span></span><span><span class="pt">01 agente de navegação</span><span class="en">01 navigation agent</span></span><span><span class="pt">01 método de decisão</span><span class="en">01 decision method</span></span>
-      </div>
-    </div>
-  </section>
+<section class="sec first" aria-labelledby="work-title">
+<div class="wrap">
+<header class="sec-head wide">
+<span class="node state" aria-hidden="true">00</span>
+<div style="display:grid;gap:14px">
+<div class="eyebrow"><span><span class="pt">Trabalhos / sistemas em órbita</span><span class="en">Work / systems in orbit</span></span><i class="dot"></i><span>2026 · Portugal</span></div>
+<h1 class="h1" id="work-title"><span class="pt">Trabalho<br>com <em>prova.</em></span><span class="en">Work<br>with <em>proof.</em></span></h1>
+</div>
+<div style="display:grid;gap:18px">
+<p class="lead"><span class="pt">Não são maquetas soltas. São ferramentas que recebem pessoas, reduzem dúvidas e chegam à produção - e, em 2026, foram todas redesenhadas com os mesmos princípios da Gestalt que organizam este site.</span><span class="en">These aren't loose mockups. They're tools that receive people, cut confusion and reach production - and in 2026 they were all redesigned with the same Gestalt principles that organise this site.</span></p>
+<a class="arrow-link down" href="#provador"><span class="pt">Começar pelo caso em destaque</span><span class="en">Start with the featured case</span></a>
+</div>
+</header>
+<nav class="work-index rv" aria-label="Índice dos trabalhos / Work index"><a href="#provador"><span class="wi-n">01</span><span><b>O Provador</b><small><span class="pt">recomendação com stock real</span><span class="en">recommendation on real stock</span></small></span><span class="wi-go" aria-hidden="true">→</span></a><a href="#ferramentas-vivas"><span class="wi-n">02</span><span><b><span class="pt">Ferramentas de entrada</span><span class="en">Input tools</span></b><small><span class="pt">briefing e postal · redesenhados</span><span class="en">briefing and postcard · redesigned</span></small></span><span class="wi-go" aria-hidden="true">→</span></a><a href="#ajuda"><span class="wi-n">03</span><span><b>Ajuda</b><small><span class="pt">o guia que te está a guiar · redesenhado</span><span class="en">the guide that is guiding you · redesigned</span></small></span><span class="wi-go" aria-hidden="true">→</span></a><a href="#metodo"><span class="wi-n">04</span><span><b><span class="pt">O critério</span><span class="en">The criterion</span></b><small><span class="pt">respostas comparadas, não aceites</span><span class="en">answers compared, not accepted</span></small></span><span class="wi-go" aria-hidden="true">→</span></a><a href="#gestalt"><span class="wi-n">05</span><span><b><span class="pt">O sistema visual</span><span class="en">The visual system</span></b><small><span class="pt">oito princípios da Gestalt</span><span class="en">eight Gestalt principles</span></small></span><span class="wi-go" aria-hidden="true">→</span></a></nav>
+<div class="work-count">
+<span class="chip"><span class="pt">01 caso de estudo</span><span class="en">01 case study</span></span><span class="chip"><span class="pt">02 ferramentas públicas</span><span class="en">02 public tools</span></span><span class="chip"><span class="pt">01 agente de navegação</span><span class="en">01 navigation agent</span></span><span class="chip"><span class="pt">01 método de decisão</span><span class="en">01 decision method</span></span><span class="chip"><span class="pt">08 princípios</span><span class="en">08 principles</span></span>
+</div>
+</div>
+</section>
 
-  <section class="work-case" id="provador" aria-labelledby="provador-title">
-    <div class="wrap">
-      <header class="work-section-head rv">
-        <div><span class="mono"><span class="pt">01 / Caso de estudo</span><span class="en">01 / Case study</span></span><h2 id="provador-title">O Provador</h2></div>
-        <p>Freedom Outdoor · Espinho<br><span class="pt">Design, desenvolvimento e adaptação WordPress</span><span class="en">Design, development and WordPress adaptation</span></p>
-      </header>
+<section class="sec" id="provador" aria-labelledby="provador-title">
+<div class="wrap">
+<header class="sec-head wide">
+<span class="node" aria-hidden="true">01</span>
+<div style="display:grid;gap:14px">
+<div class="eyebrow"><span><span class="pt">01 / Caso de estudo</span><span class="en">01 / Case study</span></span><i class="dot"></i><span>Freedom Outdoor · Espinho</span></div>
+<h2 class="h2" id="provador-title">O Provador</h2>
+</div>
+<p class="lead"><span class="pt">Design, desenvolvimento e adaptação WordPress. Ao vivo em freedomoutdoor.pt.</span><span class="en">Design, development and WordPress adaptation. Live at freedomoutdoor.pt.</span></p>
+</header>
+<div class="case-top rv">
+<p class="case-statement"><span class="pt">O aconselhamento de balcão, transformado num percurso de <mark>cinco perguntas e sessenta segundos.</mark></span><span class="en">Counter advice, turned into a path of <mark>five questions and sixty seconds.</mark></span></p>
+<div class="case-meta">
+<span class="mono"><span class="pt">Desafio</span><span class="en">Challenge</span></span>
+<p><span class="pt">Encontrar uma sapatilha em stock sem fingir que existe uma resposta certa para toda a gente.</span><span class="en">Finding an in-stock shoe without pretending there's one right answer for everyone.</span></p>
+</div>
+</div>
+<div class="ledger region rv">
+<div><b>05</b><span><span class="pt">Perguntas para chegar ao perfil de corrida</span><span class="en">Questions to reach the running profile</span></span></div>
+<div><b>06</b><span><span class="pt">Eixos transparentes para pontuar cada modelo</span><span class="en">Transparent axes to score each model</span></span></div>
+<div><b>310</b><span><span class="pt">Modelos com stock verificado na corrida de teste</span><span class="en">Models with verified stock in the test run</span></span></div>
+<div><b>~60s</b><span><span class="pt">Do primeiro toque ao parecer completo</span><span class="en">From first tap to the full verdict</span></span></div>
+</div>
+<div class="case-body rv">
+<div class="copy">
+<span class="mono"><span class="pt">O que foi construído</span><span class="en">What was built</span></span>
+<h3 class="h3"><span class="pt">Um veredicto que explica o próprio raciocínio.</span><span class="en">A verdict that explains its own reasoning.</span></h3>
+<p><span class="pt">Terreno, volume semanal, objetivo, passada, corpo, pé e preferências reduzem a lista. Depois, o motor pontua o stock real da loja e devolve uma escolha, alternativas e os números à vista.</span><span class="en">Terrain, weekly volume, goal, stride, body, foot and preferences narrow the list. Then the engine scores the store's real stock and returns a choice, alternatives and the numbers in plain sight.</span></p>
+<p><span class="pt">O resultado não tenta vender a qualquer custo: se nenhum modelo serve, diz-se. É essa honestidade que prepara melhor a conversa na loja.</span><span class="en">The result doesn't try to sell at any cost: if no model fits, it says so. That honesty is what best prepares the conversation in store.</span></p>
+<div class="actions">
+<a class="btn btn-primary" href="https://freedomoutdoor.pt/provador" rel="noopener" target="_blank"><span class="pt">Ver O Provador</span><span class="en">See O Provador</span> <span class="arrow">↗</span></a>
+<a class="btn btn-ghost" href="https://freedomoutdoor.pt/provador/fitting" rel="noopener" target="_blank"><span class="pt">Fazer fitting</span><span class="en">Do a fitting</span> <span class="arrow">↗</span></a>
+</div>
+</div>
+<div class="shot-grid">
+<figure class="shot region"><img alt="O Provador — página inicial" decoding="async" loading="lazy" src="assets/provador-hero.jpg" srcset="assets/provador-hero-720.jpg 720w, assets/provador-hero.jpg 2160w" sizes="(max-width:1040px) 92vw, 440px" width="2160" height="1350"><figcaption><span class="pt">Entrada · 3 passos</span><span class="en">Entry · 3 steps</span></figcaption></figure>
+<figure class="shot region"><img alt="O Provador — fitting" decoding="async" loading="lazy" src="assets/provador-fitting.jpg" width="2160" height="1350"><figcaption>Fitting</figcaption></figure>
+<figure class="shot region"><img alt="O Provador — resultado" decoding="async" loading="lazy" src="assets/provador-resultado.jpg" srcset="assets/provador-resultado-720.jpg 720w, assets/provador-resultado.jpg 1800w" sizes="(max-width:1040px) 92vw, 300px" width="1800" height="900"><figcaption><span class="pt">Parecer</span><span class="en">Verdict</span></figcaption></figure>
+</div>
+</div>
+</div>
+</section>
 
-      <div class="work-case-opening rv">
-        <p class="case-statement"><span class="pt">O aconselhamento de balcão, transformado num percurso de <mark>cinco perguntas e sessenta segundos.</mark></span><span class="en">Counter advice, turned into a path of <mark>five questions and sixty seconds.</mark></span></p>
-        <div class="case-meta">
-          <span class="mono"><span class="pt">Desafio</span><span class="en">Challenge</span></span>
-          <p><span class="pt">Encontrar uma sapatilha em stock sem fingir que existe uma resposta certa para toda a gente.</span><span class="en">Finding an in-stock shoe without pretending there&#39;s one right answer for everyone.</span></p>
-        </div>
-      </div>
+<section class="sec" id="ferramentas-vivas" aria-labelledby="tools-title">
+<div class="wrap">
+<header class="sec-head wide">
+<span class="node" aria-hidden="true">02</span>
+<div style="display:grid;gap:14px">
+<div class="eyebrow"><span><span class="pt">02 / Ferramentas de entrada</span><span class="en">02 / Input tools</span></span><span class="chip"><span class="pt">Redesenhadas · 2026</span><span class="en">Redesigned · 2026</span></span></div>
+<h2 class="h2" id="tools-title"><span class="pt">Antes e depois<br>da <em>conversa.</em></span><span class="en">Before and after<br>the <em>conversation.</em></span></h2>
+</div>
+<p class="lead"><span class="pt">Dois objetos simples para criar clareza antes de começar - e para deixar algo físico depois de acabar. Ambos foram reorganizados para que se percebam de relance.</span><span class="en">Two simple objects to create clarity before we start - and to leave something physical after we finish. Both were reorganised so they read at a glance.</span></p>
+</header>
+<div class="duo">
+<article class="work-card region rv">
+<div class="preview" aria-hidden="true">
+<div class="mini-brief">
+<div class="mb-stars"><i class="done"></i><i class="done"></i><i class="cur"></i><i></i><i></i><i></i><i></i><i></i></div>
+<div class="mb-body">
+<div class="mb-mod"><small><span class="pt">MÓDULO 03</span><span class="en">MODULE 03</span></small><strong><span class="pt">Tripulação</span><span class="en">Crew</span></strong></div>
+<div class="mb-q"><label><span class="pt">Quem é o teu cliente ideal?</span><span class="en">Who is your ideal client?</span></label><div class="in"><span class="pt">Corredores de trail, 25-45</span><span class="en">Trail runners, 25-45</span></div></div>
+<div class="mb-q"><label><span class="pt">Idade do público</span><span class="en">Audience age</span></label><div class="mb-chips"><span>18-24</span><span class="on">25-34</span><span class="on">35-44</span><span>45+</span></div></div>
+</div>
+<div class="mb-foot"><span><span class="pt">2 / 8 MÓDULOS</span><span class="en">2 / 8 MODULES</span></span><span><span class="pt">RASCUNHO GUARDADO</span><span class="en">DRAFT SAVED</span></span></div>
+</div>
+</div>
+<div class="wc-body">
+<span class="mono"><span class="pt">01 · Briefing de Missão</span><span class="en">01 · Mission Briefing</span></span>
+<h3 class="h3"><span class="pt">Perguntas boas antes do primeiro pixel.</span><span class="en">Good questions before the first pixel.</span></h3>
+<p><span class="pt">Um formulário de oito módulos que troca tecnicismos por decisões concretas. Guarda o rascunho no navegador e entrega um relatório pronto para email, cópia ou ficheiro.</span><span class="en">An eight-module form that trades jargon for concrete decisions. It saves the draft in your browser and delivers a report ready for email, copy or file.</span></p>
+<ul class="principle-list"><li><b><span class="pt">Conexão</span><span class="en">Connectedness</span></b><span><span class="pt">Uma constelação de 8 estrelas no topo: cada módulo é uma estrela, e ligam-se por uma linha. Clica para saltar.</span><span class="en">An 8-star constellation up top: each module is a star, joined by one line. Click to jump.</span></span></li><li><b><span class="pt">Semelhança</span><span class="en">Similarity</span></b><span><span class="pt">Estrela vazia = por começar, ciano = respondido, violeta = onde estás.</span><span class="en">Empty star = not started, cyan = answered, violet = where you are.</span></span></li><li><b><span class="pt">Região comum</span><span class="en">Common region</span></b><span><span class="pt">Cada módulo numa moldura própria, com o número num anel à esquerda.</span><span class="en">Each module in its own frame, with its number in a ring on the left.</span></span></li><li><b><span class="pt">Proximidade</span><span class="en">Proximity</span></b><span><span class="pt">Pergunta, ajuda e campo colados; perguntas separadas por ar.</span><span class="en">Question, hint and field held tight; questions separated by air.</span></span></li></ul>
+<a class="arrow-link" href="briefing.html"><span class="pt">Abrir o briefing</span><span class="en">Open the briefing</span></a>
+</div>
+</article>
+<article class="work-card region rv">
+<div class="preview" aria-hidden="true">
+<div class="mini-post">
+<span class="mp-ring"></span>
+<span class="mp-planet"><img src="postal/retrato.jpg" alt="" decoding="async" loading="lazy" width="584" height="584"></span>
+<div class="mp-copy">
+<span class="mp-k"><span class="pt">Postal da Terra · Nº 01</span><span class="en">Postcard from Earth · No. 01</span></span>
+<span class="mp-name">Ruben<br>Rodrigues</span>
+<span class="mp-role"><span class="pt">Programador &amp; IA</span><span class="en">Developer &amp; AI</span></span>
+<span class="mp-dots"><i></i><i></i><i></i></span>
+</div>
+</div>
+</div>
+<div class="wc-body">
+<span class="mono"><span class="pt">02 · Postal da Terra</span><span class="en">02 · Postcard from Earth</span></span>
+<h3 class="h3"><span class="pt">Uma apresentação que não desaparece no separador do browser.</span><span class="en">An introduction that doesn't vanish in a browser tab.</span></h3>
+<p><span class="pt">Postal bilingue, pronto em A6 para gráfica ou A4 para imprimir em casa. Inclui contacto copiável, vCard, área segura e frente/verso para pré-visualizar.</span><span class="en">A bilingual postcard, ready in A6 for the print shop or A4 to print at home. Includes copyable contact, vCard, safe area and front/back preview.</span></p>
+<ul class="principle-list"><li><b><span class="pt">Figura / fundo</span><span class="en">Figure / ground</span></b><span><span class="pt">Frente reduzida a duas figuras: o nome e o retrato-planeta, sobre céu escuro.</span><span class="en">Front reduced to two figures: the name and the portrait-planet, on a dark sky.</span></span></li><li><b><span class="pt">Fecho</span><span class="en">Closure</span></b><span><span class="pt">A órbita tracejada à volta do retrato - o olho fecha o círculo.</span><span class="en">The dashed orbit around the portrait - the eye closes the circle.</span></span></li><li><b><span class="pt">Região comum</span><span class="en">Common region</span></b><span><span class="pt">Verso em duas regiões claras: a mensagem e a morada.</span><span class="en">Back in two clear regions: the message and the address.</span></span></li><li><b><span class="pt">Proximidade</span><span class="en">Proximity</span></b><span><span class="pt">Números colados às legendas; contactos alinhados numa só coluna.</span><span class="en">Numbers glued to their captions; contacts aligned in one column.</span></span></li></ul>
+<a class="arrow-link" href="postal/"><span class="pt">Ver o postal</span><span class="en">See the postcard</span></a>
+</div>
+</article>
+</div>
+</div>
+</section>
 
-      <div class="case-ledger rv">
-        <div><b>05</b><span><span class="pt">Perguntas para chegar ao perfil de corrida</span><span class="en">Questions to reach the running profile</span></span></div>
-        <div><b>06</b><span><span class="pt">Eixos transparentes para pontuar cada modelo</span><span class="en">Transparent axes to score each model</span></span></div>
-        <div><b>310</b><span><span class="pt">Modelos com stock verificado na corrida de teste</span><span class="en">Models with verified stock in the test run</span></span></div>
-        <div><b>~60s</b><span><span class="pt">Do primeiro toque ao parecer completo</span><span class="en">From first tap to the full verdict</span></span></div>
-      </div>
+<section class="sec" id="ajuda" aria-labelledby="ajuda-title">
+<div class="wrap">
+<header class="sec-head wide">
+<span class="node state" aria-hidden="true">03</span>
+<div style="display:grid;gap:14px">
+<div class="eyebrow"><span><span class="pt">03 / Agente de navegação</span><span class="en">03 / Navigation agent</span></span><span class="chip"><span class="pt">Redesenhado · 2026</span><span class="en">Redesigned · 2026</span></span></div>
+<h2 class="h2" id="ajuda-title">Ajuda</h2>
+</div>
+<p class="lead"><span class="pt">O guia do canto inferior direito - presente em todas as páginas, construído de raiz em JavaScript puro.</span><span class="en">The guide in the bottom-right corner - present on every page, built from scratch in plain JavaScript.</span></p>
+</header>
+<div class="case-top rv">
+<p class="case-statement"><span class="pt">Um assistente que cabe num canto e <mark>faz duas perguntas antes de decidir.</mark></span><span class="en">An assistant that fits in a corner and <mark>asks two questions before it decides.</mark></span></p>
+<div class="case-meta">
+<span class="mono"><span class="pt">Sob o capô</span><span class="en">Under the hood</span></span>
+<p><span class="pt">Sem modelo, sem API, sem rede: pontuação de palavras-chave, matriz de rotas e uma base de conhecimento que vive no teu browser.</span><span class="en">No model, no API, no network: keyword scoring, a routing matrix and a knowledge base that lives in your browser.</span></p>
+</div>
+</div>
+<div class="ledger region rv">
+<div><b>02</b><span><span class="pt">Perguntas antes de montar a rota</span><span class="en">Questions before the route is built</span></span></div>
+<div><b>25</b><span><span class="pt">Entradas na base de conhecimento local</span><span class="en">Entries in the local knowledge base</span></span></div>
+<div><b>≥2</b><span><span class="pt">Pontos para uma resposta ser escolhida</span><span class="en">Points for an answer to be picked</span></span></div>
+<div><b>0</b><span><span class="pt">Pedidos de rede, cookies ou modelos</span><span class="en">Network requests, cookies or models</span></span></div>
+</div>
+<div class="agent-grid rv">
+<div class="agent-copy">
+<span class="mono"><span class="pt">O que foi construído</span><span class="en">What was built</span></span>
+<h3 class="h3"><span class="pt">Um agente de verdade, feito à mão.</span><span class="en">A real agent, made by hand.</span></h3>
+<p><span class="pt">O Ajuda abre com duas perguntas - porque estás aqui e de onde vens. A primeira escolhe uma das seis rotas de intenção; a segunda ajusta a porta principal ao ponto de partida. Um referrer do Google promove o contacto; um referrer do CV abre o percurso. O veredicto mostra sempre o porquê, em mono, debaixo da resposta.</span><span class="en">Ajuda opens with two questions - why you're here and where you came from. The first picks one of six intention routes; the second tunes the front door to your starting point. A Google referrer promotes contact; a CV referrer opens the journey. The verdict always shows its reasoning, in mono, beneath the answer.</span></p>
+<p><span class="pt">O texto livre é normalizado - acentos fora, pontuação convertida em espaço - e pontuado contra uma base local: cada palavra-chave vale pontos pelo seu tamanho, mais um se marcar como forte; uma frase contida no que escreveste ainda recebe crédito parcial. Abaixo do limiar, em vez de inventar uma resposta, o guia entrega o mapa completo do site.</span><span class="en">Free-typed text is normalised - accents out, punctuation turned to space - and scored against a local base: each keyword is worth points by its length, one more if marked strong; a phrase contained in what you wrote still earns partial credit. Below the threshold, instead of inventing an answer, the guide hands you the full site map.</span></p>
+<p><span class="pt">Detalhes honestos: o indicador “a escrever…” é um atraso de 420 ms para a conversa respirar; a transcrição fica em sessionStorage e morre com o separador; e há botões de tema e idioma que re-renderizam a conversa inteira.</span><span class="en">Honest details: the “typing…” indicator is a 420 ms delay so the conversation can breathe; the transcript sits in sessionStorage and dies with the tab; and there are theme and language buttons that re-render the whole conversation.</span></p>
+<ul class="principle-list"><li><b><span class="pt">Proximidade</span><span class="en">Proximity</span></b><span><span class="pt">Mensagens seguidas do mesmo lado ficam coladas; a troca de interlocutor ganha ar.</span><span class="en">Consecutive messages from one side sit tight; a change of speaker gets air.</span></span></li><li><b><span class="pt">Conexão</span><span class="en">Connectedness</span></b><span><span class="pt">As respostas do guia pendem de um fio contínuo, como uma rota.</span><span class="en">The guide's replies hang from one continuous thread, like a route.</span></span></li><li><b><span class="pt">Semelhança</span><span class="en">Similarity</span></b><span><span class="pt">A porta principal é coral - a mesma cor de todas as ações do site.</span><span class="en">The main door is coral - the same colour as every action on the site.</span></span></li><li><b><span class="pt">Região comum</span><span class="en">Common region</span></b><span><span class="pt">Os atalhos vivem numa bandeja própria, separada da conversa.</span><span class="en">Shortcuts live in their own tray, apart from the conversation.</span></span></li></ul>
+<div class="actions">
+<button class="btn btn-primary" type="button" data-ajuda-open><span class="pt">Falar com o Ajuda</span><span class="en">Talk to Ajuda</span> <span class="arrow">→</span></button>
+<a class="btn btn-ghost" href="#metodo"><span class="pt">Ver o critério</span><span class="en">See the criterion</span> <span class="arrow">→</span></a>
+</div>
+</div>
+<div class="agent-board region" aria-hidden="true">
+<div class="region-head"><span class="mono"><span class="pt">Ajuda / fluxo</span><span class="en">Ajuda / flow</span></span><span class="mono"><span class="pt">Corre no browser</span><span class="en">Runs in the browser</span></span></div>
+<div class="agent-chat">
+<div class="agent-msg ag"><span class="agent-head"><span class="pt">01 / Intenção</span><span class="en">01 / Intent</span></span><p><span class="pt">Porque estás aqui hoje?</span><span class="en">Why are you here today?</span></p></div>
+<div class="agent-msg me"><p><span class="pt">Quero IA dentro de um produto</span><span class="en">I want AI inside a product</span></p></div>
+<div class="agent-msg ag"><span class="agent-head"><span class="pt">02 / Origem</span><span class="en">02 / Origin</span></span><p><span class="pt">Certo - integração de IA. E onde encontraste o site?</span><span class="en">Got it - AI integration. And where did you find the site?</span></p></div>
+<div class="agent-msg me"><p><span class="pt">CV ou GitHub</span><span class="en">CV or GitHub</span></p></div>
+<div class="agent-msg ag">
+<span class="agent-head"><span class="pt">Rota / IA em produção</span><span class="en">Route / AI in production</span></span>
+<div class="agent-doors">
+<span class="agent-door primary"><b><span class="pt">Falar do serviço 03</span><span class="en">Talk about service 03</span></b><i>→</i></span>
+<span class="agent-door"><b><span class="pt">Ver as rotas de IA</span><span class="en">See the AI routes</span></b><i>→</i></span>
+<span class="agent-door"><b><span class="pt">Um sistema de IA em produção</span><span class="en">An AI system in production</span></b><i>→</i></span>
+</div>
+<span class="agent-why"><span class="pt">rota montada a partir de - procuras: integração de IA · vens de: cv ou github</span><span class="en">route built from - you want: ai integration · you came from: cv or github</span></span>
+</div>
+</div>
+<div class="agent-chips"><span><span class="pt">Não é bem isto</span><span class="en">Not quite</span></span><span><span class="pt">Falar com o Ruben</span><span class="en">Talk to Ruben</span></span><span><span class="pt">Mapa do site</span><span class="en">Site map</span></span></div>
+<div class="agent-foot"><span><span class="pt">RECOMEÇAR</span><span class="en">START OVER</span></span><span><span class="pt">SEM COOKIES · NADA SAI DO BROWSER</span><span class="en">NO COOKIES · NOTHING LEAVES THE BROWSER</span></span></div>
+</div>
+</div>
+</div>
+</section>
 
-      <div class="case-story rv">
-        <div class="case-story-head">
-          <span class="mono"><span class="pt">O que foi construído</span><span class="en">What was built</span></span>
-          <h3><span class="pt">Um veredicto que explica o próprio raciocínio.</span><span class="en">A verdict that explains its own reasoning.</span></h3>
-        </div>
-        <div class="case-story-body">
-          <p><span class="pt">Terreno, volume semanal, objetivo, passada, corpo, pé e preferências reduzem a lista. Depois, o motor pontua o stock real da loja e devolve uma escolha, alternativas e os números à vista.</span><span class="en">Terrain, weekly volume, goal, stride, body, foot and preferences narrow the list. Then the engine scores the store&#39;s real stock and returns a choice, alternatives and the numbers in plain sight.</span></p>
-          <p><span class="pt">O resultado não tenta vender a qualquer custo: se nenhum modelo serve, diz-se. É essa honestidade que prepara melhor a conversa na loja.</span><span class="en">The result doesn&#39;t try to sell at any cost: if no model fits, it says so. That honesty is what best prepares the conversation in store.</span></p>
-          <div class="case-actions">
-            <a class="btn btn-primary" href="https://freedomoutdoor.pt/provador" rel="noopener" target="_blank"><span class="pt">Ver O Provador</span><span class="en">See O Provador</span> <span class="arrow">↗</span></a>
-            <a class="btn btn-ghost" href="https://freedomoutdoor.pt/provador/fitting" rel="noopener" target="_blank"><span class="pt">Fazer fitting</span><span class="en">Do a fitting</span> <span class="arrow">↗</span></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<section class="sec" id="metodo" aria-labelledby="method-title">
+<div class="wrap">
+<header class="sec-head wide">
+<span class="node" aria-hidden="true">04</span>
+<div style="display:grid;gap:14px">
+<div class="eyebrow"><span><span class="pt">04 / Critério de trabalho</span><span class="en">04 / Working criterion</span></span><span class="g-tag"><span class="pt">Semelhança · Figura/fundo</span><span class="en">Similarity · Figure/ground</span></span></div>
+<h2 class="h2" id="method-title"><span class="pt">Não aceito a primeira resposta <em>só porque chegou depressa.</em></span><span class="en">I don't accept the first answer <em>just because it arrived quickly.</em></span></h2>
+</div>
+<div style="display:grid;gap:18px">
+<p class="lead"><span class="pt">Quando um texto, uma direção visual ou uma decisão importa, ponho as respostas lado a lado. O objetivo não é deixar o modelo escolher: é tornar visível o que cada proposta acerta, inventa ou esquece.</span><span class="en">When a piece of copy, a visual direction or a decision matters, I put the answers side by side. The goal isn't to let the model choose: it's to make visible what each proposal gets right, invents or forgets.</span></p>
+<a class="arrow-link" href="ferramentas.html"><span class="pt">Ver ferramentas e prática</span><span class="en">See tools and practice</span></a>
+</div>
+</header>
+<div class="board region rv" aria-label="Exemplo de confronto de respostas / Example of an answer face-off">
+<div class="region-head"><span class="mono"><span class="pt">Arena / ronda 12</span><span class="en">Arena / round 12</span></span><span class="mono"><span class="pt">Mesmo pedido</span><span class="en">Same request</span></span></div>
+<p class="board-prompt"><span class="pt">“Uma frase de herói para um quiz de sapatilhas. Concreta, humana, sem hype.”</span><span class="en">“A hero line for a sneaker quiz. Concrete, human, no hype.”</span></p>
+<div class="board-options">
+<div class="board-option win"><span><span class="pt">A / FICA</span><span class="en">A / KEEP</span></span><p><span class="pt">“Diz-nos como corres mesmo. Encontramos a sapatilha que faz o resto.”</span><span class="en">“Tell us how you really run. We'll find the shoe that does the rest.”</span></p><small><span class="pt">específica · humana · útil</span><span class="en">specific · human · useful</span></small></div>
+<div class="board-option"><span><span class="pt">B / SAI</span><span class="en">B / DROP</span></span><p><span class="pt">“Vive a tua melhor experiência com equipamento que se move contigo.”</span><span class="en">“Live your best experience with gear that moves with you.”</span></p><small><span class="pt">genérica · intercambiável · vazia</span><span class="en">generic · interchangeable · empty</span></small></div>
+</div>
+<div class="board-verdict"><span><span class="pt">VEREDICTO</span><span class="en">VERDICT</span></span><b><span class="pt">A resposta A respeita o pedido e dá uma ação concreta.</span><span class="en">Answer A respects the brief and gives a concrete action.</span></b></div>
+</div>
+</div>
+</section>
 
-  <section class="work-tools on-light" id="ferramentas-vivas" aria-labelledby="tools-title">
-    <div class="wrap">
-      <header class="work-section-head rv">
-        <div><span class="mono"><span class="pt">02 / Ferramentas de entrada</span><span class="en">02 / Input tools</span></span><h2 id="tools-title"><span class="pt">Antes e depois<br>da conversa.</span><span class="en">Before and after<br>the conversation.</span></h2></div>
-        <p><span class="pt">Dois objetos simples para criar clareza antes de começar — e para deixar algo físico depois de acabar.</span><span class="en">Two simple objects to create clarity before we start — and to leave something physical after we finish.</span></p>
-      </header>
+<section class="sec" id="gestalt" aria-labelledby="gestalt-title">
+<div class="wrap">
+<header class="sec-head wide">
+<span class="node state" aria-hidden="true">05</span>
+<div style="display:grid;gap:14px">
+<div class="eyebrow"><span><span class="pt">05 / O sistema visual</span><span class="en">05 / The visual system</span></span><span class="chip"><span class="pt">Redesenho 2026</span><span class="en">2026 redesign</span></span></div>
+<h2 class="h2" id="gestalt-title"><span class="pt">O todo é<br><em>outra coisa.</em></span><span class="en">The whole is<br><em>something else.</em></span></h2>
+</div>
+<div style="display:grid;gap:18px">
+<p class="lead"><span class="pt">O site inteiro - e cada trabalho acima - segue as mesmas oito leis de perceção da Gestalt. Aprendes as regras uma vez e elas valem em todas as páginas.</span><span class="en">The whole site - and every work above - follows the same eight Gestalt laws of perception. Learn the rules once and they hold on every page.</span></p>
+<div class="legend"><span><i class="lg state"></i><span class="pt">Estado · estás aqui</span><span class="en">State · you are here</span></span><span><i class="lg link"></i><span class="pt">Ligação</span><span class="en">Connection</span></span><span><i class="lg act"></i><span class="pt">Ação</span><span class="en">Action</span></span></div>
+</div>
+</header>
+<div class="gestalt-grid rv"><article class="g-card region"><div class="g-demo"><svg viewBox="0 0 150 90" aria-hidden="true"><circle class="i" cx="20" cy="30" r="6"/><circle class="i" cx="38" cy="30" r="6"/><circle class="i" cx="20" cy="50" r="6"/><circle class="i" cx="38" cy="50" r="6"/><circle class="i" cx="100" cy="30" r="6"/><circle class="i" cx="118" cy="30" r="6"/><circle class="i" cx="100" cy="50" r="6"/><circle class="i" cx="118" cy="50" r="6"/></svg></div><div class="g-body"><b><span class="pt">Proximidade</span><span class="en">Proximity</span></b><p><span class="pt">Espaço curto dentro de um grupo, espaço largo entre grupos.</span><span class="en">Short space inside a group, wide space between groups.</span></p><small><span class="pt">Rótulos colados aos campos do briefing · factos na página Sobre</span><span class="en">Labels hugging briefing fields · facts on About</span></small></div></article><article class="g-card region"><div class="g-demo"><svg viewBox="0 0 150 90" aria-hidden="true"><circle class="s" cx="20" cy="45" r="8"/><rect class="k" x="44" y="37" width="16" height="16" rx="4"/><circle class="s" cx="84" cy="45" r="8"/><rect class="k" x="108" y="37" width="16" height="16" rx="4"/><line class="ln" x1="10" y1="75" x2="140" y2="75"/></svg></div><div class="g-body"><b><span class="pt">Semelhança</span><span class="en">Similarity</span></b><p><span class="pt">Uma cor, um significado: violeta = estado, ciano = ligação, coral = ação.</span><span class="en">One colour, one meaning: violet = state, cyan = connection, coral = action.</span></p><small><span class="pt">Botões coral em todo o site · pontos cheios vs anéis no percurso</span><span class="en">Coral buttons site-wide · filled vs ring nodes on Journey</span></small></div></article><article class="g-card region"><div class="g-demo"><svg viewBox="0 0 150 90" aria-hidden="true"><rect class="rg" x="4" y="14" width="66" height="62" rx="12"/><rect class="rg" x="80" y="14" width="66" height="62" rx="12"/><circle class="i" cx="26" cy="45" r="6"/><circle class="i" cx="48" cy="45" r="6"/><circle class="i" cx="102" cy="45" r="6"/><circle class="i" cx="124" cy="45" r="6"/></svg></div><div class="g-body"><b><span class="pt">Região comum</span><span class="en">Common region</span></b><p><span class="pt">O que partilha uma moldura é lido como um conjunto.</span><span class="en">What shares a frame is read as a set.</span></p><small><span class="pt">Módulos do briefing · controlos tema/idioma · canais de contacto</span><span class="en">Briefing modules · theme/language controls · contact channels</span></small></div></article><article class="g-card region"><div class="g-demo"><svg viewBox="0 0 150 90" aria-hidden="true"><line class="ln" x1="16" y1="45" x2="134" y2="45"/><circle class="i" cx="16" cy="45" r="6"/><circle class="i" cx="55" cy="45" r="6"/><circle class="s" cx="95" cy="45" r="8"/><circle class="i" cx="134" cy="45" r="6"/></svg></div><div class="g-body"><b><span class="pt">Conexão</span><span class="en">Connectedness</span></b><p><span class="pt">Uma linha une mais forte do que a cor ou a distância.</span><span class="en">A line binds more strongly than colour or distance.</span></p><small><span class="pt">A navegação-constelação · a linha entre ferramenta e painel</span><span class="en">The constellation nav · the line from tool to panel</span></small></div></article><article class="g-card region"><div class="g-demo"><svg viewBox="0 0 150 90" aria-hidden="true"><path class="ln" d="M6 70 C 40 10, 80 10, 110 45 S 150 70, 150 70"/><circle class="i" cx="6" cy="70" r="4"/><circle class="i" cx="58" cy="22" r="4"/><circle class="i" cx="110" cy="45" r="4"/></svg></div><div class="g-body"><b><span class="pt">Continuidade</span><span class="en">Continuity</span></b><p><span class="pt">O olho segue a linha mais suave - e lê o que está nela por ordem.</span><span class="en">The eye follows the smoothest line - and reads what's on it in order.</span></p><small><span class="pt">O eixo vertical que atravessa todas as páginas</span><span class="en">The vertical axis running through every page</span></small></div></article><article class="g-card region"><div class="g-demo"><svg viewBox="0 0 150 90" aria-hidden="true"><circle class="ol" cx="75" cy="45" r="30" stroke-dasharray="36 11"/><circle class="s" cx="75" cy="45" r="8"/></svg></div><div class="g-body"><b><span class="pt">Fecho</span><span class="en">Closure</span></b><p><span class="pt">Formas incompletas são completadas pelo cérebro.</span><span class="en">Incomplete shapes get completed by the brain.</span></p><small><span class="pt">Nós das secções · logótipo · AYYLIENADO fatiado</span><span class="en">Section nodes · logo · sliced AYYLIENADO</span></small></div></article><article class="g-card region"><div class="g-demo"><svg viewBox="0 0 150 90" aria-hidden="true"><rect x="0" y="5" width="150" height="80" rx="10" fill="var(--canvas)" stroke="var(--rule-strong)"/><circle class="i" cx="20" cy="22" r="1.5"/><circle class="i" cx="130" cy="18" r="1.2"/><circle class="i" cx="110" cy="70" r="1.4"/><circle class="i" cx="34" cy="66" r="1.2"/><circle class="k" cx="75" cy="45" r="18"/></svg></div><div class="g-body"><b><span class="pt">Figura / fundo</span><span class="en">Figure / ground</span></b><p><span class="pt">O céu estrelado é fundo; uma só coisa brilhante por ecrã é figura.</span><span class="en">The starfield is ground; one bright thing per screen is figure.</span></p><small><span class="pt">Retrato-planeta · uma ação coral por ecrã</span><span class="en">Portrait-planet · one coral action per screen</span></small></div></article><article class="g-card region"><div class="g-demo"><svg viewBox="0 0 150 90" aria-hidden="true"><g><circle class="c" cx="30" cy="30" r="5"/><circle class="c" cx="50" cy="30" r="5"/><circle class="c" cx="70" cy="30" r="5"/><path class="ln" d="M84 30 h14 l-5 -5 M98 30 l-5 5"/></g><circle class="i" cx="30" cy="62" r="5"/><circle class="i" cx="62" cy="68" r="5"/><circle class="i" cx="100" cy="58" r="5"/></svg></div><div class="g-body"><b><span class="pt">Destino comum</span><span class="en">Common fate</span></b><p><span class="pt">O que se move junto pertence junto.</span><span class="en">What moves together belongs together.</span></p><small><span class="pt">Camadas de estrelas em paralaxe · satélites do herói</span><span class="en">Parallax star layers · hero satellites</span></small></div></article></div>
+</div>
+</section>
 
-      <div class="tool-stories">
-        <article class="tool-story rv">
-          <div class="tool-story-top"><span>01</span><p><span class="pt">Antes de construir</span><span class="en">Before building</span></p></div>
-          <div class="brief-card" aria-hidden="true">
-            <div class="brief-card-bar"><i></i><i></i><i></i><span><span class="pt">BRIEFING DE MISSÃO</span><span class="en">MISSION BRIEF</span></span></div>
-            <div class="brief-card-content"><b><span class="pt">Módulo 01</span><span class="en">Module 01</span></b><strong><span class="pt">Identidade</span><span class="en">Identity</span></strong><small><span class="pt">Nome da marca *</span><span class="en">Brand name *</span></small><em>Freedom Outdoor</em><small><span class="pt">Objetivo principal *</span><span class="en">Main goal *</span></small><div><span><span class="pt">Gerar contactos</span><span class="en">Generate leads</span></span><span class="selected"><span class="pt">Mostrar produtos</span><span class="en">Show products</span></span></div></div>
-            <footer><span class="pt">8 MÓDULOS</span><span class="en">8 MODULES</span> <i></i> <span class="pt">RASCUNHO AUTOMÁTICO</span><span class="en">AUTO DRAFT</span></footer>
-          </div>
-          <div class="tool-story-copy">
-            <span class="mono"><span class="pt">Briefing de Missão</span><span class="en">Mission Briefing</span></span>
-            <h3><span class="pt">Perguntas boas antes do primeiro pixel.</span><span class="en">Good questions before the first pixel.</span></h3>
-            <p><span class="pt">Um formulário de oito módulos que troca tecnicismos por decisões concretas. Guarda o rascunho no navegador e entrega um relatório pronto para email, cópia ou ficheiro.</span><span class="en">An eight-module form that trades jargon for concrete decisions. It saves the draft in your browser and delivers a report ready for email, copy or file.</span></p>
-            <a class="work-text-link dark" href="briefing.html"><span class="pt">Abrir o briefing</span><span class="en">Open the briefing</span> <span aria-hidden="true">→</span></a>
-          </div>
-        </article>
+<section class="sec last" aria-labelledby="outro-title">
+<div class="wrap">
+<div class="outro">
 
-        <article class="tool-story rv">
-          <div class="tool-story-top"><span>02</span><p><span class="pt">Depois da conversa</span><span class="en">After the conversation</span></p></div>
-          <div class="postal-card" aria-hidden="true">
-            <div class="postal-stars">✦ &nbsp; · &nbsp; ✦ &nbsp; · &nbsp; ✦</div>
-            <p><span class="pt">Olá, Terra.</span><span class="en">Hello, Earth.</span></p>
-            <strong>RUBEN<br>RODRIGUES</strong>
-            <small><span class="pt">PROGRAMADOR &amp;<br>ESPECIALISTA EM IA</span><span class="en">DEVELOPER &amp;<br>AI SPECIALIST</span></small>
-            <div class="postal-orbit"></div>
-            <img src="postal/retrato.jpg" alt="" decoding="async" loading="lazy" width="584" height="584">
-            <footer>ESMORIZ · PORTUGAL</footer>
-          </div>
-          <div class="tool-story-copy">
-            <span class="mono"><span class="pt">Postal da Terra</span><span class="en">Postcard from Earth</span></span>
-            <h3><span class="pt">Uma apresentação que não desaparece no separador do browser.</span><span class="en">An introduction that doesn&#39;t vanish in a browser tab.</span></h3>
-            <p><span class="pt">Postal bilingue, pronto em A6 para gráfica ou A4 para imprimir em casa. Inclui contacto copiável, vCard, área segura e frente/verso para pré-visualizar.</span><span class="en">A bilingual postcard, ready in A6 for the print shop or A4 to print at home. Includes copyable contact, vCard, safe area and front/back preview.</span></p>
-            <a class="work-text-link dark" href="postal/"><span class="pt">Ver o postal</span><span class="en">See the postcard</span> <span aria-hidden="true">→</span></a>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="work-agent" id="ajuda" aria-labelledby="ajuda-title">
-    <div class="wrap">
-      <header class="work-section-head rv">
-        <div><span class="mono"><span class="pt">03 / Agente de navegação</span><span class="en">03 / Navigation agent</span></span><h2 id="ajuda-title">Ajuda</h2></div>
-        <p><span class="pt">O guia do canto inferior direito — presente em todas as páginas, construído de raiz em JavaScript puro.</span><span class="en">The guide in the bottom-right corner — present on every page, built from scratch in plain JavaScript.</span></p>
-      </header>
-
-      <div class="work-case-opening rv">
-        <p class="case-statement"><span class="pt">Um assistente que cabe num canto e <mark>faz duas perguntas antes de decidir.</mark></span><span class="en">An assistant that fits in a corner and <mark>asks two questions before it decides.</mark></span></p>
-        <div class="case-meta">
-          <span class="mono"><span class="pt">Sob o capô</span><span class="en">Under the hood</span></span>
-          <p><span class="pt">Sem modelo, sem API, sem rede: pontuação de palavras-chave, matriz de rotas e uma base de conhecimento que vive no teu browser.</span><span class="en">No model, no API, no network: keyword scoring, a routing matrix and a knowledge base that lives in your browser.</span></p>
-        </div>
-      </div>
-
-      <div class="case-ledger rv">
-        <div><b>02</b><span><span class="pt">Perguntas antes de montar a rota</span><span class="en">Questions before the route is built</span></span></div>
-        <div><b>25</b><span><span class="pt">Entradas na base de conhecimento local</span><span class="en">Entries in the local knowledge base</span></span></div>
-        <div><b>≥2</b><span><span class="pt">Pontos para uma resposta ser escolhida</span><span class="en">Points for an answer to be picked</span></span></div>
-        <div><b>0</b><span><span class="pt">Pedidos de rede, cookies ou modelos</span><span class="en">Network requests, cookies or models</span></span></div>
-      </div>
-
-      <div class="work-agent-grid rv">
-        <div class="agent-copy">
-          <span class="mono"><span class="pt">O que foi construído</span><span class="en">What was built</span></span>
-          <h3><span class="pt">Um agente de verdade, feito à mão.</span><span class="en">A real agent, made by hand.</span></h3>
-          <p><span class="pt">O Ajuda abre com duas perguntas — porque estás aqui e de onde vens. A primeira escolhe uma das seis rotas de intenção; a segunda ajusta a porta principal ao ponto de partida. Um referrer do Google promove o contacto; um referrer do CV abre o percurso. O veredicto mostra sempre o porquê, em mono, debaixo da resposta.</span><span class="en">Ajuda opens with two questions — why you're here and where you came from. The first picks one of six intention routes; the second tunes the front door to your starting point. A Google referrer promotes contact; a CV referrer opens the journey. The verdict always shows its reasoning, in mono, beneath the answer.</span></p>
-          <p><span class="pt">O texto livre é normalizado — acentos fora, pontuação convertida em espaço — e pontuado contra uma base local: cada palavra-chave vale pontos pelo seu tamanho, mais um se marcar como forte; uma frase contida no que escreveste ainda recebe crédito parcial. Abaixo do limiar, em vez de inventar uma resposta, o guia entrega o mapa completo do site. E quando tudo falha, nunca te deixa às voltas.</span><span class="en">Free-typed text is normalised — accents out, punctuation turned to space — and scored against a local base: each keyword is worth points by its length, one more if marked strong; a phrase contained in what you wrote still earns partial credit. Below the threshold, instead of inventing an answer, the guide hands you the full site map. When everything fails, it never leaves you wandering.</span></p>
-          <p><span class="pt">Detalhes honestos: o indicador "a escrever…" é um atraso de 420 ms para a conversa respirar; a transcrição fica em sessionStorage e morre com o separador; o referrer é lido para adivinhar a origem sem perguntar duas vezes; e há um botão de tema e outro de idioma que a conversa inteira re-renderiza. Se o produto é navegação, um sistema determinístico chega — e chega offline.</span><span class="en">Honest details: the "typing…" indicator is a 420 ms delay so the conversation can breathe; the transcript sits in sessionStorage and dies with the tab; the referrer is read to guess origin without asking twice; and there are theme and language buttons that re-render the whole conversation. When the product is navigation, a deterministic system is enough — and enough means working offline.</span></p>
-          <div class="case-actions">
-            <button class="btn btn-primary" type="button" data-ajuda-open><span class="pt">Falar com o Ajuda</span><span class="en">Talk to Ajuda</span> <span class="arrow">→</span></button>
-            <a class="btn btn-ghost" href="#metodo"><span class="pt">Ver o critério</span><span class="en">See the criterion</span> <span class="arrow">→</span></a>
-          </div>
-        </div>
-
-        <div class="agent-board" aria-hidden="true">
-          <div class="board-top"><span><span class="pt">AJUDA / FLUXO</span><span class="en">AJUDA / FLOW</span></span><span><span class="pt">CORRE NO BROWSER</span><span class="en">RUNS IN THE BROWSER</span></span></div>
-          <div class="agent-chat">
-            <div class="agent-msg ag">
-              <span class="agent-head"><span class="pt">01 / INTENÇÃO</span><span class="en">01 / INTENT</span></span>
-              <p><span class="pt">Porque estás aqui hoje?</span><span class="en">Why are you here today?</span></p>
-            </div>
-            <div class="agent-msg me"><p><span class="pt">Quero IA dentro de um produto</span><span class="en">I want AI inside a product</span></p></div>
-            <div class="agent-msg ag">
-              <span class="agent-head"><span class="pt">02 / ORIGEM</span><span class="en">02 / ORIGIN</span></span>
-              <p><span class="pt">Certo — integração de IA. E onde encontraste o site?</span><span class="en">Got it — AI integration. And where did you find the site?</span></p>
-            </div>
-            <div class="agent-msg me"><p><span class="pt">CV ou GitHub</span><span class="en">CV or GitHub</span></p></div>
-            <div class="agent-msg ag">
-              <span class="agent-head"><span class="pt">ROTA / IA EM PRODUÇÃO</span><span class="en">ROUTE / AI IN PRODUCTION</span></span>
-              <div class="agent-doors">
-                <span class="agent-door primary"><b><span class="pt">Falar do serviço 03</span><span class="en">Talk about service 03</span></b><i>→</i></span>
-                <span class="agent-door"><b><span class="pt">Ver as rotas de IA</span><span class="en">See the AI routes</span></b><i>→</i></span>
-                <span class="agent-door"><b><span class="pt">Um sistema de IA em produção</span><span class="en">An AI system in production</span></b><i>→</i></span>
-              </div>
-              <span class="agent-why"><span class="pt">rota montada a partir de — procuras: integração de IA · vens de: cv ou github</span><span class="en">route built from — you want: ai integration · you came from: cv or github</span></span>
-            </div>
-          </div>
-          <div class="agent-chips"><span><span class="pt">Não é bem isto</span><span class="en">Not quite</span></span><span><span class="pt">Falar com o Ruben</span><span class="en">Talk to Ruben</span></span><span><span class="pt">Mapa do site</span><span class="en">Site map</span></span></div>
-          <footer class="agent-foot"><span><span class="pt">RECOMEÇAR</span><span class="en">START OVER</span></span><span><span class="pt">SEM COOKIES · NADA SAI DO BROWSER</span><span class="en">NO COOKIES · NOTHING LEAVES THE BROWSER</span></span></footer>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="work-method" id="metodo" aria-labelledby="method-title">
-    <div class="wrap work-method-grid">
-      <div class="method-copy rv">
-        <span class="mono"><span class="pt">04 / Critério de trabalho</span><span class="en">04 / Working criterion</span></span>
-        <h2 id="method-title"><span class="pt">Não aceito a primeira resposta só porque chegou depressa.</span><span class="en">I don&#39;t accept the first answer just because it arrived quickly.</span></h2>
-        <p><span class="pt">Quando um texto, uma direção visual ou uma decisão importa, ponho as respostas lado a lado. O objetivo não é deixar o modelo escolher: é tornar visível o que cada proposta acerta, inventa ou esquece.</span><span class="en">When a piece of copy, a visual direction or a decision matters, I put the answers side by side. The goal isn&#39;t to let the model choose: it&#39;s to make visible what each proposal gets right, invents or forgets.</span></p>
-        <a class="btn btn-ghost" href="ferramentas.html"><span class="pt">Ver ferramentas e prática</span><span class="en">See tools and practice</span> <span class="arrow">→</span></a>
-      </div>
-      <div class="method-board rv" aria-label="Exemplo de confronto de respostas">
-        <div class="board-top"><span><span class="pt">ARENA / RONDA 12</span><span class="en">ARENA / ROUND 12</span></span><span><span class="pt">MESMO PEDIDO</span><span class="en">SAME REQUEST</span></span></div>
-        <p class="board-prompt"><span class="pt">“Uma frase de herói para um quiz de sapatilhas. Concreta, humana, sem hype.”</span><span class="en">“A hero line for a sneaker quiz. Concrete, human, no hype.”</span></p>
-        <div class="board-options">
-          <div class="board-option win"><span><span class="pt">A / FICA</span><span class="en">A / KEEP</span></span><p><span class="pt">“Diz-nos como corres mesmo. Encontramos a sapatilha que faz o resto.”</span><span class="en">“Tell us how you really run. We&#39;ll find the shoe that does the rest.”</span></p><small><span class="pt">específica · humana · útil</span><span class="en">specific · human · useful</span></small></div>
-          <div class="board-option"><span><span class="pt">B / SAI</span><span class="en">B / DROP</span></span><p><span class="pt">“Vive a tua melhor experiência com equipamento que se move contigo.”</span><span class="en">“Live your best experience with gear that moves with you.”</span></p><small><span class="pt">genérica · intercambiável · vazia</span><span class="en">generic · interchangeable · empty</span></small></div>
-        </div>
-        <div class="board-verdict"><span><span class="pt">VEREDICTO</span><span class="en">VERDICT</span></span><b><span class="pt">A resposta A respeita o pedido e dá uma ação concreta.</span><span class="en">Answer A respects the brief and gives a concrete action.</span></b></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="work-outro" aria-labelledby="outro-title">
-    <div class="wrap">
-      <span class="mono"><span class="pt">Próxima missão</span><span class="en">Next mission</span></span>
-      <h2 id="outro-title"><span class="pt">Tens uma pergunta que devia virar ferramenta?</span><span class="en">Have a question that should become a tool?</span></h2>
-      <p><span class="pt">Começamos pelo que precisa de funcionar — e só depois escolhemos a forma.</span><span class="en">We start with what needs to work — and only then choose the form.</span></p>
-      <a class="btn btn-primary" href="contacto.html"><span class="pt">Falar sobre o projeto</span><span class="en">Talk about the project</span> <span class="arrow">→</span></a>
-    </div>
-  </section>
+<span class="mono"><span class="pt">Próxima missão</span><span class="en">Next mission</span></span>
+<h2 class="h2" id="outro-title"><span class="pt">Tens uma pergunta que devia <em>virar ferramenta?</em></span><span class="en">Have a question that should <em>become a tool?</em></span></h2>
+<p class="lead"><span class="pt">Começamos pelo que precisa de funcionar - e só depois escolhemos a forma.</span><span class="en">We start with what needs to work - and only then choose the form.</span></p>
+<a class="btn btn-primary" href="contacto.html"><span class="pt">Falar sobre o projeto</span><span class="en">Talk about the project</span> <span class="arrow">→</span></a>
+</div>
+</div>
+</section>
 </main>
-
 <footer class="site-footer">
 <div class="wrap">
 <div class="footer-grid">
 <div>
-<p class="f-h"><span class="pt">Índice / 01</span><span class="en">Index / 01</span></p>
-<p><span class="dot-live"></span><span><span class="pt">Esmoriz, PT - Terra</span><span class="en">Esmoriz, PT - Earth</span></span></p>
+<p class="f-h"><span class="pt">Base</span><span class="en">Base</span></p>
+<p><span class="dot-live" aria-hidden="true"></span><span><span class="pt">Esmoriz, PT - Terra</span><span class="en">Esmoriz, PT - Earth</span></span></p>
 <p><span class="pt">26 anos - a construir o portefólio</span><span class="en">26 years old - building portfolio</span></p>
 </div>
 <div>
-<p class="f-h"><span class="pt">Índice / 02</span><span class="en">Index / 02</span></p>
+<p class="f-h"><span class="pt">Serviços</span><span class="en">Services</span></p>
 <p><span class="pt">Websites · landing pages · integrações de IA</span><span class="en">Websites · landing pages · AI integrations</span></p>
 <p><span class="pt">Revisão &amp; reparação de código</span><span class="en">Code review &amp; repair</span></p>
 </div>
 <div>
 <p class="f-h"><span class="pt">Ferramentas selecionadas</span><span class="en">Selected tools</span></p>
 <ul>
-<li>Arena.AI</li>
-<li>ChatGPT</li>
-<li>Gemini</li>
-<li>Eklipse</li>
-<li>APIs de IA</li>
+<li>Arena.AI · ChatGPT · Gemini</li>
+<li>Eklipse · <span class="pt">APIs de IA</span><span class="en">AI APIs</span></li>
 <li>Python / JS</li>
 </ul>
 </div>
@@ -307,9 +329,8 @@
 <p class="f-h"><span class="pt">Contacto</span><span class="en">Contact</span></p>
 <ul>
 <li><a href="mailto:benmrodrigues2000@gmail.com">benmrodrigues2000@gmail.com</a></li>
-
 <li><a href="https://github.com/benmrodrigues2000" rel="noopener" target="_blank">github.com/benmrodrigues2000</a></li>
-          <li><a href="cv.pdf" download>CV (PDF)</a></li>
+<li><a href="cv.pdf" download>CV (PDF)</a></li>
 </ul>
 </div>
 </div>
@@ -319,7 +340,7 @@
 </div>
 </div>
 </footer>
-<div aria-live="polite" class="toast" id="toast" role="status">Email copiado</div>
+<div aria-live="polite" class="toast" id="toast" role="status"></div>
 <script src="js/controls.js"></script>
 <script src="js/main.js"></script>
 <script src="js/ajuda.js"></script>

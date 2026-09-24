@@ -166,6 +166,58 @@ html[data-theme="light"]::-webkit-scrollbar-thumb{background:#C4CADD;border-colo
 @keyframes rr-bounce{0%{transform:scale(1)}28%{transform:scale(.9) rotate(-3deg)}62%{transform:scale(1.07) rotate(3deg)}100%{transform:scale(1)}}
 @media (prefers-reduced-motion:reduce){.lt-globe,.lang-toggle.flip,.theme-toggle.ready.pop{animation:none}}
 
+/* ===========================================================================
+   GESTALT LAYER - 2026 redesign
+   Similarity: violet = where you are / selected, cyan = answered, coral = act.
+   Connectedness: the 8 module stars are joined by one line.
+   Common region: each module is one framed card, numbered in a ring.
+   Continuity: a thin axis runs down the left of the form, through every ring.
+   Proximity: label, hint and field sit tight; questions are separated by air.
+   =========================================================================== */
+body{padding-top:128px}
+.mod-index{border-top:1px solid var(--rule)}
+.mi-in{position:relative;max-width:880px;margin:0 auto;padding:10px clamp(16px,4vw,32px) 12px;display:grid;grid-template-columns:repeat(8,1fr)}
+.mi-rail{position:absolute;left:calc(clamp(16px,4vw,32px) + 6.25% ); right:calc(clamp(16px,4vw,32px) + 6.25%);top:19px;height:1px;background:var(--rule)}
+.mod-index a{position:relative;display:grid;justify-items:center;gap:4px;text-decoration:none;color:var(--muted);font-family:var(--font-m);font-size:9.5px;letter-spacing:1.2px;text-transform:uppercase}
+.mod-index i{width:12px;height:12px;border-radius:50%;border:1.5px solid var(--muted);background:var(--bg);transition:background .2s,border-color .2s,box-shadow .2s}
+.mod-index a.done i{background:var(--ice);border-color:var(--ice)}
+.mod-index a.cur{color:var(--ink)}
+.mod-index a.cur i{background:var(--violet);border-color:var(--violet);box-shadow:0 0 0 5px color-mix(in srgb,var(--violet) 22%,transparent)}
+.mod-index a:hover{color:var(--ink)}
+.mod-index a:hover i{border-color:var(--violet)}
+.mi-n{display:none}
+.mi-l{white-space:nowrap}
+.mod-legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:18px;font-family:var(--font-m);font-size:10px;letter-spacing:1.4px;color:var(--muted);text-transform:uppercase}
+.mod-legend span{display:inline-flex;align-items:center;gap:7px}
+.mod-legend i{width:10px;height:10px;border-radius:50%;border:1.5px solid var(--muted)}
+.mod-legend .l-done i{background:var(--ice);border-color:var(--ice)}
+.mod-legend .l-cur i{background:var(--violet);border-color:var(--violet)}
+#form{position:relative;padding-left:56px}
+#form::before{content:"";position:absolute;left:19px;top:30px;bottom:30px;width:1px;background:linear-gradient(var(--violet),var(--rule) 30%,var(--rule) 70%,transparent)}
+.mod{position:relative;scroll-margin-top:140px;margin:34px 0;background:color-mix(in srgb,var(--surface) 92%,transparent)}
+.mod-head{position:static;align-items:center;gap:12px;border-bottom:1px dashed var(--rule)}
+.mod-n{position:absolute;left:-56px;top:clamp(22px,4vw,40px);width:40px;height:40px;border-radius:50%;display:grid;place-items:center;
+  font-family:var(--font-m);font-size:12px;color:var(--ink);background:var(--bg);border:1.5px dashed var(--muted);transition:border-color .2s,background .2s,color .2s}
+.mod.is-done .mod-n{border:1.5px solid var(--ice);color:var(--ice)}
+.mod.is-cur .mod-n{border:1.5px solid var(--violet);color:var(--bg);background:var(--violet)}
+.mod.is-cur{border-color:color-mix(in srgb,var(--violet) 55%,var(--rule))}
+.mod-k{order:2;margin-left:auto;color:var(--muted)}
+.q{margin-top:30px}
+.ql{margin-bottom:8px}
+.ql small{margin-top:2px}
+.btn-pri{background:var(--orange);border-color:var(--orange);color:var(--bg);font-weight:600}
+.btn-pri:hover{filter:brightness(1.06)}
+.head h1 em{color:var(--violet)}
+@media (max-width:720px){
+  body{padding-top:120px}
+  .mi-l{display:none}.mi-n{display:block}
+  #form{padding-left:0}
+  #form::before,.mod-n{display:none}
+  .mod-head{flex-direction:row}
+}
+@media (max-width:420px){body{padding-top:112px}}
+@media print{.mod-index{display:none}#form{padding-left:0}#form::before,.mod-n{display:none}}
+
 @media print{
   *{color:#111 !important;background:#fff !important;box-shadow:none !important}
   #field,.bar,.send-grid,.linkish,.toast{display:none !important}
@@ -190,6 +242,9 @@ html[data-theme="light"]::-webkit-scrollbar-thumb{background:#C4CADD;border-colo
 <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch to English" title="Switch to English"><span class="lt-globe" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"></circle><path d="M3.6 12h16.8"></path><path d="M12 3.6c2.7 2.5 2.7 14.1 0 16.8-2.7-2.7-2.7-14.3 0-16.8z"></path></svg></span><span class="lt-stack" aria-hidden="true"><span class="lt-code lt-pt">PT</span><span class="lt-code lt-en">EN</span></span></button>
     </div>
   </div>
+  <nav class="mod-index" aria-label="Módulos do briefing / Brief modules">
+    <div class="mi-in"><span class="mi-rail" aria-hidden="true"></span><a href="#m1" data-m="1"><i></i><span class="mi-n">01</span><span class="mi-l"><span class="pt">Identidade</span><span class="en">Identity</span></span></a><a href="#m2" data-m="2"><i></i><span class="mi-n">02</span><span class="mi-l"><span class="pt">Missão</span><span class="en">Mission</span></span></a><a href="#m3" data-m="3"><i></i><span class="mi-n">03</span><span class="mi-l"><span class="pt">Tripulação</span><span class="en">Crew</span></span></a><a href="#m4" data-m="4"><i></i><span class="mi-n">04</span><span class="mi-l"><span class="pt">Estética</span><span class="en">Aesthetics</span></span></a><a href="#m5" data-m="5"><i></i><span class="mi-n">05</span><span class="mi-l"><span class="pt">Estrutura</span><span class="en">Structure</span></span></a><a href="#m6" data-m="6"><i></i><span class="mi-n">06</span><span class="mi-l"><span class="pt">Módulos</span><span class="en">Modules</span></span></a><a href="#m7" data-m="7"><i></i><span class="mi-n">07</span><span class="mi-l"><span class="pt">Logística</span><span class="en">Logistics</span></span></a><a href="#m8" data-m="8"><i></i><span class="mi-n">08</span><span class="mi-l"><span class="pt">Transmissão</span><span class="en">Transmission</span></span></a></div>
+  </nav>
 </header>
 
 <main class="wrap">
@@ -197,13 +252,14 @@ html[data-theme="light"]::-webkit-scrollbar-thumb{background:#C4CADD;border-colo
   <p class="mono"><span class="pt">TRANSMISSÃO / NOVO SITE</span><span class="en">TRANSMISSION / NEW SITE</span></p>
   <h1><span class="pt">Briefing de<br/><em>Missão</em></span><span class="en">Mission<br/><em>Briefing</em></span></h1>
   <p class="lede"><span class="pt">Oito módulos de perguntas, cerca de 15 minutos, zero tecnicismos. As tuas respostas viram o plano de voo do teu site: estética, estrutura, funcionalidades e prazos. Podes guardar e voltar mais tarde - o rascunho fica no teu navegador.</span><span class="en">Eight modules of questions, about 15 minutes, zero jargon. Your answers become your site's flight plan: aesthetics, structure, features and deadlines. You can save and come back later - the draft stays in your browser.</span></p>
+  <div class="mod-legend" aria-hidden="true"><span><i></i><span class="pt">Por começar</span><span class="en">Not started</span></span><span class="l-done"><i></i><span class="pt">Respondido</span><span class="en">Answered</span></span><span class="l-cur"><i></i><span class="pt">Estás aqui</span><span class="en">You are here</span></span></div>
   <p class="mono hint"><span class="pt">CAMPOS COM <span class="req">*</span> SÃO OBRIGATÓRIOS · O RESTO AJUDA-ME A ACERTAR À PRIMEIRA</span><span class="en">FIELDS MARKED <span class="req">*</span> ARE REQUIRED · THE REST HELP ME GET IT RIGHT FIRST TIME</span></p>
 </section>
 
 <form id="form" novalidate>
 
-<section class="mod">
-  <div class="mod-head"><span class="mono">MODULE 01</span><h2><span class="pt">Identidade</span><span class="en">Identity</span></h2></div>
+<section class="mod" id="m1" data-n="01">
+  <div class="mod-head"><span class="mod-n" aria-hidden="true">01</span><span class="mono mod-k"><span class="pt">MÓDULO 01</span><span class="en">MODULE 01</span></span><h2><span class="pt">Identidade</span><span class="en">Identity</span></h2></div>
 
   <div class="q">
     <label class="ql" for="f-nome"><span class="pt">O teu nome</span><span class="en">Your name</span> <span class="req">*</span><small><span class="pt">quem está a preencher este briefing</span><span class="en">who is filling in this brief</span></small></label>
@@ -231,8 +287,8 @@ html[data-theme="light"]::-webkit-scrollbar-thumb{background:#C4CADD;border-colo
   </div>
 </section>
 
-<section class="mod">
-  <div class="mod-head"><span class="mono">MODULE 02</span><h2><span class="pt">A missão</span><span class="en">The mission</span></h2></div>
+<section class="mod" id="m2" data-n="02">
+  <div class="mod-head"><span class="mod-n" aria-hidden="true">02</span><span class="mono mod-k"><span class="pt">MÓDULO 02</span><span class="en">MODULE 02</span></span><h2><span class="pt">A missão</span><span class="en">The mission</span></h2></div>
 
   <div class="q">
     <label class="ql" for="f-oque"><span class="pt">O que fazes e para quem?</span><span class="en">What do you do and for whom?</span><small><span class="pt">3 a 5 frases, como se explicasses a um amigo</span><span class="en">3 to 5 sentences, as if explaining to a friend</span></small></label>
@@ -270,8 +326,8 @@ html[data-theme="light"]::-webkit-scrollbar-thumb{background:#C4CADD;border-colo
   </div>
 </section>
 
-<section class="mod">
-  <div class="mod-head"><span class="mono">MODULE 03</span><h2><span class="pt">Tripulação</span><span class="en">Crew</span></h2></div>
+<section class="mod" id="m3" data-n="03">
+  <div class="mod-head"><span class="mod-n" aria-hidden="true">03</span><span class="mono mod-k"><span class="pt">MÓDULO 03</span><span class="en">MODULE 03</span></span><h2><span class="pt">Tripulação</span><span class="en">Crew</span></h2></div>
 
   <div class="q">
     <label class="ql" for="f-publico"><span class="pt">Quem é o teu cliente ideal?</span><span class="en">Who is your ideal client?</span><small><span class="pt">idade, zona, profissão, interesses... quanto mais concreto, melhor</span><span class="en">age, area, profession, interests... the more concrete, the better</span></small></label>
@@ -287,8 +343,8 @@ html[data-theme="light"]::-webkit-scrollbar-thumb{background:#C4CADD;border-colo
   </div>
 </section>
 
-<section class="mod">
-  <div class="mod-head"><span class="mono">MODULE 04</span><h2><span class="pt">Estética da nave</span><span class="en">Ship aesthetics</span></h2></div>
+<section class="mod" id="m4" data-n="04">
+  <div class="mod-head"><span class="mod-n" aria-hidden="true">04</span><span class="mono mod-k"><span class="pt">MÓDULO 04</span><span class="en">MODULE 04</span></span><h2><span class="pt">Estética da nave</span><span class="en">Ship aesthetics</span></h2></div>
 
   <div class="q">
     <span class="ql"><span class="pt">Paleta de cores</span><span class="en">Colour palette</span><small><span class="pt">escolhe uma base pronta ou personaliza as três cores abaixo</span><span class="en">pick a ready-made base or customise the three colours below</span></small></span>
@@ -354,8 +410,8 @@ html[data-theme="light"]::-webkit-scrollbar-thumb{background:#C4CADD;border-colo
   </div>
 </section>
 
-<section class="mod">
-  <div class="mod-head"><span class="mono">MODULE 05</span><h2><span class="pt">Estrutura & conteúdos</span><span class="en">Structure & content</span></h2></div>
+<section class="mod" id="m5" data-n="05">
+  <div class="mod-head"><span class="mod-n" aria-hidden="true">05</span><span class="mono mod-k"><span class="pt">MÓDULO 05</span><span class="en">MODULE 05</span></span><h2><span class="pt">Estrutura & conteúdos</span><span class="en">Structure & content</span></h2></div>
 
   <div class="q">
     <fieldset style="border:none"><legend class="ql"><span class="pt">Que páginas deve ter o site?</span><span class="en">What pages should the site have?</span></legend>
@@ -406,8 +462,8 @@ html[data-theme="light"]::-webkit-scrollbar-thumb{background:#C4CADD;border-colo
   </div>
 </section>
 
-<section class="mod">
-  <div class="mod-head"><span class="mono">MODULE 06</span><h2><span class="pt">Módulos da nave</span><span class="en">Ship modules</span></h2></div>
+<section class="mod" id="m6" data-n="06">
+  <div class="mod-head"><span class="mod-n" aria-hidden="true">06</span><span class="mono mod-k"><span class="pt">MÓDULO 06</span><span class="en">MODULE 06</span></span><h2><span class="pt">Módulos da nave</span><span class="en">Ship modules</span></h2></div>
 
   <div class="q">
     <fieldset style="border:none"><legend class="ql"><span class="pt">Funcionalidades</span><span class="en">Features</span><small><span class="pt">o que o site deve saber fazer</span><span class="en">what the site should be able to do</span></small></legend>
@@ -443,8 +499,8 @@ html[data-theme="light"]::-webkit-scrollbar-thumb{background:#C4CADD;border-colo
   </div>
 </section>
 
-<section class="mod">
-  <div class="mod-head"><span class="mono">MODULE 07</span><h2><span class="pt">Logística</span><span class="en">Logistics</span></h2></div>
+<section class="mod" id="m7" data-n="07">
+  <div class="mod-head"><span class="mod-n" aria-hidden="true">07</span><span class="mono mod-k"><span class="pt">MÓDULO 07</span><span class="en">MODULE 07</span></span><h2><span class="pt">Logística</span><span class="en">Logistics</span></h2></div>
 
   <div class="q">
     <label class="ql" for="f-orc"><span class="pt">Orçamento confortável para este projeto</span><span class="en">Comfortable budget for this project</span><small><span class="pt">um intervalo honesto ajuda-me a propor a solução certa</span><span class="en">an honest range helps me propose the right solution</span></small></label>
@@ -467,8 +523,8 @@ html[data-theme="light"]::-webkit-scrollbar-thumb{background:#C4CADD;border-colo
   </div>
 </section>
 
-<section class="mod">
-  <div class="mod-head"><span class="mono">MODULE 08</span><h2><span class="pt">Transmissão</span><span class="en">Transmission</span></h2></div>
+<section class="mod" id="m8" data-n="08">
+  <div class="mod-head"><span class="mod-n" aria-hidden="true">08</span><span class="mono mod-k"><span class="pt">MÓDULO 08</span><span class="en">MODULE 08</span></span><h2><span class="pt">Transmissão</span><span class="en">Transmission</span></h2></div>
 
   <div class="q">
     <label class="ql" for="f-notas"><span class="pt">Mais alguma coisa que eu deva saber?</span><span class="en">Anything else I should know?</span><small><span class="pt">medos, sonhos, prazos apertados, o que NÃO queres num site...</span><span class="en">fears, dreams, tight deadlines, what you DON'T want in a site...</span></small></label>
@@ -896,6 +952,25 @@ try{
     navigator.serviceWorker.register("sw.js").catch(function(){});
   }
 }catch(e){}
+})();
+</script>
+<script>
+/* Star index: answered modules turn cyan, the one in view turns violet. */
+(function(){
+  var mods=[].slice.call(document.querySelectorAll(".mod[id]"));
+  var links=[].slice.call(document.querySelectorAll(".mod-index a"));
+  function answered(m){
+    var f=m.querySelectorAll("input[data-key],textarea[data-key]");
+    for(var i=0;i<f.length;i++){var t=f[i].type;if(t!=="range"&&t!=="color"&&f[i].value&&f[i].value.trim())return true}
+    return !!m.querySelector(".chips .on,.pal.on");
+  }
+  function paint(){mods.forEach(function(m,i){var d=answered(m);m.classList.toggle("is-done",d);if(links[i])links[i].classList.toggle("done",d)})}
+  function setCur(i){mods.forEach(function(m,j){m.classList.toggle("is-cur",i===j);if(links[j]){links[j].classList.toggle("cur",i===j);if(i===j)links[j].setAttribute("aria-current","step");else links[j].removeAttribute("aria-current")}})}
+  var form=document.getElementById("form");
+  if(form){form.addEventListener("input",paint);form.addEventListener("click",function(){setTimeout(paint,0)});form.addEventListener("change",paint)}
+  window.addEventListener("load",paint);paint();
+  function onScroll(){var y=160,best=0;mods.forEach(function(m,i){if(m.getBoundingClientRect().top<=y+40)best=i});setCur(best)}
+  window.addEventListener("scroll",onScroll,{passive:true});onScroll();
 })();
 </script>
 </body>
