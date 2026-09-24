@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-PT" data-lang="pt" data-fmt="a6">
+<html lang="pt-PT" data-lang="pt" data-theme="dark" data-fmt="a6">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>(function(){try{var q=new URLSearchParams(location.search);var l=q.get("lang"),t=q.get("theme"),L=null,T=null;try{L=localStorage.getItem("rr-lang");T=localStorage.getItem("rr-theme")}catch(e){}l=(l==="en"||l==="pt")?l:((L==="en"||L==="pt")?L:"pt");t=(t==="light"||t==="dark")?t:((T==="light"||T==="dark")?T:"dark");var r=document.documentElement;r.setAttribute("data-lang",l);r.setAttribute("lang",l==="en"?"en":"pt-PT");r.setAttribute("data-theme",t)}catch(e){}})();</script>
 <meta name="robots" content="noindex">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#05060F">
@@ -529,6 +530,52 @@ input[type="range"]{accent-color:var(--violet);width:150px;cursor:pointer}
   .marks line{stroke:#000;stroke-width:.2}
 }
 </style>
+<style>
+/* ---- theme (dark/light) : flip the screen UI, keep the postcard design ---- */
+html[data-theme="light"] .chrome,
+html[data-theme="light"] .notes,
+html[data-theme="light"] .footer-base,
+html[data-theme="light"] .stage-wrap{
+  --canvas:#F3F5FC; --surface:#FFFFFF; --surface-2:#E9ECF8;
+  --light:#F3F5FC; --paper:#FFFFFF; --ink:#171B30;
+  --muted:#59608A; --rule:#D6DBEC; --rule-light:rgba(7,10,24,.16);
+  --violet:#7C5CF0; --violet-deep:#6A46E0; --cyan:#1E93C9; --coral:#D9722F; --ok:#2C9E82;
+  --muted-print:#59608A;
+}
+html[data-theme="light"] .card-box{
+  --canvas:#05060F; --surface:#0B0F1F; --surface-2:#121731;
+  --light:#E9EDF8; --paper:#EEF1F9; --ink:#EDEFFA;
+  --muted:#9AA3BF; --rule:#232A4D; --rule-light:rgba(7,10,24,.16);
+  --violet:#A78BFA; --violet-deep:#7C5CF0; --cyan:#7DD3FC; --coral:#FF9E64; --ok:#6EE7B7;
+  --muted-print:#B3BAD2;
+}
+html[data-theme="light"] body{ background-color:#F3F5FC; background-image:none; }
+html[data-theme="light"] .chrome{ background:rgba(255,255,255,.86); }
+html[data-theme="light"] .toolbar{ background:rgba(255,255,255,.7); }
+html[data-theme="light"] .notes p,html[data-theme="light"] .notes li{ color:#3A4066; }
+html[data-theme="light"] .notes code{ color:#1E93C9; }
+html[data-theme="light"] ::selection{ background:rgba(124,92,240,.26); color:#171B30; }
+html[data-theme="light"]{ scrollbar-color:#C4CADD #F3F5FC; }
+html[data-theme="light"]::-webkit-scrollbar-track{ background:#F3F5FC; }
+html[data-theme="light"]::-webkit-scrollbar-thumb{ background:#C4CADD; }
+/* theme toggle button (top-left) */
+.theme-toggle{position:relative;width:38px;height:38px;border-radius:10px;display:grid;place-items:center;border:1px solid var(--rule);background:var(--surface);color:var(--ink);overflow:hidden;cursor:pointer;transition:border-color .15s,color .15s,transform .15s;flex:none}
+.theme-toggle:hover{border-color:var(--violet);color:var(--violet);transform:translateY(-1px)}
+.theme-toggle svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.theme-toggle .t-icon{position:absolute;inset:0;display:grid;place-items:center}
+.theme-toggle .t-sun .rays{transform-origin:12px 12px}
+[data-theme="dark"] .theme-toggle .t-sun{opacity:0;transform:scale(.4) rotate(-90deg)}
+[data-theme="dark"] .theme-toggle .t-moon{opacity:1}
+[data-theme="light"] .theme-toggle .t-sun{opacity:1}
+[data-theme="light"] .theme-toggle .t-moon{opacity:0;transform:scale(.4) rotate(90deg)}
+.theme-toggle.ready .t-icon{transition:opacity .32s,transform .46s}
+.theme-toggle.ready.pop{animation:rr-pop .46s var(--ease)}
+.theme-toggle.ready.pop .t-sun .rays{animation:rr-rays .9s var(--ease)}
+@keyframes rr-pop{0%{transform:scale(1)}40%{transform:scale(1.16)}100%{transform:scale(1)}}
+@keyframes rr-rays{from{transform:rotate(0)}to{transform:rotate(180deg)}}
+@media (prefers-reduced-motion:reduce){.theme-toggle.ready.pop,.theme-toggle.ready.pop .t-sun .rays{animation:none}}
+</style>
+<script src="../js/controls.js"></script>
 </head>
 <body>
 
@@ -536,6 +583,7 @@ input[type="range"]{accent-color:var(--violet);width:150px;cursor:pointer}
 
 <header class="chrome">
   <div class="wrap">
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ativar modo claro" title="Ativar modo claro" aria-pressed="false"><span class="t-icon t-sun" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><g class="rays"><line x1="12" y1="1.6" x2="12" y2="4"></line><line x1="12" y1="20" x2="12" y2="22.4"></line><line x1="1.6" y1="12" x2="4" y2="12"></line><line x1="20" y1="12" x2="22.4" y2="12"></line><line x1="4.4" y1="4.4" x2="6.1" y2="6.1"></line><line x1="17.9" y1="17.9" x2="19.6" y2="19.6"></line><line x1="4.4" y1="19.6" x2="6.1" y2="17.9"></line><line x1="17.9" y1="6.1" x2="19.6" y2="4.4"></line></g></svg></span><span class="t-icon t-moon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.3 14.6A8.6 8.6 0 0 1 9.4 3.7a8.6 8.6 0 1 0 10.9 10.9z"></path></svg></span></button>
     <a class="wordmark" href="../index.html">
       <span class="name-s">RUBEN RODRIGUES</span>
       <span class="role-s"><span class="pt">Postal imprimível</span><span class="en">Printable postcard</span></span>
@@ -839,7 +887,7 @@ input[type="range"]{accent-color:var(--violet);width:150px;cursor:pointer}
   var stored = loadPrefs();
   var mq = window.matchMedia ? window.matchMedia("(max-width: 900px)") : null;
   var state = {
-    lang: params.get("lang") === "en" ? "en" : (params.get("lang") === "pt" ? "pt" : ((stored.lang === "en" || stored.lang === "pt") ? stored.lang : "pt")),
+    lang: params.get("lang") === "en" ? "en" : (params.get("lang") === "pt" ? "pt" : ((stored.lang === "en" || stored.lang === "pt") ? stored.lang : ((function(){try{var r=localStorage.getItem("rr-lang");return (r==="en"||r==="pt")?r:"pt"}catch(e){return "pt"}})()))),
     fmt: params.get("fmt") === "a4" ? "a4" : (params.get("fmt") === "a6" ? "a6" : ((stored.fmt === "a4" || stored.fmt === "a6") ? stored.fmt : "a6")),
     /* A single face is easier to inspect and operate on a narrow screen. */
     mode: (mq && mq.matches) ? "flip" : ((stored.mode === "flip" || stored.mode === "side") ? stored.mode : "side"),
@@ -1086,7 +1134,7 @@ input[type="range"]{accent-color:var(--violet);width:150px;cursor:pointer}
   }
 
   document.querySelectorAll("[data-set-lang]").forEach(function(x){
-    x.addEventListener("click", function(){ state.lang = x.getAttribute("data-set-lang"); apply(); });
+    x.addEventListener("click", function(){ state.lang = x.getAttribute("data-set-lang"); try{localStorage.setItem("rr-lang", state.lang)}catch(e){} apply(); });
   });
   document.querySelectorAll("[data-set-fmt]").forEach(function(x){
     x.addEventListener("click", function(){ state.fmt = x.getAttribute("data-set-fmt"); apply(); });

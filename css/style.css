@@ -1066,3 +1066,124 @@ section[id],main[id]{scroll-margin-top:calc(var(--header-h) + 20px)}
   .method-board{padding:16px}
   .board-prompt{font-size:12px}
 }
+
+/* ==========================================================================
+   LANGUAGE (PT / EN) + THEME (DARK / LIGHT) CONTROLS
+   The <html> element carries data-lang ("pt"|"en") and data-theme
+   ("dark"|"light"). A tiny inline script in <head> sets them before paint
+   (see every page), so there is no flash of the wrong language/theme.
+   ========================================================================== */
+
+/* Bilingual text: only the span matching the active language is shown. */
+[data-lang="pt"] .en,[data-lang="en"] .pt{display:none !important}
+
+/* Left cluster in the header: theme toggle + wordmark. */
+.header-left{display:flex;align-items:center;gap:12px;min-width:0}
+
+/* Shared circular icon-button shell (used by the theme toggle). */
+.icon-btn{
+  position:relative;flex:0 0 auto;
+  width:40px;height:40px;border-radius:12px;
+  display:grid;place-items:center;
+  border:1px solid var(--rule);background:var(--surface);color:var(--ink);
+  overflow:hidden;
+  transition:border-color 160ms var(--ease),color 160ms var(--ease),
+             background 160ms var(--ease),transform 160ms var(--ease);
+}
+.icon-btn:hover{border-color:var(--lime);color:var(--lime);transform:translateY(-1px)}
+.icon-btn:active{transform:scale(.94)}
+
+/* ---- Theme toggle: a moon in dark mode, a sun in light mode. ---- */
+.theme-toggle .t-icon{position:absolute;inset:0;display:grid;place-items:center}
+.theme-toggle svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.theme-toggle .t-sun .rays{transform-origin:12px 12px}
+[data-theme="dark"] .theme-toggle .t-sun{opacity:0;transform:scale(.4) rotate(-90deg)}
+[data-theme="dark"] .theme-toggle .t-moon{opacity:1;transform:none}
+[data-theme="light"] .theme-toggle .t-sun{opacity:1;transform:none}
+[data-theme="light"] .theme-toggle .t-moon{opacity:0;transform:scale(.4) rotate(90deg)}
+/* Transitions + the one-shot flourish are enabled only AFTER the first
+   human click (controls.js adds .ready), so nothing animates on load. */
+.theme-toggle.ready .t-icon{transition:opacity 320ms var(--ease),transform 460ms var(--ease)}
+.theme-toggle.ready.pop{animation:rr-pop 460ms var(--ease)}
+.theme-toggle.ready.pop .t-sun .rays{animation:rr-rays 900ms var(--ease)}
+@keyframes rr-pop{0%{transform:scale(1)}40%{transform:scale(1.16)}100%{transform:scale(1)}}
+@keyframes rr-rays{from{transform:rotate(0)}to{transform:rotate(180deg)}}
+
+/* ---- Language toggle: spinning globe + odometer code swap. ---- */
+.lang-toggle{
+  flex:0 0 auto;display:inline-flex;align-items:center;gap:8px;
+  height:40px;padding:0 14px 0 11px;border-radius:999px;
+  border:1px solid var(--rule);background:var(--surface);color:var(--ink);
+  font-family:var(--font-mono);font-size:12px;font-weight:500;letter-spacing:.08em;
+  transition:border-color 160ms var(--ease),color 160ms var(--ease),
+             transform 160ms var(--ease),background 160ms var(--ease);
+}
+.lang-toggle:hover{border-color:var(--lime);color:var(--lime)}
+.lt-globe{display:grid;place-items:center;width:18px;height:18px;animation:rr-spin 16s linear infinite}
+.lang-toggle:hover .lt-globe{animation-duration:3.5s}
+.lt-globe svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6}
+@keyframes rr-spin{to{transform:rotate(360deg)}}
+.lt-stack{position:relative;display:block;height:14px;width:24px;overflow:hidden}
+.lt-code{position:absolute;left:0;top:0;height:14px;line-height:14px;white-space:nowrap;
+  transition:transform 320ms var(--ease),opacity 320ms var(--ease)}
+[data-lang="pt"] .lt-en{transform:translateY(16px);opacity:0}
+[data-lang="pt"] .lt-pt{transform:translateY(0);opacity:1}
+[data-lang="en"] .lt-pt{transform:translateY(-16px);opacity:0}
+[data-lang="en"] .lt-en{transform:translateY(-16px);opacity:1}
+/* Click flourish: a playful squish/bounce + a fast globe spin. */
+.lang-toggle.flip{animation:rr-bounce 560ms var(--ease)}
+.lang-toggle.flip .lt-globe{animation:rr-spin 640ms var(--ease)}
+@keyframes rr-bounce{0%{transform:scale(1)}28%{transform:scale(.9) rotate(-3deg)}62%{transform:scale(1.07) rotate(3deg)}100%{transform:scale(1)}}
+
+/* ==========================================================================
+   LIGHT THEME — flip the shared palette; a few hard-coded dark values are
+   re-pointed so the whole site reads correctly on a light canvas.
+   ========================================================================== */
+html[data-theme="light"]{
+  --canvas:#F3F5FC;
+  --surface:#FFFFFF;
+  --surface-2:#E9ECF8;
+  --light:#FFFFFF;
+  --ink:#171B30;
+  --ink-dark:#0A0D1B;
+  --muted:#59608A;
+  --rule:#D6DBEC;
+  --rule-light:rgba(10,13,27,.14);
+}
+html[data-theme="light"] .site-header{background:rgba(255,255,255,.82)}
+html[data-theme="light"] .map{background:rgba(255,255,255,.74)}
+html[data-theme="light"] .section.on-dark,
+html[data-theme="light"] .site-footer{background-image:none}
+html[data-theme="light"] .hero-word{-webkit-text-stroke-color:rgba(23,27,48,.16)}
+html[data-theme="light"] .nf-code{-webkit-text-stroke-color:rgba(23,27,48,.24)}
+html[data-theme="light"] .work-hero::after{-webkit-text-stroke-color:rgba(23,27,48,.12)}
+/* The starfield canvas is a dark-mode effect: hide it on light and show the grid. */
+html[data-theme="light"] .hero #field{opacity:0}
+html[data-theme="light"] .hero.canvas-live .hero-fallback{display:block}
+html[data-theme="light"] .hero-fallback{
+  background-image:
+    linear-gradient(rgba(89,96,138,.16) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(89,96,138,.16) 1px,transparent 1px);
+}
+/* Dark UI mockup cards keep a light-friendly border in light mode. */
+html[data-theme="light"] .brief-card,
+html[data-theme="light"] .postal-card{border-color:var(--rule)}
+html[data-theme="light"] .shot-row img:hover{box-shadow:0 16px 42px rgba(23,27,48,.18)}
+html[data-theme="light"] .card-box{box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 40px 80px -30px rgba(23,27,48,.4),0 0 0 1px rgba(23,27,48,.12)}
+/* Scrollbars follow the theme. */
+html[data-theme="light"]{scrollbar-color:#C4CADD #F3F5FC}
+html[data-theme="light"]::-webkit-scrollbar-track{background:#F3F5FC}
+html[data-theme="light"]::-webkit-scrollbar-thumb{background:#C4CADD;border-color:#F3F5FC}
+html[data-theme="light"]::-webkit-scrollbar-thumb:hover{background:#AEB6D2}
+
+/* Compact the controls a touch on small screens. */
+@media (max-width:720px){
+  .icon-btn{width:38px;height:38px}
+  .lang-toggle{height:38px;padding:0 12px 0 9px}
+  .site-header .wrap{gap:10px}
+  .header-left{gap:8px}
+}
+@media (prefers-reduced-motion:reduce){
+  .lt-globe{animation:none}
+  .lang-toggle.flip,.theme-toggle.ready.pop,.theme-toggle.ready.pop .t-sun .rays{animation:none}
+}
