@@ -478,6 +478,28 @@ input[type="range"]{accent-color:var(--violet);width:150px;cursor:pointer}
   .notes-grid{grid-template-columns:1fr}
   .footer-base{padding:0 18px 32px;flex-direction:column}
 }
+@media (max-width:600px){
+  .chrome .wrap{padding:10px 16px;gap:10px}
+  .wordmark .name-s{font-size:22px}
+  .controls{width:100%;gap:8px;justify-content:space-between}
+  .controls .seg{flex:1}
+  .seg button{min-height:42px;flex:1;padding:8px 10px}
+  .controls .btn-primary{width:100%;justify-content:center}
+  .stage-wrap{padding:24px 16px 12px}
+  .intro{gap:18px;margin-bottom:24px}
+  .intro h1{font-size:clamp(48px,15vw,64px)}
+  .intro p.lede{font-size:14px}
+  .actions .btn{flex:1 1 100%;justify-content:center}
+  .toolbar{padding:12px;margin-bottom:22px}
+  .toolbar > .tb-group{width:100%;justify-content:space-between}
+  .toolbar input[type="range"]{width:min(48vw,180px)}
+  .card-cap{font-size:10px}
+  .card-box:hover{transform:none}
+  .notes{padding:20px 16px 48px}
+  .footer-base{padding:0 16px calc(24px + env(safe-area-inset-bottom))}
+  .toasts{bottom:max(16px,env(safe-area-inset-bottom));width:calc(100% - 32px)}
+  .toast{text-align:center}
+}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none !important;transition:none !important}
@@ -819,7 +841,8 @@ input[type="range"]{accent-color:var(--violet);width:150px;cursor:pointer}
   var state = {
     lang: params.get("lang") === "en" ? "en" : (params.get("lang") === "pt" ? "pt" : ((stored.lang === "en" || stored.lang === "pt") ? stored.lang : "pt")),
     fmt: params.get("fmt") === "a4" ? "a4" : (params.get("fmt") === "a6" ? "a6" : ((stored.fmt === "a4" || stored.fmt === "a6") ? stored.fmt : "a6")),
-    mode: (stored.mode === "flip" || stored.mode === "side") ? stored.mode : ((mq && mq.matches) ? "flip" : "side"),
+    /* A single face is easier to inspect and operate on a narrow screen. */
+    mode: (mq && mq.matches) ? "flip" : ((stored.mode === "flip" || stored.mode === "side") ? stored.mode : "side"),
     side: "front",
     zoom: (typeof stored.zoom === "number" && stored.zoom >= 60 && stored.zoom <= 140) ? stored.zoom : 100
   };
@@ -916,18 +939,22 @@ input[type="range"]{accent-color:var(--violet);width:150px;cursor:pointer}
 
   function cloneFace(face, suffix){
     var c = face.cloneNode(true);
+    var ids = {};
     c.removeAttribute("id");
-    c.querySelectorAll("[id]").forEach(function(el){ el.id = el.id + suffix; });
-    c.querySelectorAll("textPath,use").forEach(function(el){
-      ["href", "xlink:href"].forEach(function(a){
-        var h = el.getAttribute(a);
-        if (h && h.charAt(0) === "#") el.setAttribute(a, h + suffix);
-      });
+    c.querySelectorAll("[id]").forEach(function(el){
+      var oldId = el.id;
+      ids[oldId] = oldId + suffix;
+      el.id = ids[oldId];
     });
     c.querySelectorAll("*").forEach(function(el){
+      ["href", "xlink:href"].forEach(function(a){
+        var h = el.getAttribute(a);
+        if (h && h.charAt(0) === "#" && ids[h.slice(1)]) el.setAttribute(a, "#" + ids[h.slice(1)]);
+      });
       ["fill", "stroke", "filter", "clip-path", "mask"].forEach(function(a){
         var v = el.getAttribute(a);
-        if (v && v.indexOf("url(#") === 0) el.setAttribute(a, v.replace("url(#", "url(#" + "__tmp__").replace("__tmp__", "") + "");
+        var match = v && v.match(/^url\(#([^)]+)\)$/);
+        if (match && ids[match[1]]) el.setAttribute(a, "url(#" + ids[match[1]] + ")");
       });
     });
     c.querySelectorAll(".copy-btn").forEach(function(b){ b.setAttribute("tabindex", "-1"); });
@@ -1099,11 +1126,13 @@ input[type="range"]{accent-color:var(--violet);width:150px;cursor:pointer}
     cancelAnimationFrame(raf);
     raf = requestAnimationFrame(fit);
   });
-  if (mq && mq.addEventListener && !stored.mode){
-    mq.addEventListener("change", function(e){
+  if (mq){
+    function setResponsiveMode(e){
       state.mode = e.matches ? "flip" : "side";
       apply();
-    });
+    }
+    if (mq.addEventListener) mq.addEventListener("change", setResponsiveMode);
+    else if (mq.addListener) mq.addListener(setResponsiveMode);
   }
   document.addEventListener("keydown", function(e){
     if (e.metaKey || e.ctrlKey || e.altKey) return;

@@ -49,14 +49,14 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font-b);font-size:1
 .ql small{display:block;letter-spacing:.4px;color:var(--muted);text-transform:none;margin-top:3px;font-size:11.5px}
 input[type=text],input[type=email],input[type=tel],input[type=date],textarea{
   width:100%;background:var(--bg);border:1px solid var(--rule);border-radius:10px;
-  padding:12px 14px;color:var(--ink);font-family:var(--font-b);font-size:15px;transition:border-color 150ms var(--ease)}
+  padding:12px 14px;color:var(--ink);font-family:var(--font-b);font-size:16px;transition:border-color 150ms var(--ease)}
 input:focus,textarea:focus{border-color:var(--violet);outline:none}
 input.invalid{border-color:#FF6B6B}
 textarea{min-height:96px;resize:vertical}
 input[type=date]{color-scheme:dark;max-width:280px}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chips button{
-  font-family:var(--font-m);font-size:11px;letter-spacing:1px;padding:9px 15px;border-radius:999px;
+  display:inline-flex;align-items:center;min-height:44px;font-family:var(--font-m);font-size:11px;letter-spacing:1px;padding:9px 15px;border-radius:999px;
   background:var(--bg);border:1px solid var(--rule);color:var(--muted);cursor:pointer;
   transition:border-color 150ms var(--ease),color 150ms var(--ease),background 150ms var(--ease)}
 .chips button:hover{border-color:var(--violet);color:var(--ink)}
@@ -98,8 +98,22 @@ details.repo[open] summary::before{content:"- "}
 .linkish:hover{color:var(--orange)}
 :focus-visible{outline:2px solid var(--violet);outline-offset:2px}
 @media (max-width:720px){
+  body{padding-bottom:env(safe-area-inset-bottom)}
   .paletas{grid-template-columns:repeat(2,1fr)}
   .prog{width:34vw}
+  .send-grid .btn{flex:1 1 100%;text-align:center}
+  .toast{max-width:calc(100% - 32px);text-align:center}
+}
+@media (max-width:420px){
+  body{padding-top:68px}
+  .bar-in{padding:10px 16px;gap:10px}
+  .logo{font-size:19px}
+  .logo span{font-size:7.5px;letter-spacing:1.8px}
+  .head{padding-top:40px}
+  .mod{border-radius:14px;padding:20px 16px}
+  .mod-head{align-items:flex-start;flex-direction:column;gap:5px}
+  .ranger{gap:10px}
+  #orc-val{min-width:72px}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -141,11 +155,11 @@ details.repo[open] summary::before{content:"- "}
 
   <div class="q">
     <label class="ql" for="f-nome">O teu nome <span class="req">*</span><small>quem está a preencher este briefing</small></label>
-    <input type="text" id="f-nome" data-key="nome" data-label="Nome" data-sec="01 · IDENTIDADE" autocomplete="name" placeholder="Ex.: Maria Silva"/>
+    <input type="text" id="f-nome" data-key="nome" data-label="Nome" data-sec="01 · IDENTIDADE" autocomplete="name" placeholder="Ex.: Maria Silva" required aria-required="true"/>
   </div>
   <div class="q">
     <label class="ql" for="f-email">Email <span class="req">*</span><small>para onde envio perguntas durante o projeto</small></label>
-    <input type="email" id="f-email" data-key="email" data-label="Email" data-sec="01 · IDENTIDADE" autocomplete="email" placeholder="nome@empresa.pt"/>
+    <input type="email" id="f-email" data-key="email" data-label="Email" data-sec="01 · IDENTIDADE" autocomplete="email" placeholder="nome@empresa.pt" required aria-required="true"/>
   </div>
   <div class="q">
     <label class="ql" for="f-tel">Telefone <small>opcional, só se preferires chamadas rápidas</small></label>
@@ -153,7 +167,7 @@ details.repo[open] summary::before{content:"- "}
   </div>
   <div class="q">
     <label class="ql" for="f-marca">Nome da marca ou projeto <span class="req">*</span><small>exatamente como deve aparecer escrito no site</small></label>
-    <input type="text" id="f-marca" data-key="marca" data-label="Marca" data-sec="01 · IDENTIDADE" placeholder="Ex.: Padaria Central"/>
+    <input type="text" id="f-marca" data-key="marca" data-label="Marca" data-sec="01 · IDENTIDADE" placeholder="Ex.: Padaria Central" required aria-required="true"/>
   </div>
   <div class="q">
     <label class="ql" for="f-area">Área de atividade <small>o que a marca faz, numa linha</small></label>
@@ -593,8 +607,18 @@ form.addEventListener("input",function(e){
   update();
 });
 
+function syncChipState(g){
+  var buttons=g.querySelectorAll("button");
+  for(var i=0;i<buttons.length;i++) buttons[i].setAttribute("aria-pressed",buttons[i].classList.contains("on") ? "true" : "false");
+}
+
+function syncPaletteState(){
+  $$(".pal").forEach(function(p){ p.setAttribute("aria-pressed",p.classList.contains("on") ? "true" : "false"); });
+}
+
 $$(".chips").forEach(function(g){
   var single=g.hasAttribute("data-single");
+  syncChipState(g);
   g.addEventListener("click",function(e){
     var b=e.target.closest("button");
     if(!b) return;
@@ -607,6 +631,7 @@ $$(".chips").forEach(function(g){
     } else {
       b.classList.toggle("on");
     }
+    syncChipState(g);
     update();
   });
 });
@@ -615,6 +640,7 @@ $$(".pal").forEach(function(p){
   p.addEventListener("click",function(){
     $$(".pal").forEach(function(x){x.classList.remove("on")});
     p.classList.add("on");
+    syncPaletteState();
     var pair={cor_fundo:p.getAttribute("data-c1"),cor_destaque:p.getAttribute("data-c2"),cor_texto:p.getAttribute("data-c3")};
     var g=$(".paletas");
     g.dataset.val=p.getAttribute("data-pal");
@@ -626,23 +652,31 @@ $$(".pal").forEach(function(p){
     say("Paleta "+p.getAttribute("data-pal")+" aplicada");
   });
 });
+syncPaletteState();
 
 function requiredMissing(){
   var miss=[];
   ["nome","email","marca"].forEach(function(k){
     var f=document.querySelector('[data-key="'+k+'"]');
-    if(!String(f.value||"").trim()){ miss.push(f); f.classList.add("invalid"); }
-    else f.classList.remove("invalid");
+    var invalid=!String(f.value||"").trim() || !f.checkValidity();
+    f.classList.toggle("invalid",invalid);
+    f.setAttribute("aria-invalid",invalid ? "true" : "false");
+    if(invalid) miss.push(f);
   });
   return miss;
+}
+
+function focusMissing(miss){
+  if(!miss.length) return;
+  miss[0].scrollIntoView({behavior:"smooth",block:"center"});
+  miss[0].focus({preventScroll:true});
 }
 
 $("#m-mail").addEventListener("click",function(e){
   var miss=requiredMissing();
   if(miss.length){
     e.preventDefault();
-    miss[0].scrollIntoView({behavior:"smooth",block:"center"});
-    miss[0].focus({preventScroll:true});
+    focusMissing(miss);
     say("Faltam coordenadas obrigatórias no módulo 01");
     return;
   }
@@ -652,7 +686,7 @@ $("#m-mail").addEventListener("click",function(e){
 $("#m-copy").addEventListener("click",function(){
   var miss=requiredMissing();
   if(miss.length){
-    miss[0].scrollIntoView({behavior:"smooth",block:"center"});
+    focusMissing(miss);
     say("Faltam coordenadas obrigatórias no módulo 01");
     return;
   }
@@ -672,7 +706,7 @@ $("#m-copy").addEventListener("click",function(){
 $("#m-dl").addEventListener("click",function(){
   var miss=requiredMissing();
   if(miss.length){
-    miss[0].scrollIntoView({behavior:"smooth",block:"center"});
+    focusMissing(miss);
     say("Faltam coordenadas obrigatórias no módulo 01");
     return;
   }
@@ -691,6 +725,15 @@ $("#m-reset").addEventListener("click",function(){
   if(LS) LS.removeItem(LSK);
   form.reset();
   $$(".chips button.on").forEach(function(b){b.classList.remove("on")});
+  $$(".chips").forEach(syncChipState);
+  $$(".pal.on").forEach(function(p){p.classList.remove("on")});
+  $(".paletas").removeAttribute("data-val");
+  syncPaletteState();
+  ["nome","email","marca"].forEach(function(k){
+    var requiredField=document.querySelector('[data-key="'+k+'"]');
+    requiredField.removeAttribute("aria-invalid");
+    requiredField.classList.remove("invalid");
+  });
   var defs={cor_fundo:"#05060F",cor_destaque:"#A78BFA",cor_texto:"#E9EDF8"};
   ["cor_fundo","cor_destaque","cor_texto"].forEach(function(k){
     var c=document.querySelector('[data-key="'+k+'"]');
@@ -704,8 +747,8 @@ $("#m-reset").addEventListener("click",function(){
 });
 
 var c=document.getElementById("field"), ctx=c.getContext("2d");
-var stars=[], meteors=[], W=0, H=0;
-var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var stars=[], meteors=[], W=0, H=0, frame=0, running=false;
+var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches || (window.matchMedia && window.matchMedia("(pointer: coarse)").matches);
 function seed(){
   W=c.width=window.innerWidth; H=c.height=window.innerHeight;
   stars=[];
@@ -737,16 +780,36 @@ function drawField(t){
   if(Math.random()<0.005&&meteors.length<2)
     meteors.push({x:W*(0.15+Math.random()*0.7),y:Math.random()*H*0.35,vx:-(2.4+Math.random()*1.8),vy:1.2+Math.random()*0.9,life:1});
 }
-function loop(t){ drawField(t||0); requestAnimationFrame(loop); }
+function loop(t){
+  if(!running) return;
+  drawField(t||0);
+  frame=requestAnimationFrame(loop);
+}
+function startField(){
+  if(reduce || running || document.hidden) return;
+  running=true;
+  frame=requestAnimationFrame(loop);
+}
+function stopField(){
+  running=false;
+  cancelAnimationFrame(frame);
+}
 seed();
-if(reduce){ drawField(0); }
-else requestAnimationFrame(loop);
+if(reduce) drawField(0);
+else startField();
 window.addEventListener("resize",function(){ seed(); if(reduce) drawField(0); });
+document.addEventListener("visibilitychange",function(){ if(document.hidden) stopField(); else startField(); });
 
 var d=$("#f-data");
-if(d){ var today=new Date(); d.min=today.toISOString().slice(0,10); }
+if(d){
+  var today=new Date();
+  var localToday=today.getFullYear()+"-"+String(today.getMonth()+1).padStart(2,"0")+"-"+String(today.getDate()).padStart(2,"0");
+  d.min=localToday;
+}
 
 restore();
+$$(".chips").forEach(syncChipState);
+syncPaletteState();
 update();
 
 try{
