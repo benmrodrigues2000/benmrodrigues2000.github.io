@@ -1,0 +1,285 @@
+/* --------------------------------------------------------------------------
+   Ajuda — guia de navegação do site (assistente local, sem dependências).
+   Aparece como botão no canto inferior direito e abre um painel no mesmo
+   canto. Usa apenas os tokens de css/style.css, por isso segue o tema e o
+   idioma ativos sem duplicar cores.
+
+   Estrutura gerada por js/ajuda.js:
+   .aj-root > .aj-bubble + .aj-panel > (.aj-head, .aj-log, .aj-chips,
+                                        .aj-form, .aj-foot)
+   -------------------------------------------------------------------------- */
+
+.aj-root{position:fixed;inset:auto 0 0 auto;z-index:130;font-family:var(--font-read)}
+
+/* Esconde o agente em impressão (o layout impresso já tem o seu próprio CTA). */
+@media print{.aj-root{display:none !important}}
+
+/* --------------------------------------------------------------- botão ---- */
+.aj-bubble{
+  position:fixed;right:22px;bottom:22px;z-index:131;
+  display:inline-flex;align-items:center;gap:10px;
+  min-height:52px;padding:0 20px 0 14px;border-radius:999px;
+  background:var(--surface);border:1px solid var(--rule);color:var(--ink);
+  box-shadow:0 20px 44px -20px rgba(0,0,0,.72),0 0 0 1px rgba(167,139,250,.12) inset;
+  font-family:var(--font-read);font-size:13px;font-weight:700;
+  letter-spacing:.05em;text-transform:uppercase;
+  transition:transform 180ms var(--ease),border-color 180ms var(--ease),
+             box-shadow 180ms var(--ease);
+}
+.aj-bubble:hover{border-color:var(--lime);transform:translateY(-2px)}
+.aj-bubble .aj-ico{
+  display:grid;place-items:center;width:28px;height:28px;flex:0 0 28px;
+  border-radius:50%;background:var(--accent-fill);color:var(--ink-dark);
+}
+.aj-bubble .aj-ico svg{width:16px;height:16px;stroke:currentColor;fill:none;
+  stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.aj-bubble .aj-ico .aj-ico-x{display:none}
+.aj-root.open .aj-bubble .aj-ico-nav{display:none}
+.aj-root.open .aj-bubble .aj-ico-x{display:block}
+/* Anel discreto até o painel ser aberto pela primeira vez. */
+.aj-bubble.unseen::after{
+  content:"";position:absolute;inset:-3px;border-radius:999px;
+  border:1px solid rgba(167,139,250,.45);
+  animation:aj-ring 2.6s var(--ease) infinite;pointer-events:none;
+}
+@keyframes aj-ring{
+  0%{transform:scale(1);opacity:.9}
+  70%{transform:scale(1.16);opacity:0}
+  100%{transform:scale(1.16);opacity:0}
+}
+
+/* --------------------------------------------------------------- painel --- */
+.aj-panel{
+  position:fixed;right:22px;bottom:86px;z-index:132;
+  width:min(384px,calc(100vw - 44px));
+  max-height:min(620px,calc(100vh - 170px));
+  max-height:min(620px,calc(100dvh - 170px));
+  display:flex;flex-direction:column;
+  background:var(--surface);border:1px solid var(--rule);border-radius:18px;
+  box-shadow:0 40px 80px -32px rgba(0,0,0,.82),0 0 0 1px rgba(255,255,255,.03) inset;
+  overflow:hidden;
+  opacity:0;visibility:hidden;transform:translateY(14px) scale(.985);
+  transform-origin:100% 100%;
+  transition:opacity 220ms var(--ease),transform 220ms var(--ease),
+             visibility 0s linear 220ms;
+}
+.aj-panel.open{
+  opacity:1;visibility:visible;transform:none;
+  transition:opacity 220ms var(--ease),transform 220ms var(--ease),visibility 0s;
+}
+.aj-panel::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(120% 80% at 100% 0%,rgba(167,139,250,.16),transparent 60%),
+    radial-gradient(90% 60% at 0% 100%,rgba(125,211,252,.10),transparent 60%);
+}
+
+/* ------------------------------------------------------------- cabeçalho -- */
+.aj-head{
+  position:relative;z-index:1;display:flex;align-items:center;gap:12px;
+  padding:14px 14px 14px 16px;border-bottom:1px solid var(--rule);
+  background:rgba(255,255,255,.02);
+}
+.aj-id{display:flex;align-items:center;gap:11px;min-width:0;flex:1}
+.aj-orb{
+  position:relative;width:34px;height:34px;flex:0 0 34px;border-radius:11px;
+  display:grid;place-items:center;background:var(--surface-2);
+  border:1px solid var(--rule);color:var(--lime);
+}
+.aj-orb svg{width:17px;height:17px;stroke:currentColor;fill:none;
+  stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.aj-orb i{
+  position:absolute;right:-2px;bottom:-2px;width:8px;height:8px;border-radius:50%;
+  background:var(--lime);box-shadow:0 0 0 2px var(--surface);
+}
+.aj-titles{min-width:0}
+.aj-titles b{
+  display:block;font-family:var(--font-display);font-weight:700;font-size:20px;
+  line-height:1;letter-spacing:.03em;text-transform:uppercase;
+}
+.aj-titles span{
+  display:block;font-family:var(--font-mono);font-size:10px;line-height:1.5;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--muted);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.aj-x{
+  width:34px;height:34px;flex:0 0 34px;border-radius:10px;display:grid;
+  place-items:center;border:1px solid transparent;color:var(--muted);
+  transition:border-color 150ms var(--ease),color 150ms var(--ease);
+}
+.aj-x:hover{border-color:var(--rule);color:var(--ink)}
+.aj-x svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;
+  stroke-linecap:round}
+
+/* ----------------------------------------------------------- conversa ----- */
+.aj-log{
+  position:relative;z-index:1;flex:1;min-height:120px;
+  overflow-y:auto;overscroll-behavior:contain;
+  padding:16px;display:flex;flex-direction:column;gap:10px;
+  scrollbar-width:thin;
+}
+.aj-msg{max-width:94%;font-size:14px;line-height:1.5;animation:aj-in 260ms var(--ease) both}
+@keyframes aj-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.aj-msg.ag{
+  align-self:flex-start;padding:12px 14px;border-radius:14px 14px 14px 4px;
+  background:var(--surface-2);border:1px solid var(--rule);color:var(--ink);
+}
+.aj-msg.me{
+  align-self:flex-end;padding:10px 14px;border-radius:14px 14px 4px 14px;
+  background:var(--accent-fill);color:var(--ink-dark);font-weight:600;
+}
+.aj-msg.plain{background:none;border:0;padding:2px 0 0;max-width:100%}
+.aj-msg p{margin:0}
+.aj-msg p + p{margin-top:8px}
+.aj-msg .aj-headline{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--lime);margin-bottom:6px;
+}
+.aj-msg .aj-why{
+  margin-top:9px;padding-top:9px;border-top:1px dashed var(--rule);
+  font-family:var(--font-mono);font-size:10px;line-height:1.6;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--muted);
+}
+/* Linhas de destino ("leva-me lá") */
+.aj-acts{margin-top:10px;display:flex;flex-direction:column;gap:6px}
+.aj-act{
+  display:flex;align-items:center;gap:10px;text-decoration:none;
+  padding:9px 11px;border:1px solid var(--rule);border-radius:10px;
+  background:rgba(255,255,255,.02);
+  transition:border-color 150ms var(--ease),background 150ms var(--ease),
+             transform 150ms var(--ease);
+}
+.aj-act:hover{border-color:var(--lime);transform:translateX(2px)}
+.aj-act .aj-act-txt{flex:1;min-width:0}
+.aj-act b{display:block;font-size:13px;font-weight:700;line-height:1.3}
+.aj-act small{
+  display:block;font-family:var(--font-mono);font-size:10px;line-height:1.5;
+  letter-spacing:.05em;color:var(--muted);text-transform:uppercase;
+}
+.aj-act .aj-go{
+  font-family:var(--font-mono);font-size:13px;color:var(--muted);
+  transition:transform 150ms var(--ease),color 150ms var(--ease);
+}
+.aj-act:hover .aj-go{color:var(--lime);transform:translateX(3px)}
+.aj-act.primary{background:var(--accent-fill);border-color:var(--accent-fill)}
+.aj-act.primary b,.aj-act.primary small,.aj-act.primary .aj-go{color:var(--ink-dark)}
+.aj-act.primary:hover{border-color:var(--ink-dark)}
+/* Ações que não navegam (mudar tema/idioma) */
+.aj-do{
+  display:inline-flex;align-items:center;gap:8px;margin-top:10px;
+  min-height:38px;padding:8px 14px;border-radius:9px;
+  background:var(--accent-fill);color:var(--ink-dark);
+  font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+}
+.aj-do:hover{transform:translateY(-1px)}
+.aj-link-inline{
+  background:none;border:0;padding:0;margin-top:8px;
+  font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted);text-decoration:underline;
+}
+.aj-link-inline:hover{color:var(--lime)}
+
+/* Indicador de escrita */
+.aj-typing{align-self:flex-start;display:flex;gap:4px;padding:12px 14px;
+  border-radius:14px 14px 14px 4px;background:var(--surface-2);border:1px solid var(--rule)}
+.aj-typing i{width:5px;height:5px;border-radius:50%;background:var(--muted);
+  animation:aj-dot 1.1s ease-in-out infinite}
+.aj-typing i:nth-child(2){animation-delay:.16s}
+.aj-typing i:nth-child(3){animation-delay:.32s}
+@keyframes aj-dot{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+
+/* -------------------------------------------------------------- chips ----- */
+.aj-chips{
+  position:relative;z-index:1;display:none;flex-wrap:wrap;gap:7px;
+  padding:0 16px 12px;
+}
+.aj-chips.on{display:flex}
+.aj-chip{
+  border:1px solid var(--rule);border-radius:999px;padding:8px 13px;
+  font-size:12.5px;line-height:1.2;color:var(--ink);background:transparent;
+  transition:border-color 150ms var(--ease),color 150ms var(--ease),
+             background 150ms var(--ease);
+}
+.aj-chip:hover{border-color:var(--lime);color:var(--lime)}
+/* Sugestão inferida (referrer ou página anterior). */
+.aj-chip.guess{border-style:dashed;border-color:var(--lime);color:var(--lime)}
+.aj-chip.guess::before{content:"\21B3\00A0"}
+
+/* --------------------------------------------------------------- form ----- */
+.aj-form{
+  position:relative;z-index:1;display:flex;gap:8px;padding:12px 16px;
+  border-top:1px solid var(--rule);background:rgba(255,255,255,.02);
+}
+.aj-input{
+  flex:1;min-width:0;height:44px;padding:0 13px;border-radius:10px;
+  background:var(--canvas);border:1px solid var(--rule);color:var(--ink);
+  font-family:var(--font-read);font-size:14px;
+}
+.aj-input::placeholder{color:var(--muted)}
+.aj-input:focus{outline:none;border-color:var(--lime)}
+.aj-send{
+  width:44px;height:44px;flex:0 0 44px;border-radius:10px;display:grid;
+  place-items:center;background:var(--accent-fill);color:var(--ink-dark);
+  transition:transform 150ms var(--ease);
+}
+.aj-send:hover{transform:translateY(-1px)}
+.aj-send svg{width:17px;height:17px;stroke:currentColor;fill:none;
+  stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.aj-send:disabled{opacity:.45;transform:none;cursor:default}
+
+/* -------------------------------------------------------------- rodapé ---- */
+.aj-foot{
+  position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;
+  gap:12px;padding:0 16px 13px;
+  font-family:var(--font-mono);font-size:9.5px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--muted);
+}
+.aj-foot button{
+  font-family:var(--font-mono);font-size:9.5px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--muted);text-decoration:underline;
+}
+.aj-foot button:hover{color:var(--lime)}
+
+/* -------------------------------------------------- tema claro / impressão */
+html[data-theme="light"] .aj-panel{box-shadow:0 40px 80px -34px rgba(23,27,48,.42)}
+html[data-theme="light"] .aj-bubble{box-shadow:0 20px 40px -22px rgba(23,27,48,.45)}
+html[data-theme="light"] .aj-act{background:rgba(23,27,48,.02)}
+html[data-theme="light"] .aj-chips .aj-chip:hover{border-color:var(--lime)}
+
+/* --------------------------------------------- o botão "topo" sai da frente */
+body.aj-on .to-top{right:22px;bottom:86px}
+
+/* -------------------------------------------------------------- pequenos -- */
+@media (max-width:720px){
+  .aj-bubble{right:16px;bottom:max(16px,env(safe-area-inset-bottom))}
+  body.aj-on .to-top{right:16px;bottom:max(84px,calc(env(safe-area-inset-bottom) + 68px))}
+  .aj-panel{
+    right:12px;left:12px;width:auto;
+    bottom:calc(max(16px,env(safe-area-inset-bottom)) + 66px);
+    max-height:min(560px,calc(100dvh - 120px));
+    border-radius:16px;
+  }
+}
+@media (max-width:420px){
+  .aj-bubble{padding:0 16px 0 12px;font-size:12px}
+  .aj-msg{max-width:100%;font-size:13.5px}
+  .aj-log{padding:14px}
+  .aj-chips{padding:0 14px 12px}
+  .aj-form{padding:10px 14px}
+  .aj-foot{padding:0 14px 12px}
+}
+
+/* Landscape phones and other very short viewports: give the conversation
+   room by shrinking the log rather than clipping the input row. */
+@media (max-height:560px){
+  .aj-panel{max-height:calc(100dvh - 90px)}
+  .aj-log{min-height:64px}
+  .aj-titles span{display:none}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .aj-bubble,.aj-panel,.aj-act,.aj-chip,.aj-send{transition:none}
+  .aj-bubble.unseen::after{animation:none;opacity:.5}
+  .aj-msg{animation:none}
+  .aj-typing i{animation:none;opacity:.6}
+}

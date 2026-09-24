@@ -21,4 +21,6 @@ Programador & Especialista em IA - Esmoriz, Portugal.
 - `sitemap.xml`, `robots.txt`, `.nojekyll` - SEO e configuracao
 - `assets/` - imagens reais do Provador (com variantes `-720.jpg` para ecrãs pequenos)
 - `assets/ruben-portrait*.jpg` - retrato na página Sobre
-- `css/style.css`, `js/main.js` - estilos e comportamento
+- `css/style.css`, `css/ajuda.css` - estilos do site e do guia de ajuda
+- `js/main.js`, `js/controls.js` - comportamento e controlos (tema/idioma)
+- `js/ajuda.js` - guia de navegacao "Ajuda" (canto inferior direito): pergunta porque o visitante esta ali e de onde vem, e encaminha-o para a pagina certa. Bilingue, funciona offline e nao faz pedidos a terceiros. Publica `window.RR_AJUDA` e pode ser desligada com `?noajuda=1`.
