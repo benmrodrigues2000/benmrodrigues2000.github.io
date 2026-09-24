@@ -29,9 +29,12 @@
 <meta name="twitter:title" content="Ruben Rodrigues - Programador &amp; Especialista em IA">
 <meta name="twitter:description" content="Programador e especialista em IA em Esmoriz, Portugal. Websites, landing pages e integrações de IA para pequenas empresas.">
 <meta name="twitter:image" content="https://benmrodrigues2000.github.io/og.jpg">
+<link rel="preload" href="fonts/inter-400_700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/bebas-neue-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="fonts.css"/>
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/ajuda.css">
+<link rel="stylesheet" href="css/ajuda.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="css/ajuda.css"></noscript>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Ruben Monteiro Correia Rodrigues", "alternateName": "AYYLIENADO", "jobTitle": "Programador & Especialista em IA", "email": "mailto:benmrodrigues2000@gmail.com", "url": "https://benmrodrigues2000.github.io/", "sameAs": ["https://github.com/benmrodrigues2000", "https://freedomoutdoor.pt/provador"], "address": {"@type": "PostalAddress", "addressLocality": "Esmoriz", "addressCountry": "PT"}}</script>
 
 
@@ -208,8 +211,7 @@
 </div>
 </footer>
 
-<script src="js/controls.js"></script>
-<script src="js/main.js"></script>
-<script src="js/ajuda.js"></script>
+<script src="js/controls.js" defer></script>
+<script src="js/main.js" defer></script>
 </body>
 </html>

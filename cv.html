@@ -29,10 +29,13 @@
 <meta name="twitter:title" content="CV - Ruben Rodrigues - Programador &amp; Especialista em IA">
 <meta name="twitter:description" content="Currículo de Ruben Rodrigues: perfil, registo de serviço, competências, projeto em destaque e método.">
 <meta name="twitter:image" content="https://benmrodrigues2000.github.io/og.jpg">
+<link rel="preload" href="fonts/inter-400_700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/bebas-neue-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="fonts.css"/>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/cv.css">
-<link rel="stylesheet" href="css/ajuda.css">
+<link rel="stylesheet" href="css/ajuda.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="css/ajuda.css"></noscript>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Ruben Monteiro Correia Rodrigues", "alternateName": "AYYLIENADO", "jobTitle": "Programador & Especialista em IA", "email": "mailto:benmrodrigues2000@gmail.com", "url": "https://benmrodrigues2000.github.io/", "sameAs": ["https://github.com/benmrodrigues2000", "https://freedomoutdoor.pt/provador"], "address": {"@type": "PostalAddress", "addressLocality": "Esmoriz", "addressCountry": "PT"}}</script>
 
 <noscript><style>.rv{opacity:1;transform:none}.boot .hero-inner>*{opacity:1;transform:none}</style></noscript>
@@ -306,9 +309,8 @@
 </div>
 </footer>
 
-<script src="js/controls.js"></script>
-<script src="js/main.js"></script>
-<script src="js/ajuda.js"></script>
+<script src="js/controls.js" defer></script>
+<script src="js/main.js" defer></script>
 <script>document.getElementById("printCv").addEventListener("click",function(){window.print();});</script>
 </body>
 </html>
