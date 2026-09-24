@@ -10,9 +10,9 @@
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="manifest" href="manifest.webmanifest">
 <title data-en="Work - Ruben Rodrigues - Developer & AI Specialist">Trabalhos - Ruben Rodrigues - Programador &amp; Especialista em IA</title>
-<meta name="description" content="Sistemas digitais feitos em contexto real: O Provador, o Briefing de Missão, o Postal da Terra e o método de confronto de respostas." data-en="Digital systems built in real contexts: O Provador, the Mission Briefing, the Postcard from Earth and the answer-confrontation method.">
+<meta name="description" content="Sistemas digitais feitos em contexto real: O Provador, o Briefing de Missão, o Postal da Terra, o guia Ajuda e o método de confronto de respostas." data-en="Digital systems built in real contexts: O Provador, the Mission Briefing, the Postcard from Earth, the Ajuda guide and the answer-confrontation method.">
 <meta property="og:title" content="Trabalhos - Ruben Rodrigues - Programador &amp; Especialista em IA">
-<meta property="og:description" content="Sistemas digitais feitos em contexto real: O Provador, o Briefing de Missão, o Postal da Terra e o método de confronto de respostas.">
+<meta property="og:description" content="Sistemas digitais feitos em contexto real: O Provador, o Briefing de Missão, o Postal da Terra, o guia Ajuda e o método de confronto de respostas.">
 <meta property="og:locale" content="pt_PT">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -27,7 +27,7 @@
 <meta property="og:url" content="https://benmrodrigues2000.github.io/trabalhos.html">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Trabalhos - Ruben Rodrigues - Programador &amp; Especialista em IA">
-<meta name="twitter:description" content="Sistemas digitais feitos em contexto real: O Provador, o Briefing de Missão, o Postal da Terra e o método de confronto de respostas.">
+<meta name="twitter:description" content="Sistemas digitais feitos em contexto real: O Provador, o Briefing de Missão, o Postal da Terra, o guia Ajuda e o método de confronto de respostas.">
 <meta name="twitter:image" content="https://benmrodrigues2000.github.io/og-trabalhos.jpg">
 <link rel="stylesheet" href="fonts.css">
 <link rel="stylesheet" href="css/style.css">
@@ -90,11 +90,12 @@
         <ol class="work-route" aria-label="Índice dos trabalhos">
           <li><a href="#provador"><span>01</span><b>O Provador</b><small><span class="pt">recomendação com stock real</span><span class="en">recommendation on real stock</span></small></a></li>
           <li><a href="#ferramentas-vivas"><span>02</span><b><span class="pt">Ferramentas de entrada</span><span class="en">Input tools</span></b><small><span class="pt">briefing e postal imprimível</span><span class="en">briefing and printable postcard</span></small></a></li>
-          <li><a href="#metodo"><span>03</span><b><span class="pt">O critério</span><span class="en">The criterion</span></b><small><span class="pt">respostas comparadas, não aceites</span><span class="en">answers compared, not accepted</span></small></a></li>
+          <li><a href="#ajuda"><span>03</span><b>Ajuda</b><small><span class="pt">o guia que te está a guiar</span><span class="en">the guide that is guiding you</span></small></a></li>
+          <li><a href="#metodo"><span>04</span><b><span class="pt">O critério</span><span class="en">The criterion</span></b><small><span class="pt">respostas comparadas, não aceites</span><span class="en">answers compared, not accepted</span></small></a></li>
         </ol>
       </div>
       <div class="work-hero-foot">
-        <span><span class="pt">01 caso de estudo</span><span class="en">01 case study</span></span><span><span class="pt">02 ferramentas públicas</span><span class="en">02 public tools</span></span><span><span class="pt">01 método de decisão</span><span class="en">01 decision method</span></span>
+        <span><span class="pt">01 caso de estudo</span><span class="en">01 case study</span></span><span><span class="pt">02 ferramentas públicas</span><span class="en">02 public tools</span></span><span><span class="pt">01 agente de navegação</span><span class="en">01 navigation agent</span></span><span><span class="pt">01 método de decisão</span><span class="en">01 decision method</span></span>
       </div>
     </div>
   </section>
@@ -183,10 +184,75 @@
     </div>
   </section>
 
+  <section class="work-agent" id="ajuda" aria-labelledby="ajuda-title">
+    <div class="wrap">
+      <header class="work-section-head rv">
+        <div><span class="mono"><span class="pt">03 / Agente de navegação</span><span class="en">03 / Navigation agent</span></span><h2 id="ajuda-title">Ajuda</h2></div>
+        <p><span class="pt">O guia do canto inferior direito — presente em todas as páginas, construído de raiz em JavaScript puro.</span><span class="en">The guide in the bottom-right corner — present on every page, built from scratch in plain JavaScript.</span></p>
+      </header>
+
+      <div class="work-case-opening rv">
+        <p class="case-statement"><span class="pt">Um assistente que cabe num canto e <mark>faz duas perguntas antes de decidir.</mark></span><span class="en">An assistant that fits in a corner and <mark>asks two questions before it decides.</mark></span></p>
+        <div class="case-meta">
+          <span class="mono"><span class="pt">Sob o capô</span><span class="en">Under the hood</span></span>
+          <p><span class="pt">Sem modelo, sem API, sem rede: pontuação de palavras-chave, matriz de rotas e uma base de conhecimento que vive no teu browser.</span><span class="en">No model, no API, no network: keyword scoring, a routing matrix and a knowledge base that lives in your browser.</span></p>
+        </div>
+      </div>
+
+      <div class="case-ledger rv">
+        <div><b>02</b><span><span class="pt">Perguntas antes de montar a rota</span><span class="en">Questions before the route is built</span></span></div>
+        <div><b>25</b><span><span class="pt">Entradas na base de conhecimento local</span><span class="en">Entries in the local knowledge base</span></span></div>
+        <div><b>≥2</b><span><span class="pt">Pontos para uma resposta ser escolhida</span><span class="en">Points for an answer to be picked</span></span></div>
+        <div><b>0</b><span><span class="pt">Pedidos de rede, cookies ou modelos</span><span class="en">Network requests, cookies or models</span></span></div>
+      </div>
+
+      <div class="work-agent-grid rv">
+        <div class="agent-copy">
+          <span class="mono"><span class="pt">O que foi construído</span><span class="en">What was built</span></span>
+          <h3><span class="pt">Um agente de verdade, feito à mão.</span><span class="en">A real agent, made by hand.</span></h3>
+          <p><span class="pt">O Ajuda abre com duas perguntas — porque estás aqui e de onde vens. A primeira escolhe uma das seis rotas de intenção; a segunda ajusta a porta principal ao ponto de partida. Um referrer do Google promove o contacto; um referrer do CV abre o percurso. O veredicto mostra sempre o porquê, em mono, debaixo da resposta.</span><span class="en">Ajuda opens with two questions — why you're here and where you came from. The first picks one of six intention routes; the second tunes the front door to your starting point. A Google referrer promotes contact; a CV referrer opens the journey. The verdict always shows its reasoning, in mono, beneath the answer.</span></p>
+          <p><span class="pt">O texto livre é normalizado — acentos fora, pontuação convertida em espaço — e pontuado contra uma base local: cada palavra-chave vale pontos pelo seu tamanho, mais um se marcar como forte; uma frase contida no que escreveste ainda recebe crédito parcial. Abaixo do limiar, em vez de inventar uma resposta, o guia entrega o mapa completo do site. E quando tudo falha, nunca te deixa às voltas.</span><span class="en">Free-typed text is normalised — accents out, punctuation turned to space — and scored against a local base: each keyword is worth points by its length, one more if marked strong; a phrase contained in what you wrote still earns partial credit. Below the threshold, instead of inventing an answer, the guide hands you the full site map. When everything fails, it never leaves you wandering.</span></p>
+          <p><span class="pt">Detalhes honestos: o indicador "a escrever…" é um atraso de 420 ms para a conversa respirar; a transcrição fica em sessionStorage e morre com o separador; o referrer é lido para adivinhar a origem sem perguntar duas vezes; e há um botão de tema e outro de idioma que a conversa inteira re-renderiza. Se o produto é navegação, um sistema determinístico chega — e chega offline.</span><span class="en">Honest details: the "typing…" indicator is a 420 ms delay so the conversation can breathe; the transcript sits in sessionStorage and dies with the tab; the referrer is read to guess origin without asking twice; and there are theme and language buttons that re-render the whole conversation. When the product is navigation, a deterministic system is enough — and enough means working offline.</span></p>
+          <div class="case-actions">
+            <button class="btn btn-primary" type="button" data-ajuda-open><span class="pt">Falar com o Ajuda</span><span class="en">Talk to Ajuda</span> <span class="arrow">→</span></button>
+            <a class="btn btn-ghost" href="#metodo"><span class="pt">Ver o critério</span><span class="en">See the criterion</span> <span class="arrow">→</span></a>
+          </div>
+        </div>
+
+        <div class="agent-board" aria-hidden="true">
+          <div class="board-top"><span><span class="pt">AJUDA / FLUXO</span><span class="en">AJUDA / FLOW</span></span><span><span class="pt">CORRE NO BROWSER</span><span class="en">RUNS IN THE BROWSER</span></span></div>
+          <div class="agent-chat">
+            <div class="agent-msg ag">
+              <span class="agent-head"><span class="pt">01 / INTENÇÃO</span><span class="en">01 / INTENT</span></span>
+              <p><span class="pt">Porque estás aqui hoje?</span><span class="en">Why are you here today?</span></p>
+            </div>
+            <div class="agent-msg me"><p><span class="pt">Quero IA dentro de um produto</span><span class="en">I want AI inside a product</span></p></div>
+            <div class="agent-msg ag">
+              <span class="agent-head"><span class="pt">02 / ORIGEM</span><span class="en">02 / ORIGIN</span></span>
+              <p><span class="pt">Certo — integração de IA. E onde encontraste o site?</span><span class="en">Got it — AI integration. And where did you find the site?</span></p>
+            </div>
+            <div class="agent-msg me"><p><span class="pt">CV ou GitHub</span><span class="en">CV or GitHub</span></p></div>
+            <div class="agent-msg ag">
+              <span class="agent-head"><span class="pt">ROTA / IA EM PRODUÇÃO</span><span class="en">ROUTE / AI IN PRODUCTION</span></span>
+              <div class="agent-doors">
+                <span class="agent-door primary"><b><span class="pt">Falar do serviço 03</span><span class="en">Talk about service 03</span></b><i>→</i></span>
+                <span class="agent-door"><b><span class="pt">Ver as rotas de IA</span><span class="en">See the AI routes</span></b><i>→</i></span>
+                <span class="agent-door"><b><span class="pt">Um sistema de IA em produção</span><span class="en">An AI system in production</span></b><i>→</i></span>
+              </div>
+              <span class="agent-why"><span class="pt">rota montada a partir de — procuras: integração de IA · vens de: cv ou github</span><span class="en">route built from — you want: ai integration · you came from: cv or github</span></span>
+            </div>
+          </div>
+          <div class="agent-chips"><span><span class="pt">Não é bem isto</span><span class="en">Not quite</span></span><span><span class="pt">Falar com o Ruben</span><span class="en">Talk to Ruben</span></span><span><span class="pt">Mapa do site</span><span class="en">Site map</span></span></div>
+          <footer class="agent-foot"><span><span class="pt">RECOMEÇAR</span><span class="en">START OVER</span></span><span><span class="pt">SEM COOKIES · NADA SAI DO BROWSER</span><span class="en">NO COOKIES · NOTHING LEAVES THE BROWSER</span></span></footer>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="work-method" id="metodo" aria-labelledby="method-title">
     <div class="wrap work-method-grid">
       <div class="method-copy rv">
-        <span class="mono"><span class="pt">03 / Critério de trabalho</span><span class="en">03 / Working criterion</span></span>
+        <span class="mono"><span class="pt">04 / Critério de trabalho</span><span class="en">04 / Working criterion</span></span>
         <h2 id="method-title"><span class="pt">Não aceito a primeira resposta só porque chegou depressa.</span><span class="en">I don&#39;t accept the first answer just because it arrived quickly.</span></h2>
         <p><span class="pt">Quando um texto, uma direção visual ou uma decisão importa, ponho as respostas lado a lado. O objetivo não é deixar o modelo escolher: é tornar visível o que cada proposta acerta, inventa ou esquece.</span><span class="en">When a piece of copy, a visual direction or a decision matters, I put the answers side by side. The goal isn&#39;t to let the model choose: it&#39;s to make visible what each proposal gets right, invents or forgets.</span></p>
         <a class="btn btn-ghost" href="ferramentas.html"><span class="pt">Ver ferramentas e prática</span><span class="en">See tools and practice</span> <span class="arrow">→</span></a>

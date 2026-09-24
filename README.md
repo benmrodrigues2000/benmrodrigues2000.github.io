@@ -9,7 +9,7 @@ Programador & Especialista em IA - Esmoriz, Portugal.
 - `sobre.html` - sobre + metodo
 - `ferramentas.html` - ferramentas de uso diario
 - `percurso.html` - percurso e registo de servico
-- `trabalhos.html` - notas de campo (O Provador)
+- `trabalhos.html` - notas de campo (O Provador, ferramentas de entrada, o agente Ajuda e o criterio)
 - `contacto.html` - contacto e servicos
 - `404.html` - pagina de erro
 - `cv.pdf` - curriculum atualizado (descarregavel no site)
@@ -23,4 +23,4 @@ Programador & Especialista em IA - Esmoriz, Portugal.
 - `assets/ruben-portrait*.jpg` - retrato na página Sobre
 - `css/style.css`, `css/ajuda.css` - estilos do site e do guia de ajuda
 - `js/main.js`, `js/controls.js` - comportamento e controlos (tema/idioma)
-- `js/ajuda.js` - guia de navegacao "Ajuda" (canto inferior direito): pergunta porque o visitante esta ali e de onde vem, e encaminha-o para a pagina certa. Bilingue, funciona offline e nao faz pedidos a terceiros. Publica `window.RR_AJUDA` e pode ser desligada com `?noajuda=1`.
+- `js/ajuda.js` - guia de navegacao "Ajuda" (canto inferior direito): pergunta porque o visitante esta ali e de onde vem, e encaminha-o para a pagina certa. Bilingue, funciona offline e nao faz pedidos a terceiros. Publica `window.RR_AJUDA` e pode ser desligada com `?noajuda=1`. Apresentado como trabalho na pagina Trabalhos (`#ajuda`).

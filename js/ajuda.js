@@ -71,6 +71,7 @@
     trabalhos: [
       { h:"#provador", name:{pt:"O Provador (caso de estudo)", en:"O Provador (case study)"}, note:{pt:"cliente real, em produção", en:"real client, live"} },
       { h:"#ferramentas-vivas", name:{pt:"Ferramentas públicas", en:"Public tools"}, note:{pt:"briefing e postal", en:"briefing and postcard"} },
+      { h:"#ajuda", name:{pt:"O agente Ajuda", en:"The Ajuda agent"}, note:{pt:"como o guia decide", en:"how the guide decides"} },
       { h:"#metodo", name:{pt:"O critério", en:"The criterion"}, note:{pt:"como comparo respostas", en:"how I compare answers"} }
     ],
     contacto: [{ h:"#contact", name:{pt:"Serviços e contacto", en:"Services and contact"},
@@ -127,8 +128,8 @@
         return {
           head:{ pt:"Rota: prova", en:"Route: proof" },
           text:{
-            pt:"A página Trabalhos abre pelo caso de estudo do Provador (quiz de recomendação com stock real, ligado à base de dados da Freedom Outdoor) e depois mostra as ferramentas públicas e o critério de decisão por trás delas.",
-            en:"The Work page opens with the O Provador case study (a recommendation quiz on real stock, wired to Freedom Outdoor's database), then shows the public tools and the decision criterion behind them."
+            pt:"A página Trabalhos abre pelo caso de estudo do Provador (quiz de recomendação com stock real, ligado à base de dados da Freedom Outdoor), mostra as ferramentas públicas, desmonta o próprio guia Ajuda por dentro e fecha com o critério de decisão por trás de tudo.",
+            en:"The Work page opens with the O Provador case study (a recommendation quiz on real stock, wired to Freedom Outdoor's database), shows the public tools, takes the Ajuda guide itself apart inside, and closes with the decision criterion behind it all."
           },
           acts:[
             { page:"trabalhos", hash:"#provador", label:{pt:"Abrir o caso do Provador", en:"Open the Provador case"},
@@ -367,11 +368,11 @@
     { id:"trabalhos", goal:"trabalhos",
       kw:["trabalhos","projetos","portfolio","portefolio","casos","caso de estudo","exemplos","provas","amostra","work","projects","case studies","case study","examples","your work"],
       head:{pt:"Trabalhos", en:"Work"},
-      text:{ pt:"Três blocos: um caso de estudo (O Provador), duas ferramentas públicas (briefing e postal) e um método de decisão. Nada de maquetas soltas - tudo recebe pessoas a sério.",
-              en:"Three blocks: a case study (O Provador), two public tools (briefing and postcard) and a decision method. No loose mockups - everything meets real people." },
+      text:{ pt:"Quatro blocos: um caso de estudo (O Provador), duas ferramentas públicas (briefing e postal), o próprio guia Ajuda desmontado por dentro e um método de decisão. Nada de maquetas soltas - tudo recebe pessoas a sério.",
+              en:"Four blocks: a case study (O Provador), two public tools (briefing and postcard), the Ajuda guide itself taken apart inside, and a decision method. No loose mockups - everything meets real people." },
       acts:[A("trabalhos","#provador","Abrir o caso do Provador","Open the Provador case","5 perguntas · 60 segundos","5 questions · 60 seconds",true),
-            A("trabalhos","#ferramentas-vivas","Ferramentas públicas","Public tools","briefing e postal","briefing and postcard"),
-            A("trabalhos","#metodo","O critério","The criterion","respostas comparadas","answers compared")] },
+            A("trabalhos","#ajuda","Ver o guia por dentro","See the guide from inside","nota de campo · sem nuvem","field note · no cloud"),
+            A("trabalhos","#ferramentas-vivas","Ferramentas públicas","Public tools","briefing e postal","briefing and postcard")] },
 
     { id:"provador", goal:"trabalhos",
       kw:["provador!","freedom outdoor","sapatilha","sapatilhas","corrida","corredor","shoe","shoes","runner","running","quiz","espinho"],
@@ -395,6 +396,14 @@
               en:"Prompt → draft → critique → revision → publish. I define the outcome, the client and the constraint before writing the first prompt; then I compare answers from two or three models in an arena and sign the verdict with a reason attached." },
       acts:[A("sobre","#method","Ver o método completo","See the full method","com o diagrama do briefing","with the brief diagram",true),
             A("trabalhos","#metodo","O critério aplicado","The criterion applied","veredicto da arena","arena verdict")] },
+
+    { id:"ajuda-guia", goal:"metodo",
+      kw:["como funciona a ajuda","como funciona o guia","como funciona ajuda","ajuda funciona","guia!","guia do site","como o guia","what is the help","how does the help work","how does the guide work","how does ajuda work","site guide","help widget","guide widget"],
+      head:{pt:"O guia por dentro", en:"The guide from inside"},
+      text:{ pt:"Sou eu. Duas perguntas primeiro - porque estás aqui e de onde vens - e a partir daí uma rota com portas. O que escreves é normalizado e pontuado por palavras-chave numa base local: a partir de dois pontos, a resposta escolhe-se; abaixo disso, vai o mapa completo. Tudo corre no teu browser: sem cookies, sem rede, sem modelo. A nota de campo na página Trabalhos desmonta o sistema por dentro.",
+              en:"That's me. Two questions first - why you're here and where you came from - and from there a route with doors. What you type is normalised and scored against keywords in a local base: at two points the answer is picked; below that, the full map goes. It all runs in your browser: no cookies, no network, no model. The field note on the Work page takes the system apart inside." },
+      acts:[A("trabalhos","#ajuda","Ler a nota de campo","Read the field note","o guia, por dentro","the guide, inside",true),
+            A("sobre","#method","Ver o método","See the method","briefing → modelos → entrega","brief → models → delivery")] },
 
     { id:"percurso", goal:"metodo",
       kw:["percurso","experiencia","carreira","curriculo profissional","robot","ferreira de sa","servico militar","registo de servico","journey","experience","career","background","track record"],
