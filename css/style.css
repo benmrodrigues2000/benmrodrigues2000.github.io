@@ -35,6 +35,10 @@ body{
   overflow-x:hidden;
 }
 img,svg,canvas{display:block;max-width:100%}
+/* Keep intrinsic proportions whenever CSS constrains only one axis.
+   Without this, the width/height HTML attributes can pin the other axis
+   (notably on older mobile browsers) and visibly stretch the image. */
+img{height:auto}
 a{color:inherit}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 ::selection{background:var(--lime);color:var(--ink-dark)}
@@ -945,7 +949,7 @@ section[id],main[id]{scroll-margin-top:calc(var(--header-h) + 20px)}
 .case-browser-bar span{width:7px;height:7px;border-radius:50%;background:var(--rule)}
 .case-browser-bar b{margin-left:6px;font-weight:400;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .case-browser-bar em{margin-left:auto;font-style:normal;color:var(--cyan);text-transform:uppercase}
-.case-hero img{display:block;width:100%;aspect-ratio:16/8.5;object-fit:cover;object-position:center top}
+.case-hero img{display:block;width:100%;height:auto;aspect-ratio:16/8.5;object-fit:cover;object-position:center top}
 .case-ledger{display:grid;grid-template-columns:repeat(4,1fr);margin:0;border:1px solid var(--rule);border-top:0;border-radius:0 0 14px 14px;overflow:hidden}
 .case-ledger div{min-height:150px;padding:22px;border-right:1px solid var(--rule);display:flex;flex-direction:column;justify-content:space-between}
 .case-ledger div:last-child{border-right:0}
@@ -956,7 +960,7 @@ section[id],main[id]{scroll-margin-top:calc(var(--header-h) + 20px)}
 .case-story-copy > p{max-width:48ch;margin:0 0 16px;color:var(--muted);font-size:16px;line-height:1.65}
 .case-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
 .case-result{position:relative;margin:0;border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:var(--canvas)}
-.case-result img{display:block;width:100%;aspect-ratio:2/1;object-fit:cover}
+.case-result img{display:block;width:100%;height:auto;aspect-ratio:2/1;object-fit:cover}
 .case-result figcaption{display:flex;justify-content:space-between;gap:12px;padding:11px 14px;border-top:1px solid var(--rule);font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .case-result figcaption span:last-child{color:var(--cyan)}
 .case-steps{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
@@ -965,8 +969,8 @@ section[id],main[id]{scroll-margin-top:calc(var(--header-h) + 20px)}
 .case-steps summary span::before{content:"+";display:inline-block;width:20px;color:var(--lime);font-size:18px;vertical-align:-1px}
 .case-steps[open] summary span::before{content:"−"}
 .case-steps summary small{font-size:10px;line-height:1.4;letter-spacing:.06em;text-align:right;color:var(--muted)}
-.case-step-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:0 0 22px}
-.case-step-strip img{display:block;width:100%;border:1px solid var(--rule);border-radius:8px}
+.case-step-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:0 0 22px;align-items:flex-start}
+.case-step-strip img{display:block;width:100%;height:auto;border:1px solid var(--rule);border-radius:8px}
 
 .work-tools{padding:clamp(88px,12vw,168px) 0;background:var(--light)}
 .work-tools .work-section-head{border-color:var(--rule-light)}
