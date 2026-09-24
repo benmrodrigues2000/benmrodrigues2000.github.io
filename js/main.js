@@ -1,6 +1,9 @@
 (function(){
   "use strict";
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  /* Touch devices get the lightweight static hero rather than a continuous canvas loop. */
+  var coarsePointer = window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
+  var canAnimate = !reduce && !coarsePointer;
 
   function boot(){
     document.body.classList.remove("boot");
@@ -12,17 +15,33 @@
   var burger = document.getElementById("burger");
   var nav = document.getElementById("nav");
   if (burger && nav){
-    burger.addEventListener("click", function(){
-      var open = nav.classList.toggle("open");
+    function setMenu(open){
+      nav.classList.toggle("open", open);
+      document.body.classList.toggle("menu-open", open);
       burger.setAttribute("aria-expanded", open ? "true" : "false");
       burger.setAttribute("aria-label", open ? "Fechar menu" : "Abrir menu");
+    }
+    burger.addEventListener("click", function(){
+      setMenu(!nav.classList.contains("open"));
     });
     nav.addEventListener("click", function(e){
-      if (e.target.tagName === "A"){
-        nav.classList.remove("open");
-        burger.setAttribute("aria-expanded", "false");
+      if (e.target.closest("a")) setMenu(false);
+    });
+    document.addEventListener("keydown", function(e){
+      if (e.key === "Escape" && nav.classList.contains("open")){
+        setMenu(false);
+        burger.focus();
       }
     });
+    document.addEventListener("click", function(e){
+      if (nav.classList.contains("open") && !nav.contains(e.target) && !burger.contains(e.target)) setMenu(false);
+    });
+    var desktopNav = window.matchMedia && window.matchMedia("(min-width: 721px)");
+    function closeForDesktop(e){ if (e.matches) setMenu(false); }
+    if (desktopNav){
+      if (desktopNav.addEventListener) desktopNav.addEventListener("change", closeForDesktop);
+      else if (desktopNav.addListener) desktopNav.addListener(closeForDesktop);
+    }
   }
 
   var revealables = document.querySelectorAll(".rv, .rv-left, .pathway");
@@ -54,7 +73,9 @@
 
   function selectTool(i){
     rows.forEach(function(r, idx){
-      r.setAttribute("aria-selected", idx === i ? "true" : "false");
+      var selected = idx === i;
+      r.setAttribute("aria-selected", selected ? "true" : "false");
+      r.setAttribute("tabindex", selected ? "0" : "-1");
     });
     var t = TOOLS[i];
     if (t && tdNote && tdPrompt && tdOut){
@@ -105,7 +126,7 @@
 
   var mapNodes = Array.prototype.slice.call(document.querySelectorAll(".map-node"));
   var railSpans = Array.prototype.slice.call(document.querySelectorAll(".map-rail span"));
-  if (!reduce && mapNodes.length){
+  if (canAnimate && mapNodes.length){
     var mi = 0;
     window.setInterval(function(){
       mapNodes.forEach(function(n, i){ n.classList.toggle("is-live", i === mi); });
@@ -142,7 +163,7 @@
 
   try{
   var canvas = document.getElementById("field");
-  if (canvas && !reduce && canvas.getContext){
+  if (canvas && canAnimate && canvas.getContext){
     var ctx = canvas.getContext("2d");
     var hero = canvas.parentElement;
     var W = 0, H = 0, DPR = Math.min(window.devicePixelRatio || 1, 2);
