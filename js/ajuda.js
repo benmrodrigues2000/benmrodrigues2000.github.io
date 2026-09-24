@@ -44,6 +44,7 @@
     sobre:       { file:"sobre.html",       name:{pt:"Sobre",     en:"About"} },
     ferramentas: { file:"ferramentas.html", name:{pt:"Ferramentas", en:"Tools"} },
     percurso:    { file:"percurso.html",    name:{pt:"Percurso",  en:"Journey"} },
+    cvpage:      { file:"cv.html",          name:{pt:"CV",        en:"CV"} },
     trabalhos:   { file:"trabalhos.html",   name:{pt:"Trabalhos", en:"Work"} },
     contacto:    { file:"contacto.html",    name:{pt:"Contacto",  en:"Contact"} }
   };
@@ -66,6 +67,8 @@
     ],
     ferramentas: [{ h:"#tools", name:{pt:"O stack", en:"The stack"},
                     note:{pt:"6 ferramentas em uso diário", en:"6 tools in daily use"} }],
+    cvpage: [{ h:"#cv", name:{pt:"Currículo", en:"Curriculum"},
+               note:{pt:"uma página, cinco blocos", en:"one page, five blocks"} }],
     percurso: [{ h:"#curriculum", name:{pt:"Índice de capacidades", en:"Capability index"},
                  note:{pt:"3 rotas, prova por etapa", en:"3 routes, proof per step"} }],
     trabalhos: [
@@ -419,6 +422,7 @@
       text:{ pt:"O PDF tem o essencial para triagem e é atualizado a cada entrega. Se a vaga for de IA aplicada ou front-end, o Percurso mostra a profundidade real - cada capacidade com a sua prova.",
               en:"The PDF carries what screening needs and is updated with every delivery. If the role is applied AI or front-end, Journey shows the real depth - every capability with its proof." },
       acts:[A("cv","","Descarregar o CV (PDF)","Download the CV (PDF)","pronto para triagem","screening-ready",true),
+            A("cvpage","#cv","CV na página","CV as a web page","uma página, cinco blocos","one page, five blocks"),
             A("percurso","#curriculum","Índice de capacidades","Capability index","a versão longa","the long version"),
             A("email","","Falar sobre a vaga","Talk about the role","benmrodrigues2000@gmail.com","benmrodrigues2000@gmail.com")] },
 
@@ -1079,14 +1083,15 @@
     var o = opts || {};
     var text = [];
     if (o.prefix) text.push(o.prefix);
-    text.push({pt:"Seis páginas, seis intenções:", en:"Six pages, six intentions:"});
+    text.push({pt:"Sete páginas, sete intenções:", en:"Seven pages, seven intentions:"});
     say({
       k:"ag",
       head:{pt:"Mapa do site", en:"Site map"},
       text:text,
       acts:[
         A("sobre","#sobre","Sobre","About","quem está por trás","who's behind it"),
-        A("percurso","#curriculum","Percurso","Journey","3 rotas de capacidade","3 capability routes", true),
+        A("percurso","#curriculum","Percurso","Journey","3 rotas de capacidade","3 capability routes"),
+        A("cvpage","#cv","CV","CV","currículo numa página","the CV as a web page"),
         A("trabalhos","#provador","Trabalhos","Work","o Provador e as provas","O Provador and the proof"),
         A("contacto","#contact","Contacto","Contact","serviços e email","services and email")
       ]

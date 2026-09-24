@@ -1,4 +1,4 @@
-var VERSION = "portefolio-v13";
+var VERSION = "portefolio-v14";
 var SHELL = [
   "./",
   "index.html",
@@ -7,9 +7,11 @@ var SHELL = [
   "percurso.html",
   "trabalhos.html",
   "contacto.html",
+  "cv.html",
   "briefing.html",
   "404.html",
   "css/style.css",
+  "css/cv.css",
   "css/ajuda.css",
   "js/main.js",
   "js/controls.js",
@@ -20,6 +22,7 @@ var SHELL = [
   "icon-192.png",
   "icon-512.png",
   "fonts.css",
+  "cv.pdf",
   "fonts/bebas-neue-400-latin.woff2",
   "fonts/ibm-plex-mono-400-latin.woff2",
   "fonts/ibm-plex-mono-500-latin.woff2",
