@@ -397,8 +397,8 @@ details.repo[open] summary::before{content:"- "}
   <div class="q">
     <label class="ql" for="f-orc">Orçamento confortável para este projeto<small>um intervalo honesto ajuda-me a propor a solução certa</small></label>
     <div class="ranger">
-      <input type="range" id="f-orc" data-key="orcamento" data-label="Orçamento" data-sec="07 · LOGÍSTICA" min="500" max="5000" step="250" value="1500"/>
-      <output id="orc-val" for="f-orc">1500 €</output>
+      <input type="range" id="f-orc" data-key="orcamento" data-label="Orçamento" data-sec="07 · LOGÍSTICA" min="0" max="1500" step="100" value="750"/>
+      <output id="orc-val" for="f-orc">750 €</output>
     </div>
   </div>
   <div class="q">
@@ -493,7 +493,7 @@ function fmtDate(v){
 
 function fmtBudget(){
   var r=$("#f-orc"), v=parseInt(r.value,10);
-  return v>=parseInt(r.max,10)? v+" €+" : v+" €";
+  return v+" €";
 }
 
 function report(){
