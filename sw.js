@@ -1,4 +1,4 @@
-var VERSION = "portefolio-v14";
+var VERSION = "portefolio-v15";
 var SHELL = [
   "./",
   "index.html",
@@ -80,7 +80,7 @@ self.addEventListener("fetch", function(e){
           caches.open(VERSION).then(function(c){ c.put(req, copy); });
         }
         return res;
-      }).catch(function(){ return cached; });
+      }).catch(function(){ return cached || Response.error(); });
       return cached || net;
     })
   );

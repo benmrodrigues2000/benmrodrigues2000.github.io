@@ -26,6 +26,9 @@ html{scroll-behavior:smooth;scrollbar-color:#2B3358 #05060F}
 ::selection{background:var(--violet);color:var(--bg)}
 body{background:var(--bg);color:var(--ink);font-family:var(--font-b);font-size:15px;line-height:1.6;padding-top:74px}
 #field{position:fixed;inset:0;z-index:0;pointer-events:none}
+.skip{position:absolute;left:-9999px;top:0;z-index:300;background:var(--orange);color:var(--bg);
+  font-family:var(--font-m);font-size:12px;letter-spacing:1px;padding:12px 18px;border-radius:999px;text-decoration:none}
+.skip:focus{left:12px;top:12px}
 .wrap{max-width:880px;margin:0 auto;padding:0 clamp(16px,4vw,32px);position:relative;z-index:1}
 .mono{font-family:var(--font-m);letter-spacing:1.6px;font-size:11px;color:var(--violet)}
 .bar{position:fixed;top:0;left:0;right:0;z-index:10;background:rgba(5,6,15,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
@@ -80,7 +83,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--violet);border:3px solid var(--bg);box-shadow:0 0 0 1px var(--violet);cursor:pointer}
 #orc-val{font-family:var(--font-m);font-size:14px;color:var(--ice);min-width:86px;text-align:right}
 .send-grid{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
-.btn{display:inline-block;font-family:var(--font-m);font-size:12px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;cursor:pointer;border-radius:999px;padding:15px 24px;transition:transform 150ms var(--ease),border-color 150ms var(--ease)}
+.btn{display:inline-block;font-family:var(--font-m);font-size:12px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;cursor:pointer;border-radius:999px;padding:15px 24px;line-height:inherit;transition:transform 150ms var(--ease),border-color 150ms var(--ease)}
 .btn:active{transform:scale(.97)}
 .btn-pri{background:var(--violet);color:var(--bg);border:1px solid var(--violet)}
 .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--rule)}
@@ -227,6 +230,7 @@ body{padding-top:128px}
 </style>
 </head>
 <body>
+<a class="skip" href="#main"><span class="pt">Saltar para o conteúdo</span><span class="en">Skip to content</span></a>
 <canvas id="field" aria-hidden="true"></canvas>
 
 <header class="bar">
@@ -247,13 +251,13 @@ body{padding-top:128px}
   </nav>
 </header>
 
-<main class="wrap">
+<main class="wrap" id="main">
 <section class="head">
   <p class="mono"><span class="pt">TRANSMISSÃO / NOVO SITE</span><span class="en">TRANSMISSION / NEW SITE</span></p>
   <h1><span class="pt">Briefing de<br/><em>Missão</em></span><span class="en">Mission<br/><em>Briefing</em></span></h1>
   <p class="lede"><span class="pt">Oito módulos de perguntas, cerca de 15 minutos, zero tecnicismos. As tuas respostas viram o plano de voo do teu site: estética, estrutura, funcionalidades e prazos. Podes guardar e voltar mais tarde - o rascunho fica no teu navegador.</span><span class="en">Eight modules of questions, about 15 minutes, zero jargon. Your answers become your site's flight plan: aesthetics, structure, features and deadlines. You can save and come back later - the draft stays in your browser.</span></p>
   <div class="mod-legend" aria-hidden="true"><span><i></i><span class="pt">Por começar</span><span class="en">Not started</span></span><span class="l-done"><i></i><span class="pt">Respondido</span><span class="en">Answered</span></span><span class="l-cur"><i></i><span class="pt">Estás aqui</span><span class="en">You are here</span></span></div>
-  <p class="mono hint"><span class="pt">CAMPOS COM <span class="req">*</span> SÃO OBRIGATÓRIOS · O RESTO AJUDA-ME A ACERTAR À PRIMEIRA</span><span class="en">FIELDS MARKED <span class="req">*</span> ARE REQUIRED · THE REST HELP ME GET IT RIGHT FIRST TIME</span></p>
+  <p class="mono hint"><span class="pt">CAMPOS COM <span class="req">*</span> SÃO OBRIGATÓRIOS · O RESTO AJUDA-ME A PLANEAR MELHOR</span><span class="en">FIELDS MARKED <span class="req">*</span> ARE REQUIRED · THE REST HELPS ME PLAN BETTER</span></p>
 </section>
 
 <form id="form" novalidate>
@@ -411,11 +415,11 @@ body{padding-top:128px}
 </section>
 
 <section class="mod" id="m5" data-n="05">
-  <div class="mod-head"><span class="mod-n" aria-hidden="true">05</span><span class="mono mod-k"><span class="pt">MÓDULO 05</span><span class="en">MODULE 05</span></span><h2><span class="pt">Estrutura & conteúdos</span><span class="en">Structure & content</span></h2></div>
+  <div class="mod-head"><span class="mod-n" aria-hidden="true">05</span><span class="mono mod-k"><span class="pt">MÓDULO 05</span><span class="en">MODULE 05</span></span><h2><span class="pt">Estrutura &amp; conteúdos</span><span class="en">Structure &amp; content</span></h2></div>
 
   <div class="q">
     <fieldset style="border:none"><legend class="ql"><span class="pt">Que páginas deve ter o site?</span><span class="en">What pages should the site have?</span></legend>
-    <div class="chips" data-key="paginas" data-label="Páginas" data-label-en="Pages" data-sec="05 · ESTRUTURA & CONTEÚDOS" data-sec-en="05 · STRUCTURE & CONTENT">
+    <div class="chips" data-key="paginas" data-label="Páginas" data-label-en="Pages" data-sec="05 · ESTRUTURA &amp; CONTEÚDOS" data-sec-en="05 · STRUCTURE &amp; CONTENT">
       <button type="button" data-val="Início" data-val-en="Home"><span class="pt">Início</span><span class="en">Home</span></button>
       <button type="button" data-val="Sobre" data-val-en="About"><span class="pt">Sobre</span><span class="en">About</span></button>
       <button type="button" data-val="Serviços" data-val-en="Services"><span class="pt">Serviços</span><span class="en">Services</span></button>
@@ -429,7 +433,7 @@ body{padding-top:128px}
   </div>
   <div class="q">
     <fieldset style="border:none"><legend class="ql"><span class="pt">Os textos estão prontos?</span><span class="en">Is the copy ready?</span></legend>
-    <div class="chips" data-key="textos" data-label="Textos" data-label-en="Copy" data-sec="05 · ESTRUTURA & CONTEÚDOS" data-sec-en="05 · STRUCTURE & CONTENT">
+    <div class="chips" data-key="textos" data-label="Textos" data-label-en="Copy" data-sec="05 · ESTRUTURA &amp; CONTEÚDOS" data-sec-en="05 · STRUCTURE &amp; CONTENT">
       <button type="button" data-val="Tenho tudo escrito" data-val-en="I have it all written"><span class="pt">Tenho tudo escrito</span><span class="en">I have it all written</span></button>
       <button type="button" data-val="Tenho partes" data-val-en="I have parts"><span class="pt">Tenho partes</span><span class="en">I have parts</span></button>
       <button type="button" data-val="Não tenho nada - preciso de ajuda" data-val-en="I have nothing - I need help"><span class="pt">Não tenho nada, preciso de ajuda</span><span class="en">I have nothing - I need help</span></button>
@@ -437,7 +441,7 @@ body{padding-top:128px}
   </div>
   <div class="q">
     <fieldset style="border:none"><legend class="ql"><span class="pt">Fotografias e imagens</span><span class="en">Photos and images</span></legend>
-    <div class="chips" data-key="imagens" data-label="Imagens" data-label-en="Images" data-sec="05 · ESTRUTURA & CONTEÚDOS" data-sec-en="05 · STRUCTURE & CONTENT">
+    <div class="chips" data-key="imagens" data-label="Imagens" data-label-en="Images" data-sec="05 · ESTRUTURA &amp; CONTEÚDOS" data-sec-en="05 · STRUCTURE &amp; CONTENT">
       <button type="button" data-val="Tenho fotos próprias boas" data-val-en="I have good own photos"><span class="pt">Tenho fotos próprias boas</span><span class="en">I have good own photos</span></button>
       <button type="button" data-val="Tenho algumas" data-val-en="I have some"><span class="pt">Tenho algumas</span><span class="en">I have some</span></button>
       <button type="button" data-val="Usar imagens de banco (stock)" data-val-en="Use stock images"><span class="pt">Usar imagens de banco</span><span class="en">Use stock images</span></button>
@@ -446,7 +450,7 @@ body{padding-top:128px}
   </div>
   <div class="q">
     <fieldset style="border:none"><legend class="ql"><span class="pt">Redes sociais a ligar ao site</span><span class="en">Social media to link to the site</span></legend>
-    <div class="chips" data-key="redes" data-label="Redes sociais" data-label-en="Social media" data-sec="05 · ESTRUTURA & CONTEÚDOS" data-sec-en="05 · STRUCTURE & CONTENT">
+    <div class="chips" data-key="redes" data-label="Redes sociais" data-label-en="Social media" data-sec="05 · ESTRUTURA &amp; CONTEÚDOS" data-sec-en="05 · STRUCTURE &amp; CONTENT">
       <button type="button" data-val="Instagram" data-val-en="Instagram"><span class="pt">Instagram</span><span class="en">Instagram</span></button>
       <button type="button" data-val="Facebook" data-val-en="Facebook"><span class="pt">Facebook</span><span class="en">Facebook</span></button>
       <button type="button" data-val="LinkedIn" data-val-en="LinkedIn"><span class="pt">LinkedIn</span><span class="en">LinkedIn</span></button>
@@ -458,7 +462,7 @@ body{padding-top:128px}
   </div>
   <div class="q">
     <label class="ql" for="f-handles"><span class="pt">Links ou @ das redes</span><span class="en">Social links or @</span><small><span class="pt">opcional</span><span class="en">optional</span></small></label>
-    <input type="text" id="f-handles" data-key="links_redes" data-label="Links das redes" data-label-en="Social links" data-sec="05 · ESTRUTURA & CONTEÚDOS" data-sec-en="05 · STRUCTURE & CONTENT" placeholder="@marca, links..." data-ph-en="@brand, links..."/>
+    <input type="text" id="f-handles" data-key="links_redes" data-label="Links das redes" data-label-en="Social links" data-sec="05 · ESTRUTURA &amp; CONTEÚDOS" data-sec-en="05 · STRUCTURE &amp; CONTENT" placeholder="@marca, links..." data-ph-en="@brand, links..."/>
   </div>
 </section>
 
@@ -503,7 +507,7 @@ body{padding-top:128px}
   <div class="mod-head"><span class="mod-n" aria-hidden="true">07</span><span class="mono mod-k"><span class="pt">MÓDULO 07</span><span class="en">MODULE 07</span></span><h2><span class="pt">Logística</span><span class="en">Logistics</span></h2></div>
 
   <div class="q">
-    <label class="ql" for="f-orc"><span class="pt">Orçamento confortável para este projeto</span><span class="en">Comfortable budget for this project</span><small><span class="pt">um intervalo honesto ajuda-me a propor a solução certa</span><span class="en">an honest range helps me propose the right solution</span></small></label>
+    <label class="ql" for="f-orc"><span class="pt">Orçamento confortável para este projeto</span><span class="en">Comfortable budget for this project</span><small><span class="pt">um intervalo realista ajuda-me a propor a solução certa</span><span class="en">a realistic range helps me propose the right solution</span></small></label>
     <div class="ranger">
       <input type="range" id="f-orc" data-key="orcamento" data-label="Orçamento" data-label-en="Budget" data-sec="07 · LOGÍSTICA" data-sec-en="07 · LOGISTICS" min="0" max="1500" step="100" value="750"/>
       <output id="orc-val" for="f-orc">750 €</output>
@@ -527,7 +531,7 @@ body{padding-top:128px}
   <div class="mod-head"><span class="mod-n" aria-hidden="true">08</span><span class="mono mod-k"><span class="pt">MÓDULO 08</span><span class="en">MODULE 08</span></span><h2><span class="pt">Transmissão</span><span class="en">Transmission</span></h2></div>
 
   <div class="q">
-    <label class="ql" for="f-notas"><span class="pt">Mais alguma coisa que eu deva saber?</span><span class="en">Anything else I should know?</span><small><span class="pt">medos, sonhos, prazos apertados, o que NÃO queres num site...</span><span class="en">fears, dreams, tight deadlines, what you DON'T want in a site...</span></small></label>
+    <label class="ql" for="f-notas"><span class="pt">Mais alguma coisa que eu deva saber?</span><span class="en">Anything else I should know?</span><small><span class="pt">dúvidas, prazos apertados, o que NÃO queres num site...</span><span class="en">worries, tight deadlines, what you DON'T want in a site...</span></small></label>
     <textarea id="f-notas" data-key="notas" data-label="Notas finais" data-label-en="Final notes" data-sec="08 · TRANSMISSÃO" data-sec-en="08 · TRANSMISSION" placeholder="Escreve sem filtros - é isto que torna um site teu..." data-ph-en="Write without filters - this is what makes a site yours..."></textarea>
   </div>
 
@@ -537,7 +541,7 @@ body{padding-top:128px}
   </details>
 
   <div class="send-grid">
-    <a class="btn btn-pri" id="m-mail" href="mailto:benmrodrigues2000@gmail.com"><span class="pt">Enviar por email</span><span class="en">Send by email</span> →</a>
+    <button class="btn btn-pri" type="submit" id="m-mail"><span class="pt">Enviar por email</span><span class="en">Send by email</span> →</button>
     <button type="button" class="btn btn-ghost" id="m-copy"><span class="pt">Copiar respostas</span><span class="en">Copy answers</span></button>
     <button type="button" class="btn btn-ghost" id="m-dl"><span class="pt">Descarregar .txt</span><span class="en">Download .txt</span></button>
   </div>
@@ -550,6 +554,7 @@ body{padding-top:128px}
 <footer class="foot">
   <span class="pt">FEITO EM ESMORIZ, PORTUGAL</span><span class="en">MADE IN ESMORIZ, PORTUGAL</span><br/>
   RUBEN RODRIGUES · <span class="pt">PROGRAMADOR &amp; ESPECIALISTA EM IA</span><span class="en">DEVELOPER &amp; AI SPECIALIST</span> · <a href="https://github.com/benmrodrigues2000" rel="noopener">GITHUB.COM/BENMRODRIGUES2000</a>
+  · <a href="#main"><span class="pt">VOLTAR AO TOPO ↑</span><span class="en">BACK TO TOP ↑</span></a>
 </footer>
 </main>
 
@@ -665,7 +670,7 @@ function update(){
   var r=report();
   $("#repo").textContent=r;
   var marca=($("#f-marca").value||"").trim();
-  $("#m-mail").href="mailto:"+MAIL+"?subject="+encodeURIComponent(T("subject")+(marca||T("novo")))+"&body="+encodeURIComponent(r);
+  $("#m-mail").setAttribute("data-href","mailto:"+MAIL+"?subject="+encodeURIComponent(T("subject")+(marca||T("novo")))+"&body="+encodeURIComponent(r));
   save();
 }
 
@@ -787,19 +792,28 @@ function requiredMissing(){
 
 function focusMissing(miss){
   if(!miss.length) return;
-  miss[0].scrollIntoView({behavior:"smooth",block:"center"});
-  miss[0].focus({preventScroll:true});
+  var f=miss[0];
+  /* Embedders without scrollIntoView (and older engines) still need the focus. */
+  try{ if(f.scrollIntoView) f.scrollIntoView({behavior:"smooth",block:"center"}); }catch(err){}
+  try{ f.focus({preventScroll:true}); }catch(err){ f.focus(); }
 }
 
-$("#m-mail").addEventListener("click",function(e){
+/* Enter inside a text field must not fire the mail client: only the button does. */
+form.addEventListener("keydown",function(e){
+  var t=e.target;
+  if(e.key==="Enter"&&t&&(t.tagName==="INPUT"||t.tagName==="SELECT")){ e.preventDefault(); }
+});
+
+form.addEventListener("submit",function(e){
+  e.preventDefault();
   var miss=requiredMissing();
   if(miss.length){
-    e.preventDefault();
     focusMissing(miss);
     say(T("missing"));
     return;
   }
   say(T("opening"));
+  window.location.href=$("#m-mail").getAttribute("data-href")||$("#m-mail").href;
 });
 
 $("#m-copy").addEventListener("click",function(){
@@ -865,10 +879,17 @@ $("#m-reset").addEventListener("click",function(){
   window.scrollTo({top:0,behavior:"smooth"});
 });
 
-var c=document.getElementById("field"), ctx=c.getContext("2d");
+var c=document.getElementById("field"), ctx=(c&&c.getContext)?c.getContext("2d"):null;
+/* No canvas support (or no element): keep the animation loop harmless. */
+if(!ctx) ctx={clearRect:function(){},beginPath:function(){},arc:function(){},fill:function(){},
+             moveTo:function(){},lineTo:function(){},stroke:function(){},
+             createLinearGradient:function(){return {addColorStop:function(){}};}};
+var raf=window.requestAnimationFrame?window.requestAnimationFrame.bind(window):function(f){return setTimeout(function(){f(Date.now())},16)};
+var caf=window.cancelAnimationFrame?window.cancelAnimationFrame.bind(window):function(id){clearTimeout(id)};
 var stars=[], meteors=[], W=0, H=0, frame=0, running=false;
 var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches || (window.matchMedia && window.matchMedia("(pointer: coarse)").matches);
 function seed(){
+  if(!c) return;
   W=c.width=window.innerWidth; H=c.height=window.innerHeight;
   stars=[];
   var n=Math.min(240,Math.round(W*H/9000));
@@ -902,16 +923,16 @@ function drawField(t){
 function loop(t){
   if(!running) return;
   drawField(t||0);
-  frame=requestAnimationFrame(loop);
+  frame=raf(loop);
 }
 function startField(){
   if(reduce || running || document.hidden) return;
   running=true;
-  frame=requestAnimationFrame(loop);
+  frame=raf(loop);
 }
 function stopField(){
   running=false;
-  cancelAnimationFrame(frame);
+  caf(frame);
 }
 seed();
 if(reduce) drawField(0);

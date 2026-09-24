@@ -112,28 +112,27 @@ def wrap(text, font, size, width):
 
 # ----------------------------------------------------------------- content ---
 PROFILE = (
-    "Programador e especialista em IA. Uso modelos de IA todos os dias e transformo esse "
-    "uso em produtos para pequenas empresas: websites, landing pages, integrações de IA e "
-    "reparação de código."
+    "Programador e especialista em IA. Trabalho em websites, landing pages, integrações "
+    "de IA e reparação de código para pequenas empresas."
 )
 
 RECORD = [
     ("2026 - agora", "Freelancer", "Programador & Especialista em IA", "now",
-     "Websites, landing pages e integrações de IA para pequenas empresas, mais reparação "
-     "de código."),
+     "Websites, landing pages, integrações de IA e reparação de código para pequenas "
+     "empresas. Portefólio em construção."),
     ("2026", "Freedom Outdoor", "Estágio · Running & Trail", "work",
      "Construí O Provador: questionário de cinco passos sobre o stock real da loja, "
      "pontuado em seis eixos. Responsável pelo website da loja."),
-    ("2020 - 22", "Operador de Robot", "Ferreira de Sá S.A.", "work",
-     "Operação e monitorização de robôs industriais em ambiente de produção."),
-    ("2018 - 21", "Colaborador", "Pingo Doce", "work",
-     "Apoio ao cliente e operações — onde começou a paixão por servir bem o cliente."),
     ("2025 - 26", "Curso Sentido 3", "CRPG · Gaia", "train",
      "Programa de regresso ao trabalho com aulas de terapeutas qualificados."),
+    ("2020 - 22", "Operador de Robot", "Ferreira de Sá S.A.", "work",
+     "Operação e monitorização de robôs industriais em ambiente de produção."),
     ("2019 - 21", "TeSP Desenvolvimento de Software", "ESAN · Universidade de Aveiro", "train",
      "Dois anos concluídos, programa pausado por razões de saúde."),
+    ("2018 - 21", "Colaborador", "Pingo Doce", "work",
+     "Apoio ao cliente e operações de loja."),
     ("Concluído", "Técnico de Multimédia", "Curso profissional · 12.º ano", "train",
-     "Multimédia, design e tecnologias web — a primeira caixa de ferramentas."),
+     "Multimédia, design e tecnologias web: a primeira formação técnica."),
 ]
 
 SKILL_GROUPS = [
@@ -154,11 +153,11 @@ STEPS = ["Pergunta", "Briefing", "Prompt", "Crítica", "Código", "Publicação"
 
 PRINCIPLES = [
     ("01", "Começar pela pergunta.",
-     "Resultado, cliente e restrição antes do primeiro prompt."),
-    ("02", "Tornar o invisível visível.",
-     "Cada prompt que importa é guardado, numerado e anotado."),
-    ("03", "Servir o cliente primeiro.",
-     "Prazos claros, linguagem simples; um cliente feliz faz parte da entrega."),
+     "O que tem de funcionar, para quem, e o que não pode ser feito."),
+    ("02", "Guardar o processo.",
+     "Com versão e nota do que partiu da última vez."),
+    ("03", "Explicar sem tecnicismos.",
+     "Prazos ditos de início e linguagem que se percebe."),
 ]
 
 
@@ -443,7 +442,7 @@ def build(path=OUT, g=1.0):
             s.text(x + 14, s.y - 39 - j * 9.4, line, F["READ"], 7.8, MUTED)
     s.y -= 51
     feat = ("Questionário de cinco passos que cruza o perfil do corredor com o stock real "
-            "da loja e devolve um parecer honesto, com exportação em PDF.")
+            "da loja e devolve uma recomendação pontuada em seis eixos, com PDF.")
     line_y = s.y - 11
     for line in wrap(feat, F["READ"], 8.4, s.width - 150):
         s.text(s.left, line_y, line, F["READ"], 8.4, MUTED)
