@@ -31,147 +31,123 @@
 <link rel="stylesheet" href="fonts.css"/>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/ajuda.css">
-<noscript>
-<style>
-.rv,.rv-left{opacity:1;transform:none}
-.boot .map-node,.boot .hero-left>*{opacity:1;transform:none}
-.booted .map-node,.booted .hero-left>*{opacity:1;transform:none}
-</style>
-</noscript>
+
+
+<noscript><style>.rv{opacity:1;transform:none}.boot .hero-inner>*{opacity:1;transform:none}</style></noscript>
 </head>
 <body class="boot">
 <a class="skip" href="#main"><span class="pt">Saltar para o conteúdo</span><span class="en">Skip to content</span></a>
+<div class="sky-fallback" aria-hidden="true"></div>
+<canvas id="sky" aria-hidden="true"></canvas>
 <header class="site-header">
-<div class="wrap">
-<div class="header-left">
-<button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Ativar modo claro" title="Ativar modo claro" aria-pressed="false">
-<span class="t-icon t-sun" aria-hidden="true">
-<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><g class="rays"><line x1="12" y1="1.6" x2="12" y2="4"></line><line x1="12" y1="20" x2="12" y2="22.4"></line><line x1="1.6" y1="12" x2="4" y2="12"></line><line x1="20" y1="12" x2="22.4" y2="12"></line><line x1="4.4" y1="4.4" x2="6.1" y2="6.1"></line><line x1="17.9" y1="17.9" x2="19.6" y2="19.6"></line><line x1="4.4" y1="19.6" x2="6.1" y2="17.9"></line><line x1="17.9" y1="6.1" x2="19.6" y2="4.4"></line></g></svg>
-</span>
-<span class="t-icon t-moon" aria-hidden="true">
-<svg viewBox="0 0 24 24"><path d="M20.3 14.6A8.6 8.6 0 0 1 9.4 3.7a8.6 8.6 0 1 0 10.9 10.9z"></path></svg>
-</span>
-</button>
-<a class="wordmark" href="index.html">
-<span class="name">RUBEN RODRIGUES</span>
-<span class="role"><span class="pt">Programador &amp; Especialista em IA</span><span class="en">Developer &amp; AI Specialist</span></span>
+<div class="wrap hdr">
+<a class="brand" href="index.html">
+<svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><circle class="orbit" cx="17" cy="17" r="15"></circle><circle class="planet" cx="17" cy="17" r="6.5"></circle><circle cx="29.5" cy="9" r="2.2" fill="var(--link)"></circle></svg>
+<span class="brand-txt"><span class="name">RUBEN RODRIGUES</span><span class="role"><span class="pt">Programador &amp; Especialista em IA</span><span class="en">Developer &amp; AI Specialist</span></span></span>
 </a>
-</div>
-<nav aria-label="Secções do site" class="nav" id="nav">
-<a href="index.html"><span class="pt">Início</span><span class="en">Home</span></a>
-<a href="sobre.html"><span class="pt">Sobre</span><span class="en">About</span></a>
-<a href="ferramentas.html" aria-current="page"><span class="pt">Ferramentas</span><span class="en">Tools</span></a>
-<a href="percurso.html"><span class="pt">Percurso</span><span class="en">Journey</span></a>
-<a href="trabalhos.html"><span class="pt">Trabalhos</span><span class="en">Work</span></a>
-<a href="contacto.html"><span class="pt">Contacto</span><span class="en">Contact</span></a>
+<nav aria-label="Secções do site" class="constellation" id="nav">
+<a href="index.html"><i class="star" aria-hidden="true"></i><span class="lbl"><span class="pt">Início</span><span class="en">Home</span></span></a>
+<a href="sobre.html"><i class="star" aria-hidden="true"></i><span class="lbl"><span class="pt">Sobre</span><span class="en">About</span></span></a>
+<a href="ferramentas.html" aria-current="page"><i class="star" aria-hidden="true"></i><span class="lbl"><span class="pt">Ferramentas</span><span class="en">Tools</span></span></a>
+<a href="percurso.html"><i class="star" aria-hidden="true"></i><span class="lbl"><span class="pt">Percurso</span><span class="en">Journey</span></span></a>
+<a href="trabalhos.html"><i class="star" aria-hidden="true"></i><span class="lbl"><span class="pt">Trabalhos</span><span class="en">Work</span></span></a>
+<a href="contacto.html"><i class="star" aria-hidden="true"></i><span class="lbl"><span class="pt">Contacto</span><span class="en">Contact</span></span></a>
 </nav>
-<div style="display:flex;align-items:center;gap:12px">
+<div class="hdr-tools">
+<div class="ctl-group" role="group" aria-label="Tema e idioma / Theme and language">
+<button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Ativar modo claro" title="Ativar modo claro" aria-pressed="false">
+<span class="t-icon t-sun" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><g class="rays"><line x1="12" y1="1.6" x2="12" y2="4"></line><line x1="12" y1="20" x2="12" y2="22.4"></line><line x1="1.6" y1="12" x2="4" y2="12"></line><line x1="20" y1="12" x2="22.4" y2="12"></line><line x1="4.4" y1="4.4" x2="6.1" y2="6.1"></line><line x1="17.9" y1="17.9" x2="19.6" y2="19.6"></line><line x1="4.4" y1="19.6" x2="6.1" y2="17.9"></line><line x1="17.9" y1="6.1" x2="19.6" y2="4.4"></line></g></svg></span>
+<span class="t-icon t-moon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.3 14.6A8.6 8.6 0 0 1 9.4 3.7a8.6 8.6 0 1 0 10.9 10.9z"></path></svg></span>
+</button>
+<span class="ctl-sep" aria-hidden="true"></span>
 <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch to English" title="Switch to English">
 <span class="lt-globe" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"></circle><path d="M3.6 12h16.8"></path><path d="M12 3.6c2.7 2.5 2.7 14.1 0 16.8-2.7-2.7-2.7-14.3 0-16.8z"></path></svg></span>
 <span class="lt-stack" aria-hidden="true"><span class="lt-code lt-pt">PT</span><span class="lt-code lt-en">EN</span></span>
 </button>
+</div>
 <a class="btn btn-primary header-cta" href="contacto.html"><span class="pt">Vamos falar</span><span class="en">Let's talk</span></a>
-<button aria-controls="nav" aria-expanded="false" aria-label="Abrir menu" class="burger" id="burger">
-<span></span>
-</button>
+<button aria-controls="nav" aria-expanded="false" aria-label="Abrir menu" class="burger" id="burger" type="button"><span></span></button>
 </div>
 </div>
 </header>
 <main id="main">
-<section class="section on-light" id="tools">
+<section class="sec first last" id="tools">
 <div class="wrap">
-<div class="section-head">
-<div class="titleblock">
-<span class="mono"><span class="pt">Ferramentas / prática diária</span><span class="en">Tools / daily practice</span></span>
-<h1 class="big-title rv-left"><span class="pt">O Stack</span><span class="en">The Stack</span></h1>
+<header class="sec-head wide">
+<span class="node state" aria-hidden="true">01</span>
+<div style="display:grid;gap:14px">
+<div class="eyebrow"><span><span class="pt">Ferramentas / prática diária</span><span class="en">Tools / daily practice</span></span><span class="g-tag"><span class="pt">Semelhança · Conexão</span><span class="en">Similarity · Connectedness</span></span></div>
+<h1 class="h1"><span class="pt">O <em>Stack</em></span><span class="en">The <em>Stack</em></span></h1>
 </div>
-<div class="aside">
-<p class="mono" style="margin:0 0 8px"><span class="pt">06 ferramentas em uso ativo</span><span class="en">06 tools in active use</span></p>
-<p class="mono" style="margin:0"><span class="pt">Escolhe uma linha para abrir a nota de campo</span><span class="en">Pick a row to open the field note</span></p>
+<div style="display:grid;gap:14px">
+<p class="lead"><span class="pt">06 ferramentas em uso ativo. Escolhe uma linha para abrir a nota de campo - a linha violeta liga a ferramenta ao seu painel.</span><span class="en">06 tools in active use. Pick a row to open the field note - the violet line ties the tool to its panel.</span></p>
+<div class="legend"><span><i class="lg fill"></i><span class="pt">Uso</span><span class="en">Usage</span></span><span><i class="lg state"></i><span class="pt">Selecionada</span><span class="en">Selected</span></span></div>
 </div>
-</div>
-</div>
-<div class="wrap">
-<div aria-label="AI tool index" class="tools-shell" id="toolList" role="tablist">
-<button aria-controls="toolPanel" aria-selected="true" class="tool-row rv" data-tool="0" id="tool-1" role="tab">
+</header>
+<div class="tools-layout">
+<div aria-label="Índice de ferramentas / Tool index" class="tools-shell rv" id="toolList" role="tablist" aria-orientation="vertical">
+<button aria-controls="toolPanel" aria-selected="true" class="tool-row" data-tool="0" id="tool-1" role="tab" type="button">
 <span class="t-idx">01</span>
-<span class="t-name"><i class="marker"></i>Arena.AI</span>
-<span class="t-cat"><span class="pt">Arena de modelos / comparação</span><span class="en">Model arena / comparison</span></span>
+<span class="t-head"><span class="t-name">Arena.AI</span><span class="t-cat"><span class="pt">Arena de modelos / comparação</span><span class="en">Model arena / comparison</span></span></span>
 <span class="t-use"><span class="pt">Respostas às cegas, lado a lado, para o mesmo prompt - testo as instruções ao limite e fico só com o resultado que merece o lugar.</span><span class="en">Blind answers, side by side, for the same prompt - I push instructions to the limit and keep only the result that earns its place.</span></span>
-<span class="t-meter-col">
-<span aria-hidden="true" class="t-meter"><i class="hot on"></i><i class="hot on"></i><i class="hot on"></i><i class="hot on"></i><i class="hot on"></i></span>
-<span class="t-level"><span class="pt">Essencial / diário</span><span class="en">Essential / daily</span></span>
-</span>
-<span class="t-tag"><span class="pt">Testes</span><span class="en">Testing</span></span>
+<span class="t-meter-col"><span aria-hidden="true" class="t-meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="t-level"><span class="pt">Essencial / diário</span><span class="en">Essential / daily</span></span></span>
+<span class="t-tag chip"><span class="pt">Testes</span><span class="en">Testing</span></span>
 </button>
-<button aria-controls="toolPanel" aria-selected="false" class="tool-row rv" data-tool="1" id="tool-2" role="tab">
+<button aria-controls="toolPanel" aria-selected="false" class="tool-row" data-tool="1" id="tool-2" role="tab" type="button" tabindex="-1">
 <span class="t-idx">02</span>
-<span class="t-name"><i class="marker"></i>ChatGPT</span>
-<span class="t-cat"><span class="pt">Raciocínio / escrita / código</span><span class="en">Reasoning / writing / code</span></span>
+<span class="t-head"><span class="t-name">ChatGPT</span><span class="t-cat"><span class="pt">Raciocínio / escrita / código</span><span class="en">Reasoning / writing / code</span></span></span>
 <span class="t-use"><span class="pt">O parceiro de pensamento: organiza ideias confusas, escreve textos e scripts, e faz de pato de borracha enquanto afinas o tom.</span><span class="en">The thinking partner: it organises messy ideas, writes copy and scripts, and plays rubber duck while you tune the tone.</span></span>
-<span class="t-meter-col">
-<span aria-hidden="true" class="t-meter"><i class="hot on"></i><i class="hot on"></i><i class="hot on"></i><i class="hot on"></i><i class="hot on"></i></span>
-<span class="t-level"><span class="pt">Essencial / diário</span><span class="en">Essential / daily</span></span>
-</span>
-<span class="t-tag"><span class="pt">Pensar</span><span class="en">Thinking</span></span>
+<span class="t-meter-col"><span aria-hidden="true" class="t-meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="t-level"><span class="pt">Essencial / diário</span><span class="en">Essential / daily</span></span></span>
+<span class="t-tag chip"><span class="pt">Pensar</span><span class="en">Thinking</span></span>
 </button>
-<button aria-controls="toolPanel" aria-selected="false" class="tool-row rv" data-tool="2" id="tool-3" role="tab">
+<button aria-controls="toolPanel" aria-selected="false" class="tool-row" data-tool="2" id="tool-3" role="tab" type="button" tabindex="-1">
 <span class="t-idx">03</span>
-<span class="t-name"><i class="marker"></i>Gemini</span>
-<span class="t-cat"><span class="pt">Pesquisa / contexto longo</span><span class="en">Research / long context</span></span>
-<span class="t-use"><span class="pt">Documentos compridos, investigação com muitas fontes, imagens nos prompts. Segunda opinião quando o enviesamento de um modelo aparece.</span><span class="en">Long documents, multi-source research, images in prompts. A second opinion when a model&#39;s bias shows.</span></span>
-<span class="t-meter-col">
-<span aria-hidden="true" class="t-meter"><i class="hot on"></i><i class="hot on"></i><i class="hot on"></i><i class="hot on"></i><i class="hot on"></i></span>
-<span class="t-level"><span class="pt">Essencial / diário</span><span class="en">Essential / daily</span></span>
-</span>
-<span class="t-tag"><span class="pt">Pesquisa</span><span class="en">Research</span></span>
+<span class="t-head"><span class="t-name">Gemini</span><span class="t-cat"><span class="pt">Pesquisa / contexto longo</span><span class="en">Research / long context</span></span></span>
+<span class="t-use"><span class="pt">Documentos compridos, investigação com muitas fontes, imagens nos prompts. Segunda opinião quando o enviesamento de um modelo aparece.</span><span class="en">Long documents, multi-source research, images in prompts. A second opinion when a model's bias shows.</span></span>
+<span class="t-meter-col"><span aria-hidden="true" class="t-meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="t-level"><span class="pt">Essencial / diário</span><span class="en">Essential / daily</span></span></span>
+<span class="t-tag chip"><span class="pt">Pesquisa</span><span class="en">Research</span></span>
 </button>
-<button aria-controls="toolPanel" aria-selected="false" class="tool-row rv" data-tool="3" id="tool-4" role="tab">
+<button aria-controls="toolPanel" aria-selected="false" class="tool-row" data-tool="3" id="tool-4" role="tab" type="button" tabindex="-1">
 <span class="t-idx">04</span>
-<span class="t-name"><i class="marker"></i>Eklipse</span>
-<span class="t-cat"><span class="pt">Clipping de streams / shorts</span><span class="en">Stream clipping / shorts</span></span>
+<span class="t-head"><span class="t-name">Eklipse</span><span class="t-cat"><span class="pt">Clipping de streams / shorts</span><span class="en">Stream clipping / shorts</span></span></span>
 <span class="t-use"><span class="pt">Transformar streams longas em momentos curtos e publicáveis - encontra os destaques, corta os clipes, prepara-os para as feeds.</span><span class="en">Turning long streams into short, publishable moments - it finds the highlights, cuts the clips, preps them for the feeds.</span></span>
-<span class="t-meter-col">
-<span aria-hidden="true" class="t-meter"><i class="hot on"></i><i class="hot on"></i><i class="hot on"></i><i class="hot on"></i><i></i></span>
-<span class="t-level"><span class="pt">Fluente / semanal</span><span class="en">Fluent / weekly</span></span>
-</span>
-<span class="t-tag"><span class="pt">Clipes</span><span class="en">Clips</span></span>
+<span class="t-meter-col"><span aria-hidden="true" class="t-meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span class="t-level"><span class="pt">Fluente / semanal</span><span class="en">Fluent / weekly</span></span></span>
+<span class="t-tag chip"><span class="pt">Clipes</span><span class="en">Clips</span></span>
 </button>
-<button aria-controls="toolPanel" aria-selected="false" class="tool-row rv" data-tool="4" id="tool-5" role="tab">
+<button aria-controls="toolPanel" aria-selected="false" class="tool-row" data-tool="4" id="tool-5" role="tab" type="button" tabindex="-1">
 <span class="t-idx">05</span>
-<span class="t-name">APIs de IA &amp; Integrações</span>
-<span class="t-cat"><span class="pt">Construir / publicar</span><span class="en">Build / ship</span></span>
+<span class="t-head"><span class="t-name"><span class="pt">APIs de IA &amp; Integrações</span><span class="en">AI APIs &amp; Integrations</span></span><span class="t-cat"><span class="pt">Construir / publicar</span><span class="en">Build / ship</span></span></span>
 <span class="t-use"><span class="pt">Ligar modelos classe GPT e Gemini a produtos reais - chatbots, formulários inteligentes e assistentes para pequenas empresas.</span><span class="en">Wiring GPT- and Gemini-class models into real products - chatbots, smart forms and assistants for small businesses.</span></span>
-<span class="t-meter-col">
-<span aria-hidden="true" class="t-meter"><i class="hot on"></i><i class="hot on"></i><i class="hot on"></i><i class="hot on"></i><i></i></span>
-<span class="t-level"><span class="pt">Fluente / semanal</span><span class="en">Fluent / weekly</span></span>
-</span>
-<span class="t-tag"><span class="pt">Integrar</span><span class="en">Integrate</span></span>
+<span class="t-meter-col"><span aria-hidden="true" class="t-meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span class="t-level"><span class="pt">Fluente / semanal</span><span class="en">Fluent / weekly</span></span></span>
+<span class="t-tag chip"><span class="pt">Integrar</span><span class="en">Integrate</span></span>
 </button>
-<button aria-controls="toolPanel" aria-selected="false" class="tool-row rv" data-tool="5" id="tool-6" role="tab">
+<button aria-controls="toolPanel" aria-selected="false" class="tool-row" data-tool="5" id="tool-6" role="tab" type="button" tabindex="-1">
 <span class="t-idx">06</span>
-<span class="t-name"><i class="marker"></i>Python / JavaScript</span>
-<span class="t-cat"><span class="pt">Código / reparação</span><span class="en">Code / repair</span></span>
+<span class="t-head"><span class="t-name">Python / JavaScript</span><span class="t-cat"><span class="pt">Código / reparação</span><span class="en">Code / repair</span></span></span>
 <span class="t-use"><span class="pt">O ofício por trás de cada fluxo de IA - construo a sério e depois revejo e reparo o código quando algo parte.</span><span class="en">The craft behind every AI flow - I build it properly, then review and repair the code when something breaks.</span></span>
-<span class="t-meter-col">
-<span aria-hidden="true" class="t-meter"><i class="hot on"></i><i class="hot on"></i><i class="hot on"></i><i class="hot on"></i><i class="hot on"></i></span>
-<span class="t-level"><span class="pt">Essencial / diário</span><span class="en">Essential / daily</span></span>
-</span>
-<span class="t-tag"><span class="pt">Código</span><span class="en">Code</span></span>
+<span class="t-meter-col"><span aria-hidden="true" class="t-meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="t-level"><span class="pt">Essencial / diário</span><span class="en">Essential / daily</span></span></span>
+<span class="t-tag chip"><span class="pt">Código</span><span class="en">Code</span></span>
 </button>
 </div>
-<div aria-labelledby="tool-1" class="tool-detail" id="toolPanel" role="tabpanel">
-<div>
+<div aria-labelledby="tool-1" class="tool-detail region" id="toolPanel" role="tabpanel">
+<div class="tool-detail-in">
+<div class="td-block">
+<h2><span class="pt">Ferramenta</span><span class="en">Tool</span></h2>
+<p class="td-name" id="td-name">Arena.AI</p>
+</div>
+<div class="td-block">
 <h2><span class="pt">Nota de campo</span><span class="en">Field note</span></h2>
-<p id="td-note">Comparison before commitment. Every prompt that matters gets run past a small arena of models first - the winner sets the direction, the losers reveal what the instruction was missing.</p>
+<p id="td-note">Comparar antes de comprometer.</p>
 </div>
-<div>
+<div class="td-block">
 <h2><span class="pt">Fragmento de prompt</span><span class="en">Prompt fragment</span></h2>
-<p class="prompt-chip" id="td-prompt">Same brief, three models. Rank for clarity, tone and usefulness. Tell me what the losers got wrong.</p>
+<p class="prompt-chip" id="td-prompt">Mesmo briefing, três modelos.</p>
 </div>
-<div>
+<div class="td-block">
 <h2><span class="pt">O que sai daí</span><span class="en">What comes out</span></h2>
-<p id="td-out">A ranked decision with a reason attached - so the choice of model is a documented step, not a habit.</p>
+<p id="td-out">Uma decisão ordenada com razão anexa.</p>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -181,23 +157,20 @@
 <div class="wrap">
 <div class="footer-grid">
 <div>
-<p class="f-h"><span class="pt">Índice / 01</span><span class="en">Index / 01</span></p>
-<p><span class="dot-live"></span><span><span class="pt">Esmoriz, PT - Terra</span><span class="en">Esmoriz, PT - Earth</span></span></p>
+<p class="f-h"><span class="pt">Base</span><span class="en">Base</span></p>
+<p><span class="dot-live" aria-hidden="true"></span><span><span class="pt">Esmoriz, PT - Terra</span><span class="en">Esmoriz, PT - Earth</span></span></p>
 <p><span class="pt">26 anos - a construir o portefólio</span><span class="en">26 years old - building portfolio</span></p>
 </div>
 <div>
-<p class="f-h"><span class="pt">Índice / 02</span><span class="en">Index / 02</span></p>
+<p class="f-h"><span class="pt">Serviços</span><span class="en">Services</span></p>
 <p><span class="pt">Websites · landing pages · integrações de IA</span><span class="en">Websites · landing pages · AI integrations</span></p>
 <p><span class="pt">Revisão &amp; reparação de código</span><span class="en">Code review &amp; repair</span></p>
 </div>
 <div>
 <p class="f-h"><span class="pt">Ferramentas selecionadas</span><span class="en">Selected tools</span></p>
 <ul>
-<li>Arena.AI</li>
-<li>ChatGPT</li>
-<li>Gemini</li>
-<li>Eklipse</li>
-<li>APIs de IA</li>
+<li>Arena.AI · ChatGPT · Gemini</li>
+<li>Eklipse · <span class="pt">APIs de IA</span><span class="en">AI APIs</span></li>
 <li>Python / JS</li>
 </ul>
 </div>
@@ -205,9 +178,8 @@
 <p class="f-h"><span class="pt">Contacto</span><span class="en">Contact</span></p>
 <ul>
 <li><a href="mailto:benmrodrigues2000@gmail.com">benmrodrigues2000@gmail.com</a></li>
-
 <li><a href="https://github.com/benmrodrigues2000" rel="noopener" target="_blank">github.com/benmrodrigues2000</a></li>
-          <li><a href="cv.pdf" download>CV (PDF)</a></li>
+<li><a href="cv.pdf" download>CV (PDF)</a></li>
 </ul>
 </div>
 </div>
@@ -217,7 +189,6 @@
 </div>
 </div>
 </footer>
-
 
 <script src="js/controls.js"></script>
 <script src="js/main.js"></script>

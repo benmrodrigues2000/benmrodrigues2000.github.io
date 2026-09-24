@@ -18,9 +18,7 @@
 <meta property="og:locale:alternate" content="en_GB">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='14'%20fill='%2305060F'/%3E%3Ccircle%20cx='46'%20cy='18'%20r='6'%20fill='%237DD3FC'/%3E%3Ccircle%20cx='46'%20cy='18'%20r='9'%20fill='none'%20stroke='%237DD3FC'%20stroke-width='1.4'%20opacity='.5'/%3E%3Ctext%20x='30'%20y='46'%20font-family='Arial%20Black,Arial,sans-serif'%20font-size='34'%20font-weight='900'%20fill='%23A78BFA'%20text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../fonts.css">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"Ruben Monteiro Correia Rodrigues","alternateName":"AYYLIENADO","jobTitle":"Programador & Especialista em IA","url":"https://benmrodrigues2000.github.io","email":"mailto:benmrodrigues2000@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Esmoriz","postalCode":"3885","addressCountry":"PT"},"sameAs":["https://github.com/benmrodrigues2000"]}
 </script>
@@ -191,6 +189,34 @@ svg{display:block}
   box-shadow:0 0 0 .85mm rgba(167,139,250,.18);margin-right:2.4mm;
 }
 .f-bottom .url{color:var(--cyan);letter-spacing:.06em;text-transform:none;font-size:6pt}
+
+/* ---------- FRONT : Gestalt redesign (2026) ----------
+   Figure/ground: two figures only - the name and the portrait-planet - on sky.
+   Closure: the violet orbit is an open arc; the eye completes the circle.
+   Connectedness: the three routes hang on one cyan line.
+   Proximity: hello, name, role and lead form one tight block. */
+.f-left{top:15.6mm;width:76mm}
+.f-left .name{font-size:44pt}
+.f-left .bar{margin:3mm 0 2.6mm}
+.f-left .lead{margin-top:1.8mm}
+.face-front .hero-word{opacity:.55}
+.f-planet{position:absolute;right:8mm;top:15mm;width:56mm;height:56mm}
+.f-planet .orbit{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.f-planet .ph{position:absolute;left:7.5mm;top:7.5mm;width:41mm;height:41mm;border-radius:50%;overflow:hidden;
+  box-shadow:0 0 0 .5mm var(--canvas),0 0 14mm rgba(167,139,250,.35);background:var(--surface-2)}
+.f-planet .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.f-routes{position:absolute;left:8mm;width:70mm;bottom:15.4mm}
+.fr-head,.fr-turn{font-family:var(--font-mono);font-size:5.2pt;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-print);white-space:nowrap;margin:0}
+.f-routes ol{list-style:none;display:flex;justify-content:space-between;position:relative;margin:2.2mm 0 0;padding:0}
+.f-routes ol::before{content:"";position:absolute;left:1mm;right:1mm;top:.95mm;height:.3mm;background:linear-gradient(90deg,var(--cyan),rgba(125,211,252,.35))}
+.f-routes li{position:relative;display:grid;gap:1.5mm;justify-items:start}
+.f-routes li:nth-child(2){justify-items:center}
+.f-routes li:last-child{justify-items:end}
+.f-routes li i{width:2.1mm;height:2.1mm;border-radius:50%;background:var(--canvas);border:.3mm solid var(--cyan);box-sizing:border-box}
+.f-routes li:nth-child(2) i{border-color:var(--violet);background:var(--violet)}
+.f-routes li b{font-weight:600;font-size:7pt;line-height:1.1;color:var(--ink);white-space:nowrap}
+.fr-turn{position:absolute;right:8mm;top:74mm;display:inline-flex;align-items:center;gap:1.1mm;color:var(--violet)}
+.fr-turn .ico{width:2.6mm;height:2.6mm}
 
 /* ---------- BACK : the paper side ---------- */
 .face-back{color:var(--ink-dark);background:var(--paper)}
@@ -386,7 +412,7 @@ svg{display:block}
   font:inherit;font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;
   border:0;cursor:pointer;transition:transform 150ms var(--ease),background 150ms var(--ease),color 150ms var(--ease),border-color 150ms var(--ease);
 }
-.btn-primary{background:var(--violet);color:var(--ink-dark)}
+.btn-primary{background:var(--coral);color:var(--ink-dark)}
 .btn-primary:hover{transform:translateY(-2px)}
 .btn-ghost{border:1px solid var(--rule);color:var(--ink);background:none}
 .btn-ghost:hover{border-color:var(--violet);color:var(--violet)}
@@ -559,7 +585,7 @@ html[data-theme="light"] .toolbar{ background:rgba(255,255,255,.7); }
 html[data-theme="light"] .notes p,html[data-theme="light"] .notes li{ color:#3A4066; }
 html[data-theme="light"] .notes code{ color:#0B77A8; }
 /* Violet fills are darker in light mode, so their labels flip to white (5.7:1). */
-html[data-theme="light"] .chrome .btn-primary,html[data-theme="light"] .stage-wrap .btn-primary{ color:#fff; }
+html[data-theme="light"] .chrome .btn-primary,html[data-theme="light"] .stage-wrap .btn-primary{ color:#0A0D1B; }
 html[data-theme="light"] body{ color:#171B30; }
 html[data-theme="light"] ::selection{ background:rgba(124,92,240,.26); color:#171B30; }
 html[data-theme="light"]{ scrollbar-color:#C4CADD #F3F5FC; }
@@ -681,16 +707,6 @@ html[data-theme="light"]::-webkit-scrollbar-thumb{ background:#C4CADD; }
         <path d="M95 23h2.4M96.2 21.8v2.4" stroke="#7DD3FC" opacity=".75"/>
       </g>
     </svg>
-    <svg class="planet" viewBox="0 0 148 105" aria-hidden="true">
-      <circle cx="136.5" cy="4.5" r="16.5" fill="none" stroke="#A78BFA" stroke-width=".25" opacity=".3"/>
-      <line x1="112.6" y1="12.4" x2="160" y2="-3.4" stroke="#7DD3FC" stroke-width=".42" stroke-linecap="round" opacity=".85"/>
-      <circle cx="136.5" cy="4.5" r="13.2" fill="#121731" stroke="#A78BFA" stroke-width=".62"/>
-      <ellipse cx="136.5" cy="4.5" rx="21" ry="5.2" transform="rotate(-18 136.5 4.5)" fill="none" stroke="#7DD3FC" stroke-width=".3" opacity=".45"/>
-      <path d="M126.2 7.4a10.6 10.6 0 0 1 4.6-8.6" fill="none" stroke="#A78BFA" stroke-width=".32" stroke-linecap="round" opacity=".5"/>
-      <line x1="112.6" y1="12.4" x2="124.2" y2="8.53" stroke="#7DD3FC" stroke-width=".42" stroke-linecap="round" opacity=".85"/>
-      <circle cx="116.2" cy="11.2" r="1.15" fill="#7DD3FC"/>
-    </svg>
-    <i class="meteor" aria-hidden="true"></i>
     <svg class="hero-word" viewBox="0 0 148 105" aria-hidden="true"><path transform="translate(2.769 108.119) scale(0.035884)" fill="#EDEFFA" fill-opacity=".05" stroke="#EDEFFA" stroke-opacity=".19" stroke-width="5.57" stroke-linejoin="round" d="M126 -700H275L389 0H279L259 -139V-137H134L114 0H12ZM246 -232 197 -578H195L147 -232ZM532 -298 399 -700H516L591 -443H593L668 -700H775L642 -298V0H532ZM961 -298 828 -700H945L1020 -443H1022L1097 -700H1204L1071 -298V0H961ZM1289 -700H1399V-100H1580V0H1289ZM1668 -700H1778V0H1668ZM1895 -700H2195V-600H2005V-415H2156V-315H2005V-100H2195V0H1895ZM2293 -700H2431L2538 -281H2540V-700H2638V0H2525L2393 -511H2391V0H2293ZM2840 -700H2989L3103 0H2993L2973 -139V-137H2848L2828 0H2726ZM2960 -232 2911 -578H2909L2861 -232ZM3191 -700H3359Q3441 -700 3482 -656Q3523 -612 3523 -527V-173Q3523 -88 3482 -44Q3441 0 3359 0H3191ZM3357 -100Q3384 -100 3398.5 -116Q3413 -132 3413 -168V-532Q3413 -568 3398.5 -584Q3384 -600 3357 -600H3301V-100ZM3624 -166V-534Q3624 -618 3667 -664Q3710 -710 3791 -710Q3872 -710 3915 -664Q3958 -618 3958 -534V-166Q3958 -82 3915 -36Q3872 10 3791 10Q3710 10 3667 -36Q3624 -82 3624 -166ZM3848 -159V-541Q3848 -610 3791 -610Q3734 -610 3734 -541V-159Q3734 -90 3791 -90Q3848 -90 3848 -159Z"/></svg>
 
     <div class="f-top">
@@ -713,32 +729,25 @@ html[data-theme="light"]::-webkit-scrollbar-thumb{ background:#C4CADD; }
       </p>
     </div>
 
-    <div class="map">
-      <div class="map-head">
-        <span><span class="pt">Plano de voo</span><span class="en">Flight plan</span></span>
-        <span><span class="pt">v.2026 / 3 rotas</span><span class="en">v.2026 / 3 routes</span></span>
-      </div>
-      <ol class="routes">
-        <li>
-          <span class="dot"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.4" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.6 8h10.8M8 2.6c-3.4 3.2-3.4 7.6 0 10.8 3.4-3.2 3.4-7.6 0-10.8z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></span><span class="idx">01</span>
-          <span><b>Websites &amp; landing pages</b><small><span class="pt">Para pequenas empresas</span><span class="en">For small businesses</span></small></span>
-        </li>
-        <li>
-          <span class="dot"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.8 9.7 6l4.5 1-4.5 1L8 12.2 6.3 8l-4.5-1 4.5-1zM13.2 10.4l.9 2 2 .9-2 .9-.9 2-.9-2-2-.9 2-.9z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></span><span class="idx">02</span>
-          <span><b><span class="pt">Integrações de IA</span><span class="en">AI integrations</span></b><small><span class="pt">Formulários, quizzes e chatbots</span><span class="en">Smart forms, quizzes &amp; chatbots</span></small></span>
-        </li>
-        <li>
-          <span class="dot"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10.4 2.6a3.4 3.4 0 0 0-4.5 4.2L2.4 10.3a1.7 1.7 0 0 0 2.4 2.4l3.5-3.5a3.4 3.4 0 0 0 4.2-4.5l-2.1 2.1-1.5-.4-.4-1.5z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></span><span class="idx">03</span>
-          <span><b><span class="pt">Revisão &amp; reparação</span><span class="en">Code review &amp; repair</span></b><small><span class="pt">Código partido, inteiro outra vez</span><span class="en">Broken code, made whole again</span></small></span>
-        </li>
-      </ol>
-      <div class="map-foot">
-        <span><span class="pt">Contactos no verso</span><span class="en">Contacts on the back</span></span>
-        <span class="turn"><span class="pt">Vira o postal</span><span class="en">Turn over</span>
-          <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-      </div>
+    <div class="f-planet" aria-hidden="true">
+      <svg class="orbit" viewBox="0 0 60 60">
+        <circle cx="30" cy="30" r="28.6" fill="none" stroke="#7DD3FC" stroke-width=".3" stroke-dasharray="1.2 1.4" pathLength="100" opacity=".7"/>
+        <circle cx="30" cy="30" r="25.4" fill="none" stroke="#A78BFA" stroke-width=".55" stroke-dasharray="62 38" pathLength="100" transform="rotate(-60 30 30)"/>
+        <circle cx="52.6" cy="12.6" r="1.5" fill="#A78BFA"/>
+      </svg>
+      <div class="ph"><img src="retrato.jpg" alt="" width="584" height="584" decoding="async"></div>
     </div>
+
+    <div class="f-routes">
+      <p class="fr-head"><span class="pt">Três rotas, uma órbita</span><span class="en">Three routes, one orbit</span></p>
+      <ol>
+        <li><i></i><b><span class="pt">Websites</span><span class="en">Websites</span></b></li>
+        <li><i></i><b><span class="pt">Integrações de IA</span><span class="en">AI integrations</span></b></li>
+        <li><i></i><b><span class="pt">Reparação de código</span><span class="en">Code repair</span></b></li>
+      </ol>
+    </div>
+    <p class="fr-turn"><span class="pt">Contactos no verso</span><span class="en">Contacts on the back</span>
+      <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></p>
 
     <div class="f-bottom">
       <span class="status"><i class="dot-live"></i><span class="pt">A construir o portefólio</span><span class="en">Building portfolio</span></span>

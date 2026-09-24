@@ -32,124 +32,139 @@
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/ajuda.css">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Ruben Monteiro Correia Rodrigues", "alternateName": "AYYLIENADO", "jobTitle": "Programador & Especialista em IA", "email": "mailto:benmrodrigues2000@gmail.com", "url": "https://benmrodrigues2000.github.io/", "sameAs": ["https://github.com/benmrodrigues2000", "https://freedomoutdoor.pt/provador"], "address": {"@type": "PostalAddress", "addressLocality": "Esmoriz", "addressCountry": "PT"}}</script>
-<noscript>
-<style>
-.rv,.rv-left{opacity:1;transform:none}
-.boot .map-node,.boot .hero-left>*{opacity:1;transform:none}
-.booted .map-node,.booted .hero-left>*{opacity:1;transform:none}
-</style>
-</noscript>
+
+
+<noscript><style>.rv{opacity:1;transform:none}.boot .hero-inner>*{opacity:1;transform:none}</style></noscript>
 </head>
 <body class="boot">
 <a class="skip" href="#main"><span class="pt">Saltar para o conteúdo</span><span class="en">Skip to content</span></a>
+<div class="sky-fallback" aria-hidden="true"></div>
+<canvas id="sky" aria-hidden="true"></canvas>
 <header class="site-header">
-<div class="wrap">
-<div class="header-left">
-<button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Ativar modo claro" title="Ativar modo claro" aria-pressed="false">
-<span class="t-icon t-sun" aria-hidden="true">
-<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><g class="rays"><line x1="12" y1="1.6" x2="12" y2="4"></line><line x1="12" y1="20" x2="12" y2="22.4"></line><line x1="1.6" y1="12" x2="4" y2="12"></line><line x1="20" y1="12" x2="22.4" y2="12"></line><line x1="4.4" y1="4.4" x2="6.1" y2="6.1"></line><line x1="17.9" y1="17.9" x2="19.6" y2="19.6"></line><line x1="4.4" y1="19.6" x2="6.1" y2="17.9"></line><line x1="17.9" y1="6.1" x2="19.6" y2="4.4"></line></g></svg>
-</span>
-<span class="t-icon t-moon" aria-hidden="true">
-<svg viewBox="0 0 24 24"><path d="M20.3 14.6A8.6 8.6 0 0 1 9.4 3.7a8.6 8.6 0 1 0 10.9 10.9z"></path></svg>
-</span>
-</button>
-<a class="wordmark" href="index.html">
-<span class="name">RUBEN RODRIGUES</span>
-<span class="role"><span class="pt">Programador &amp; Especialista em IA</span><span class="en">Developer &amp; AI Specialist</span></span>
+<div class="wrap hdr">
+<a class="brand" href="index.html">
+<svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><circle class="orbit" cx="17" cy="17" r="15"></circle><circle class="planet" cx="17" cy="17" r="6.5"></circle><circle cx="29.5" cy="9" r="2.2" fill="var(--link)"></circle></svg>
+<span class="brand-txt"><span class="name">RUBEN RODRIGUES</span><span class="role"><span class="pt">Programador &amp; Especialista em IA</span><span class="en">Developer &amp; AI Specialist</span></span></span>
 </a>
-</div>
-<nav aria-label="Secções do site" class="nav" id="nav">
-<a href="index.html" aria-current="page"><span class="pt">Início</span><span class="en">Home</span></a>
-<a href="sobre.html"><span class="pt">Sobre</span><span class="en">About</span></a>
-<a href="ferramentas.html"><span class="pt">Ferramentas</span><span class="en">Tools</span></a>
-<a href="percurso.html"><span class="pt">Percurso</span><span class="en">Journey</span></a>
-<a href="trabalhos.html"><span class="pt">Trabalhos</span><span class="en">Work</span></a>
-<a href="contacto.html"><span class="pt">Contacto</span><span class="en">Contact</span></a>
+<nav aria-label="Secções do site" class="constellation" id="nav">
+<a href="index.html" aria-current="page"><i class="star" aria-hidden="true"></i><span class="lbl"><span class="pt">Início</span><span class="en">Home</span></span></a>
+<a href="sobre.html"><i class="star" aria-hidden="true"></i><span class="lbl"><span class="pt">Sobre</span><span class="en">About</span></span></a>
+<a href="ferramentas.html"><i class="star" aria-hidden="true"></i><span class="lbl"><span class="pt">Ferramentas</span><span class="en">Tools</span></span></a>
+<a href="percurso.html"><i class="star" aria-hidden="true"></i><span class="lbl"><span class="pt">Percurso</span><span class="en">Journey</span></span></a>
+<a href="trabalhos.html"><i class="star" aria-hidden="true"></i><span class="lbl"><span class="pt">Trabalhos</span><span class="en">Work</span></span></a>
+<a href="contacto.html"><i class="star" aria-hidden="true"></i><span class="lbl"><span class="pt">Contacto</span><span class="en">Contact</span></span></a>
 </nav>
-<div style="display:flex;align-items:center;gap:12px">
+<div class="hdr-tools">
+<div class="ctl-group" role="group" aria-label="Tema e idioma / Theme and language">
+<button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Ativar modo claro" title="Ativar modo claro" aria-pressed="false">
+<span class="t-icon t-sun" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><g class="rays"><line x1="12" y1="1.6" x2="12" y2="4"></line><line x1="12" y1="20" x2="12" y2="22.4"></line><line x1="1.6" y1="12" x2="4" y2="12"></line><line x1="20" y1="12" x2="22.4" y2="12"></line><line x1="4.4" y1="4.4" x2="6.1" y2="6.1"></line><line x1="17.9" y1="17.9" x2="19.6" y2="19.6"></line><line x1="4.4" y1="19.6" x2="6.1" y2="17.9"></line><line x1="17.9" y1="6.1" x2="19.6" y2="4.4"></line></g></svg></span>
+<span class="t-icon t-moon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.3 14.6A8.6 8.6 0 0 1 9.4 3.7a8.6 8.6 0 1 0 10.9 10.9z"></path></svg></span>
+</button>
+<span class="ctl-sep" aria-hidden="true"></span>
 <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch to English" title="Switch to English">
 <span class="lt-globe" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"></circle><path d="M3.6 12h16.8"></path><path d="M12 3.6c2.7 2.5 2.7 14.1 0 16.8-2.7-2.7-2.7-14.3 0-16.8z"></path></svg></span>
 <span class="lt-stack" aria-hidden="true"><span class="lt-code lt-pt">PT</span><span class="lt-code lt-en">EN</span></span>
 </button>
+</div>
 <a class="btn btn-primary header-cta" href="contacto.html"><span class="pt">Vamos falar</span><span class="en">Let's talk</span></a>
-<button aria-controls="nav" aria-expanded="false" aria-label="Abrir menu" class="burger" id="burger">
-<span></span>
-</button>
+<button aria-controls="nav" aria-expanded="false" aria-label="Abrir menu" class="burger" id="burger" type="button"><span></span></button>
 </div>
 </div>
 </header>
 <main id="main">
-<section aria-label="Introduction" class="hero" id="about">
-<div aria-hidden="true" class="hero-fallback"></div>
+<section aria-label="Introdução / Introduction" class="hero" id="about">
 <canvas aria-hidden="true" id="field"></canvas>
-<div aria-hidden="true" class="hero-word">AYYLIENADO</div>
-<div class="wrap">
-<div class="disclaimer-banner">
-<span class="pt">⚠️ Este site é um portefólio em construção. Os trabalhos e serviços apresentados são exemplos de projetos pessoais e académicos.</span>
-<span class="en">⚠️ This website is a portfolio under construction. The work and services shown are examples of personal and academic projects.</span>
+<div class="hero-orbits" aria-hidden="true">
+<svg viewBox="0 0 1000 1000">
+<defs><radialGradient id="planetGrad" cx="38%" cy="32%" r="70%"><stop offset="0" stop-color="#2A2F5A" stop-opacity=".55"/><stop offset=".7" stop-color="#0A0D1D" stop-opacity=".0"/></radialGradient></defs>
+<circle class="hero-planet" cx="500" cy="500" r="250"/>
+<circle class="o o1" cx="500" cy="500" r="300"/>
+<circle class="o o2" cx="500" cy="500" r="400"/>
+<circle class="o o3" cx="500" cy="500" r="490"/>
+<g class="sats">
+<circle cx="800" cy="500" r="6"/>
+<circle class="c" cx="217" cy="283" r="4.5"/>
+<circle class="k" cx="500" cy="990" r="5"/>
+</g>
+</svg>
 </div>
-<div class="hero-left">
+<div aria-hidden="true" class="hero-word">AYYLIENADO</div>
+<div class="wrap hero-inner">
+<p class="notice"><i aria-hidden="true"></i><span><span class="pt">Este site é um portefólio em construção. Os trabalhos e serviços apresentados são exemplos de projetos pessoais e académicos.</span><span class="en">This website is a portfolio under construction. The work and services shown are examples of personal and academic projects.</span></span></p>
 <div class="eyebrow">
-<span><span class="pt">Prática de IA</span><span class="en">AI practice</span></span><i class="tick"></i>
-<span><span class="pt">Construção diária</span><span class="en">Building daily</span></span><i class="tick"></i>
+<span><span class="pt">Prática de IA</span><span class="en">AI practice</span></span><i class="dot" aria-hidden="true"></i>
+<span><span class="pt">Construção diária</span><span class="en">Building daily</span></span><i class="dot" aria-hidden="true"></i>
 <span><span class="pt">Esmoriz, PT - Terra</span><span class="en">Esmoriz, PT - Earth</span></span>
 </div>
-<h1><span class="pt">Trabalho com IA <em>todos os dias.</em></span><span class="en">I work with AI <em>every single day.</em></span></h1>
+<h1><span class="pt">Trabalho com IA <em>todos os <span class="fill">dias.</span></em></span><span class="en">I work with AI <em>every single <span class="fill">day.</span></em></span></h1>
 <p class="hero-sub"><span class="pt">Programador &amp; especialista em IA - transformo perguntas em código, em fluxos de trabalho e em coisas úteis.</span><span class="en">Developer &amp; AI specialist - I turn questions into code, into workflows and into useful things.</span></p>
 <div class="hero-actions">
 <a class="btn btn-primary" href="percurso.html"><span class="pt">Explorar o percurso</span><span class="en">Explore the journey</span> <span class="arrow">→</span></a>
 <a class="btn btn-ghost" href="trabalhos.html"><span class="pt">Ver os trabalhos</span><span class="en">See the work</span></a>
 </div>
 </div>
-<div class="hero-right">
-<div class="map" id="map">
-<div class="map-head">
-<span class="mono"><span class="pt">Plano de voo</span><span class="en">Flight plan</span></span>
-<span class="mono"><span class="pt">v.2026 / 3 rotas</span><span class="en">v.2026 / 3 routes</span></span>
+<a class="scroll-cue" href="#plano"><span class="pt">Desce para começar</span><span class="en">Scroll to begin</span></a>
+</section>
+
+<section class="sec first" id="plano" aria-labelledby="plano-title">
+<div class="wrap">
+<header class="sec-head wide">
+<span class="node state" aria-hidden="true">01</span>
+<div style="display:grid;gap:14px">
+<div class="eyebrow"><span><span class="pt">Plano de voo</span><span class="en">Flight plan</span></span><i class="dot"></i><span><span class="pt">v.2026 / 3 rotas</span><span class="en">v.2026 / 3 routes</span></span></div>
+<h2 class="h2" id="plano-title"><span class="pt">Três rotas,<br>uma <em>órbita.</em></span><span class="en">Three routes,<br>one <em>orbit.</em></span></h2>
 </div>
-<div class="map-body">
-<div class="map-track">
-<svg aria-hidden="true" class="map-lines" preserveaspectratio="none" viewbox="0 0 2 100">
-<line class="base" x1="1" x2="1" y1="0" y2="100"></line>
-<line class="draw" x1="1" x2="1" y1="0" y2="100"></line>
-</svg>
-<a class="map-node is-live" href="percurso.html">
-<span class="dot"><i></i></span>
-<span class="idx">01</span>
-<span>
-<span class="label"><span class="pt">Prompt &amp; Conversação</span><span class="en">Prompt &amp; Conversation</span></span>
-<span class="note"><span class="pt">Fazer os modelos perceberem-te a sério</span><span class="en">Getting models to actually understand you</span></span>
-</span>
+<p class="lead"><span class="pt">Cada rota é uma capacidade. Estão ligadas pela mesma linha porque trabalham juntas: conversa → código → entrega.</span><span class="en">Each route is a capability. They share one line because they work together: conversation → code → delivery.</span></p>
+</header>
+<div class="routes rv">
+<a class="route is-live" href="percurso.html">
+<span class="r-dot">01</span>
+<span class="r-label"><span class="pt">Prompt &amp; Conversação</span><span class="en">Prompt &amp; Conversation</span></span>
+<span class="r-note"><span class="pt">Fazer os modelos perceberem-te a sério</span><span class="en">Getting models to actually understand you</span></span>
+<span class="r-go"><span class="pt">Abrir rota</span><span class="en">Open route</span> →</span>
 </a>
-<a class="map-node" href="percurso.html">
-<span class="dot"><i></i></span>
-<span class="idx">02</span>
-<span>
-<span class="label"><span class="pt">Integrações de IA &amp; Código</span><span class="en">AI &amp; Code Integrations</span></span>
-<span class="note"><span class="pt">Funcionalidades de IA, sites e formulários inteligentes que chegam à produção</span><span class="en">AI features, sites and smart forms that reach production</span></span>
-</span>
+<a class="route" href="percurso.html">
+<span class="r-dot">02</span>
+<span class="r-label"><span class="pt">Integrações de IA &amp; Código</span><span class="en">AI &amp; Code Integrations</span></span>
+<span class="r-note"><span class="pt">Funcionalidades de IA, sites e formulários inteligentes que chegam à produção</span><span class="en">AI features, sites and smart forms that reach production</span></span>
+<span class="r-go"><span class="pt">Abrir rota</span><span class="en">Open route</span> →</span>
 </a>
-<a class="map-node" href="percurso.html">
-<span class="dot"><i></i></span>
-<span class="idx">03</span>
-<span>
-<span class="label"><span class="pt">Web Design &amp; Reparação</span><span class="en">Web Design &amp; Repair</span></span>
-<span class="note"><span class="pt">Landing pages, correções, entrega centrada no cliente</span><span class="en">Landing pages, fixes, delivery centred on the client</span></span>
-</span>
+<a class="route" href="percurso.html">
+<span class="r-dot">03</span>
+<span class="r-label"><span class="pt">Web Design &amp; Reparação</span><span class="en">Web Design &amp; Repair</span></span>
+<span class="r-note"><span class="pt">Landing pages, correções, entrega centrada no cliente</span><span class="en">Landing pages, fixes, delivery centred on the client</span></span>
+<span class="r-go"><span class="pt">Abrir rota</span><span class="en">Open route</span> →</span>
 </a>
 </div>
-<div aria-hidden="true" class="map-rail">
+<div aria-hidden="true" class="rail">
 <span class="is-live"><span class="pt">Prática</span><span class="en">Practice</span></span>
 <span><span class="pt">Ferramentas</span><span class="en">Tools</span></span>
 <span><span class="pt">Método</span><span class="en">Method</span></span>
 <span><span class="pt">Resultado</span><span class="en">Result</span></span>
 </div>
+<div class="status-row">
+<span class="mono"><span class="dot-live" aria-hidden="true"></span><span class="pt">Estado / a construir o portefólio</span><span class="en">Status / building portfolio</span></span>
+<span class="g-tag"><span class="pt">Conexão · Continuidade</span><span class="en">Connectedness · Continuity</span></span>
 </div>
-<div class="map-foot">
-<span class="mono"><span class="pt">Estado / a construir o portefólio</span><span class="en">Status / building portfolio</span></span>
-<span class="mono"><span class="pt">Desce para começar</span><span class="en">Scroll to begin</span></span>
 </div>
+</section>
+
+<section class="sec last" id="mapa" aria-labelledby="mapa-title">
+<div class="wrap">
+<header class="sec-head wide">
+<span class="node" aria-hidden="true">02</span>
+<div style="display:grid;gap:14px">
+<div class="eyebrow"><span><span class="pt">Mapa estelar</span><span class="en">Star chart</span></span><i class="dot"></i><span><span class="pt">5 destinos</span><span class="en">5 destinations</span></span></div>
+<h2 class="h2" id="mapa-title"><span class="pt">Para onde<br><em>vais?</em></span><span class="en">Where are<br>you <em>headed?</em></span></h2>
 </div>
+<p class="lead"><span class="pt">O mesmo mapa da navegação lá em cima - cada estrela é uma página. Sem surpresas: o que parece igual, funciona igual.</span><span class="en">The same map as the navigation up top - each star is a page. No surprises: what looks alike, works alike.</span></p>
+</header>
+<div class="chart rv">
+<a href="trabalhos.html"><span class="c-top"><span class="mono"><span class="pt">Trabalhos</span><span class="en">Work</span></span><i class="c-star"></i></span><span class="c-name"><span class="pt">Trabalho com prova</span><span class="en">Work with proof</span></span><span class="c-note"><span class="pt">O Provador, o briefing, o postal e o agente Ajuda.</span><span class="en">O Provador, the briefing, the postcard and the Ajuda agent.</span></span></a>
+<a href="contacto.html"><span class="c-top"><span class="mono"><span class="pt">Contacto</span><span class="en">Contact</span></span><i class="c-star"></i></span><span class="c-name"><span class="pt">Cria algo útil</span><span class="en">Make something useful</span></span><span class="c-note"><span class="pt">Quatro serviços e um briefing de missão.</span><span class="en">Four services and a mission briefing.</span></span></a>
+<a href="sobre.html"><span class="c-top"><span class="mono"><span class="pt">Sobre</span><span class="en">About</span></span><i class="c-star"></i></span><span class="c-name"><span class="pt">Quem e como</span><span class="en">Who &amp; how</span></span><span class="c-note"><span class="pt">A pessoa e o método.</span><span class="en">The person and the method.</span></span></a>
+<a href="ferramentas.html"><span class="c-top"><span class="mono"><span class="pt">Ferramentas</span><span class="en">Tools</span></span><i class="c-star"></i></span><span class="c-name"><span class="pt">O stack</span><span class="en">The stack</span></span><span class="c-note"><span class="pt">Seis ferramentas de uso diário.</span><span class="en">Six tools in daily use.</span></span></a>
+<a href="percurso.html"><span class="c-top"><span class="mono"><span class="pt">Percurso</span><span class="en">Journey</span></span><i class="c-star"></i></span><span class="c-name"><span class="pt">Percurso</span><span class="en">Journey</span></span><span class="c-note"><span class="pt">Três rotas e o registo de serviço.</span><span class="en">Three routes and the service record.</span></span></a>
 </div>
 </div>
 </section>
@@ -158,23 +173,20 @@
 <div class="wrap">
 <div class="footer-grid">
 <div>
-<p class="f-h"><span class="pt">Índice / 01</span><span class="en">Index / 01</span></p>
-<p><span class="dot-live"></span><span><span class="pt">Esmoriz, PT - Terra</span><span class="en">Esmoriz, PT - Earth</span></span></p>
+<p class="f-h"><span class="pt">Base</span><span class="en">Base</span></p>
+<p><span class="dot-live" aria-hidden="true"></span><span><span class="pt">Esmoriz, PT - Terra</span><span class="en">Esmoriz, PT - Earth</span></span></p>
 <p><span class="pt">26 anos - a construir o portefólio</span><span class="en">26 years old - building portfolio</span></p>
 </div>
 <div>
-<p class="f-h"><span class="pt">Índice / 02</span><span class="en">Index / 02</span></p>
+<p class="f-h"><span class="pt">Serviços</span><span class="en">Services</span></p>
 <p><span class="pt">Websites · landing pages · integrações de IA</span><span class="en">Websites · landing pages · AI integrations</span></p>
 <p><span class="pt">Revisão &amp; reparação de código</span><span class="en">Code review &amp; repair</span></p>
 </div>
 <div>
 <p class="f-h"><span class="pt">Ferramentas selecionadas</span><span class="en">Selected tools</span></p>
 <ul>
-<li>Arena.AI</li>
-<li>ChatGPT</li>
-<li>Gemini</li>
-<li>Eklipse</li>
-<li>APIs de IA</li>
+<li>Arena.AI · ChatGPT · Gemini</li>
+<li>Eklipse · <span class="pt">APIs de IA</span><span class="en">AI APIs</span></li>
 <li>Python / JS</li>
 </ul>
 </div>
@@ -182,9 +194,8 @@
 <p class="f-h"><span class="pt">Contacto</span><span class="en">Contact</span></p>
 <ul>
 <li><a href="mailto:benmrodrigues2000@gmail.com">benmrodrigues2000@gmail.com</a></li>
-
 <li><a href="https://github.com/benmrodrigues2000" rel="noopener" target="_blank">github.com/benmrodrigues2000</a></li>
-          <li><a href="cv.pdf" download>CV (PDF)</a></li>
+<li><a href="cv.pdf" download>CV (PDF)</a></li>
 </ul>
 </div>
 </div>
@@ -194,7 +205,6 @@
 </div>
 </div>
 </footer>
-
 
 <script src="js/controls.js"></script>
 <script src="js/main.js"></script>

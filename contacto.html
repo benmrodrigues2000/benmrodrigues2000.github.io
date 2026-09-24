@@ -31,93 +31,70 @@
 <link rel="stylesheet" href="fonts.css"/>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/ajuda.css">
-<noscript>
-<style>
-.rv,.rv-left{opacity:1;transform:none}
-.boot .map-node,.boot .hero-left>*{opacity:1;transform:none}
-.booted .map-node,.booted .hero-left>*{opacity:1;transform:none}
-</style>
-</noscript>
+
+
+<noscript><style>.rv{opacity:1;transform:none}.boot .hero-inner>*{opacity:1;transform:none}</style></noscript>
 </head>
 <body class="boot">
 <a class="skip" href="#main"><span class="pt">Saltar para o conteúdo</span><span class="en">Skip to content</span></a>
+<div class="sky-fallback" aria-hidden="true"></div>
+<canvas id="sky" aria-hidden="true"></canvas>
 <header class="site-header">
-<div class="wrap">
-<div class="header-left">
-<button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Ativar modo claro" title="Ativar modo claro" aria-pressed="false">
-<span class="t-icon t-sun" aria-hidden="true">
-<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><g class="rays"><line x1="12" y1="1.6" x2="12" y2="4"></line><line x1="12" y1="20" x2="12" y2="22.4"></line><line x1="1.6" y1="12" x2="4" y2="12"></line><line x1="20" y1="12" x2="22.4" y2="12"></line><line x1="4.4" y1="4.4" x2="6.1" y2="6.1"></line><line x1="17.9" y1="17.9" x2="19.6" y2="19.6"></line><line x1="4.4" y1="19.6" x2="6.1" y2="17.9"></line><line x1="17.9" y1="6.1" x2="19.6" y2="4.4"></line></g></svg>
-</span>
-<span class="t-icon t-moon" aria-hidden="true">
-<svg viewBox="0 0 24 24"><path d="M20.3 14.6A8.6 8.6 0 0 1 9.4 3.7a8.6 8.6 0 1 0 10.9 10.9z"></path></svg>
-</span>
-</button>
-<a class="wordmark" href="index.html">
-<span class="name">RUBEN RODRIGUES</span>
-<span class="role"><span class="pt">Programador &amp; Especialista em IA</span><span class="en">Developer &amp; AI Specialist</span></span>
+<div class="wrap hdr">
+<a class="brand" href="index.html">
+<svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><circle class="orbit" cx="17" cy="17" r="15"></circle><circle class="planet" cx="17" cy="17" r="6.5"></circle><circle cx="29.5" cy="9" r="2.2" fill="var(--link)"></circle></svg>
+<span class="brand-txt"><span class="name">RUBEN RODRIGUES</span><span class="role"><span class="pt">Programador &amp; Especialista em IA</span><span class="en">Developer &amp; AI Specialist</span></span></span>
 </a>
-</div>
-<nav aria-label="Secções do site" class="nav" id="nav">
-<a href="index.html"><span class="pt">Início</span><span class="en">Home</span></a>
-<a href="sobre.html"><span class="pt">Sobre</span><span class="en">About</span></a>
-<a href="ferramentas.html"><span class="pt">Ferramentas</span><span class="en">Tools</span></a>
-<a href="percurso.html"><span class="pt">Percurso</span><span class="en">Journey</span></a>
-<a href="trabalhos.html"><span class="pt">Trabalhos</span><span class="en">Work</span></a>
-<a href="contacto.html" aria-current="page"><span class="pt">Contacto</span><span class="en">Contact</span></a>
+<nav aria-label="Secções do site" class="constellation" id="nav">
+<a href="index.html"><i class="star" aria-hidden="true"></i><span class="lbl"><span class="pt">Início</span><span class="en">Home</span></span></a>
+<a href="sobre.html"><i class="star" aria-hidden="true"></i><span class="lbl"><span class="pt">Sobre</span><span class="en">About</span></span></a>
+<a href="ferramentas.html"><i class="star" aria-hidden="true"></i><span class="lbl"><span class="pt">Ferramentas</span><span class="en">Tools</span></span></a>
+<a href="percurso.html"><i class="star" aria-hidden="true"></i><span class="lbl"><span class="pt">Percurso</span><span class="en">Journey</span></span></a>
+<a href="trabalhos.html"><i class="star" aria-hidden="true"></i><span class="lbl"><span class="pt">Trabalhos</span><span class="en">Work</span></span></a>
+<a href="contacto.html" aria-current="page"><i class="star" aria-hidden="true"></i><span class="lbl"><span class="pt">Contacto</span><span class="en">Contact</span></span></a>
 </nav>
-<div style="display:flex;align-items:center;gap:12px">
+<div class="hdr-tools">
+<div class="ctl-group" role="group" aria-label="Tema e idioma / Theme and language">
+<button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Ativar modo claro" title="Ativar modo claro" aria-pressed="false">
+<span class="t-icon t-sun" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><g class="rays"><line x1="12" y1="1.6" x2="12" y2="4"></line><line x1="12" y1="20" x2="12" y2="22.4"></line><line x1="1.6" y1="12" x2="4" y2="12"></line><line x1="20" y1="12" x2="22.4" y2="12"></line><line x1="4.4" y1="4.4" x2="6.1" y2="6.1"></line><line x1="17.9" y1="17.9" x2="19.6" y2="19.6"></line><line x1="4.4" y1="19.6" x2="6.1" y2="17.9"></line><line x1="17.9" y1="6.1" x2="19.6" y2="4.4"></line></g></svg></span>
+<span class="t-icon t-moon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.3 14.6A8.6 8.6 0 0 1 9.4 3.7a8.6 8.6 0 1 0 10.9 10.9z"></path></svg></span>
+</button>
+<span class="ctl-sep" aria-hidden="true"></span>
 <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch to English" title="Switch to English">
 <span class="lt-globe" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"></circle><path d="M3.6 12h16.8"></path><path d="M12 3.6c2.7 2.5 2.7 14.1 0 16.8-2.7-2.7-2.7-14.3 0-16.8z"></path></svg></span>
 <span class="lt-stack" aria-hidden="true"><span class="lt-code lt-pt">PT</span><span class="lt-code lt-en">EN</span></span>
 </button>
+</div>
 <a class="btn btn-primary header-cta" href="contacto.html"><span class="pt">Vamos falar</span><span class="en">Let's talk</span></a>
-<button aria-controls="nav" aria-expanded="false" aria-label="Abrir menu" class="burger" id="burger">
-<span></span>
-</button>
+<button aria-controls="nav" aria-expanded="false" aria-label="Abrir menu" class="burger" id="burger" type="button"><span></span></button>
 </div>
 </div>
 </header>
 <main id="main">
-<section class="section on-light" id="contact">
+<section class="sec first last" id="contact">
 <div class="wrap">
-<div class="contact-grid">
-<div class="contact-left">
-<span class="mono"><span class="pt">Contacto / Esmoriz, PT</span><span class="en">Contact / Esmoriz, PT</span></span>
-<h1 class="contact-title rv"><span class="pt">Cria<br/>Algo<br/>Útil</span><span class="en">Make<br/>Something<br/>Useful</span></h1>
-<p class="contact-lead"><span class="pt">Traz-me uma pergunta confusa. Um website partido. Um fluxo de trabalho repetitivo que não devia existir.</span><span class="en">Bring me a messy question. A broken website. A repetitive workflow that shouldn&#39;t exist.</span></p>
+<header class="sec-head" style="max-width:none;margin-bottom:0">
+<span class="node act" aria-hidden="true">01</span>
+<div class="eyebrow"><span><span class="pt">Contacto / Esmoriz, PT</span><span class="en">Contact / Esmoriz, PT</span></span><span class="g-tag"><span class="pt">Ponto focal · Região comum</span><span class="en">Focal point · Common region</span></span></div>
+</header>
+<div class="contact-top">
+<div style="display:grid;gap:26px">
+<h1 class="contact-title rv"><span class="pt"><span class="l">Cria</span><span class="l">Algo</span><span class="l">Útil</span></span><span class="en"><span class="l">Make</span><span class="l">Something</span><span class="l">Useful</span></span></h1>
+<p class="lead"><span class="pt">Traz-me uma pergunta confusa. Um website partido. Um fluxo de trabalho repetitivo que não devia existir.</span><span class="en">Bring me a messy question. A broken website. A repetitive workflow that shouldn't exist.</span></p>
 </div>
-<div class="contact-right">
+<div class="channels region rv">
+<span class="mono"><span class="pt">Canais</span><span class="en">Channels</span></span>
 <a class="btn btn-primary" href="mailto:benmrodrigues2000@gmail.com"><span class="pt">Iniciar conversa</span><span class="en">Start a conversation</span> <span class="arrow">→</span></a>
+<div class="sub-row">
 <button class="btn btn-ghost" data-email="benmrodrigues2000@gmail.com" id="copyEmail" type="button"><span class="pt">Copiar email</span><span class="en">Copy email</span></button>
-
 <a class="btn btn-ghost" href="https://github.com/benmrodrigues2000" rel="noopener" target="_blank">GitHub <span class="arrow">↗</span></a>
-        <a class="btn btn-ghost" href="cv.pdf" download><span class="pt">Descarregar CV</span><span class="en">Download CV</span> <span class="arrow">↓</span></a>
+</div>
+<a class="btn btn-ghost" href="cv.pdf" download><span class="pt">Descarregar CV</span><span class="en">Download CV</span> <span class="arrow">↓</span></a>
 </div>
 </div>
-<div class="services">
-<div class="service rv">
-<h2><span class="pt">Serviço / 01</span><span class="en">Service / 01</span></h2>
-<p class="s-desc"><span class="pt">Site completo para o teu negócio - feito para durar, fácil de atualizar.</span><span class="en">A complete site for your business - built to last, easy to update.</span></p>
-<small><span class="pt">Website · pequena empresa</span><span class="en">Website · small business</span></small>
-</div>
-<div class="service rv">
-<h2><span class="pt">Serviço / 02</span><span class="en">Service / 02</span></h2>
-<p class="s-desc"><span class="pt">Uma página com um objetivo: transformar visitas em contactos.</span><span class="en">One page with one goal: turning visits into contacts.</span></p>
-<small>Landing page</small>
-</div>
-<div class="service rv">
-<h2><span class="pt">Serviço / 03</span><span class="en">Service / 03</span></h2>
-<p class="s-desc"><span class="pt">Assistentes e formulários inteligentes ligados ao teu fluxo de trabalho.</span><span class="en">Smart assistants and forms wired into your workflow.</span></p>
-<small><span class="pt">Integração de IA</span><span class="en">AI integration</span></small>
-</div>
-<div class="service rv">
-<h2><span class="pt">Serviço / 04</span><span class="en">Service / 04</span></h2>
-<p class="s-desc"><span class="pt">Diagnóstico, reparações e um site que volta a comportar-se.</span><span class="en">Diagnosis, repairs and a site that behaves again.</span></p>
-<small><span class="pt">Verificações &amp; reparações</span><span class="en">Checks &amp; repairs</span></small>
-</div>
-</div>
-<div class="brief-cta rv">
-<div class="brief-left">
+<div class="services rv"><div class="service region"><h2><span class="pt">Serviço</span><span class="en">Service</span> / 01</h2><p class="s-name"><span class="pt">Website</span><span class="en">Website</span></p><p class="s-desc"><span class="pt">Site completo para o teu negócio - feito para durar, fácil de atualizar.</span><span class="en">A complete site for your business - built to last, easy to update.</span></p><span class="chip" style="justify-self:start"><span class="pt">Website · pequena empresa</span><span class="en">Website · small business</span></span></div><div class="service region"><h2><span class="pt">Serviço</span><span class="en">Service</span> / 02</h2><p class="s-name">Landing page</p><p class="s-desc"><span class="pt">Uma página com um objetivo: transformar visitas em contactos.</span><span class="en">One page with one goal: turning visits into contacts.</span></p><span class="chip" style="justify-self:start">Landing page</span></div><div class="service region"><h2><span class="pt">Serviço</span><span class="en">Service</span> / 03</h2><p class="s-name"><span class="pt">IA</span><span class="en">AI</span></p><p class="s-desc"><span class="pt">Assistentes e formulários inteligentes ligados ao teu fluxo de trabalho.</span><span class="en">Smart assistants and forms wired into your workflow.</span></p><span class="chip" style="justify-self:start"><span class="pt">Integração de IA</span><span class="en">AI integration</span></span></div><div class="service region"><h2><span class="pt">Serviço</span><span class="en">Service</span> / 04</h2><p class="s-name"><span class="pt">Reparação</span><span class="en">Repair</span></p><p class="s-desc"><span class="pt">Diagnóstico, reparações e um site que volta a comportar-se.</span><span class="en">Diagnosis, repairs and a site that behaves again.</span></p><span class="chip" style="justify-self:start"><span class="pt">Verificações &amp; reparações</span><span class="en">Checks &amp; repairs</span></span></div></div>
+<div class="brief-cta region rv">
+<div>
 <span class="mono"><span class="pt">Transmissão / novo projeto</span><span class="en">Transmission / new project</span></span>
 <h3><span class="pt">Briefing de Missão</span><span class="en">Mission Briefing</span></h3>
 <p><span class="pt">Responde a oito módulos de perguntas - cerca de 15 minutos, zero tecnicismos. Quando me enviares o relatório, já sabemos exatamente para onde vai o teu site.</span><span class="en">Answer eight modules of questions - about 15 minutes, zero jargon. Once you send the report, we already know exactly where your site is headed.</span></p>
@@ -131,23 +108,20 @@
 <div class="wrap">
 <div class="footer-grid">
 <div>
-<p class="f-h"><span class="pt">Índice / 01</span><span class="en">Index / 01</span></p>
-<p><span class="dot-live"></span><span><span class="pt">Esmoriz, PT - Terra</span><span class="en">Esmoriz, PT - Earth</span></span></p>
+<p class="f-h"><span class="pt">Base</span><span class="en">Base</span></p>
+<p><span class="dot-live" aria-hidden="true"></span><span><span class="pt">Esmoriz, PT - Terra</span><span class="en">Esmoriz, PT - Earth</span></span></p>
 <p><span class="pt">26 anos - a construir o portefólio</span><span class="en">26 years old - building portfolio</span></p>
 </div>
 <div>
-<p class="f-h"><span class="pt">Índice / 02</span><span class="en">Index / 02</span></p>
+<p class="f-h"><span class="pt">Serviços</span><span class="en">Services</span></p>
 <p><span class="pt">Websites · landing pages · integrações de IA</span><span class="en">Websites · landing pages · AI integrations</span></p>
 <p><span class="pt">Revisão &amp; reparação de código</span><span class="en">Code review &amp; repair</span></p>
 </div>
 <div>
 <p class="f-h"><span class="pt">Ferramentas selecionadas</span><span class="en">Selected tools</span></p>
 <ul>
-<li>Arena.AI</li>
-<li>ChatGPT</li>
-<li>Gemini</li>
-<li>Eklipse</li>
-<li>APIs de IA</li>
+<li>Arena.AI · ChatGPT · Gemini</li>
+<li>Eklipse · <span class="pt">APIs de IA</span><span class="en">AI APIs</span></li>
 <li>Python / JS</li>
 </ul>
 </div>
@@ -155,9 +129,8 @@
 <p class="f-h"><span class="pt">Contacto</span><span class="en">Contact</span></p>
 <ul>
 <li><a href="mailto:benmrodrigues2000@gmail.com">benmrodrigues2000@gmail.com</a></li>
-
 <li><a href="https://github.com/benmrodrigues2000" rel="noopener" target="_blank">github.com/benmrodrigues2000</a></li>
-          <li><a href="cv.pdf" download>CV (PDF)</a></li>
+<li><a href="cv.pdf" download>CV (PDF)</a></li>
 </ul>
 </div>
 </div>
@@ -167,8 +140,7 @@
 </div>
 </div>
 </footer>
-<div aria-live="polite" class="toast" id="toast" role="status">Email copiado</div>
-
+<div aria-live="polite" class="toast" id="toast" role="status"></div>
 <script src="js/controls.js"></script>
 <script src="js/main.js"></script>
 <script src="js/ajuda.js"></script>
