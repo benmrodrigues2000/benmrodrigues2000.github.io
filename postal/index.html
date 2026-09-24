@@ -539,8 +539,11 @@ html[data-theme="light"] .stage-wrap{
   --canvas:#F3F5FC; --surface:#FFFFFF; --surface-2:#E9ECF8;
   --light:#F3F5FC; --paper:#FFFFFF; --ink:#171B30;
   --muted:#59608A; --rule:#D6DBEC; --rule-light:rgba(7,10,24,.16);
-  --violet:#7C5CF0; --violet-deep:#6A46E0; --cyan:#1E93C9; --coral:#D9722F; --ok:#2C9E82;
+  --violet:#6D4AE0; --violet-deep:#5B3BD0; --cyan:#0B77A8; --coral:#B4540F; --ok:#1F7A63;
   --muted-print:#59608A;
+  /* body's colour is resolved from the dark :root --ink, so anything that
+     doesn't set its own colour (e.g. the intro h1) must be re-pointed here. */
+  color:var(--ink);
 }
 html[data-theme="light"] .card-box{
   --canvas:#05060F; --surface:#0B0F1F; --surface-2:#121731;
@@ -548,12 +551,16 @@ html[data-theme="light"] .card-box{
   --muted:#9AA3BF; --rule:#232A4D; --rule-light:rgba(7,10,24,.16);
   --violet:#A78BFA; --violet-deep:#7C5CF0; --cyan:#7DD3FC; --coral:#FF9E64; --ok:#6EE7B7;
   --muted-print:#B3BAD2;
+  color:var(--ink);
 }
 html[data-theme="light"] body{ background-color:#F3F5FC; background-image:none; }
 html[data-theme="light"] .chrome{ background:rgba(255,255,255,.86); }
 html[data-theme="light"] .toolbar{ background:rgba(255,255,255,.7); }
 html[data-theme="light"] .notes p,html[data-theme="light"] .notes li{ color:#3A4066; }
-html[data-theme="light"] .notes code{ color:#1E93C9; }
+html[data-theme="light"] .notes code{ color:#0B77A8; }
+/* Violet fills are darker in light mode, so their labels flip to white (5.7:1). */
+html[data-theme="light"] .chrome .btn-primary,html[data-theme="light"] .stage-wrap .btn-primary{ color:#fff; }
+html[data-theme="light"] body{ color:#171B30; }
 html[data-theme="light"] ::selection{ background:rgba(124,92,240,.26); color:#171B30; }
 html[data-theme="light"]{ scrollbar-color:#C4CADD #F3F5FC; }
 html[data-theme="light"]::-webkit-scrollbar-track{ background:#F3F5FC; }
