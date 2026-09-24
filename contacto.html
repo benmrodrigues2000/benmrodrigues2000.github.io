@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="pt-PT">
+<html lang="pt-PT" data-lang="pt" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>(function(){try{var q=new URLSearchParams(location.search);var l=q.get("lang"),t=q.get("theme"),L=null,T=null;try{L=localStorage.getItem("rr-lang");T=localStorage.getItem("rr-theme")}catch(e){}l=(l==="en"||l==="pt")?l:((L==="en"||L==="pt")?L:"pt");t=(t==="light"||t==="dark")?t:((T==="light"||T==="dark")?T:"dark");var r=document.documentElement;r.setAttribute("data-lang",l);r.setAttribute("lang",l==="en"?"en":"pt-PT");r.setAttribute("data-theme",t)}catch(e){}})();</script>
 <meta name="color-scheme" content="dark">
 <meta name="author" content="Ruben Monteiro Correia Rodrigues"><link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="manifest" href="manifest.webmanifest">
-<title>Contacto - Ruben Rodrigues - Programador & Especialista em IA</title>
-<meta name="description" content="Falemos: email, GitHub e serviços para pequenas empresas.">
+<title data-en="Contact - Ruben Rodrigues - Developer & AI Specialist">Contacto - Ruben Rodrigues - Programador & Especialista em IA</title>
+<meta name="description" content="Falemos: email, GitHub e serviços para pequenas empresas." data-en="Let&#39;s talk: email, GitHub and services for small businesses.">
 <meta property="og:title" content="Contacto - Ruben Rodrigues - Programador & Especialista em IA">
 <meta property="og:description" content="Falemos: email, GitHub e serviços para pequenas empresas.">
 <meta property="og:locale" content="pt_PT">
@@ -38,24 +39,37 @@
 </noscript>
 </head>
 <body class="boot">
-<a class="skip" href="#main">Saltar para o conteúdo</a>
+<a class="skip" href="#main"><span class="pt">Saltar para o conteúdo</span><span class="en">Skip to content</span></a>
 <header class="site-header">
 <div class="wrap">
+<div class="header-left">
+<button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Ativar modo claro" title="Ativar modo claro" aria-pressed="false">
+<span class="t-icon t-sun" aria-hidden="true">
+<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><g class="rays"><line x1="12" y1="1.6" x2="12" y2="4"></line><line x1="12" y1="20" x2="12" y2="22.4"></line><line x1="1.6" y1="12" x2="4" y2="12"></line><line x1="20" y1="12" x2="22.4" y2="12"></line><line x1="4.4" y1="4.4" x2="6.1" y2="6.1"></line><line x1="17.9" y1="17.9" x2="19.6" y2="19.6"></line><line x1="4.4" y1="19.6" x2="6.1" y2="17.9"></line><line x1="17.9" y1="6.1" x2="19.6" y2="4.4"></line></g></svg>
+</span>
+<span class="t-icon t-moon" aria-hidden="true">
+<svg viewBox="0 0 24 24"><path d="M20.3 14.6A8.6 8.6 0 0 1 9.4 3.7a8.6 8.6 0 1 0 10.9 10.9z"></path></svg>
+</span>
+</button>
 <a class="wordmark" href="index.html">
 <span class="name">RUBEN RODRIGUES</span>
-<span class="role">Programador &amp; Especialista em IA</span>
+<span class="role"><span class="pt">Programador &amp; Especialista em IA</span><span class="en">Developer &amp; AI Specialist</span></span>
 </a>
+</div>
 <nav aria-label="Secções do site" class="nav" id="nav">
-<a href="index.html">Início</a>
-<a href="sobre.html">Sobre</a>
-<a href="ferramentas.html">Ferramentas</a>
-<a href="percurso.html">Percurso</a>
-<a href="trabalhos.html">Trabalhos</a>
-<a href="contacto.html" aria-current="page">Contacto</a>
+<a href="index.html"><span class="pt">Início</span><span class="en">Home</span></a>
+<a href="sobre.html"><span class="pt">Sobre</span><span class="en">About</span></a>
+<a href="ferramentas.html"><span class="pt">Ferramentas</span><span class="en">Tools</span></a>
+<a href="percurso.html"><span class="pt">Percurso</span><span class="en">Journey</span></a>
+<a href="trabalhos.html"><span class="pt">Trabalhos</span><span class="en">Work</span></a>
+<a href="contacto.html" aria-current="page"><span class="pt">Contacto</span><span class="en">Contact</span></a>
 </nav>
 <div style="display:flex;align-items:center;gap:12px">
-
-<a class="btn btn-primary header-cta" href="contacto.html">Vamos falar</a>
+<button class="lang-toggle" id="langToggle" type="button" aria-label="Switch to English" title="Switch to English">
+<span class="lt-globe" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"></circle><path d="M3.6 12h16.8"></path><path d="M12 3.6c2.7 2.5 2.7 14.1 0 16.8-2.7-2.7-2.7-14.3 0-16.8z"></path></svg></span>
+<span class="lt-stack" aria-hidden="true"><span class="lt-code lt-pt">PT</span><span class="lt-code lt-en">EN</span></span>
+</button>
+<a class="btn btn-primary header-cta" href="contacto.html"><span class="pt">Vamos falar</span><span class="en">Let's talk</span></a>
 <button aria-controls="nav" aria-expanded="false" aria-label="Abrir menu" class="burger" id="burger">
 <span></span>
 </button>
@@ -67,47 +81,47 @@
 <div class="wrap">
 <div class="contact-grid">
 <div class="contact-left">
-<span class="mono">Contacto / Esmoriz, PT</span>
-<h1 class="contact-title rv">Cria<br/>Algo<br/>Útil</h1>
-<p class="contact-lead">Traz-me uma pergunta confusa. Um website partido. Um fluxo de trabalho repetitivo que não devia existir.</p>
+<span class="mono"><span class="pt">Contacto / Esmoriz, PT</span><span class="en">Contact / Esmoriz, PT</span></span>
+<h1 class="contact-title rv"><span class="pt">Cria<br/>Algo<br/>Útil</span><span class="en">Make<br/>Something<br/>Useful</span></h1>
+<p class="contact-lead"><span class="pt">Traz-me uma pergunta confusa. Um website partido. Um fluxo de trabalho repetitivo que não devia existir.</span><span class="en">Bring me a messy question. A broken website. A repetitive workflow that shouldn&#39;t exist.</span></p>
 </div>
 <div class="contact-right">
-<a class="btn btn-primary" href="mailto:benmrodrigues2000@gmail.com">Iniciar conversa <span class="arrow">→</span></a>
-<button class="btn btn-ghost" data-email="benmrodrigues2000@gmail.com" id="copyEmail" type="button">Copiar email</button>
+<a class="btn btn-primary" href="mailto:benmrodrigues2000@gmail.com"><span class="pt">Iniciar conversa</span><span class="en">Start a conversation</span> <span class="arrow">→</span></a>
+<button class="btn btn-ghost" data-email="benmrodrigues2000@gmail.com" id="copyEmail" type="button"><span class="pt">Copiar email</span><span class="en">Copy email</span></button>
 
 <a class="btn btn-ghost" href="https://github.com/benmrodrigues2000" rel="noopener" target="_blank">GitHub <span class="arrow">↗</span></a>
-        <a class="btn btn-ghost" href="cv.pdf" download>Descarregar CV <span class="arrow">↓</span></a>
+        <a class="btn btn-ghost" href="cv.pdf" download><span class="pt">Descarregar CV</span><span class="en">Download CV</span> <span class="arrow">↓</span></a>
 </div>
 </div>
 <div class="services">
 <div class="service rv">
-<h2>Serviço / 01</h2>
-<p class="s-desc">Site completo para o teu negócio - feito para durar, fácil de atualizar.</p>
-<small>Website · pequena empresa</small>
+<h2><span class="pt">Serviço / 01</span><span class="en">Service / 01</span></h2>
+<p class="s-desc"><span class="pt">Site completo para o teu negócio - feito para durar, fácil de atualizar.</span><span class="en">A complete site for your business - built to last, easy to update.</span></p>
+<small><span class="pt">Website · pequena empresa</span><span class="en">Website · small business</span></small>
 </div>
 <div class="service rv">
-<h2>Serviço / 02</h2>
-<p class="s-desc">Uma página com um objetivo: transformar visitas em contactos.</p>
+<h2><span class="pt">Serviço / 02</span><span class="en">Service / 02</span></h2>
+<p class="s-desc"><span class="pt">Uma página com um objetivo: transformar visitas em contactos.</span><span class="en">One page with one goal: turning visits into contacts.</span></p>
 <small>Landing page</small>
 </div>
 <div class="service rv">
-<h2>Serviço / 03</h2>
-<p class="s-desc">Assistentes e formulários inteligentes ligados ao teu fluxo de trabalho.</p>
-<small>Integração de IA</small>
+<h2><span class="pt">Serviço / 03</span><span class="en">Service / 03</span></h2>
+<p class="s-desc"><span class="pt">Assistentes e formulários inteligentes ligados ao teu fluxo de trabalho.</span><span class="en">Smart assistants and forms wired into your workflow.</span></p>
+<small><span class="pt">Integração de IA</span><span class="en">AI integration</span></small>
 </div>
 <div class="service rv">
-<h2>Serviço / 04</h2>
-<p class="s-desc">Diagnóstico, reparações e um site que volta a comportar-se.</p>
-<small>Verificações &amp; reparações</small>
+<h2><span class="pt">Serviço / 04</span><span class="en">Service / 04</span></h2>
+<p class="s-desc"><span class="pt">Diagnóstico, reparações e um site que volta a comportar-se.</span><span class="en">Diagnosis, repairs and a site that behaves again.</span></p>
+<small><span class="pt">Verificações &amp; reparações</span><span class="en">Checks &amp; repairs</span></small>
 </div>
 </div>
 <div class="brief-cta rv">
 <div class="brief-left">
-<span class="mono">Transmissão / novo projeto</span>
-<h3>Briefing de Missão</h3>
-<p>Responde a oito módulos de perguntas - cerca de 15 minutos, zero tecnicismos. Quando me enviares o relatório, já sabemos exatamente para onde vai o teu site.</p>
+<span class="mono"><span class="pt">Transmissão / novo projeto</span><span class="en">Transmission / new project</span></span>
+<h3><span class="pt">Briefing de Missão</span><span class="en">Mission Briefing</span></h3>
+<p><span class="pt">Responde a oito módulos de perguntas - cerca de 15 minutos, zero tecnicismos. Quando me enviares o relatório, já sabemos exatamente para onde vai o teu site.</span><span class="en">Answer eight modules of questions - about 15 minutes, zero jargon. Once you send the report, we already know exactly where your site is headed.</span></p>
 </div>
-<a class="btn btn-primary" href="briefing.html">Preencher briefing <span class="arrow">→</span></a>
+<a class="btn btn-primary" href="briefing.html"><span class="pt">Preencher briefing</span><span class="en">Fill in the briefing</span> <span class="arrow">→</span></a>
 </div>
 </div>
 </section>
@@ -116,17 +130,17 @@
 <div class="wrap">
 <div class="footer-grid">
 <div>
-<p class="f-h">Índice / 01</p>
-<p><span class="dot-live"></span><span>Esmoriz, PT - Terra</span></p>
-<p>26 anos - disponível para projetos freelance</p>
+<p class="f-h"><span class="pt">Índice / 01</span><span class="en">Index / 01</span></p>
+<p><span class="dot-live"></span><span><span class="pt">Esmoriz, PT - Terra</span><span class="en">Esmoriz, PT - Earth</span></span></p>
+<p><span class="pt">26 anos - disponível para projetos freelance</span><span class="en">26 years old - available for freelance projects</span></p>
 </div>
 <div>
-<p class="f-h">Índice / 02</p>
-<p>Websites · landing pages · integrações de IA</p>
-<p>Revisão &amp; reparação de código</p>
+<p class="f-h"><span class="pt">Índice / 02</span><span class="en">Index / 02</span></p>
+<p><span class="pt">Websites · landing pages · integrações de IA</span><span class="en">Websites · landing pages · AI integrations</span></p>
+<p><span class="pt">Revisão &amp; reparação de código</span><span class="en">Code review &amp; repair</span></p>
 </div>
 <div>
-<p class="f-h">Ferramentas selecionadas</p>
+<p class="f-h"><span class="pt">Ferramentas selecionadas</span><span class="en">Selected tools</span></p>
 <ul>
 <li>Arena.AI</li>
 <li>ChatGPT</li>
@@ -137,7 +151,7 @@
 </ul>
 </div>
 <div>
-<p class="f-h">Contacto</p>
+<p class="f-h"><span class="pt">Contacto</span><span class="en">Contact</span></p>
 <ul>
 <li><a href="mailto:benmrodrigues2000@gmail.com">benmrodrigues2000@gmail.com</a></li>
 
@@ -149,12 +163,13 @@
 </div>
 <div class="footer-base">
 <span class="mono">© 2026 - Ruben Monteiro Correia Rodrigues · AYYLIENADO online</span>
-<span class="mono">Feito em Esmoriz, Portugal</span>
+<span class="mono"><span class="pt">Feito em Esmoriz, Portugal</span><span class="en">Made in Esmoriz, Portugal</span></span>
 </div>
 </div>
 </footer>
 <div aria-live="polite" class="toast" id="toast" role="status">Email copiado</div>
 
+<script src="js/controls.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

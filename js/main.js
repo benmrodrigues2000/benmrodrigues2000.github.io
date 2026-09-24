@@ -57,12 +57,12 @@
   }
 
   var TOOLS = [
-    {note: "Comparar antes de comprometer. Todo o prompt que importa passa primeiro por uma pequena arena de modelos - o vencedor define a direção, os perdedores revelam o que faltava na instrução.", prompt: "Mesmo briefing, três modelos. Ordena por clareza, tom e utilidade. Diz-me o que os perdedores erraram.", out: "Uma decisão ordenada com razão anexa - a escolha do modelo é um passo documentado, não um hábito."},
-    {note: "O parceiro de pensamento. Notas confusas de clientes entram; saem estrutura, rascunhos e contra-argumentos. Uso-o para pensar comigo, não por mim.", prompt: "Aqui está o meu briefing confuso. Dá-me 3 estruturas e depois argumenta contra a que eu escolheria naturalmente.", out: "Rascunhos com espinha - e uma lista curta de pontos fracos que ainda tenho de corrigir eu."},
-    {note: "Quando a pilha é grande demais para um cérebro. Transcrições longas, documentos e referências entram; sai um mapa do território. Segunda opinião quando o enviesamento de um modelo aparece.", prompt: "Lê os documentos anexos. Cria uma cronologia, lista contradições e responde apenas com base nas fontes.", out: "Um briefing com fontes com que posso discutir - citações incluídas, nada flutua sem evidência."},
-    {note: "O motor de clipes. Entra stream longa, saem candidatos verticais curtos. A IA é rápida a encontrar momentos; sou eu que sei que momento significou alguma coisa.", prompt: "Encontra os 5 momentos mais carregados emocionalmente. Ordena pela força do gancho nos primeiros 2 segundos.", out: "Três clipes publicáveis com ganchos e legendas - e uma lista de cortes que poupa uma hora."},
-    {note: "A camada de publicação. Modelos, formulários inteligentes e assistentes ligados a produtos reais com Python e JavaScript - para pequenas empresas que só querem que as coisas funcionem.", prompt: "Dada a tarefa mais repetitiva deste cliente, desenha a funcionalidade de IA mais fina que a elimina. Inclui estados de falha.", out: "Uma integração com âmbito definido: endpoints, prompts, ligações à base de dados - e um preço que o cliente entende."},
-    {note: "O ofício por trás de cada fluxo de IA. Os prompts dão-te um rascunho; Python e JavaScript dão-te um produto - e a reparação tira-te de apuros quando um build parte.", prompt: "Explica este bug como um sénior: causa raiz, correção mínima, guarda de regressão.", out: "Código a funcionar com razão anexa - revisto, reparado e legível."}
+    {note:{pt:"Comparar antes de comprometer. Todo o prompt que importa passa primeiro por uma pequena arena de modelos - o vencedor define a direção, os perdedores revelam o que faltava na instrução.",en:"Compare before committing. Every prompt that matters first runs through a small arena of models - the winner sets the direction, the losers reveal what the instruction was missing."},prompt:{pt:"Mesmo briefing, três modelos. Ordena por clareza, tom e utilidade. Diz-me o que os perdedores erraram.",en:"Same brief, three models. Rank for clarity, tone and usefulness. Tell me what the losers got wrong."},out:{pt:"Uma decisão ordenada com razão anexa - a escolha do modelo é um passo documentado, não um hábito.",en:"A ranked decision with a reason attached - so the choice of model is a documented step, not a habit."}},
+    {note:{pt:"O parceiro de pensamento. Notas confusas de clientes entram; saem estrutura, rascunhos e contra-argumentos. Uso-o para pensar comigo, não por mim.",en:"The thinking partner. Messy client notes go in; structure, drafts and counter-arguments come out. I use it to think with me, not for me."},prompt:{pt:"Aqui está o meu briefing confuso. Dá-me 3 estruturas e depois argumenta contra a que eu escolheria naturalmente.",en:"Here is my messy brief. Give me 3 structures, then argue against the one I'd naturally pick."},out:{pt:"Rascunhos com espinha - e uma lista curta de pontos fracos que ainda tenho de corrigir eu.",en:"Drafts with a backbone - plus a short list of weak points I still have to fix myself."}},
+    {note:{pt:"Quando a pilha é grande demais para um cérebro. Transcrições longas, documentos e referências entram; sai um mapa do território. Segunda opinião quando o enviesamento de um modelo aparece.",en:"For when the pile is too big for one brain. Long transcripts, documents and references go in; a map of the territory comes out. A second opinion when a model's bias shows."},prompt:{pt:"Lê os documentos anexos. Cria uma cronologia, lista contradições e responde apenas com base nas fontes.",en:"Read the attached documents. Build a timeline, list contradictions, and answer only from the sources."},out:{pt:"Um briefing com fontes com que posso discutir - citações incluídas, nada flutua sem evidência.",en:"A brief with sources I can argue from - citations included, nothing floats without evidence."}},
+    {note:{pt:"O motor de clipes. Entra stream longa, saem candidatos verticais curtos. A IA é rápida a encontrar momentos; sou eu que sei que momento significou alguma coisa.",en:"The clip engine. A long stream goes in, short vertical candidates come out. AI is quick to find moments; I'm the one who knows which moment actually meant something."},prompt:{pt:"Encontra os 5 momentos mais carregados emocionalmente. Ordena pela força do gancho nos primeiros 2 segundos.",en:"Find the 5 most emotionally charged moments. Rank by the strength of the hook in the first 2 seconds."},out:{pt:"Três clipes publicáveis com ganchos e legendas - e uma lista de cortes que poupa uma hora.",en:"Three publishable clips with hooks and captions - plus an edit list that saves an hour."}},
+    {note:{pt:"A camada de publicação. Modelos, formulários inteligentes e assistentes ligados a produtos reais com Python e JavaScript - para pequenas empresas que só querem que as coisas funcionem.",en:"The shipping layer. Models, smart forms and assistants wired into real products with Python and JavaScript - for small businesses that just want things to work."},prompt:{pt:"Dada a tarefa mais repetitiva deste cliente, desenha a funcionalidade de IA mais fina que a elimina. Inclui estados de falha.",en:"Given this client's most repetitive task, design the thinnest AI feature that removes it. Include failure states."},out:{pt:"Uma integração com âmbito definido: endpoints, prompts, ligações à base de dados - e um preço que o cliente entende.",en:"A scoped integration: endpoints, prompts, database links - and a price the client understands."}},
+    {note:{pt:"O ofício por trás de cada fluxo de IA. Os prompts dão-te um rascunho; Python e JavaScript dão-te um produto - e a reparação tira-te de apuros quando um build parte.",en:"The craft behind every AI flow. Prompts give you a draft; Python and JavaScript give you a product - and repair gets you out of trouble when a build breaks."},prompt:{pt:"Explica este bug como um sénior: causa raiz, correção mínima, guarda de regressão.",en:"Explain this bug like a senior: root cause, minimal fix, regression guard."},out:{pt:"Código a funcionar com razão anexa - revisto, reparado e legível.",en:"Working code with a reason attached - reviewed, repaired and readable."}}
   ];
 
   var rows = Array.prototype.slice.call(document.querySelectorAll(".tool-row"));
@@ -71,20 +71,28 @@
   var tdPrompt = document.getElementById("td-prompt");
   var tdOut = document.getElementById("td-out");
 
+  var currentTool = 0;
   function selectTool(i){
+    currentTool = i;
     rows.forEach(function(r, idx){
       var selected = idx === i;
       r.setAttribute("aria-selected", selected ? "true" : "false");
       r.setAttribute("tabindex", selected ? "0" : "-1");
     });
     var t = TOOLS[i];
+    var L = curLang();
     if (t && tdNote && tdPrompt && tdOut){
-      tdNote.textContent = t.note;
-      tdPrompt.textContent = t.prompt;
-      tdOut.textContent = t.out;
+      tdNote.textContent = t.note[L];
+      tdPrompt.textContent = t.prompt[L];
+      tdOut.textContent = t.out[L];
     }
     if (panel && rows[i]) panel.setAttribute("aria-labelledby", rows[i].id);
   }
+
+  /* Re-render the tool panel in the new language when the user switches. */
+  document.addEventListener("rr:lang", function(){
+    if (rows.length) selectTool(currentTool);
+  });
 
   rows.forEach(function(row, i){
     row.addEventListener("click", function(){ selectTool(i); });
@@ -141,7 +149,7 @@
   var toTop = document.createElement("a");
   toTop.className = "to-top";
   toTop.href = "#main";
-  toTop.setAttribute("aria-label", "Voltar ao topo");
+  toTop.setAttribute("aria-label", tr("toTop"));
   toTop.textContent = "\u2191";
   document.body.appendChild(toTop);
   var ticking = false;

@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="pt-PT">
+<html lang="pt-PT" data-lang="pt" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>(function(){try{var q=new URLSearchParams(location.search);var l=q.get("lang"),t=q.get("theme"),L=null,T=null;try{L=localStorage.getItem("rr-lang");T=localStorage.getItem("rr-theme")}catch(e){}l=(l==="en"||l==="pt")?l:((L==="en"||L==="pt")?L:"pt");t=(t==="light"||t==="dark")?t:((T==="light"||T==="dark")?T:"dark");var r=document.documentElement;r.setAttribute("data-lang",l);r.setAttribute("lang",l==="en"?"en":"pt-PT");r.setAttribute("data-theme",t)}catch(e){}})();</script>
 <meta name="color-scheme" content="dark">
 <meta name="author" content="Ruben Monteiro Correia Rodrigues"><link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="manifest" href="manifest.webmanifest">
-<title>Percurso - Ruben Rodrigues - Programador & Especialista em IA</title>
-<meta name="description" content="Três rotas de capacidade e o registo de serviço: trabalho e formação.">
+<title data-en="Journey - Ruben Rodrigues - Developer & AI Specialist">Percurso - Ruben Rodrigues - Programador & Especialista em IA</title>
+<meta name="description" content="Três rotas de capacidade e o registo de serviço: trabalho e formação." data-en="Three capability routes and the service record: work and training.">
 <meta property="og:title" content="Percurso - Ruben Rodrigues - Programador & Especialista em IA">
 <meta property="og:description" content="Três rotas de capacidade e o registo de serviço: trabalho e formação.">
 <meta property="og:locale" content="pt_PT">
@@ -38,24 +39,37 @@
 </noscript>
 </head>
 <body class="boot">
-<a class="skip" href="#main">Saltar para o conteúdo</a>
+<a class="skip" href="#main"><span class="pt">Saltar para o conteúdo</span><span class="en">Skip to content</span></a>
 <header class="site-header">
 <div class="wrap">
+<div class="header-left">
+<button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Ativar modo claro" title="Ativar modo claro" aria-pressed="false">
+<span class="t-icon t-sun" aria-hidden="true">
+<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><g class="rays"><line x1="12" y1="1.6" x2="12" y2="4"></line><line x1="12" y1="20" x2="12" y2="22.4"></line><line x1="1.6" y1="12" x2="4" y2="12"></line><line x1="20" y1="12" x2="22.4" y2="12"></line><line x1="4.4" y1="4.4" x2="6.1" y2="6.1"></line><line x1="17.9" y1="17.9" x2="19.6" y2="19.6"></line><line x1="4.4" y1="19.6" x2="6.1" y2="17.9"></line><line x1="17.9" y1="6.1" x2="19.6" y2="4.4"></line></g></svg>
+</span>
+<span class="t-icon t-moon" aria-hidden="true">
+<svg viewBox="0 0 24 24"><path d="M20.3 14.6A8.6 8.6 0 0 1 9.4 3.7a8.6 8.6 0 1 0 10.9 10.9z"></path></svg>
+</span>
+</button>
 <a class="wordmark" href="index.html">
 <span class="name">RUBEN RODRIGUES</span>
-<span class="role">Programador &amp; Especialista em IA</span>
+<span class="role"><span class="pt">Programador &amp; Especialista em IA</span><span class="en">Developer &amp; AI Specialist</span></span>
 </a>
+</div>
 <nav aria-label="Secções do site" class="nav" id="nav">
-<a href="index.html">Início</a>
-<a href="sobre.html">Sobre</a>
-<a href="ferramentas.html">Ferramentas</a>
-<a href="percurso.html" aria-current="page">Percurso</a>
-<a href="trabalhos.html">Trabalhos</a>
-<a href="contacto.html">Contacto</a>
+<a href="index.html"><span class="pt">Início</span><span class="en">Home</span></a>
+<a href="sobre.html"><span class="pt">Sobre</span><span class="en">About</span></a>
+<a href="ferramentas.html"><span class="pt">Ferramentas</span><span class="en">Tools</span></a>
+<a href="percurso.html" aria-current="page"><span class="pt">Percurso</span><span class="en">Journey</span></a>
+<a href="trabalhos.html"><span class="pt">Trabalhos</span><span class="en">Work</span></a>
+<a href="contacto.html"><span class="pt">Contacto</span><span class="en">Contact</span></a>
 </nav>
 <div style="display:flex;align-items:center;gap:12px">
-
-<a class="btn btn-primary header-cta" href="contacto.html">Vamos falar</a>
+<button class="lang-toggle" id="langToggle" type="button" aria-label="Switch to English" title="Switch to English">
+<span class="lt-globe" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"></circle><path d="M3.6 12h16.8"></path><path d="M12 3.6c2.7 2.5 2.7 14.1 0 16.8-2.7-2.7-2.7-14.3 0-16.8z"></path></svg></span>
+<span class="lt-stack" aria-hidden="true"><span class="lt-code lt-pt">PT</span><span class="lt-code lt-en">EN</span></span>
+</button>
+<a class="btn btn-primary header-cta" href="contacto.html"><span class="pt">Vamos falar</span><span class="en">Let's talk</span></a>
 <button aria-controls="nav" aria-expanded="false" aria-label="Abrir menu" class="burger" id="burger">
 <span></span>
 </button>
@@ -67,12 +81,12 @@
 <div class="wrap">
 <div class="section-head">
 <div class="titleblock">
-<span class="mono">Percurso / 3 rotas</span>
-<h1 class="big-title rv-left">Percurso</h1>
+<span class="mono"><span class="pt">Percurso / 3 rotas</span><span class="en">Journey / 3 routes</span></span>
+<h1 class="big-title rv-left"><span class="pt">Percurso</span><span class="en">Journey</span></h1>
 </div>
 <div class="aside">
-<p class="mono" style="margin:0 0 8px">Índice de capacidades</p>
-<p class="mono" style="margin:0">Sem certificados. Provas em vez disso.</p>
+<p class="mono" style="margin:0 0 8px"><span class="pt">Índice de capacidades</span><span class="en">Capability index</span></p>
+<p class="mono" style="margin:0"><span class="pt">Sem certificados. Provas em vez disso.</span><span class="en">No certificates. Proof instead.</span></p>
 </div>
 </div>
 <div class="pathways">
@@ -80,42 +94,42 @@
 <article class="pathway rv">
 <div class="p-left">
 <div class="p-num">01</div>
-<h2 class="p-title">Prompt &amp;<br/>Conversação</h2>
-<p class="p-desc">Fazer os modelos perceberem-te a sério - e saber exatamente porquê que não perceberam.</p>
+<h2 class="p-title"><span class="pt">Prompt &amp;<br/>Conversação</span><span class="en">Prompt &amp;<br/>Conversation</span></h2>
+<p class="p-desc"><span class="pt">Fazer os modelos perceberem-te a sério - e saber exatamente porquê que não perceberam.</span><span class="en">Getting models to actually understand you - and knowing exactly why they didn&#39;t.</span></p>
 <div class="p-tags">
-<b>Design de prompts</b><b>Gestão de contexto</b><b>Enquadramento de papéis</b><b>Ciclos de crítica</b>
+<b><span class="pt">Design de prompts</span><span class="en">Prompt design</span></b><b><span class="pt">Gestão de contexto</span><span class="en">Context management</span></b><b><span class="pt">Enquadramento de papéis</span><span class="en">Role framing</span></b><b><span class="pt">Ciclos de crítica</span><span class="en">Critique cycles</span></b>
 </div>
 </div>
 <div class="p-right">
 <div aria-hidden="true" class="diagram">
 <svg class="dsvg-simple" preserveaspectratio="xMidYMid meet" viewbox="0 0 460 110">
-<text class="dlabel" x="14" y="24">Perguntas</text>
+<text class="dlabel" x="14" y="24"><span class="pt">Perguntas</span><span class="en">Questions</span></text>
 <path class="darrow" d="M92 20 H 128"></path>
-<text class="dlabel" x="138" y="24">O modelo responde</text>
+<text class="dlabel" x="138" y="24"><span class="pt">O modelo responde</span><span class="en">The model answers</span></text>
 <path class="darrow" d="M252 20 H 288"></path>
-<text class="dlabel" x="298" y="24">Criticas</text>
+<text class="dlabel" x="298" y="24"><span class="pt">Criticas</span><span class="en">You critique</span></text>
 <path class="dloop" d="M366 34 C 366 78, 52 78, 44 42"></path>
 <path class="dhead" d="M44 42 l-4 -10 l11 3 z"></path>
-<text class="dlabel" x="14" y="100">Repete até a resposta merecer o lugar</text>
+<text class="dlabel" x="14" y="100"><span class="pt">Repete até a resposta merecer o lugar</span><span class="en">Repeat until the answer earns its place</span></text>
 </svg>
 </div>
 <ul class="skills">
-<li><span>a.</span><span>Instruções que sobrevivem à segunda ronda</span></li>
-<li><span>b.</span><span>Prompts de sistema, papéis e guardrails</span></li>
-<li><span>c.</span><span>Exemplos few-shot como calibração</span></li>
-<li><span>d.</span><span>Saber quando trocar de modelo a meio da conversa</span></li>
+<li><span>a.</span><span><span class="pt">Instruções que sobrevivem à segunda ronda</span><span class="en">Instructions that survive the second round</span></span></li>
+<li><span>b.</span><span><span class="pt">Prompts de sistema, papéis e guardrails</span><span class="en">System prompts, roles and guardrails</span></span></li>
+<li><span>c.</span><span><span class="pt">Exemplos few-shot como calibração</span><span class="en">Few-shot examples as calibration</span></span></li>
+<li><span>d.</span><span><span class="pt">Saber quando trocar de modelo a meio da conversa</span><span class="en">Knowing when to switch models mid-conversation</span></span></li>
 </ul>
-<p class="body" style="color:var(--muted);max-width:58ch">Prática diária: cada pedido recorrente da minha semana é reescrito como prompt reutilizável - com número de versão e uma nota do que partiu da última vez.</p>
+<p class="body" style="color:var(--muted);max-width:58ch"><span class="pt">Prática diária: cada pedido recorrente da minha semana é reescrito como prompt reutilizável - com número de versão e uma nota do que partiu da última vez.</span><span class="en">Daily practice: every recurring request in my week is rewritten as a reusable prompt - with a version number and a note of what broke last time.</span></p>
 </div>
 </article>
 
 <article class="pathway rv">
 <div class="p-left">
 <div class="p-num">02</div>
-<h2 class="p-title">Integrações de IA<br/>&amp; Código</h2>
-<p class="p-desc">Pôr a IA a trabalhar dentro de produtos reais - sites, formulários inteligentes e assistentes para pequenas empresas.</p>
+<h2 class="p-title"><span class="pt">Integrações de IA<br/>&amp; Código</span><span class="en">AI &amp; Code<br/>Integrations</span></h2>
+<p class="p-desc"><span class="pt">Pôr a IA a trabalhar dentro de produtos reais - sites, formulários inteligentes e assistentes para pequenas empresas.</span><span class="en">Putting AI to work inside real products - sites, smart forms and assistants for small businesses.</span></p>
 <div class="p-tags">
-<b>Python</b><b>JavaScript</b><b>APIs de IA</b><b>Bases de dados</b>
+<b>Python</b><b>JavaScript</b><b><span class="pt">APIs de IA</span><span class="en">AI APIs</span></b><b><span class="pt">Bases de dados</span><span class="en">Databases</span></b>
 </div>
 </div>
 <div class="p-right">
@@ -125,95 +139,95 @@
 <path class="darrow" d="M84 20 H 120"></path>
 <text class="dlabel" x="130" y="24">Prompt</text>
 <path class="darrow" d="M186 20 H 222"></path>
-<text class="dlabel" x="232" y="24">Código + dados</text>
+<text class="dlabel" x="232" y="24"><span class="pt">Código + dados</span><span class="en">Code + data</span></text>
 <path class="darrow" d="M347 20 H 383"></path>
-<text class="dlabel" x="393" y="24">Publicado</text>
+<text class="dlabel" x="393" y="24"><span class="pt">Publicado</span><span class="en">Shipped</span></text>
 <circle class="dnode on" cx="30" cy="62" r="10"></circle>
-<text class="dlabel" x="52" y="66">Recente: O Provador - 5 perguntas, 6 eixos, ao vivo</text>
+<text class="dlabel" x="52" y="66"><span class="pt">Recente: O Provador - 5 perguntas, 6 eixos, ao vivo</span><span class="en">Recent: O Provador - 5 questions, 6 axes, live</span></text>
 </svg>
 </div>
 <ul class="skills">
-<li><span>a.</span><span>Integrações com APIs de IA - classe GPT &amp; Gemini</span></li>
-<li><span>b.</span><span>Questionários e formulários de recomendação inteligentes</span></li>
-<li><span>c.</span><span>Ferramentas web apoiadas em bases de dados</span></li>
-<li><span>d.</span><span>Projetos em Python &amp; JavaScript, de ponta a ponta</span></li>
+<li><span>a.</span><span><span class="pt">Integrações com APIs de IA - classe GPT &amp; Gemini</span><span class="en">AI API integrations - GPT &amp; Gemini class</span></span></li>
+<li><span>b.</span><span><span class="pt">Questionários e formulários de recomendação inteligentes</span><span class="en">Smart recommendation quizzes and forms</span></span></li>
+<li><span>c.</span><span><span class="pt">Ferramentas web apoiadas em bases de dados</span><span class="en">Database-backed web tools</span></span></li>
+<li><span>d.</span><span><span class="pt">Projetos em Python &amp; JavaScript, de ponta a ponta</span><span class="en">Python &amp; JavaScript projects, end to end</span></span></li>
 </ul>
-<p class="body" style="color:var(--muted);max-width:58ch">Construção recente: <a class="tlink" href="https://freedomoutdoor.pt/provador" rel="noopener" target="_blank">O Provador</a> - cinco perguntas e todos os modelos em stock real da loja pontuados em seis eixos. Terminei o projeto e adaptei-o para uma página WordPress, agora ao vivo em freedomoutdoor.pt.</p>
+<p class="body" style="color:var(--muted);max-width:58ch"><span class="pt">Construção recente: <a class="tlink" href="https://freedomoutdoor.pt/provador" rel="noopener" target="_blank">O Provador</a> - cinco perguntas e todos os modelos em stock real da loja pontuados em seis eixos. Terminei o projeto e adaptei-o para uma página WordPress, agora ao vivo em freedomoutdoor.pt.</span><span class="en">Recent build: <a class="tlink" href="https://freedomoutdoor.pt/provador" rel="noopener" target="_blank">O Provador</a> - five questions and every model in the store&#39;s real stock scored on six axes. I finished the project and adapted it into a WordPress page, now live at freedomoutdoor.pt.</span></p>
 </div>
 </article>
 
 <article class="pathway rv">
 <div class="p-left">
 <div class="p-num">03</div>
-<h2 class="p-title">Web Design<br/>&amp; Reparação</h2>
-<p class="p-desc">Websites e landing pages que servem o cliente - e código partido feito inteiro outra vez.</p>
+<h2 class="p-title"><span class="pt">Web Design<br/>&amp; Reparação</span><span class="en">Web Design<br/>&amp; Repair</span></h2>
+<p class="p-desc"><span class="pt">Websites e landing pages que servem o cliente - e código partido feito inteiro outra vez.</span><span class="en">Websites and landing pages that serve the client - and broken code made whole again.</span></p>
 <div class="p-tags">
-<b>Landing pages</b><b>Web responsiva</b><b>Revisão de código</b><b>Serviço ao cliente</b>
+<b>Landing pages</b><b><span class="pt">Web responsiva</span><span class="en">Responsive web</span></b><b><span class="pt">Revisão de código</span><span class="en">Code review</span></b><b><span class="pt">Serviço ao cliente</span><span class="en">Customer service</span></b>
 </div>
 </div>
 <div class="p-right">
 <div aria-hidden="true" class="diagram">
 <svg class="dsvg-simple" preserveaspectratio="xMidYMid meet" viewbox="0 0 460 110">
-<text class="dlabel" x="14" y="24">Algo parte</text>
+<text class="dlabel" x="14" y="24"><span class="pt">Algo parte</span><span class="en">Something breaks</span></text>
 <path class="darrow" d="M144 20 H 180"></path>
-<text class="dlabel" x="190" y="24">Ler o código</text>
+<text class="dlabel" x="190" y="24"><span class="pt">Ler o código</span><span class="en">Read the code</span></text>
 <path class="darrow" d="M300 20 H 336"></path>
-<text class="dlabel" x="346" y="24">Reparar</text>
+<text class="dlabel" x="346" y="24"><span class="pt">Reparar</span><span class="en">Repair</span></text>
 <circle class="dnode on" cx="30" cy="62" r="10"></circle>
-<text class="dlabel" x="52" y="66">Regra: a correção mínima que mantém as promessas</text>
+<text class="dlabel" x="52" y="66"><span class="pt">Regra: a correção mínima que mantém as promessas</span><span class="en">Rule: the smallest fix that keeps the promises</span></text>
 </svg>
 </div>
 <ul class="skills">
-<li><span>a.</span><span>Websites para pequenas empresas</span></li>
-<li><span>b.</span><span>Landing pages com um objetivo claro</span></li>
-<li><span>c.</span><span>Revisão e reparação de código</span></li>
-<li><span>d.</span><span>Serviço ao cliente como funcionalidade</span></li>
+<li><span>a.</span><span><span class="pt">Websites para pequenas empresas</span><span class="en">Websites for small businesses</span></span></li>
+<li><span>b.</span><span><span class="pt">Landing pages com um objetivo claro</span><span class="en">Landing pages with one clear goal</span></span></li>
+<li><span>c.</span><span><span class="pt">Revisão e reparação de código</span><span class="en">Code review and repair</span></span></li>
+<li><span>d.</span><span><span class="pt">Serviço ao cliente como funcionalidade</span><span class="en">Customer service as a feature</span></span></li>
 </ul>
-<p class="body" style="color:var(--muted);max-width:58ch">Prática diária: cada projeto começa pela pergunta do cliente, não pela stack. A mentalidade de serviço começou no Pingo Doce - e nunca mais saiu.</p>
+<p class="body" style="color:var(--muted);max-width:58ch"><span class="pt">Prática diária: cada projeto começa pela pergunta do cliente, não pela stack. A mentalidade de serviço começou no Pingo Doce - e nunca mais saiu.</span><span class="en">Daily practice: every project starts with the client&#39;s question, not the stack. The service mindset started at Pingo Doce - and never left.</span></p>
 </div>
 </article>
 </div>
 
 <div class="trail rv">
 <div class="trail-head">
-<h3 class="sub" style="color:var(--ink)">O percurso até aqui</h3>
-<span class="mono">Registo de serviço / trabalho e formação</span>
+<h3 class="sub" style="color:var(--ink)"><span class="pt">O percurso até aqui</span><span class="en">The journey so far</span></h3>
+<span class="mono"><span class="pt">Registo de serviço / trabalho e formação</span><span class="en">Service record / work &amp; training</span></span>
 </div>
 <ul class="trail-list">
 <li>
 <span class="yr">2026 - agora</span>
-<span class="who">Freelancer<small>Programador &amp; Especialista em IA</small></span>
-<p class="what">Websites, landing pages e integrações de IA para pequenas empresas - além de revisão e reparação de código.</p>
+<span class="who">Freelancer<small><span class="pt">Programador &amp; Especialista em IA</span><span class="en">Developer &amp; AI Specialist</span></small></span>
+<p class="what"><span class="pt">Websites, landing pages e integrações de IA para pequenas empresas - além de revisão e reparação de código.</span><span class="en">Websites, landing pages and AI integrations for small businesses - plus code review and repair.</span></p>
 </li>
 <li>
 <span class="yr">2026</span>
-<span class="who">Freedom Outdoor<small>Estágio · Running &amp; Trail</small></span>
-<p class="what"><a class="tlink" href="https://freedomoutdoor.pt/provador" rel="noopener" target="_blank">O Provador</a> - lógica de quiz sobre o stock real da loja: um parecer honesto por corredor. Fui o responsável pelo website da loja e, quando o projeto ficou pronto, adaptei-o para uma página WordPress, agora ao vivo em freedomoutdoor.pt.</p>
+<span class="who">Freedom Outdoor<small><span class="pt">Estágio · Running &amp; Trail</span><span class="en">Internship · Running &amp; Trail</span></small></span>
+<p class="what"><span class="pt"><a class="tlink" href="https://freedomoutdoor.pt/provador" rel="noopener" target="_blank">O Provador</a> - lógica de quiz sobre o stock real da loja: um parecer honesto por corredor. Fui o responsável pelo website da loja e, quando o projeto ficou pronto, adaptei-o para uma página WordPress, agora ao vivo em freedomoutdoor.pt.</span><span class="en"><a class="tlink" href="https://freedomoutdoor.pt/provador" rel="noopener" target="_blank">O Provador</a> - quiz logic over the store&#39;s real stock: an honest verdict per runner. I was the lead on the store website and, once the project was ready, adapted it into a WordPress page, now live at freedomoutdoor.pt.</span></p>
 </li>
 <li>
 <span class="yr">2025 - 26</span>
 <span class="who">Curso Sentido 3<small>CRPG - Gaia</small></span>
-<p class="what">Programa de regresso ao trabalho com aulas de terapeutas qualificados.</p>
+<p class="what"><span class="pt">Programa de regresso ao trabalho com aulas de terapeutas qualificados.</span><span class="en">A return-to-work programme with sessions led by qualified therapists.</span></p>
 </li>
 <li>
 <span class="yr">2020 - 22</span>
-<span class="who">Operador de Robot<small>Ferreira de Sá S.A.</small></span>
-<p class="what">Operação e monitorização de robôs industriais em ambiente de produção.</p>
+<span class="who"><span class="pt">Operador de Robot</span><span class="en">Robot Operator</span><small>Ferreira de Sá S.A.</small></span>
+<p class="what"><span class="pt">Operação e monitorização de robôs industriais em ambiente de produção.</span><span class="en">Operating and monitoring industrial robots in a production environment.</span></p>
 </li>
 <li>
 <span class="yr">2019 - 21</span>
-<span class="who">TeSP Desenvolvimento de Software<small>ESAN - Universidade de Aveiro</small></span>
-<p class="what">Dois anos concluídos, programa pausado por razões de saúde.</p>
+<span class="who"><span class="pt">TeSP Desenvolvimento de Software</span><span class="en">TeSP Software Development</span><small><span class="pt">ESAN - Universidade de Aveiro</span><span class="en">ESAN - University of Aveiro</span></small></span>
+<p class="what"><span class="pt">Dois anos concluídos, programa pausado por razões de saúde.</span><span class="en">Two years completed, programme paused for health reasons.</span></p>
 </li>
 <li>
 <span class="yr">2018 - 21</span>
-<span class="who">Colaborador<small>Pingo Doce</small></span>
-<p class="what">Apoio ao cliente e operações - onde começou a paixão por servir o cliente.</p>
+<span class="who"><span class="pt">Colaborador</span><span class="en">Team member</span><small>Pingo Doce</small></span>
+<p class="what"><span class="pt">Apoio ao cliente e operações - onde começou a paixão por servir o cliente.</span><span class="en">Customer support and operations - where the passion for serving customers began.</span></p>
 </li>
 <li>
-<span class="yr">Concluído</span>
-<span class="who">Técnico de Multimédia<small>Curso profissional · 12.º ano</small></span>
-<p class="what">Multimédia, design e tecnologias web - a primeira caixa de ferramentas.</p>
+<span class="yr"><span class="pt">Concluído</span><span class="en">Completed</span></span>
+<span class="who"><span class="pt">Técnico de Multimédia</span><span class="en">Multimedia Technician</span><small><span class="pt">Curso profissional · 12.º ano</span><span class="en">Vocational course · 12th grade</span></small></span>
+<p class="what"><span class="pt">Multimédia, design e tecnologias web - a primeira caixa de ferramentas.</span><span class="en">Multimedia, design and web technologies - the first toolbox.</span></p>
 </li>
 </ul>
 </div>
@@ -224,17 +238,17 @@
 <div class="wrap">
 <div class="footer-grid">
 <div>
-<p class="f-h">Índice / 01</p>
-<p><span class="dot-live"></span><span>Esmoriz, PT - Terra</span></p>
-<p>26 anos - disponível para projetos freelance</p>
+<p class="f-h"><span class="pt">Índice / 01</span><span class="en">Index / 01</span></p>
+<p><span class="dot-live"></span><span><span class="pt">Esmoriz, PT - Terra</span><span class="en">Esmoriz, PT - Earth</span></span></p>
+<p><span class="pt">26 anos - disponível para projetos freelance</span><span class="en">26 years old - available for freelance projects</span></p>
 </div>
 <div>
-<p class="f-h">Índice / 02</p>
-<p>Websites · landing pages · integrações de IA</p>
-<p>Revisão &amp; reparação de código</p>
+<p class="f-h"><span class="pt">Índice / 02</span><span class="en">Index / 02</span></p>
+<p><span class="pt">Websites · landing pages · integrações de IA</span><span class="en">Websites · landing pages · AI integrations</span></p>
+<p><span class="pt">Revisão &amp; reparação de código</span><span class="en">Code review &amp; repair</span></p>
 </div>
 <div>
-<p class="f-h">Ferramentas selecionadas</p>
+<p class="f-h"><span class="pt">Ferramentas selecionadas</span><span class="en">Selected tools</span></p>
 <ul>
 <li>Arena.AI</li>
 <li>ChatGPT</li>
@@ -245,7 +259,7 @@
 </ul>
 </div>
 <div>
-<p class="f-h">Contacto</p>
+<p class="f-h"><span class="pt">Contacto</span><span class="en">Contact</span></p>
 <ul>
 <li><a href="mailto:benmrodrigues2000@gmail.com">benmrodrigues2000@gmail.com</a></li>
 
@@ -257,12 +271,13 @@
 </div>
 <div class="footer-base">
 <span class="mono">© 2026 - Ruben Monteiro Correia Rodrigues · AYYLIENADO online</span>
-<span class="mono">Feito em Esmoriz, Portugal</span>
+<span class="mono"><span class="pt">Feito em Esmoriz, Portugal</span><span class="en">Made in Esmoriz, Portugal</span></span>
 </div>
 </div>
 </footer>
 
 
+<script src="js/controls.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

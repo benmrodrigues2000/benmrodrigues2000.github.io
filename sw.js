@@ -1,4 +1,4 @@
-var VERSION = "portefolio-v7";
+var VERSION = "portefolio-v8";
 var SHELL = [
   "./",
   "index.html",
@@ -11,6 +11,7 @@ var SHELL = [
   "404.html",
   "css/style.css",
   "js/main.js",
+  "js/controls.js",
   "favicon.svg",
   "manifest.webmanifest",
   "apple-touch-icon.png",

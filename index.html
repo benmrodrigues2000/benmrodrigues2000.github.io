@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="pt-PT">
+<html lang="pt-PT" data-lang="pt" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>(function(){try{var q=new URLSearchParams(location.search);var l=q.get("lang"),t=q.get("theme"),L=null,T=null;try{L=localStorage.getItem("rr-lang");T=localStorage.getItem("rr-theme")}catch(e){}l=(l==="en"||l==="pt")?l:((L==="en"||L==="pt")?L:"pt");t=(t==="light"||t==="dark")?t:((T==="light"||T==="dark")?T:"dark");var r=document.documentElement;r.setAttribute("data-lang",l);r.setAttribute("lang",l==="en"?"en":"pt-PT");r.setAttribute("data-theme",t)}catch(e){}})();</script>
 <meta name="color-scheme" content="dark">
 <meta name="author" content="Ruben Monteiro Correia Rodrigues"><link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="manifest" href="manifest.webmanifest">
-<title>Ruben Rodrigues - Programador & Especialista em IA</title>
-<meta name="description" content="Programador e especialista em IA em Esmoriz, Portugal. Websites, landing pages e integrações de IA para pequenas empresas.">
+<title data-en="Ruben Rodrigues - Developer & AI Specialist">Ruben Rodrigues - Programador & Especialista em IA</title>
+<meta name="description" content="Programador e especialista em IA em Esmoriz, Portugal. Websites, landing pages e integrações de IA para pequenas empresas." data-en="Developer and AI specialist in Esmoriz, Portugal. Websites, landing pages and AI integrations for small businesses.">
 <meta property="og:title" content="Ruben Rodrigues - Programador & Especialista em IA">
 <meta property="og:description" content="Programador e especialista em IA em Esmoriz, Portugal. Websites, landing pages e integrações de IA para pequenas empresas.">
 <meta property="og:locale" content="pt_PT">
@@ -20,8 +21,8 @@
 <meta property="og:image" content="https://benmrodrigues2000.github.io/og.jpg">
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
-<meta property="og:image:alt" content="Cartão do portefólio de Ruben Rodrigues: Programador & Especialista em IA, sobre um campo de estrelas"/>
-<meta name="twitter:image:alt" content="Cartão do portefólio de Ruben Rodrigues: Programador & Especialista em IA, sobre um campo de estrelas"/>
+<meta property="og:image:alt" content="Cartão do portefólio de Ruben Rodrigues: Programador & Especialista em IA, sobre um campo de estrelas">
+<meta name="twitter:image:alt" content="Cartão do portefólio de Ruben Rodrigues: Programador & Especialista em IA, sobre um campo de estrelas">
 <meta property="og:url" content="https://benmrodrigues2000.github.io/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Ruben Rodrigues - Programador & Especialista em IA">
@@ -39,24 +40,37 @@
 </noscript>
 </head>
 <body class="boot">
-<a class="skip" href="#main">Saltar para o conteúdo</a>
+<a class="skip" href="#main"><span class="pt">Saltar para o conteúdo</span><span class="en">Skip to content</span></a>
 <header class="site-header">
 <div class="wrap">
+<div class="header-left">
+<button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Ativar modo claro" title="Ativar modo claro" aria-pressed="false">
+<span class="t-icon t-sun" aria-hidden="true">
+<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><g class="rays"><line x1="12" y1="1.6" x2="12" y2="4"></line><line x1="12" y1="20" x2="12" y2="22.4"></line><line x1="1.6" y1="12" x2="4" y2="12"></line><line x1="20" y1="12" x2="22.4" y2="12"></line><line x1="4.4" y1="4.4" x2="6.1" y2="6.1"></line><line x1="17.9" y1="17.9" x2="19.6" y2="19.6"></line><line x1="4.4" y1="19.6" x2="6.1" y2="17.9"></line><line x1="17.9" y1="6.1" x2="19.6" y2="4.4"></line></g></svg>
+</span>
+<span class="t-icon t-moon" aria-hidden="true">
+<svg viewBox="0 0 24 24"><path d="M20.3 14.6A8.6 8.6 0 0 1 9.4 3.7a8.6 8.6 0 1 0 10.9 10.9z"></path></svg>
+</span>
+</button>
 <a class="wordmark" href="index.html">
 <span class="name">RUBEN RODRIGUES</span>
-<span class="role">Programador &amp; Especialista em IA</span>
+<span class="role"><span class="pt">Programador &amp; Especialista em IA</span><span class="en">Developer &amp; AI Specialist</span></span>
 </a>
+</div>
 <nav aria-label="Secções do site" class="nav" id="nav">
-<a href="index.html" aria-current="page">Início</a>
-<a href="sobre.html">Sobre</a>
-<a href="ferramentas.html">Ferramentas</a>
-<a href="percurso.html">Percurso</a>
-<a href="trabalhos.html">Trabalhos</a>
-<a href="contacto.html">Contacto</a>
+<a href="index.html" aria-current="page"><span class="pt">Início</span><span class="en">Home</span></a>
+<a href="sobre.html"><span class="pt">Sobre</span><span class="en">About</span></a>
+<a href="ferramentas.html"><span class="pt">Ferramentas</span><span class="en">Tools</span></a>
+<a href="percurso.html"><span class="pt">Percurso</span><span class="en">Journey</span></a>
+<a href="trabalhos.html"><span class="pt">Trabalhos</span><span class="en">Work</span></a>
+<a href="contacto.html"><span class="pt">Contacto</span><span class="en">Contact</span></a>
 </nav>
 <div style="display:flex;align-items:center;gap:12px">
-
-<a class="btn btn-primary header-cta" href="contacto.html">Vamos falar</a>
+<button class="lang-toggle" id="langToggle" type="button" aria-label="Switch to English" title="Switch to English">
+<span class="lt-globe" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"></circle><path d="M3.6 12h16.8"></path><path d="M12 3.6c2.7 2.5 2.7 14.1 0 16.8-2.7-2.7-2.7-14.3 0-16.8z"></path></svg></span>
+<span class="lt-stack" aria-hidden="true"><span class="lt-code lt-pt">PT</span><span class="lt-code lt-en">EN</span></span>
+</button>
+<a class="btn btn-primary header-cta" href="contacto.html"><span class="pt">Vamos falar</span><span class="en">Let's talk</span></a>
 <button aria-controls="nav" aria-expanded="false" aria-label="Abrir menu" class="burger" id="burger">
 <span></span>
 </button>
@@ -71,22 +85,22 @@
 <div class="wrap">
 <div class="hero-left">
 <div class="eyebrow">
-<span>Prática de IA</span><i class="tick"></i>
-<span>Construção diária</span><i class="tick"></i>
-<span>Esmoriz, PT - Terra</span>
+<span><span class="pt">Prática de IA</span><span class="en">AI practice</span></span><i class="tick"></i>
+<span><span class="pt">Construção diária</span><span class="en">Building daily</span></span><i class="tick"></i>
+<span><span class="pt">Esmoriz, PT - Terra</span><span class="en">Esmoriz, PT - Earth</span></span>
 </div>
-<h1>Trabalho com IA <em>todos os dias.</em></h1>
-<p class="hero-sub">Programador freelance &amp; especialista em IA - transformo perguntas em código, em fluxos de trabalho e em coisas úteis.</p>
+<h1><span class="pt">Trabalho com IA <em>todos os dias.</em></span><span class="en">I work with AI <em>every single day.</em></span></h1>
+<p class="hero-sub"><span class="pt">Programador freelance &amp; especialista em IA - transformo perguntas em código, em fluxos de trabalho e em coisas úteis.</span><span class="en">Freelance developer &amp; AI specialist - I turn questions into code, into workflows and into useful things.</span></p>
 <div class="hero-actions">
-<a class="btn btn-primary" href="percurso.html">Explorar o percurso <span class="arrow">→</span></a>
-<a class="btn btn-ghost" href="trabalhos.html">Ver os trabalhos</a>
+<a class="btn btn-primary" href="percurso.html"><span class="pt">Explorar o percurso</span><span class="en">Explore the journey</span> <span class="arrow">→</span></a>
+<a class="btn btn-ghost" href="trabalhos.html"><span class="pt">Ver os trabalhos</span><span class="en">See the work</span></a>
 </div>
 </div>
 <div class="hero-right">
 <div class="map" id="map">
 <div class="map-head">
-<span class="mono">Plano de voo</span>
-<span class="mono">v.2026 / 3 rotas</span>
+<span class="mono"><span class="pt">Plano de voo</span><span class="en">Flight plan</span></span>
+<span class="mono"><span class="pt">v.2026 / 3 rotas</span><span class="en">v.2026 / 3 routes</span></span>
 </div>
 <div class="map-body">
 <div class="map-track">
@@ -98,37 +112,37 @@
 <span class="dot"><i></i></span>
 <span class="idx">01</span>
 <span>
-<span class="label">Prompt &amp; Conversação</span>
-<span class="note">Fazer os modelos perceberem-te a sério</span>
+<span class="label"><span class="pt">Prompt &amp; Conversação</span><span class="en">Prompt &amp; Conversation</span></span>
+<span class="note"><span class="pt">Fazer os modelos perceberem-te a sério</span><span class="en">Getting models to actually understand you</span></span>
 </span>
 </a>
 <a class="map-node" href="percurso.html">
 <span class="dot"><i></i></span>
 <span class="idx">02</span>
 <span>
-<span class="label">Integrações de IA &amp; Código</span>
-<span class="note">Funcionalidades de IA, sites e formulários inteligentes que chegam à produção</span>
+<span class="label"><span class="pt">Integrações de IA &amp; Código</span><span class="en">AI &amp; Code Integrations</span></span>
+<span class="note"><span class="pt">Funcionalidades de IA, sites e formulários inteligentes que chegam à produção</span><span class="en">AI features, sites and smart forms that reach production</span></span>
 </span>
 </a>
 <a class="map-node" href="percurso.html">
 <span class="dot"><i></i></span>
 <span class="idx">03</span>
 <span>
-<span class="label">Web Design &amp; Reparação</span>
-<span class="note">Landing pages, correções, entrega centrada no cliente</span>
+<span class="label"><span class="pt">Web Design &amp; Reparação</span><span class="en">Web Design &amp; Repair</span></span>
+<span class="note"><span class="pt">Landing pages, correções, entrega centrada no cliente</span><span class="en">Landing pages, fixes, delivery centred on the client</span></span>
 </span>
 </a>
 </div>
 <div aria-hidden="true" class="map-rail">
-<span class="is-live">Prática</span>
-<span>Ferramentas</span>
-<span>Método</span>
-<span>Resultado</span>
+<span class="is-live"><span class="pt">Prática</span><span class="en">Practice</span></span>
+<span><span class="pt">Ferramentas</span><span class="en">Tools</span></span>
+<span><span class="pt">Método</span><span class="en">Method</span></span>
+<span><span class="pt">Resultado</span><span class="en">Result</span></span>
 </div>
 </div>
 <div class="map-foot">
-<span class="mono">Estado / disponível para missões freelance</span>
-<span class="mono">Desce para começar</span>
+<span class="mono"><span class="pt">Estado / disponível para missões freelance</span><span class="en">Status / available for freelance missions</span></span>
+<span class="mono"><span class="pt">Desce para começar</span><span class="en">Scroll to begin</span></span>
 </div>
 </div>
 </div>
@@ -139,17 +153,17 @@
 <div class="wrap">
 <div class="footer-grid">
 <div>
-<p class="f-h">Índice / 01</p>
-<p><span class="dot-live"></span><span>Esmoriz, PT - Terra</span></p>
-<p>26 anos - disponível para projetos freelance</p>
+<p class="f-h"><span class="pt">Índice / 01</span><span class="en">Index / 01</span></p>
+<p><span class="dot-live"></span><span><span class="pt">Esmoriz, PT - Terra</span><span class="en">Esmoriz, PT - Earth</span></span></p>
+<p><span class="pt">26 anos - disponível para projetos freelance</span><span class="en">26 years old - available for freelance projects</span></p>
 </div>
 <div>
-<p class="f-h">Índice / 02</p>
-<p>Websites · landing pages · integrações de IA</p>
-<p>Revisão &amp; reparação de código</p>
+<p class="f-h"><span class="pt">Índice / 02</span><span class="en">Index / 02</span></p>
+<p><span class="pt">Websites · landing pages · integrações de IA</span><span class="en">Websites · landing pages · AI integrations</span></p>
+<p><span class="pt">Revisão &amp; reparação de código</span><span class="en">Code review &amp; repair</span></p>
 </div>
 <div>
-<p class="f-h">Ferramentas selecionadas</p>
+<p class="f-h"><span class="pt">Ferramentas selecionadas</span><span class="en">Selected tools</span></p>
 <ul>
 <li>Arena.AI</li>
 <li>ChatGPT</li>
@@ -160,7 +174,7 @@
 </ul>
 </div>
 <div>
-<p class="f-h">Contacto</p>
+<p class="f-h"><span class="pt">Contacto</span><span class="en">Contact</span></p>
 <ul>
 <li><a href="mailto:benmrodrigues2000@gmail.com">benmrodrigues2000@gmail.com</a></li>
 
@@ -172,12 +186,13 @@
 </div>
 <div class="footer-base">
 <span class="mono">© 2026 - Ruben Monteiro Correia Rodrigues · AYYLIENADO online</span>
-<span class="mono">Feito em Esmoriz, Portugal</span>
+<span class="mono"><span class="pt">Feito em Esmoriz, Portugal</span><span class="en">Made in Esmoriz, Portugal</span></span>
 </div>
 </div>
 </footer>
 
 
+<script src="js/controls.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
