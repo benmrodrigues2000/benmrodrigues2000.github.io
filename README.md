@@ -33,7 +33,10 @@ O briefing (índice de 8 estrelas) e o postal (frente com duas figuras e órbita
 Cada envio do `briefing.html` vira uma linha no separador **Briefings concluídos** de uma folha de cálculo tua,
 com a coluna **Estado** (menu: Novo · Em análise · Proposta enviada · Em curso · Concluído · Arquivado) para ires
 atualizando, e recebes um email na hora com o relatório completo, *Responder* já apontado ao cliente e link direto
-para a linha. O motor é `tools/briefing-sheets.gs`, um Google Apps Script colado na própria folha:
+para a linha. O cliente recebe na hora uma resposta automática (PT/EN) com a mensagem de confirmação, a cópia do
+que enviou e o teu cartão de negócios no fundo — no estilo do Postal da Terra, com retrato, contactos e links para
+`/postal/` e o PDF A6 (só no primeiro envio; desliga em `CONFIG.SEND_CLIENT_COPY`; pré-visualiza com a função
+`verRespostaCliente`). O motor é `tools/briefing-sheets.gs`, um Google Apps Script colado na própria folha:
 
 1. Cria uma folha em sheets.google.com → Extensões › Apps Script → cola o conteúdo de `tools/briefing-sheets.gs` → guarda.
 2. Escolhe a função `testar` e ▶ Executa uma vez (autoriza as permissões). Aparece o separador com uma linha de teste
