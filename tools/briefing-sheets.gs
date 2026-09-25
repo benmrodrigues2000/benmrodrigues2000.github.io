@@ -2,8 +2,10 @@
    BRIEFING DE MISSÃO  →  GOOGLE SHEETS  +  AVISO POR EMAIL
    -----------------------------------------------------------------------------
    Recebe cada envio do briefing.html, escreve uma linha no separador
-   "Briefings concluídos" (com a coluna Estado para ires atualizando) e
-   manda-te um email com o relatório completo e um link direto para a linha.
+   "Briefings concluídos" (com a coluna Estado para ires atualizando),
+   manda-te um email com o relatório completo e um link direto para a linha,
+   e responde automaticamente ao cliente com uma mensagem, a cópia do que
+   enviou e o teu cartão de negócios (Postal da Terra) no fundo do email.
 
    Grátis, sem servidor, sem limite prático (o email tem quota de ~100/dia).
 
@@ -26,6 +28,14 @@
    6. Em briefing.html, cola esse URL na constante SHEETS_URL (perto do topo
       do <script>, ao lado de MAIL). Publica o site. Pronto.
 
+   RESPOSTA AO CLIENTE
+   - Liga/desliga em CONFIG.SEND_CLIENT_COPY. Só vai no primeiro envio de cada
+     rascunho (CONFIG.CLIENT_COPY_ON_UPDATE = true para responder também a reenvios).
+   - A mensagem está em notifyClient_ (PT/EN, conforme o idioma do briefing);
+     o cartão está em CARD (textos, foto, links para o postal e o PDF A6).
+   - Para ver como fica sem mexer na folha: função "verRespostaCliente" › ▶
+     Executar — chegam-te as versões PT e EN.
+
    SEMPRE QUE ALTERARES ESTE CÓDIGO:
    Implementar › Gerir implementações › ✎ › Versão: "Nova versão" › Implementar.
    Sem nova versão, o URL continua a correr o código antigo.
@@ -45,9 +55,35 @@ const CONFIG = {
   OWNER_EMAIL: 'benmrodrigues2000@gmail.com', // '' = email do dono do script
   SPREADSHEET_ID: '',                          // '' = a folha onde este script está colado
   ESTADOS: ['Novo', 'Em análise', 'Proposta enviada', 'Em curso', 'Concluído', 'Arquivado'],
-  SEND_CLIENT_COPY: false,                     // true = o cliente também recebe uma cópia
+  SEND_CLIENT_COPY: true,                      // resposta automática ao cliente (mensagem + cópia + cartão)
+  CLIENT_COPY_ON_UPDATE: false,                // true = volta a responder quando o cliente reenvia alterações
   SENDER_NAME: 'Briefing de Missão',
   MAX_LEN: 6000                                // corte de segurança por campo
+};
+
+/* Cartão de negócios no fundo da resposta ao cliente (baseado no Postal da Terra, /postal/). */
+const CARD = {
+  NAME: 'Ruben Rodrigues',
+  EMAIL: 'benmrodrigues2000@gmail.com',
+  SITE: 'https://benmrodrigues2000.github.io',
+  GITHUB: 'https://github.com/benmrodrigues2000',
+  PHOTO: 'https://benmrodrigues2000.github.io/postal/retrato.jpg',
+  POSTAL: 'https://benmrodrigues2000.github.io/postal/',
+  PDF: 'https://benmrodrigues2000.github.io/postal/ruben-rodrigues-postal-a6-{lang}.pdf',
+  T: {
+    pt: { kicker: 'Postal da Terra · Nº 01', place: 'Esmoriz, PT', hi: 'Olá, sou o',
+          role: 'Programador & Especialista em IA',
+          pitch: 'Sites, landing pages, integrações de IA e reparação de código para pequenas empresas.',
+          routes: ['Websites', 'Integrações de IA', 'Reparação de código'],
+          cta: 'Fala comigo!', view: 'Ver o postal', pdf: 'Postal em PDF (A6)',
+          foot: 'Correio intergaláctico · Feito em Esmoriz, Portugal' },
+    en: { kicker: 'Postcard from Earth · Nº 01', place: 'Esmoriz, PT', hi: 'Hi, I’m',
+          role: 'Developer & AI Specialist',
+          pitch: 'Websites, landing pages, AI integrations and code repair for small businesses.',
+          routes: ['Websites', 'AI integrations', 'Code repair'],
+          cta: 'Let’s talk!', view: 'View the postcard', pdf: 'Postcard PDF (A6)',
+          foot: 'Intergalactic mail · Made in Esmoriz, Portugal' }
+  }
 };
 
 /* Cabeçalho da folha → chave enviada pelo briefing.
@@ -137,6 +173,16 @@ function testar() {
   return res;
 }
 
+/* Pré-visualização: manda-te a resposta automática (PT e EN) sem escrever na folha. */
+function verRespostaCliente() {
+  ['pt', 'en'].forEach(lang => notifyClient_({
+    lang: lang,
+    report: (lang === 'en' ? 'MISSION BRIEFING REPORT\nBrand: Central Bakery (test)' : 'RELATÓRIO DE BRIEFING DE MISSÃO\nMarca: Padaria Central (teste)') +
+            '\n\n- 01 · ' + (lang === 'en' ? 'IDENTITY' : 'IDENTIDADE') + ' -\n' + (lang === 'en' ? 'Name' : 'Nome') + ': Teste'
+  }, { nome: 'Teste', email: ownerEmail_(), marca: lang === 'en' ? 'Central Bakery (test)' : 'Padaria Central (teste)' }));
+  Logger.log('Enviado para ' + ownerEmail_());
+}
+
 /* ---------------------------------------------------------------------------
    Lógica
    --------------------------------------------------------------------------- */
@@ -194,7 +240,7 @@ function handle_(data) {
     let mail = true;
     try { notifyOwner_(data, answers, ss, sheet, row, !!existing); }
     catch (err) { mail = false; console.error('email: ' + err); }
-    if (CONFIG.SEND_CLIENT_COPY) {
+    if (CONFIG.SEND_CLIENT_COPY && (!existing || CONFIG.CLIENT_COPY_ON_UPDATE)) {
       try { notifyClient_(data, answers); } catch (err) { console.error('cópia cliente: ' + err); }
     }
 
@@ -296,18 +342,111 @@ function notifyOwner_(data, answers, ss, sheet, row, updated) {
 
 function notifyClient_(data, answers) {
   if (!isEmail_(answers.email)) return;
-  const en = String(data.lang || 'pt') === 'en';
+  const lang = String(data.lang || 'pt') === 'en' ? 'en' : 'pt';
+  const en = lang === 'en';
   const nome = clean_(answers.nome);
-  const body = en
-    ? `Hi ${nome},\n\nYour mission briefing landed safely. I'll read it carefully and get back to you at this address within a few days with a flight plan.\n\nBelow is a copy of what you sent.\n\nRuben Rodrigues\n\n────────────────────────────────────────\n\n${clean_(data.report)}`
-    : `Olá ${nome},\n\nO teu briefing de missão chegou bem. Vou lê-lo com atenção e respondo para este email nos próximos dias com o plano de voo.\n\nEm baixo fica uma cópia do que enviaste.\n\nRuben Rodrigues\n\n────────────────────────────────────────\n\n${clean_(data.report)}`;
+  const marca = clean_(answers.marca);
+  const report = clean_(data.report) || fallbackReport_(answers);
+
+  const intro = en
+    ? [`Hi ${nome},`, 'Your mission briefing landed safely. I’ll read it carefully and get back to you at this address within a few days with a flight plan.', 'Below is a copy of what you sent.']
+    : [`Olá ${nome},`, 'O teu briefing de missão chegou bem. Vou lê-lo com atenção e respondo para este email nos próximos dias com o plano de voo.', 'Em baixo fica uma cópia do que enviaste.'];
+
+  const body = intro.join('\n\n') + '\n\n' + CARD.NAME +
+    '\n\n────────────────────────────────────────\n\n' + report +
+    '\n\n────────────────────────────────────────\n\n' + cardText_(lang);
+
+  const p = 'margin:0 0 14px;font:15px/1.6 Arial,Helvetica,sans-serif;color:#1d2233';
+  const htmlBody =
+    '<div style="max-width:560px">' +
+    intro.map(t => `<p style="${p}">${esc_(t)}</p>`).join('') +
+    `<p style="${p}">${esc_(CARD.NAME)}</p>` +
+    '<div style="margin:22px 0;padding:14px 16px;background:#f4f5fa;border-left:3px solid #A78BFA;border-radius:6px;' +
+      'font:13px/1.55 Consolas,Menlo,monospace;color:#333a52;white-space:pre-wrap">' + esc_(report) + '</div>' +
+    cardHtml_(lang) +
+    '</div>';
+
   MailApp.sendEmail({
     to: clean_(answers.email),
     replyTo: ownerEmail_(),
-    name: 'Ruben Rodrigues',
-    subject: en ? 'Your briefing has landed - ' + clean_(answers.marca) : 'O teu briefing chegou - ' + clean_(answers.marca),
-    body: body
+    name: CARD.NAME,
+    subject: (en ? 'Your briefing has landed - ' : 'O teu briefing chegou - ') + marca,
+    body: body,
+    htmlBody: htmlBody
   });
+}
+
+/* Cartão de negócios em HTML de email: tabelas + estilos inline (Gmail, Outlook, Apple Mail). */
+function cardHtml_(lang) {
+  const t = CARD.T[lang] || CARD.T.pt;
+  const f = 'font-family:Arial,Helvetica,sans-serif;';
+  const host = u => u.replace(/^https?:\/\//, '');
+  const postal = CARD.POSTAL + '?lang=' + lang;
+  const pdf = CARD.PDF.replace('{lang}', lang);
+  const row = (label, href, text) =>
+    `<tr><td style="${f}padding:3px 12px 3px 0;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#9AA3BF">${label}</td>` +
+    `<td style="${f}padding:3px 0;font-size:14px"><a href="${href}" style="color:#E9EDF8;text-decoration:none">${esc_(text)}</a></td></tr>`;
+  const btn = (href, text, solid) =>
+    `<a href="${href}" style="${f}display:inline-block;margin:0 8px 8px 0;padding:9px 14px;border-radius:8px;font-size:13px;font-weight:bold;text-decoration:none;` +
+    (solid ? 'background:#A78BFA;color:#070A18;border:1px solid #A78BFA' : 'color:#E9EDF8;border:1px solid #3a4270') + `">${esc_(text)}</a>`;
+
+  return '' +
+  '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#05060F" ' +
+    'style="max-width:520px;margin-top:28px;background:#05060F;border:1px solid #232A4D;border-radius:14px;border-collapse:separate">' +
+  // cabeçalho
+  '<tr><td style="padding:12px 20px;border-bottom:1px solid #232A4D">' +
+    '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr>' +
+    `<td style="${f}font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#A78BFA">${esc_(t.kicker)}</td>` +
+    `<td align="right" style="${f}font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#9AA3BF">${esc_(t.place)}</td>` +
+    '</tr></table></td></tr>' +
+  // identidade
+  '<tr><td style="padding:20px 20px 8px">' +
+    '<table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>' +
+    `<td width="84" valign="top"><img src="${CARD.PHOTO}" width="84" height="84" alt="${esc_(CARD.NAME)}" ` +
+      'style="display:block;width:84px;height:84px;border-radius:42px;border:2px solid #A78BFA"></td>' +
+    '<td valign="top" style="padding-left:16px">' +
+      `<div style="${f}font-size:12px;color:#9AA3BF">${esc_(t.hi)}</div>` +
+      `<div style="font-family:'Bebas Neue',Impact,'Arial Narrow',Arial,sans-serif;font-size:30px;line-height:1.05;letter-spacing:.02em;text-transform:uppercase;color:#E9EDF8">${esc_(CARD.NAME)}</div>` +
+      `<div style="${f}font-size:13px;font-weight:bold;color:#7DD3FC;padding-top:4px">${esc_(t.role)}</div>` +
+      `<div style="${f}font-size:13px;line-height:1.5;color:#B3BAD2;padding-top:6px">${esc_(t.pitch)}</div>` +
+    '</td></tr></table></td></tr>' +
+  // três rotas
+  '<tr><td style="padding:6px 20px 4px">' +
+    t.routes.map(r => `<span style="${f}display:inline-block;margin:0 6px 6px 0;padding:4px 10px;border:1px solid #3a4270;border-radius:999px;font-size:12px;color:#E9EDF8">${esc_(r)}</span>`).join('') +
+  '</td></tr>' +
+  // contactos
+  '<tr><td style="padding:10px 20px 6px"><table role="presentation" cellpadding="0" cellspacing="0" border="0">' +
+    row('Email', 'mailto:' + CARD.EMAIL, CARD.EMAIL) +
+    row('Site', CARD.SITE, host(CARD.SITE)) +
+    row('GitHub', CARD.GITHUB, host(CARD.GITHUB)) +
+  '</table></td></tr>' +
+  // chamada + postal
+  '<tr><td style="padding:14px 20px 12px">' +
+    `<div style="${f}font-size:16px;font-weight:bold;color:#FF9E64;padding-bottom:10px">${esc_(t.cta)}</div>` +
+    btn(postal, t.view, true) + btn(pdf, t.pdf, false) +
+  '</td></tr>' +
+  // rodapé
+  `<tr><td style="${f}padding:10px 20px;border-top:1px solid #232A4D;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#6f7899">` +
+    `AYYLIENADO · ${esc_(t.foot)}</td></tr>` +
+  '</table>';
+}
+
+/* Versão em texto simples do cartão (clientes de email sem HTML). */
+function cardText_(lang) {
+  const t = CARD.T[lang] || CARD.T.pt;
+  return [
+    t.kicker.toUpperCase() + ' · ' + t.place,
+    CARD.NAME.toUpperCase() + ' - ' + t.role,
+    t.pitch,
+    t.routes.join(' · '),
+    '',
+    'Email:  ' + CARD.EMAIL,
+    'Site:   ' + CARD.SITE,
+    'GitHub: ' + CARD.GITHUB,
+    '',
+    t.cta + ' ' + t.view + ': ' + CARD.POSTAL + '?lang=' + lang,
+    t.pdf + ': ' + CARD.PDF.replace('{lang}', lang)
+  ].join('\n');
 }
 
 function fallbackReport_(answers) {
@@ -337,6 +476,11 @@ function text_(v) {
 function isoDate_(v) {
   const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(clean_(v));
   return m ? new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3])) : null;
+}
+
+function esc_(v) {
+  return String(v == null ? '' : v).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
 function isEmail_(v) {
