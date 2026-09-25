@@ -223,6 +223,36 @@ body{padding-top:128px}
 @media (max-width:420px){body{padding-top:112px}}
 @media print{.mod-index{display:none}#form{padding-left:0}#form::before,.mod-n{display:none}}
 
+/* ===========================================================================
+   TRANSMISSION - direct send to Google Sheets (see tools/briefing-sheets.gs)
+   html.has-sheets  = SHEETS_URL configured (otherwise the button mails).
+   form.is-busy     = request in flight.  form.is-sent = row written.
+   form.post-failed = last attempt failed: offer the email route as well.
+   Closure: the dashed module ring becomes a solid cyan ring with a check.
+   =========================================================================== */
+.when-sheets,.when-sent,.when-busy{display:none}
+html.has-sheets .when-mail{display:none}
+html.has-sheets .when-sheets{display:inline}
+html.has-sheets form.is-sent .when-sheets{display:none}
+html.has-sheets form.is-sent .when-sent{display:inline}
+html.has-sheets form.is-busy .when-sheets,html.has-sheets form.is-busy .when-sent{display:none}
+html.has-sheets form.is-busy .when-busy{display:inline}
+form.is-busy #m-mail{opacity:.65;cursor:progress}
+#m-mailfb{display:none}
+form.post-failed #m-mailfb{display:inline-block}
+.hp{position:absolute !important;left:-9999px !important;top:auto !important;width:1px;height:1px;overflow:hidden}
+.sent{display:flex;gap:16px;align-items:flex-start;margin-top:26px;padding:20px 22px;border:1px solid var(--ice);border-radius:14px;
+  background:color-mix(in srgb,var(--ice) 8%,transparent);outline:none}
+.sent[hidden]{display:none}
+.sent-ring{flex:0 0 40px;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--ice);color:var(--ice);display:grid;place-items:center;
+  font-family:var(--font-m);font-size:16px;background:var(--bg)}
+.sent .mono{color:var(--ice)}
+.sent h3{font-family:var(--font-d);font-size:clamp(24px,4vw,30px);letter-spacing:1px;margin:4px 0 6px;line-height:1.05}
+.sent p{color:var(--muted)}
+.sent b{color:var(--ink);font-weight:600}
+.sent-meta{font-family:var(--font-m);font-size:10.5px;letter-spacing:1px;margin-top:8px;text-transform:uppercase}
+@media (max-width:420px){.sent{padding:16px;gap:12px}.sent-ring{flex-basis:34px;width:34px;height:34px;font-size:14px}}
+
 @media print{
   *{color:#111 !important;background:#fff !important;box-shadow:none !important}
   #field,.bar,.send-grid,.linkish,.toast{display:none !important}
@@ -511,7 +541,7 @@ body{padding-top:128px}
   <div class="q">
     <label class="ql" for="f-orc"><span class="pt">Orçamento confortável para este projeto</span><span class="en">Comfortable budget for this project</span><small><span class="pt">um intervalo realista ajuda-me a propor a solução certa</span><span class="en">a realistic range helps me propose the right solution</span></small></label>
     <div class="ranger">
-      <input type="range" id="f-orc" data-key="orcamento" data-label="Orçamento" data-label-en="Budget" data-sec="07 · LOGÍSTICA" data-sec-en="07 · LOGISTICS" min="0" max="1500" step="100" value="750"/>
+      <input type="range" id="f-orc" data-key="orcamento" data-label="Orçamento" data-label-en="Budget" data-sec="07 · LOGÍSTICA" data-sec-en="07 · LOGISTICS" min="0" max="1500" step="50" value="750"/>
       <output id="orc-val" for="f-orc">750 €</output>
     </div>
   </div>
@@ -542,12 +572,26 @@ body{padding-top:128px}
     <pre id="repo"></pre>
   </details>
 
+  <!-- Honeypot: invisible to people, tempting to bots. Not a data-key, so it never enters the report. -->
+  <div class="hp" aria-hidden="true"><label for="f-hp">Não preencher</label><input type="text" id="f-hp" name="website" tabindex="-1" autocomplete="off"/></div>
+
+  <div class="sent" id="sent" hidden tabindex="-1" role="status" aria-live="polite">
+    <span class="sent-ring" aria-hidden="true">✓</span>
+    <div>
+      <p class="mono"><span class="pt">TRANSMISSÃO RECEBIDA</span><span class="en">TRANSMISSION RECEIVED</span></p>
+      <h3><span class="pt">O briefing chegou bem.</span><span class="en">The briefing landed safely.</span></h3>
+      <p><span class="pt">Obrigado, <b data-sent="nome"></b>. Já tenho as tuas respostas e respondo para <b data-sent="email"></b> nos próximos dias com o plano de voo. Alteraste alguma coisa entretanto? Envia de novo - a tua ficha é atualizada, não duplicada.</span><span class="en">Thank you, <b data-sent="nome"></b>. I have your answers and will reply to <b data-sent="email"></b> within a few days with the flight plan. Changed something since? Send again - your record is updated, not duplicated.</span></p>
+      <p class="sent-meta"><span class="pt">Enviado a</span><span class="en">Sent on</span> <span data-sent="data"></span></p>
+    </div>
+  </div>
+
   <div class="send-grid">
-    <button class="btn btn-pri" type="submit" id="m-mail"><span class="pt">Enviar por email</span><span class="en">Send by email</span> →</button>
+    <button class="btn btn-pri" type="submit" id="m-mail"><span class="when-mail"><span class="pt">Enviar por email</span><span class="en">Send by email</span></span><span class="when-sheets"><span class="pt">Enviar briefing</span><span class="en">Send briefing</span></span><span class="when-sent"><span class="pt">Enviar alterações</span><span class="en">Send changes</span></span><span class="when-busy"><span class="pt">A transmitir...</span><span class="en">Transmitting...</span></span> →</button>
     <button type="button" class="btn btn-ghost" id="m-copy"><span class="pt">Copiar respostas</span><span class="en">Copy answers</span></button>
     <button type="button" class="btn btn-ghost" id="m-dl"><span class="pt">Descarregar .txt</span><span class="en">Download .txt</span></button>
+    <button type="button" class="btn btn-ghost" id="m-mailfb"><span class="pt">Enviar por email</span><span class="en">Send by email</span></button>
   </div>
-  <p class="send-note"><span class="pt">O BOTÃO DE EMAIL ABRE O TEU PROGRAMA DE CORREIO COM TUDO JÁ ESCRITO, DESTINATÁRIO INCLUÍDO. SEM EMAIL À MÃO? USA COPIAR OU DESCARREGAR E ENVIA POR ONDE PREFERIRES.</span><span class="en">THE EMAIL BUTTON OPENS YOUR MAIL APP WITH EVERYTHING ALREADY WRITTEN, RECIPIENT INCLUDED. NO EMAIL AT HAND? USE COPY OR DOWNLOAD AND SEND IT HOWEVER YOU PREFER.</span></p>
+  <p class="send-note"><span class="when-mail"><span class="pt">O BOTÃO DE EMAIL ABRE O TEU PROGRAMA DE CORREIO COM TUDO JÁ ESCRITO, DESTINATÁRIO INCLUÍDO. SEM EMAIL À MÃO? USA COPIAR OU DESCARREGAR E ENVIA POR ONDE PREFERIRES.</span><span class="en">THE EMAIL BUTTON OPENS YOUR MAIL APP WITH EVERYTHING ALREADY WRITTEN, RECIPIENT INCLUDED. NO EMAIL AT HAND? USE COPY OR DOWNLOAD AND SEND IT HOWEVER YOU PREFER.</span></span><span class="when-sheets"><span class="pt">O BOTÃO ENVIA AS RESPOSTAS DIRETAMENTE PARA MIM - RECEBO UM AVISO NA HORA E RESPONDO PARA O TEU EMAIL. QUERES FICAR COM UMA CÓPIA? USA COPIAR OU DESCARREGAR.</span><span class="en">THE BUTTON SENDS YOUR ANSWERS STRAIGHT TO ME - I GET NOTIFIED INSTANTLY AND REPLY TO YOUR EMAIL. WANT TO KEEP A COPY? USE COPY OR DOWNLOAD.</span></span><span class="when-sent"><span class="pt">RECEBIDO. PODES FECHAR ESTA PÁGINA - OU GUARDAR UMA CÓPIA COM COPIAR OU DESCARREGAR.</span><span class="en">RECEIVED. YOU CAN CLOSE THIS PAGE - OR KEEP A COPY WITH COPY OR DOWNLOAD.</span></span></p>
   <button type="button" class="linkish" id="m-reset"><span class="pt">reiniciar todas as respostas</span><span class="en">reset all answers</span></button>
 </section>
 
@@ -569,23 +613,32 @@ body{padding-top:128px}
 var $=function(s){return document.querySelector(s)};
 var $$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
 var MAIL="benmrodrigues2000@gmail.com";
+/* Google Sheets: paste the Apps Script "Web app" URL here (ends in /exec).
+   Setup in tools/briefing-sheets.gs. Empty = the button opens the mail client instead. */
+var SHEETS_URL="";
 var form=$("#form"), toast=$("#toast"), toastT=null;
 
 var LS=null;
 try{ LS=window.localStorage; LS.setItem("__t","1"); LS.removeItem("__t"); }catch(e){ LS=null; }
-var LSK="briefing-v07";
+var LSK="briefing-v07", IDK=LSK+"-id", SENTK=LSK+"-sent";
+var canPost=!!(SHEETS_URL && window.fetch && window.Promise && window.JSON);
+if(canPost) document.documentElement.classList.add("has-sheets");
 function EN(){ return document.documentElement.getAttribute("data-lang")==="en"; }
 var RT={
   pt:{title:"RELATÓRIO DE BRIEFING DE MISSÃO",marca:"Marca: ",noName:"(sem nome)",data:"Data: ",paleta:"Paleta: ",
       footer:"Enviado através do briefing de missão de Ruben Rodrigues.",subject:"Briefing de missão - ",novo:"Novo projeto",
       missing:"Faltam coordenadas obrigatórias no módulo 01",opening:"A abrir o teu email...",copied:"Relatório copiado - cola onde quiseres",
       copyFail:"Não foi possível copiar - usa Descarregar",downloaded:"Relatório descarregado",resetConfirm:"Reiniciar todas as respostas?",
-      resetDone:"Missão reiniciada",custom:"Personalizada",locale:"pt-PT"},
+      resetDone:"Missão reiniciada",custom:"Personalizada",locale:"pt-PT",
+      sending:"A transmitir o briefing...",sent:"Briefing recebido - obrigado!",updated:"Briefing atualizado - obrigado!",
+      sendFail:"Não consegui enviar. Tenta de novo ou usa o email."},
   en:{title:"MISSION BRIEFING REPORT",marca:"Brand: ",noName:"(no name)",data:"Date: ",paleta:"Palette: ",
       footer:"Sent through Ruben Rodrigues' mission briefing.",subject:"Mission briefing - ",novo:"New project",
       missing:"Some required coordinates are missing in module 01",opening:"Opening your email...",copied:"Report copied - paste it anywhere",
       copyFail:"Couldn't copy - use Download",downloaded:"Report downloaded",resetConfirm:"Reset all answers?",
-      resetDone:"Mission reset",custom:"Custom",locale:"en-GB"}
+      resetDone:"Mission reset",custom:"Custom",locale:"en-GB",
+      sending:"Transmitting the briefing...",sent:"Briefing received - thank you!",updated:"Briefing updated - thank you!",
+      sendFail:"Couldn't send. Try again or use email."}
 };
 function T(k){ return RT[EN()?"en":"pt"][k]; }
 function Llabel(f){ return EN() ? (f.getAttribute("data-label-en")||f.getAttribute("data-label")) : f.getAttribute("data-label"); }
@@ -806,6 +859,119 @@ form.addEventListener("keydown",function(e){
   if(e.key==="Enter"&&t&&(t.tagName==="INPUT"||t.tagName==="SELECT")){ e.preventDefault(); }
 });
 
+/* ---- Transmission: Google Sheets first, the mail client as the fallback route ---- */
+function mailSend(){
+  say(T("opening"));
+  window.location.href=$("#m-mail").getAttribute("data-href")||$("#m-mail").href;
+}
+
+/* One id per draft: a re-send with edits updates the same row instead of adding another. */
+var memId=null;
+function draftId(){
+  var id=null;
+  try{ id=LS&&LS.getItem(IDK); }catch(e){}
+  if(!id) id=memId;
+  if(!id){
+    id=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():
+       (Date.now().toString(36)+"-"+Math.random().toString(36).slice(2,10)+Math.random().toString(36).slice(2,10));
+    memId=id;
+    try{ if(LS) LS.setItem(IDK,id); }catch(e){}
+  }
+  return id;
+}
+
+/* Canonical (Portuguese) values for the sheet, one column per question. */
+function answers(){
+  var d={}, touched=false;
+  ["cor_fundo","cor_destaque","cor_texto"].forEach(function(k){
+    if(document.querySelector('[data-key="'+k+'"]').dataset.touched==="1") touched=true;
+  });
+  fields().forEach(function(f){
+    var k=f.getAttribute("data-key");
+    if(f.classList.contains("chips")){
+      var on=f.querySelectorAll("button.on"), vals=[];
+      for(var i=0;i<on.length;i++) vals.push(on[i].getAttribute("data-val"));
+      d[k]=vals.join(", ");
+    } else if(f.classList.contains("paletas")){
+      d[k]=f.dataset.val||(touched?"Personalizada":"");
+    } else if(f.type==="color"){
+      d[k]=String(f.value||"").toUpperCase();
+    } else if(f.type==="range"){
+      d[k]=parseInt(f.value,10);
+    } else {
+      d[k]=String(f.value||"").trim();
+    }
+  });
+  return d;
+}
+
+function setBusy(b){
+  form.classList.toggle("is-busy",b);
+  var btn=$("#m-mail");
+  if(b){ btn.setAttribute("disabled","disabled"); btn.setAttribute("aria-busy","true"); }
+  else { btn.removeAttribute("disabled"); btn.removeAttribute("aria-busy"); }
+}
+
+function fmtWhen(ts){
+  var dt=new Date(ts);
+  try{ return dt.toLocaleString(T("locale"),{dateStyle:"long",timeStyle:"short"}); }
+  catch(e){ return dt.toLocaleString(T("locale")); }
+}
+
+var sentInfo=null;
+function paintSent(){
+  var box=$("#sent");
+  if(!sentInfo){ box.hidden=true; form.classList.remove("is-sent"); return; }
+  $$("[data-sent]").forEach(function(el){
+    var k=el.getAttribute("data-sent");
+    el.textContent= k==="data" ? fmtWhen(sentInfo.at) : (sentInfo[k]||"");
+  });
+  form.classList.add("is-sent");
+  box.hidden=false;
+}
+
+function markSent(info){
+  sentInfo=info;
+  try{ if(LS) LS.setItem(SENTK,JSON.stringify(info)); }catch(e){}
+  paintSent();
+}
+
+function clearSent(){
+  sentInfo=null; memId=null;
+  try{ if(LS){ LS.removeItem(SENTK); LS.removeItem(IDK); } }catch(e){}
+  form.classList.remove("post-failed");
+  paintSent();
+}
+
+var sending=false;
+function postBriefing(){
+  if(sending) return;
+  var a=answers();
+  var payload={id:draftId(),lang:EN()?"en":"pt",page:location.href.split("#")[0],report:report(),answers:a,_hp:($("#f-hp")||{}).value||""};
+  sending=true; setBusy(true); form.classList.remove("post-failed"); say(T("sending"));
+  var ctrl=window.AbortController?new AbortController():null;
+  var timer=setTimeout(function(){ if(ctrl) ctrl.abort(); },25000);
+  /* text/plain keeps the request "simple": no CORS preflight, which Apps Script cannot answer. */
+  var opts={method:"POST",body:JSON.stringify(payload),headers:{"Content-Type":"text/plain;charset=utf-8"}};
+  if(ctrl) opts.signal=ctrl.signal;
+  fetch(SHEETS_URL,opts).then(function(r){
+    if(!r.ok) throw new Error("http "+r.status);
+    return r.json();
+  }).then(function(j){
+    if(!j||!j.ok) throw new Error((j&&j.error)||"bad response");
+    markSent({at:Date.now(),nome:a.nome,email:a.email});
+    say(T(j.updated?"updated":"sent"));
+    var box=$("#sent");
+    try{ if(box.scrollIntoView) box.scrollIntoView({behavior:"smooth",block:"center"}); }catch(err){}
+    try{ box.focus({preventScroll:true}); }catch(err){}
+  }).catch(function(){
+    form.classList.add("post-failed");
+    say(T("sendFail"));
+  }).then(function(){
+    clearTimeout(timer); sending=false; setBusy(false);
+  });
+}
+
 form.addEventListener("submit",function(e){
   e.preventDefault();
   var miss=requiredMissing();
@@ -814,8 +980,13 @@ form.addEventListener("submit",function(e){
     say(T("missing"));
     return;
   }
-  say(T("opening"));
-  window.location.href=$("#m-mail").getAttribute("data-href")||$("#m-mail").href;
+  if(canPost) postBriefing(); else mailSend();
+});
+
+$("#m-mailfb").addEventListener("click",function(){
+  var miss=requiredMissing();
+  if(miss.length){ focusMissing(miss); say(T("missing")); return; }
+  mailSend();
 });
 
 $("#m-copy").addEventListener("click",function(){
@@ -876,6 +1047,7 @@ $("#m-reset").addEventListener("click",function(){
   });
   $("#f-orc").dataset.touched="";
   $("#orc-val").textContent=fmtBudget();
+  clearSent();
   update();
   say(T("resetDone"));
   window.scrollTo({top:0,behavior:"smooth"});
@@ -953,6 +1125,11 @@ restore();
 $$(".chips").forEach(syncChipState);
 syncPaletteState();
 update();
+/* A refresh after sending still shows the confirmation (and the same id, so edits update the row). */
+if(canPost){
+  try{ var si=JSON.parse((LS&&LS.getItem(SENTK))||"null"); if(si&&si.at) sentInfo=si; }catch(e){}
+  paintSent();
+}
 function swapPh(){
   var en=EN(), els=document.querySelectorAll("[data-ph-en]");
   for(var i=0;i<els.length;i++){
@@ -962,7 +1139,7 @@ function swapPh(){
   }
 }
 swapPh();
-document.addEventListener("rr:lang", function(){ swapPh(); update(); });
+document.addEventListener("rr:lang", function(){ swapPh(); update(); if(sentInfo) paintSent(); });
 
 try{
   if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)){
