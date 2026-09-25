@@ -56,7 +56,7 @@ editor da Google é preciso *Implementar › Gerir implementações › Nova ver
 - `sobre.html` - sobre + metodo
 - `ferramentas.html` - ferramentas de uso diario
 - `percurso.html` - percurso e registo de servico
-- `trabalhos.html` - trabalhos (O Provador, ferramentas de entrada, o agente Ajuda, o criterio e o sistema visual Gestalt)
+- `trabalhos.html` - trabalhos (O Provador, Marta Sousa Terapias, ferramentas de entrada, o agente Ajuda, o criterio e o sistema visual Gestalt)
 - `contacto.html` - contacto e servicos
 - `cv.html` - CV em pagina (o mesmo conteudo do PDF, no sistema visual do site: identidade, registo de servico, competencias, projeto em destaque e metodo). Imprimivel em A4 a partir do proprio browser
 - `404.html` - pagina de erro
@@ -67,7 +67,7 @@ editor da Google é preciso *Implementar › Gerir implementações › Nova ver
 - `sw.js` - service worker: o site funciona offline (páginas e estilos em cache)
 - `fonts/` + `fonts.css` - tipografia self-hosted (sem pedidos ao Google)
 - `sitemap.xml`, `robots.txt`, `.nojekyll` - SEO e configuracao
-- `assets/` - imagens reais do Provador (com variantes `-720.jpg` para ecrãs pequenos)
+- `assets/` - imagens reais do Provador (com variantes `-720.jpg` para ecrãs pequenos) e captura da página inicial de Marta Sousa Terapias
 - `assets/ruben-portrait*.jpg` - retrato na página Sobre
 - `css/style.css`, `css/cv.css`, `css/ajuda.css` - estilos do site, do CV (layout da pagina + folha de impressao A4) e do guia de ajuda
 - `js/main.js`, `js/controls.js` - comportamento e controlos (tema/idioma)
