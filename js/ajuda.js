@@ -53,6 +53,7 @@
     postal:   { href:"postal/",                          name:{pt:"Postal imprimível",  en:"Printable postcard"} },
     cv:       { href:"cv.pdf",                           name:{pt:"CV (PDF)",           en:"CV (PDF)"}, download:true },
     provador: { href:"https://freedomoutdoor.pt/provador", name:{pt:"O Provador no ar", en:"O Provador, live"}, out:true },
+    marta:    { href:"https://benmrodrigues2000.github.io/martasousaterapias/", name:{pt:"Marta Sousa Terapias", en:"Marta Sousa Terapias"}, out:true },
     github:   { href:"https://github.com/benmrodrigues2000", name:{pt:"GitHub",          en:"GitHub"}, out:true },
     email:    { href:"mailto:benmrodrigues2000@gmail.com",  name:{pt:"Email direto",    en:"Direct email"} }
   };
@@ -73,6 +74,7 @@
                  note:{pt:"3 rotas, um exemplo por etapa", en:"3 routes, one example per step"} }],
     trabalhos: [
       { h:"#provador", name:{pt:"O Provador (caso de estudo)", en:"O Provador (case study)"}, note:{pt:"cliente real, em produção", en:"real client, live"} },
+      { h:"#marta-sousa", name:{pt:"Marta Sousa Terapias", en:"Marta Sousa Terapias"}, note:{pt:"site feito para uma amiga", en:"website built for a friend"} },
       { h:"#ferramentas-vivas", name:{pt:"Ferramentas públicas", en:"Public tools"}, note:{pt:"briefing e postal", en:"briefing and postcard"} },
       { h:"#ajuda", name:{pt:"O agente Ajuda", en:"The Ajuda agent"}, note:{pt:"como o guia decide", en:"how the guide decides"} },
       { h:"#metodo", name:{pt:"O critério", en:"The criterion"}, note:{pt:"como comparo respostas", en:"how I compare answers"} }
@@ -131,14 +133,16 @@
         return {
           head:{ pt:"Rota: exemplos", en:"Route: examples" },
           text:{
-            pt:"A página Trabalhos abre pelo caso de estudo do Provador (quiz de recomendação com stock real, ligado à base de dados da Freedom Outdoor), mostra as ferramentas públicas, desmonta o próprio guia Ajuda por dentro e fecha com o critério de decisão por trás de tudo.",
-            en:"The Work page opens with the O Provador case study (a recommendation quiz on real stock, wired to Freedom Outdoor's database), shows the public tools, takes the Ajuda guide itself apart inside, and closes with the decision criterion behind it all."
+            pt:"A página Trabalhos abre pelo caso de estudo do Provador (quiz de recomendação com stock real, ligado à base de dados da Freedom Outdoor), passa pelo site Marta Sousa Terapias, mostra as ferramentas públicas, desmonta o próprio guia Ajuda por dentro e fecha com o critério de decisão por trás de tudo.",
+            en:"The Work page opens with the O Provador case study (a recommendation quiz on real stock, wired to Freedom Outdoor's database), then shows the Marta Sousa Terapias website and the public tools, takes the Ajuda guide itself apart inside, and closes with the decision criterion behind it all."
           },
           acts:[
             { page:"trabalhos", hash:"#provador", label:{pt:"Abrir o caso do Provador", en:"Open the Provador case"},
               note:{pt:"5 perguntas · 60 segundos · 310 modelos", en:"5 questions · 60 seconds · 310 models"}, primary:true },
             { page:"provador", label:{pt:"Ver o Provador a funcionar", en:"Use O Provador live"},
               note:{pt:"freedomoutdoor.pt/provador", en:"freedomoutdoor.pt/provador"} },
+            { page:"trabalhos", hash:"#marta-sousa", label:{pt:"Ver o site da Marta", en:"See Marta’s website"},
+              note:{pt:"site feito para uma amiga", en:"website built for a friend"} },
             { page:"trabalhos", hash:"#ferramentas-vivas", label:{pt:"Ferramentas públicas", en:"Public tools"},
               note:{pt:"briefing e postal imprimível", en:"briefing and printable postcard"} }
           ]
@@ -219,8 +223,8 @@
         return {
           head:{ pt:"Rota: mapa completo", en:"Route: full map" },
           text:{
-            pt:"O site tem seis páginas no menu: Início (o plano de voo), Sobre (quem está por trás), Ferramentas (o stack), Percurso (as três rotas), Trabalhos (o Provador e as ferramentas) e Contacto (serviços). Salta para onde quiseres, ou continua a perguntar-me.",
-            en:"The site has six pages in the menu: Home (the flight plan), About (who's behind it), Tools (the stack), Journey (the three routes), Work (O Provador and the tools) and Contact (services). Jump wherever you like, or keep asking me."
+            pt:"O site tem seis páginas no menu: Início (o plano de voo), Sobre (quem está por trás), Ferramentas (o stack), Percurso (as três rotas), Trabalhos (o Provador, o site da Marta e as ferramentas) e Contacto (serviços). Salta para onde quiseres, ou continua a perguntar-me.",
+            en:"The site has six pages in the menu: Home (the flight plan), About (who's behind it), Tools (the stack), Journey (the three routes), Work (O Provador, Marta’s website and the tools) and Contact (services). Jump wherever you like, or keep asking me."
           },
           acts:[
             { page:"trabalhos", hash:"#provador", label:{pt:"Ver o caso do Provador", en:"See the Provador case"},
@@ -364,9 +368,10 @@
     { id:"trabalhos", goal:"trabalhos",
       kw:["trabalhos","projetos","portfolio","portefolio","casos","caso de estudo","exemplos","provas","amostra","work","projects","case studies","case study","examples","your work"],
       head:{pt:"Trabalhos", en:"Work"},
-      text:{ pt:"Quatro blocos: um caso de estudo (O Provador), duas ferramentas públicas (briefing e postal), o próprio guia Ajuda desmontado por dentro e o critério de decisão. Tudo o que está lá pode ser aberto e usado.",
-              en:"Four blocks: a case study (O Provador), two public tools (briefing and postcard), the Ajuda guide itself taken apart, and the decision criterion. Everything there can be opened and used." },
+      text:{ pt:"Trabalhos no ar: O Provador, o site Marta Sousa Terapias feito gratuitamente para uma amiga, duas ferramentas públicas, o guia Ajuda e o critério de decisão. Tudo pode ser aberto e explorado.",
+              en:"Work already live: O Provador, the Marta Sousa Terapias website built for a friend for free, two public tools, the Ajuda guide and the decision criterion. Everything can be opened and explored." },
       acts:[A("trabalhos","#provador","Abrir o caso do Provador","Open the Provador case","5 perguntas · 60 segundos","5 questions · 60 seconds",true),
+            A("trabalhos","#marta-sousa","Ver o site da Marta","See Marta’s website","Reiki · marcação de sessões","Reiki · session requests"),
             A("trabalhos","#ajuda","Ver o guia por dentro","See the guide from inside","nota de campo · sem nuvem","field note · no cloud"),
             A("trabalhos","#ferramentas-vivas","Ferramentas públicas","Public tools","briefing e postal","briefing and postcard")] },
 
@@ -377,6 +382,14 @@
               en:"O Provador turns counter advice into a five-question, sixty-second decision, on Freedom Outdoor's real stock. I built it during my internship and it's in production - every recommendation comes from the database, not the model's imagination." },
       acts:[A("trabalhos","#provador","Ler o caso de estudo","Read the case study","desafio, eixos, resultados","challenge, axes, results",true),
             A("provador","","Abrir o Provador no ar","Open O Provador live","freedomoutdoor.pt","freedomoutdoor.pt")] },
+
+    { id:"marta", goal:"trabalhos",
+      kw:["marta sousa!","marta sousa terapias","martasousaterapias","site da marta","reiki!","tarot dos anjos","marta's website","marta sousa website"],
+      head:{pt:"Marta Sousa Terapias", en:"Marta Sousa Terapias"},
+      text:{ pt:"Um site que fiz gratuitamente para uma amiga terapeuta holística. Apresenta Reiki e Tarot dos Anjos, responde a perguntas frequentes e permite pedir uma sessão em português ou inglês.",
+              en:"A website I built for free for a friend who is a holistic therapist. It introduces Reiki and Angel Tarot, answers common questions and lets visitors request a session in Portuguese or English." },
+      acts:[A("trabalhos","#marta-sousa","Ver no portefólio","See in the portfolio","imagem e funcionalidades","image and features",true),
+            A("marta","","Abrir o site","Open the website","Marta Sousa Terapias","Marta Sousa Terapias")] },
 
     { id:"ferramentas", goal:"metodo",
       kw:["ferramentas","stack","que usas","que ferramentas usas","com o que trabalhas","tecnologias","tools","what tools","toolstack","tech stack","which tools"],
@@ -488,7 +501,7 @@
     { id:"site-info",
       kw:["que site e este","quem fez este site","este site","what is this site","who made this site","about this site"],
       head:{pt:"Este site", en:"This site"},
-      text:{ pt:"É o portefólio do Ruben - em construção, como diz o aviso da página inicial: os trabalhos e serviços mostrados misturam projetos pessoais, académicos e um caso real em produção (O Provador).", en:"It's Ruben's portfolio - still being built, as the home banner says: the work and services shown mix personal projects, academic work and one real case in production (O Provador)." },
+      text:{ pt:"É o portefólio do Ruben - em construção, como diz o aviso da página inicial: os trabalhos e serviços mostrados misturam projetos pessoais, académicos, um caso em produção (O Provador) e um site feito para uma amiga (Marta Sousa Terapias).", en:"It's Ruben's portfolio - still being built, as the home banner says: the work and services shown mix personal projects, academic work, one live case (O Provador) and a website built for a friend (Marta Sousa Terapias)." },
       acts:[A("index","","Voltar ao início","Back to home","o plano de voo","the flight plan",true),
             A("trabalhos","#provador","Ver o caso real","See the real case","O Provador","O Provador")] }
   ];
@@ -936,7 +949,7 @@
         ],
         acts:[
           A("index","","Voltar ao início","Back to home","o plano de voo","the flight plan", true),
-          A("trabalhos","#provador","Ver os trabalhos","See the work","o Provador e as ferramentas","O Provador and the tools"),
+          A("trabalhos","#provador","Ver os trabalhos","See the work","o Provador, a Marta e as ferramentas","O Provador, Marta and the tools"),
           A("contacto","#contact","Falar comigo","Talk to me","email direto","direct email")
         ]
       });
@@ -1088,7 +1101,7 @@
         A("sobre","#sobre","Sobre","About","quem está por trás","who's behind it"),
         A("percurso","#curriculum","Percurso","Journey","3 rotas de capacidade","3 capability routes"),
         A("cvpage","#cv","CV","CV","currículo numa página","the CV as a web page"),
-        A("trabalhos","#provador","Trabalhos","Work","o Provador e as ferramentas","O Provador and the tools"),
+        A("trabalhos","#provador","Trabalhos","Work","o Provador, a Marta e as ferramentas","O Provador, Marta and the tools"),
         A("contacto","#contact","Contacto","Contact","serviços e email","services and email")
       ]
     });
