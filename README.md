@@ -20,8 +20,9 @@ O briefing (índice de 8 estrelas) e o postal (frente com duas figuras e órbita
 
 ### Manutenção dos PDFs
 
-- `cv.pdf` é construído por `tools/build-cv-pdf.py` a partir do conteúdo de `cv.html`; sempre que o texto do CV mudar, correr
-  `python3 tools/build-cv-pdf.py` (precisa de `reportlab fonttools brotli`) e confirmar que continua com uma página.
+- `cv.pdf` é construído por `tools/build-cv-pdf.py`; o texto vive no bloco *content* no topo do script e deve dizer o mesmo
+  que `cv.html`. Sempre que o CV mudar, correr `python3 tools/build-cv-pdf.py` (precisa de `reportlab fonttools brotli`) -
+  o script falha se o conteúdo deixar de caber numa página.
 - Os quatro PDFs do postal (`postal/*.pdf`) saem de `postal/index.html`: correr `node tools/build-postal-pdfs.mjs`
   (precisa de `npm i -D puppeteer-core @sparticuz/chromium`) - escreve A6 para gráfica e A4 para casa, em PT e EN,
   duas páginas por ficheiro, pelo mesmo caminho de impressão do Chrome. Alternativa manual: abrir a página, escolher
@@ -60,7 +61,7 @@ editor da Google é preciso *Implementar › Gerir implementações › Nova ver
 - `contacto.html` - contacto e servicos
 - `cv.html` - CV em pagina (o mesmo conteudo do PDF, no sistema visual do site: identidade, registo de servico, competencias, projeto em destaque e metodo). Imprimivel em A4 a partir do proprio browser
 - `404.html` - pagina de erro
-- `cv.pdf` - curriculum atualizado (descarregavel no site); gerado por `tools/build-cv-pdf.py`, uma pagina A4 no mesmo sistema visual (fundo estelar, violeta = agora, ciano = ligacao, coral = acao, anel tracejado = fecho), com as fontes do site embutidas
+- `cv.pdf` - curriculum atualizado (descarregavel no site); gerado por `tools/build-cv-pdf.py`: uma pagina A4 em folha branca, pensada para ser enviada e impressa - duas colunas (perfil, experiencia, projeto em destaque e formacao a esquerda; competencias, servicos e metodo a direita), as fontes do site embutidas (Inter + IBM Plex Mono), as cores de significado do tema claro (violeta = estrutura / agora, azul = ligacao), enderecos clicaveis e texto real, legivel por sistemas de recrutamento (ATS)
 - `favicon.svg`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`, `manifest.webmanifest` - identidade e icones
 - `og.jpg`, `og-trabalhos.jpg` - imagens de partilha (geral e Trabalhos)
 - `briefing.html` - briefing interativo para clientes (autónomo, sem dependências do site). Com `SHEETS_URL` preenchido envia as respostas para o Google Sheets e avisa por email; vazio, abre o programa de email do cliente
@@ -72,5 +73,5 @@ editor da Google é preciso *Implementar › Gerir implementações › Nova ver
 - `css/style.css`, `css/cv.css`, `css/ajuda.css` - estilos do site, do CV (layout da pagina + folha de impressao A4) e do guia de ajuda
 - `js/main.js`, `js/controls.js` - comportamento e controlos (tema/idioma)
 - `tools/briefing-sheets.gs` - Google Apps Script que recebe o briefing: escreve a linha em "Briefings concluídos" (coluna Estado com menu), envia o email de aviso e atualiza a linha em vez de duplicar quando o mesmo rascunho é reenviado. Instruções de instalação no cabeçalho do ficheiro e na secção acima
-- `tools/build-cv-pdf.py` - constroi o `cv.pdf` no sistema Gestalt do site: usa as fontes de `fonts/` (woff2 -> ttf em memoria) e falha se o conteudo passar de uma pagina (`pip install reportlab fonttools brotli`)
+- `tools/build-cv-pdf.py` - constroi o `cv.pdf` (folha branca, duas colunas, uma pagina): o conteudo esta num bloco proprio no topo do script, usa as fontes de `fonts/` (woff2 -> ttf em memoria), verifica que todos os caracteres existem nas fontes e falha se o conteudo passar de uma pagina (`pip install reportlab fonttools brotli`)
 - `js/ajuda.js` - guia de navegacao "Ajuda" (canto inferior direito): pergunta porque o visitante esta ali e de onde vem, e encaminha-o para a pagina certa. Bilingue, funciona offline e nao faz pedidos a terceiros. Publica `window.RR_AJUDA` e pode ser desligada com `?noajuda=1`. Apresentado como trabalho na pagina Trabalhos (`#ajuda`).
